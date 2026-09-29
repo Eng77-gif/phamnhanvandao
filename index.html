@@ -844,6 +844,17 @@
   .si-body small.ok{color:var(--jade-bright);} .si-body small.no{color:var(--blood-bright);}
   .si-own{font-size:11.5px;color:var(--text-faint);}
 
+  .st-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-soft);}
+  .st-row:last-child{border-bottom:none;}
+  .st-dot{flex:none;width:20px;height:20px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;}
+  .st-row.ok .st-dot{background:var(--jade-dim);border-color:var(--jade);}
+  .st-row.wait .st-dot{border-color:var(--gold-dim);}
+  .st-body{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .st-body b{font-size:13.5px;font-weight:600;color:var(--text);}
+  .st-row:not(.ok) .st-body b{color:var(--text-dim);}
+  .st-body small{font-size:11px;color:var(--text-faint);}
+  .st-row.ok .st-state{color:var(--jade-bright);} .st-row.wait .st-state{color:var(--gold);}
+
   ::-webkit-scrollbar{width:5px;height:5px;}
   ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
@@ -981,7 +992,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.26.1';
+const GAME_VERSION = '1.30.0';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1119,6 +1130,31 @@ function askConfirm(key){
 function runConfirm(){ const k = pendingConfirm; pendingConfirm = null; if(k) CONFIRM_ACTIONS[k].run(); }
 
 const CHANGELOG = [
+  {v:'1.30.0', date:'26/09/2026', title:'Gọn thông báo, cốt truyện từng hồi', items:[
+    ['doi','Thông báo nhận đồ, học công pháp, đạt danh hiệu, thành tựu thể chất đều gọn lại dạng "Ngươi đã nhận được…", "Ngươi đã học được…".'],
+    ['doi','Cốt Truyện chỉ hiện hồi đang đọc. Đọc xong thì hồi đó ẩn đi và hồi mới hiện ra; hồi chưa khai mở không lộ tên.'],
+    ['doi','Thẻ Công Pháp Trong Cốt Truyện chỉ liệt kê công pháp của những cảnh đã khai mở.']
+  ]},
+  {v:'1.29.1', date:'26/09/2026', title:'Thông báo gọn hơn', items:[
+    ['doi','Khi tự học công pháp từ cốt truyện, thông báo chỉ còn "Ngươi đã học được …".']
+  ]},
+  {v:'1.29.0', date:'26/09/2026', title:'Công pháp theo cốt truyện', items:[
+    ['doi','Đọc tới cảnh Hàn Lập học công pháp nào thì công pháp đó tự vào mục Công Pháp (hoặc Bí Truyền), không cần bấm nhận. Chưa đủ điều kiện thì tự học ngay khi đủ.'],
+    ['moi','Mục Công Pháp có thẻ Công Pháp Trong Cốt Truyện: liệt kê theo thứ tự truyện, ghi rõ đã học, đang chờ điều kiện gì, hoặc cần đọc tới cảnh nào.'],
+    ['moi','Thêm các công pháp Hàn Lập học trong truyện: Nhuyễn Cốt Công, Liễm Tức Công, Nguỵ Nặc Thuật, La Yên Bộ, Trát Nhãn Kiếm Pháp, Khôi Lỗi Thuật, Lộng Diễm Quyết (đổi bằng 2 Hoàng Long Đan như trong truyện).']
+  ]},
+  {v:'1.28.0', date:'26/09/2026', title:'Bảo vật hiếm', items:[
+    ['moi','Hơn bốn mươi bảo vật hiếm trong truyện: pháp bảo (Vạn Yêu Phiên, Huyết Ma Kiếm, Hắc Phong Kỳ, Trấn Hải Chung, Huyết Ma Châu, Tam Diễm Phiến...), dị hỏa (Tu La Thánh Hỏa, Thái Dương Tinh Hỏa, Cực Hàn Chi Diễm...), trận bàn (Khốn Ma Đại Trận, Băng Phách Hàn Liệt Trận...) và đan dược (Giáng Vân Đan, Hóa Anh Đan, Huyền Băng Đan...).'],
+    ['moi','Có được qua đấu giá, phần thưởng cuối bí cảnh, hoặc túi trữ vật của thủ lĩnh. Mục Bảo Vật Hiếm trong Túi Đồ ghi rõ chủ cũ và công dụng.'],
+    ['moi','Công pháp mới: Khốn Tâm Thuật, Huyền Hồn Ngưng Cốt Thuật, Xá Nữ Thiên Nguyệt Quyết, Điên Phượng Bồi Nguyên Công, Đại Diễn Bảo Kinh, Thông Bảo Quyết, Lục Cực Chân Ma Công, Cự Đại Thuật, Nguyên Thần Phân Liệt Thuật, Phạm Thánh Yêu Công, Phong Linh Thuật, Súc Địa Thuật, Phụ Linh Thuật.'],
+    ['moi','Phù mới: Hóa Linh Phù hồi khí huyết giữa trận.']
+  ]},
+  {v:'1.27.0', date:'26/09/2026', title:'Bổ sung từ tư liệu', items:[
+    ['moi','Kiếm thuật thần thông của Thanh Nguyên Kiếm Quyết: Cự Kiếm Thuật, Kiếm Ảnh Phân Quang Thuật, Nguyên Khí Kiếm Hồ Lô — tự mạnh lên theo tầng kiếm quyết và số phi kiếm.'],
+    ['moi','Công pháp: Tam Chuyển Trọng Nguyên Công (dễ kết Đan, kết Anh hơn), Lôi Độn Thuật, Hoán Hình Quyết, và tám pháp thuật Hàn Lập học ở Thái Nam sơn.'],
+    ['moi','Pháp bảo: Thanh Ngưng Kính, Kim Cương Tráo, Bát Linh Xích, Thái Âm Chân Hỏa, và Nguyên Hợp Ngũ Cực Sơn luyện được từ Hợp Thể.'],
+    ['moi','Phù: Phá Giới Phù, Lục Đinh Thiên Giáp Phù. Trận: Cửu Chân Phục Ma Trận chuyên giam ma vật.']
+  ]},
   {v:'1.26.1', date:'26/09/2026', title:'Định Thần Phù', items:[
     ['doi','Định Thần Phù giờ là phù sơ cấp tác động lên thần hồn: vẽ được ngay từ khi mới học Phù Lục Sư (sau khi có phép chế), nhưng vẫn khó vẽ thành công.'],
     ['doi','Kẻ cảnh giới cao hơn có một nửa cơ hội chấn nát lá phù. Khôi lỗi, cấm chế, bóng ảnh không có thần hồn nên miễn nhiễm.'],
@@ -1388,6 +1424,26 @@ const TECHNIQUES = [
   {name:"Độn Thổ Thuật",    desc:"Ngũ Hành cơ sở pháp thuật hệ Thổ, độn vào lòng đất mà thoát thân (chạy trốn +10%).", bonus:{def:4, spd:3}},
   {name:"Thiên Nhãn Thuật", desc:"Pháp thuật cuối sách Trường Xuân Công: nhìn thấy pháp lực như bạch quang — nhìn thấu tu vi, khó bị lừa gạt.", bonus:{crit:3}},
   {name:"Khu Vật Thuật",    desc:"Điều khiển vật phẩm, phù kiếm từ xa tầm hai mươi trượng — Hàn Lập từng cướp quyền điều khiển phù kiếm của đối thủ.", bonus:{atk:6, spd:2}},
+  {name:"Truyền Âm Thuật",  desc:"Truyền lời thẳng vào tai người khác, kẻ ngoài không nghe thấy.", bonus:{crit:1}},
+  {name:"Lưu Sa Thuật",     desc:"Hóa đất dưới chân địch thành cát lún.", bonus:{def:3, spd:2}},
+  {name:"Băng Đống Thuật",  desc:"Ngưng hàn khí đóng băng mục tiêu.", bonus:{atk:4}},
+  {name:"Thăng Không Thuật", desc:"Nhấc thân bay lên không trung.", bonus:{spd:5}},
+  {name:"Triền Nhiễu Thuật", desc:"Dây leo linh lực quấn chặt kẻ địch.", bonus:{atk:2, crit:2}},
+  {name:"Nặc Thân Thuật",   desc:"Ẩn thân hình khỏi mắt thường.", bonus:{spd:3}},
+  {name:"Hỏa Hoa Thuật",    desc:"Bắn ra chùm hoa lửa.", bonus:{atk:5}},
+  {name:"Địa Thứ Thuật",    desc:"Gai đất trồi lên đâm xuyên.", bonus:{atk:4, def:1}},
+  {name:"Lôi Độn Thuật",    desc:"Hóa thân vào lôi quang độn đi — Hàn Lập từng dùng cùng Huyết Ảnh Độn để thoát cuộc truy sát của Trọng thần sư (chạy trốn +25%).", bonus:{spd:6}},
+  {name:"Hoán Hình Quyết",  desc:"Cải trang thành người khác, đổi cả khí tức — ít bị bám đuôi, nhận diện.", bonus:{spd:2}},
+  {name:"Phong Linh Thuật",  desc:"Phong thuật của pháp sĩ Mộ Lan — 'Hồng Trần Vạn Trượng' cuốn bão cát che trời.", bonus:{spd:6, atk:4}},
+  {name:"Súc Địa Thuật",     desc:"Rút ngắn đất trời dưới chân, một bước trăm trượng (chạy trốn +15%).", bonus:{spd:8}},
+  {name:"Phụ Linh Thuật",    desc:"Bí thuật của Cốc Song Bồ: nhập linh vào binh khí.", bonus:{atk:6}},
+  {name:"Nhuyễn Cốt Công",    desc:"Võ công co giãn gân cốt, luồn lách tránh đòn — Hàn Lập luyện trong khe núi để đối phó Mặc đại phu.", bonus:{def:3, spd:2}},
+  {name:"Liễm Tức Công",      desc:"Võ công thu liễm hơi thở, giấu mình khỏi tai mắt người khác.", bonus:{spd:2}},
+  {name:"Nguỵ Nặc Thuật",     desc:"Thuật ngụy trang, ẩn nấp của giang hồ.", bonus:{spd:2, def:1}},
+  {name:"La Yên Bộ",          desc:"Khinh công thân pháp của Thất Huyền Môn — về sau Hàn Lập dung hợp với Ngự Phong Quyết (chạy trốn +10%).", bonus:{spd:6}},
+  {name:"Trát Nhãn Kiếm Pháp",desc:"Kiếm kỹ giết người dựa vào ánh sáng làm lóa mắt đối thủ — Hàn Lập xin được từ Lệ Phi Vũ.", bonus:{atk:4, crit:4}},
+  {name:"Khôi Lỗi Thuật",     desc:"Cách điều khiển khôi lỗi thực chiến, vận dụng cùng Đại Diễn Quyết.", bonus:{atk:3}},
+  {name:"Lộng Diễm Quyết",    desc:"Biến hóa hình dạng ngọn lửa linh hoạt — tiểu xảo thị giác, nhưng hữu ích cho khống hỏa.", bonus:{atk:3}},
   {name:"Dẫn Lực Thuật",    desc:"Ngũ Hành cơ sở pháp thuật, mượn lực đánh lực.", bonus:{atk:4, crit:3}}
 ];
 
@@ -1420,6 +1476,28 @@ const ADVANCED_TECHNIQUES = [
    desc:"Ma công của Cực Âm Đảo: rút hồn luyện cốt, dùng âm khí ngưng tụ ma thân. Tâm cảnh không vững dễ tẩu hỏa.", bonus:{atk:16, def:8, hp:60}},
   {id:'huyet_anh', name:"Huyết Ảnh Độn Pháp", reqType:'path', pathId:'ma', minRealm:1, cost:{stones:140, herbTier:2, herbCount:4}, madnessRisk:false,
    desc:"Ma công tà đạo đốt tinh huyết tăng tốc độn thuật khi gặp nạn (chạy trốn +30%).", bonus:{spd:14}},
+  {id:'tam_chuyen', name:"Tam Chuyển Trọng Nguyên Công", reqType:'any', minRealm:1, cost:{stones:200, herbTier:3, herbCount:3}, madnessRisk:false,
+   desc:"Công pháp phụ trợ đi kèm Thanh Nguyên Kiếm Quyết: tán công rồi tu lại ba lần để tránh nút thắt Kết Đan, tăng tỉ lệ kết anh (đột phá Kết Đan +15%, Nguyên Anh +10%).", bonus:{def:4, hp:30}},
+  {id:'khon_tam', name:"Khốn Tâm Thuật", reqType:'any', minRealm:3, cost:{stones:600, herbTier:4, herbCount:3}, madnessRisk:false,
+   desc:"Bí thuật khống chế tâm trí của Ngụy Vô Nhai — từng dùng để trói buộc Nam Cung Uyển.", bonus:{crit:5}},
+  {id:'huyen_hon', name:"Huyền Hồn Ngưng Cốt Thuật", reqType:'path', pathId:'ma', minRealm:3, cost:{stones:800, herbTier:4, herbCount:4}, madnessRisk:true,
+   desc:"Bí thuật của sư phụ Cực Âm, Cực Huyễn: đoạt xá gần như không giới hạn — khi đoạt xá, tỷ lệ thắng giao tranh +25%.", bonus:{hp:80}},
+  {id:'xa_nu', name:"Xá Nữ Thiên Nguyệt Quyết", reqType:'any', minRealm:2, cost:{stones:500, herbTier:4, herbCount:3}, madnessRisk:true,
+   desc:"Biến thể cực nguy hiểm trong Luân Hồi Công — tu tới tận cùng là 'tử rồi sau đó sinh'. Tu luyện cực nhanh nhưng dễ tẩu hỏa.", bonus:{tuViRate:0.25}},
+  {id:'dien_phuong', name:"Điên Phượng Bồi Nguyên Công", reqType:'any', minRealm:1, cost:{stones:200, herbTier:3, herbCount:3}, madnessRisk:false,
+   desc:"Công pháp bồi dưỡng nguyên khí để kết đan — Mộ Phái Linh được chỉ điểm dùng nó (đột phá Kết Đan +10%).", bonus:{hp:40, def:4}},
+  {id:'dai_dien_bao_kinh', name:"Đại Diễn Bảo Kinh", reqType:'any', minRealm:3, cost:{stones:700, herbTier:4, herbCount:4}, madnessRisk:false,
+   desc:"Chứa Huyết Nguyệt Mịch Linh bí thuật — truy tìm tung tích, nhìn thấu kẻ phản trắc.", bonus:{crit:3}},
+  {id:'thong_bao', name:"Thông Bảo Quyết", reqType:'any', minRealm:3, cost:{stones:600, herbTier:4, herbCount:3}, madnessRisk:false,
+   desc:"Pháp quyết tế luyện Hư Thiên Đỉnh — Hàn Lập luyện tới tầng hai: đỉnh nhốt địch 2 lượt thay vì 1.", bonus:{def:6}},
+  {id:'luc_cuc', name:"Lục Cực Chân Ma Công", reqType:'path', pathId:'ma', minRealm:3, cost:{stones:900, herbTier:5, herbCount:3}, madnessRisk:true,
+   desc:"Ma công đỉnh cấp của Ma đạo Thiên Nam.", bonus:{atk:30, def:10}},
+  {id:'cu_dai', name:"Cự Đại Thuật", reqType:'path', pathId:'the', minRealm:2, cost:{stones:400, herbTier:4, herbCount:3}, madnessRisk:false,
+   desc:"Thần thông thân thể của Khuê Linh — hóa thân khổng lồ.", bonus:{hp:150, atk:10}},
+  {id:'phan_liet', name:"Nguyên Thần Phân Liệt Thuật", reqType:'path', pathId:'hon', minRealm:3, cost:{stones:800, herbTier:5, herbCount:3}, madnessRisk:true,
+   desc:"Bí thuật tách nguyên thần của Trọng thần sư.", bonus:{crit:6, spd:6}},
+  {id:'pham_thanh_yeu', name:"Phạm Thánh Yêu Công", reqType:'path', pathId:'the', minRealm:5, cost:{stones:5000, herbTier:6, herbCount:3}, madnessRisk:false,
+   desc:"Một trong ba công pháp Hàn Lập dung hợp thành Phạm Thánh Chân Ma Công (cùng Minh Vương Quyết và Thác Thiên Ma Công).", bonus:{def:20, hp:150}},
   {id:'tinh_than', name:"Tinh Thần Hộ Thể Quyết", reqType:'any', minRealm:2, cost:{stones:260, herbTier:3, herbCount:4}, madnessRisk:false,
    desc:"Công pháp Thiên Tinh Tông: hấp thụ lực lượng tinh tú rèn nhục thân, tạo màng chắn phòng ngự.", bonus:{def:22, hp:110}},
   {id:'minh_vuong', name:"Minh Vương Quyết", reqType:'path', pathId:'phat', minRealm:2, cost:{stones:260, herbTier:4, herbCount:3}, madnessRisk:false,
@@ -1476,7 +1554,7 @@ function learnAdvancedTechnique(id){
   if(success){
     state.techniques.push({name:t.name, desc:t.desc, bonus:t.bonus});
     state.learnedNames.push(t.name);
-    addLog(`Sau bao gian khổ, ngươi luyện thành 【${t.name}】— ${t.desc}`);
+    addLog(`Ngươi đã học được 【${t.name}】.`);
   } else {
     const dmg = Math.round(state.stats.hpMax*0.35);
     state.hp = Math.max(1, state.hp-dmg);
@@ -2048,9 +2126,13 @@ function ngRegionEvent(region, loc){
     if(Math.random()<0.3) opts.push('canhTinh');
   } else if(region.id==='daitan'){
     opts.push('canhTinh','canhTinh','kimLoiTruc','tangKinh');
+    if(!state.kimCuongTrao && state.realmIdx>=3) opts.push('kimCuongTrao');
+    if(!state.thaiAmHoa && state.realmIdx>=3) opts.push('thaiAm');
   }
   if(!opts.length) return false;
   const pick = pickEventOpt(opts);
+  if(pick==='kimCuongTrao'){ state.kimCuongTrao = true; addLog('Trong mật quật một thế gia Đại Tấn, ngươi can thiệp cuộc vây giết một vạn niên thi vương và nhận được 【Kim Cương Tráo】 — kim quang Phật môn hộ thân, giảm 10% sát thương nhận vào.'); return true; }
+  if(pick==='thaiAm'){ state.thaiAmHoa = true; addLog('Tại một cung điện cổ xây trên hỏa trì cực phẩm, ngươi thu được 【Thái Âm Chân Hỏa】 — một trong Tam Đại Chân Linh Chi Hỏa. Mỗi trận có thể thiêu địch một lần.'); return true; }
   if(pick==='daiNaDi'){
     state.daiNaDi = true; let egg = '';
     if(!state.worm.have){ state.worm = {have:true, level:1, typeId:'huyet_ngoc'}; egg = ' cùng một quả trứng Huyết Ngọc Tri Chu — trứng nở ngay trong tay áo ngươi'; }
@@ -2231,7 +2313,7 @@ function buySectItem(idx){
     else if(it.key==='tranDo') state.hasTranDo = true;
     else if(it.key==='khoiLoiVe') state.hasKhoiLoiVe = true;
   }
-  if(it.type!=='statpill') addLog(`Dùng ${it.cost} cống hiến đổi lấy 【${label}】 tại Tàng Bảo Các của ${def.name}.`);
+  if(it.type!=='statpill') addLog(`Ngươi đã đổi được 【${label}】.`);
   computeStats();
   render();
 }
@@ -2360,12 +2442,13 @@ function ngCombatAction(type){
   let dmg = 0, msg = '';
   if(type==='kiem'){
     if(g.swords<1 || c.cdKiem>0) return null;
-    const mult = 1.1+g.swords/60;
+    const sa = swordArts();
+    const mult = 1.1+g.swords/60 + (sa.cu?0.4:0);
     const r = pathAdjustedDamage(state.stats.atk*mult, c.enemy.def, state.stats.crit+((state.path&&state.path.id==='kiem')?10:0), c.enemy, false);
-    dmg = r.dmg;
+    dmg = Math.round(r.dmg*(sa.anh?1.6:1)*(sa.hoLo?1.5:1));
     if(isEvilEnemy(c.enemy)) dmg = Math.round(dmg*1.25);
-    msg = `${g.swords} thanh Thanh Trúc Phong Vân Kiếm hóa thành cơn lốc kiếm quang${r.crit?' — bạo kích':''}, gây ${dmg} sát thương!${isEvilEnemy(c.enemy)?' Ích Tà Thần Lôi khắc chế tà vật, uy lực tăng mạnh.':''}`;
-    c.cdKiem = 2;
+    msg = `${g.swords} thanh Thanh Trúc Phong Vân Kiếm ${sa.hoLo?'bay ra từ Nguyên Khí Kiếm Hồ Lô, ':''}${sa.cu?'hợp thành cự kiếm':'hóa thành cơn lốc kiếm quang'}${sa.anh?', rồi tách ra từng bóng kiếm phân quang':''}${r.crit?' — bạo kích':''}, gây ${dmg} sát thương!${isEvilEnemy(c.enemy)?' Ích Tà Thần Lôi khắc chế tà vật, uy lực tăng mạnh.':''}`;
+    c.cdKiem = sa.hoLo ? 1 : 2;
   } else if(type==='kiemtran'){
     if(!g.kiemTran || c.kiemTranUsed) return null;
     const r = pathAdjustedDamage(state.stats.atk*3.5, c.enemy.def*0.4, state.stats.crit, c.enemy, false);
@@ -2387,7 +2470,7 @@ function ngCombatAction(type){
     c.dinhUsed = true;
     c.enemy.atk = Math.round(c.enemy.atk*0.7);
     c.enemy.def = Math.round(c.enemy.def*0.8);
-    c.frozen = Math.max(c.frozen||0, 1);
+    c.frozen = Math.max(c.frozen||0, hasTech('Thông Bảo Quyết') ? 2 : 1);
     combatLog(`Hư Thiên Đỉnh bay lên, miệng đỉnh hút ${c.enemy.name} vào trong nhốt một lượt, đồng thời cướp đoạt linh tính pháp bảo của nó — công kích và phòng ngự giảm mạnh!`);
     enemyTurn();
     return 'done';
@@ -2742,7 +2825,7 @@ function gainProfExp(id, amt){
 /* Tỷ lệ thành công minh bạch: tay nghề cao, công thức đầy đủ thì dễ thành; món càng khó càng dễ hỏng. */
 function craftChance(id, difficulty, hasRecipe, extra){
   const lvl = profLvl(id);
-  let c = 58 + lvl*9 - difficulty*11 + (hasRecipe===false ? -30 : 12) + (extra||0) + ((id==='danSu'||id==='khiSu') && hasRelic('cuu_long_trao') ? 8 : 0) + (id==='phuLuc' && state.learnedNames && state.learnedNames.includes('Trường Xuân Công') ? 10 : 0) + (id==='danSu' && state.tienDinhLo ? 12 : 0) + (id==='tranPhap' && phyId()==='long_ngam' ? 20 : 0);
+  let c = 58 + lvl*9 - difficulty*11 + (hasRecipe===false ? -30 : 12) + (extra||0) + ((id==='danSu'||id==='khiSu') && hasRelic('cuu_long_trao') ? 8 : 0) + (id==='phuLuc' && state.learnedNames && state.learnedNames.includes('Trường Xuân Công') ? 10 : 0) + (id==='danSu' && state.tienDinhLo ? 12 : 0) + (id==='tranPhap' && phyId()==='long_ngam' ? 20 : 0) + (id==='danSu' && rareHas('chu_hong_dinh') ? 8 : 0);
   return Math.max(5, Math.min(97, Math.round(c)));
 }
 
@@ -3036,6 +3119,7 @@ function migrateState(){
 function startCombat(enemy){
   enemy = classifyBeast(Object.assign({}, enemy));
   beastLogSeen(enemy);
+  { const bl = rareBacklash(); if(bl) addLog(bl.trim()); }
   state.combat = {
     enemy:{...enemy, hp:enemy.hpMax},
     log:[`Bất ngờ chạm trán ${enemy.name}!`],
@@ -3085,8 +3169,8 @@ function playerAttack(type){
     c.formationActive = true;
     combatLog(`Cắm ${TRAN_KY[state.tranKyTier].name} quanh thân, trận pháp hộ thân mở ra — giảm ${Math.round(tranMitigation()*100)}% sát thương nhận vào.`);
     enemyTurn(); return;
-  } else if(type==='kimquang' || type==='batmon' || type==='phamiet' || type==='thienloitu' || type==='codang'){
-    const r = canonCombatAction(type);
+  } else if(['kimquang','batmon','phamiet','thienloitu','codang','batlinh','thaiam','nguson','cuuchan'].includes(type) || type.startsWith('rare:')){
+    const r = type.startsWith('rare:') ? rareCombat(type.slice(5)) : canonCombatAction(type);
     if(!r){ render(); return; }
     dmg = r.dmg; msg = r.msg;
   } else if(type==='huyenthe' || type==='tranguc'){
@@ -3165,7 +3249,7 @@ function enemyTurn(){
   const sp = lgSpecialEnemyTurn(c);
   combatLog(`${c.enemy.name} phản kích${r.crit?' chí mạng':''}, ngươi chịu ${dmg} sát thương${notes.length?` (${notes.join(', ')})`:''}.${sp}`);
   tickCombatCooldowns(c);
-  if(state.hp<=0 && !(state.tg && tgSeen() && tgTryRevive(c))){ loseCombat(); return; }
+  if(state.hp<=0 && !(state.tg && tgSeen() && tgTryRevive(c)) && !rareRevive(c)){ loseCombat(); return; }
   render();
 }
 
@@ -3640,13 +3724,13 @@ function grantFortune(id, z){
     if(manuals.length && Math.random()<0.5){
       const t = manuals[Math.floor(Math.random()*manuals.length)];
       state.manuals.push(t.id);
-      msg += `, cùng ngọc giản 【${t.name}】 (xem ở Nhân Vật ▸ Công Pháp).`;
+      msg += `, cùng ngọc giản 【${t.name}】.`;
     } else if(learnable.length){
       const base = learnable[Math.floor(Math.random()*learnable.length)];
       const t = {name:base.name, desc:base.desc, bonus:{}};
       Object.keys(base.bonus).forEach(k=>t.bonus[k] = k==='tuViRate' ? base.bonus[k] : Math.round(base.bonus[k]*(1+z*0.4)));
       state.techniques.push(t); state.learnedNames.push(base.name);
-      msg += `, cùng di thư ghi 【${t.name}】 — ngươi lĩnh ngộ ngay tại chỗ.`;
+      msg += `. Ngươi đã học được 【${t.name}】.`;
     } else msg += '.';
   } else if(id==='linh_nhu'){
     const hp = Math.round(20*scale);
@@ -3891,7 +3975,7 @@ function reqLabel(req){
   if(req.herb) return `cần ${req.herb[1]} ${HERB_NAMES[req.herb[0]-1]}`;
   return '';
 }
-function canSeeThrough(){ return hasTech('Thiên Nhãn Thuật') || isHonTu() || hasRelic('thanh_tam_boi') || phaMietOpen(); }
+function canSeeThrough(){ return hasTech('Thiên Nhãn Thuật') || hasTech('Đại Diễn Bảo Kinh') || isHonTu() || hasRelic('thanh_tam_boi') || phaMietOpen(); }
 
 /* Chọn NPC xuất hiện theo nơi chốn */
 function npcCandidates(ctx){
@@ -4345,6 +4429,7 @@ function expFinal(){
 }
 function finalReward(z){
   const E = state.expd, t = zoneMatTier(z), parts = [];
+  if(Math.random()<0.3){ const r = rareRandom(); if(r){ grantRare(r.id); parts.push(r.name); } }
   if(z===1){ parts.push(lootMat('yeudan',1,2), lootMat('khoang', Math.min(2,t+1), 3)); }
   else if(z===2){ parts.push(`${lootStones(400)} linh thạch`); const h = ng().huThien; if(!h.have && h.maps<3){ h.maps++; parts.push(`Hư Thiên Tàn Đồ (${h.maps}/3)`); } if(Math.random()<0.5){ const r = randomRelicFor(z); if(r) expLog(grantRelic(r.id,'Trong bảo khố: ')); } }
   else if(z===3){ parts.push(lootMat('yeudan',2,2), `${lootStones(500)} linh thạch`); if(Math.random()<0.4){ const r = randomRelicFor(z); if(r) expLog(grantRelic(r.id,'Phong ấn vỡ, lộ ra: ')); } }
@@ -4354,7 +4439,7 @@ function finalReward(z){
   else if(z===8){ ['atk','def'].forEach(k=>{ const sp = STAT_PILLS.find(p=>p.id===k); state.statPillBonus[k]=(state.statPillBonus[k]||0)+sp.amount*2; }); parts.push('công và thủ vĩnh viễn +10'); }
   else if(z===9){ parts.push(`${lootStones(2500)} linh thạch`); if(Math.random()<0.6){ const r = randomRelicFor(z); if(r) expLog(grantRelic(r.id,'Hỗn độn tan đi, để lại: ')); } }
   else if(z===11){ parts.push(`${lootStones(6000)} linh thạch`); const r = randomRelicFor(z); if(r) expLog(grantRelic(r.id,'Ở rìa hư vô: ')); }
-  else if(z===0){ parts.push(`${lootStones(60)} linh thạch từ túi kẻ chặn đường`); if(!state.kimQuang && Math.random()<0.35){ state.kimQuang = 8; parts.push('phù bảo Kim Quang Chuyên (8 lần)'); } }
+  else if(z===0){ if(!state.thanhNgungKinh && Math.random()<0.3){ state.thanhNgungKinh = true; parts.push('gương cổ Thanh Ngưng Kính'); } parts.push(`${lootStones(60)} linh thạch từ túi kẻ chặn đường`); if(!state.kimQuang && Math.random()<0.35){ state.kimQuang = 8; parts.push('phù bảo Kim Quang Chuyên (8 lần)'); } }
   else if(z===6){ parts.push(`${lootStones(1500)} linh thạch`); state.caiMenhBonus = Math.min(0.36, state.caiMenhBonus+0.05); parts.push('tẩy luyện linh căn trong Tẩy Linh Trì (tu luyện vĩnh viễn +5%)'); }
   else if(z===10){ parts.push(`${lootStones(3000)} linh thạch`, lootMat('yeudan',3,2)); }
   if(z>=5 && z<=7 && Math.random()<0.3){ const b = randomBloodId(); addBlood(b); parts.push(`chân huyết ${bloodName(b)}`); }
@@ -5305,7 +5390,7 @@ function grantLgHeritage(key){
   if(h.have){ state.spiritStones += 3000; return `Truyền thừa 【${LG_HERITAGE[key].name}】 ngươi đã có — bản sao đem bán được 3000 linh thạch.`; }
   h.have = true;
   if(key==='luyenThan') h.layer = 0;
-  return `Ngươi có được truyền thừa 【${LG_HERITAGE[key].name}】! Xem ở Nhân Vật ▸ Bí Truyền.`;
+  return `Ngươi đã có được truyền thừa 【${LG_HERITAGE[key].name}】.`;
 }
 EVENT_ACTS.lgHide = function(){
   if(Math.random()<0.6){ addLog('Ngươi thu liễm toàn bộ khí tức, nằm im dưới lớp đá vụn. Hóa thân Ma Tôn lướt qua, không phát hiện ra ngươi.'); return; }
@@ -5503,7 +5588,7 @@ function grantTimeArt(id){
   const g = tg(), a = TIME_ARTS.find(x=>x.id===id);
   if(g.timeArts.includes(id)){ g.tienThach += 150; return `Đã có ${a.name} — bản sao đổi được 150 tiên nguyên thạch.`; }
   g.timeArts.push(id); g.laws.thoi = Math.min(lawCap(), g.laws.thoi+3);
-  return `Lĩnh ngộ 【${a.name}】 (${g.timeArts.length}/5 bộ công pháp Thời Gian). Thời Gian Pháp Tắc +3.${g.timeArts.length===5?' Đủ năm bộ — có thể dung hợp thành Đại Ngũ Hành Huyễn Thế Quyết!':''}`;
+  return `Ngươi đã học được 【${a.name}】 (${g.timeArts.length}/5).${g.timeArts.length===5?' Đủ năm bộ, có thể dung hợp thành Đại Ngũ Hành Huyễn Thế Quyết.':''}`;
 }
 function fuseDaiNguHanh(){
   const g = tg();
@@ -5517,8 +5602,8 @@ function fuseDaiNguHanh(){
 }
 function grantTgHeritage(key){
   const g = tg();
-  if(key==='thienSat'){ if(g.thienSat.have){ g.tienThach += 150; return 'Thiên Sát Trấn Ngục Công đã có — bản sao đổi 150 tiên nguyên thạch.'; } g.thienSat.have = true; return 'Có được 【Thiên Sát Trấn Ngục Công】 — công pháp luyện thể hấp thu Tinh Thần chi lực đả thông huyền khiếu.'; }
-  if(key==='ltExt'){ if(g.ltExt){ g.tienThach += 150; return 'Tàn thiên Luyện Thần Thuật đã có — đổi 150 tiên nguyên thạch.'; } g.ltExt = true; const l = lg().luyenThan; if(!l.have){ l.have = true; l.layer = 0; } return 'Có được 【Luyện Thần Thuật — tàn thiên Tiên Giới】 (tầng 4 tới 6). Gom đủ là bản hoàn chỉnh.'; }
+  if(key==='thienSat'){ if(g.thienSat.have){ g.tienThach += 150; return 'Thiên Sát Trấn Ngục Công đã có — bản sao đổi 150 tiên nguyên thạch.'; } g.thienSat.have = true; return 'Ngươi đã học được 【Thiên Sát Trấn Ngục Công】.'; }
+  if(key==='ltExt'){ if(g.ltExt){ g.tienThach += 150; return 'Tàn thiên Luyện Thần Thuật đã có — đổi 150 tiên nguyên thạch.'; } g.ltExt = true; const l = lg().luyenThan; if(!l.have){ l.have = true; l.layer = 0; } return 'Ngươi đã có được 【Luyện Thần Thuật — tàn thiên Tiên Giới】.'; }
 }
 function openKhieu(useSand){
   const g = tg(), ts = g.thienSat;
@@ -5774,7 +5859,7 @@ function tgBuy(slot, idx){
     const base = TREASURES[Math.floor(Math.random()*TREASURES.length)], s = 6+state.realmIdx*0.8;
     const t = {name:`${base.name} · Tiên Khí`, tier:4, temperCount:0, bonus:{atk:Math.round((base.bonus.atk||0)*s*3), def:Math.round((base.bonus.def||0)*s*3), crit:Math.round((base.bonus.crit||0)*s*0.3)}};
     if(state.treasure && state.lg && lg().bachMach.have && lg().spare.length<12) lg().spare.push(state.treasure);
-    state.treasure = t; msg = `Thần lò Bách Tạo Sơn luyện ra 【${t.name}】 (${ngFmtBonus(t.bonus)}), trang bị ngay.`;
+    state.treasure = t; msg = `Ngươi đã nhận được 【${t.name}】.`;
   }
   addLog(msg); computeStats(); render();
 }
@@ -6161,6 +6246,9 @@ const TALISMANS = [
   {id:'kim_cang',   name:'Hàng Linh Phù',        kind:'shield',  tier:2, minLvl:2, pct:0.35, ing:[M('huyet',2,1), M('yeudan',1,1), S(40)], desc:'Giáp bọc mượn sức yêu thú bậc cao, hấp thụ sát thương bằng 35% khí huyết tối đa.'},
   {id:'huyet_don',  name:'Huyết Độn Phù',        kind:'blood',   tier:2, minLvl:2, ing:[M('huyet',2,1), S(30)], desc:'Thiêu đốt tinh huyết dịch chuyển tức thời: chắc chắn thoát, nhưng mất 20% khí huyết tối đa.'},
   {id:'than_hanh',  name:'Độn Không Phù',        kind:'flee',    tier:2, minLvl:3, ing:[M('huyet',2,1), M('yeudan',2,1), S(80)], desc:'Xé không gian độn đi tức thời, chắc chắn thoát kể cả trước quái vật vượt cấp.'},
+  {id:'pha_gioi',   name:'Phá Giới Phù',         kind:'flee',    tier:3, minLvl:4, ing:[M('huyet',3,1), M('yeudan',2,1), S(300)], desc:'Phá vỡ kết giới, cấm chế không gian để thoát thân — Hàn Lập từng dùng nó thoát khỏi Vạn Yêu Phiên. Chắc chắn thoát trận.'},
+  {id:'luc_dinh',   name:'Lục Đinh Thiên Giáp Phù', kind:'shield', tier:3, minLvl:5, pct:0.5, ing:[M('huyet',3,2), M('khoang',3,1), S(400)], desc:'Phù hộ thân cao cấp của Thiên Phù Môn: thiên giáp lục đinh bao bọc, hấp thụ sát thương bằng một nửa khí huyết.'},
+  {id:'hoa_linh',   name:'Hóa Linh Phù',         kind:'heal',    tier:3, minLvl:4, ing:[M('moc',3,1), M('huyet',2,2), S(250)], desc:'Phù cao cấp của Thiên Phù Môn: hóa linh khí trời đất thành sinh cơ, hồi 35% khí huyết giữa trận.'},
   {id:'giap_nguyen',name:'Giáp Nguyên Phù',      kind:'clone',   tier:3, minLvl:4, ing:[M('huyet',3,1), M('yeudan',2,2), S(200)], desc:'Tạo ra một phân thân mang một phần thực lực, chết thay ngươi trong 3 đòn kế tiếp.'},
   {id:'loi_cong',   name:'Cửu Thiên Lôi Công Phù',kind:'atk',    tier:4, minLvl:5, tien:true, dmgMult:4, flat:300, vsEvil:0.5, ing:[M('huyet',3,2), {kind:'tien',n:40}], desc:'Tiên phù trong Lục Giáp Thiên Thư: triệu lôi kiếp Tiên Giới, gấp 4 lần công kích, khắc chế tà ma.'},
   {id:'thai_nhat',  name:'Thái Nhất Hóa Thanh Phù',kind:'stealth',tier:4, minLvl:5, tien:true, ing:[M('moc',3,2), {kind:'tien',n:60}], desc:'Tiên phù trong Lục Giáp Thiên Thư: che giấu tuyệt đối khí tức 20 năm — tuần tra Thiên Đình không phát hiện, truy nã không tăng. Trong trận: thoát chắc chắn.'}
@@ -6200,6 +6288,9 @@ function useTalisman(id){
   } else if(t.kind==='shield'){
     const amt = Math.round(state.stats.hpMax*t.pct); c.shield += amt;
     combatLog(`${t.name} hóa thành bộ giáp yêu thú quanh thân, hấp thụ tối đa ${amt} sát thương.`);
+  } else if(t.kind==='heal'){
+    const h = Math.round(state.stats.hpMax*0.35); state.hp = Math.min(state.stats.hpMax, state.hp+h);
+    combatLog(`Hóa Linh Phù tan thành linh quang thấm vào thân — hồi ${h} khí huyết.`);
   } else if(t.kind==='stun'){
     if(/Khôi Lỗi|Ảnh\b|Chi Linh|Cấm Chế/.test(c.enemy.name)){ combatLog(`Định Thần Phù dán lên ${c.enemy.name} rồi tự cháy thành tro — thứ này không có thần hồn để phong ấn.`); }
     else if(beastPower(c.enemy) > state.realmIdx && Math.random()<0.5){ combatLog(`Thần thức của ${c.enemy.name} mạnh hơn ngươi một bậc — lá Định Thần Phù vừa chạm người đã bị chấn nát.`); }
@@ -6316,6 +6407,7 @@ function renderFormationPage(){
     <div class="card"><div class="sec-title">${ic('seal')} Điên Đảo Ngũ Hành Trận<span>${state.tranKyTier?'bậc '+state.tranKyTier:'chưa có'}</span></div>
       <p class="sec-note" style="margin:0 0 8px;">Trận phòng ngự danh tiếng, tạo ảo ảnh và chịu được sát thương của tu sĩ Nguyên Anh. Mất một lượt để bày giữa trận.</p>${tkCard}</div>
     <div class="card"><div class="sec-title">${ic('swords')} Bát Môn Kim Quang Trận</div>${bm}</div>
+    <div class="card"><div class="sec-title">${ic('taiji')} Cửu Chân Phục Ma Trận</div>${state.cuuChan ? '<p class="flavor">Đã có trận bàn — mỗi trận dùng một lần: giam ma vật, quỷ vật, tà tu 3 lượt (thủ lĩnh 2), kẻ khác 1 lượt.</p>' : recipeCard({prof:'tranPhap', title:'Cửu Chân Phục Ma Trận', minLvl:4, ing:[M('khoang',2,5), M('yeudan',2,2), S(800)], chance:100, action:'buildCuuChan()', btn:'Bố Trí', gold:true, desc:'Trận pháp chuyên giam giữ ma vật — cổ tu từng dùng nó canh giữ những tồn tại nguy hiểm.'})}</div>
     ${xt?`<div class="card"><div class="sec-title">${ic('hourglass')} Xuân Thu Luân Hồi Trận</div>${xt}</div>`:''}`;
 }
 
@@ -6398,7 +6490,8 @@ function renderCanonForge(){
     : recipeCard({prof:'khiSu', title:'Phong Lôi Sí', minLvl:3, ing:[{kind:'special',type:'phongLoiSi',n:2}, M('khoang',2,3), S(500)], chance:100, action:'craftWings()', btn:'Luyện', gold:true,
       desc:'Luyện từ hài cốt Lôi Bằng — yêu thú phong lôi thuộc tính. Hài cốt rơi từ thủ lĩnh yêu thú ở Loạn Tinh Hải và vùng trời Phi Linh Tộc.'});
   const hk = state.tg && (tg().huyenDang || state.huyenManh>0) && !state.huyenKiem ? `<button class="btn gold" style="margin-top:8px;" onclick="forgeHuyenThien()">Luyện Huyền Thiên Trảm Linh Kiếm (Luyện Khí Sư 5, 500 tiên thạch)</button>` : '';
-  return `<div class="card"><div class="sec-title">${ic('bolt')} Pháp Bảo Đặc Thù</div>${wingsCard}${hk}</div>`;
+  const ncs = state.realmIdx>=6 ? (state.nguCucSon ? `<div class="row"><span class="k">Nguyên Hợp Ngũ Cực Sơn</span><span class="v ok-mark">Đã luyện</span></div>` : recipeCard({prof:'khiSu', title:'Nguyên Hợp Ngũ Cực Sơn', minLvl:5, ing:[M('khoang',3,15), M('moc',3,5), S(20000)], chance:100, action:'forgeNguCucSon()', btn:'Luyện (10 năm)', gold:true, desc:'Hợp năm ngọn núi thành Thông Thiên Linh Bảo phòng ngự tối thượng: giảm 15% sát thương nhận vào, giảm 30% uy lực thiên kiếp; mỗi trận trấn áp địch một lần.'})) : '';
+  return `<div class="card"><div class="sec-title">${ic('bolt')} Pháp Bảo Đặc Thù</div>${wingsCard}${hk}${ncs}</div>`;
 }
 
 /* ---------------- Phá Miệt Pháp Mục ---------------- */
@@ -6490,6 +6583,11 @@ function renderCanonItems(){
   if(state.phaCamChau) rows.push(`<div class="row"><span class="k">Phá Cấm Châu ×${state.phaCamChau}</span><span class="v"><small>tự phá cấm chế khi gặp bẫy trong bí cảnh</small></span></div>`);
   if(state.dapVanNgoa) rows.push(`<div class="row"><span class="k">Đạp Vân Ngoa</span><span class="v"><small>giày pháp khí, thân pháp +15%</small></span></div>`);
   if(state.daiNaDi) rows.push(`<div class="row"><span class="k">Đại Na Di Lệnh<br><small>Bảo vật thượng cổ, chìa khóa kích hoạt Cổ Truyền Tống Trận</small></span><span class="v"><small>đi lại Thiên Nam ↔ Loạn Tinh Hải · giảm 40% sát thương bão không gian khi phi thăng</small></span></div>`);
+  if(state.thanhNgungKinh) rows.push(`<div class="row"><span class="k">Thanh Ngưng Kính</span><span class="v"><small>gương cổ phỏng chế, phòng ngự +8%</small></span></div>`);
+  if(state.kimCuongTrao) rows.push(`<div class="row"><span class="k">Kim Cương Tráo</span><span class="v"><small>giảm 10% sát thương nhận vào</small></span></div>`);
+  if(state.batLinhXich) rows.push(`<div class="row"><span class="k">Bát Linh Xích</span><span class="v"><small>mỗi trận khóa địch một lần</small></span></div>`);
+  if(state.thaiAmHoa) rows.push(`<div class="row"><span class="k">Thái Âm Chân Hỏa</span><span class="v"><small>mỗi trận thiêu địch một lần</small></span></div>`);
+  if(state.nguCucSon) rows.push(`<div class="row"><span class="k">Nguyên Hợp Ngũ Cực Sơn</span><span class="v"><small>phòng ngự tối thượng, cản cả thiên kiếp</small></span></div>`);
   if(state.coDang) rows.push(`<div class="row"><span class="k">Cửu Trản Cổ Đăng</span><span class="v"><small>mỗi trận dùng một lần</small></span></div>`);
   if(state.minhHonChau) rows.push(`<div class="row"><span class="k">Minh Hồn Châu</span><span class="v"><small>Đề Hồn Thú mạnh thêm 50%</small></span></div>`);
   if(state.phongLoiSi) rows.push(`<div class="row"><span class="k">Hài cốt Lôi Bằng ×${state.phongLoiSi}</span><span class="v"><small>luyện Phong Lôi Sí</small></span></div>`);
@@ -6530,6 +6628,30 @@ function canonCombatAction(type){
     fx('flash',{color:'rgba(255,248,224,.75)',dur:420}); fx('bolt'); fx('shake');
     return {dmg, msg:`Ném Thiên Lôi Tử — hạt châu vỡ tung, thiên lôi chí dương chí cương bùng nổ, ${c.enemy.name} lãnh ${dmg} sát thương, xuyên thẳng qua mọi phòng ngự.${note} (còn ${state.thienLoiTu})`};
   }
+  if(type==='batlinh'){
+    if(!state.batLinhXich || c.batLinhUsed) return null;
+    c.batLinhUsed = true; c.frozen = Math.max(c.frozen||0, c.enemy.isBoss?1:2);
+    return {dmg:0, msg:`Bát Linh Xích bay lên, tám đạo linh quang khóa chặt ${c.enemy.name} — không thể cử động ${c.enemy.isBoss?1:2} lượt!`};
+  }
+  if(type==='thaiam'){
+    if(!state.thaiAmHoa || c.thaiAmUsed) return null;
+    c.thaiAmUsed = true;
+    const r = pathAdjustedDamage(state.stats.atk*2.2, c.enemy.def*0.5, state.stats.crit, c.enemy, false);
+    const dmg = Math.round(r.dmg*(isEvilEnemy(c.enemy)?1.4:1));
+    return {dmg, msg:`Thái Âm Chân Hỏa — một trong Tam Đại Chân Linh Chi Hỏa — bùng lên lạnh lẽo, thiêu ${c.enemy.name} ${dmg} sát thương${isEvilEnemy(c.enemy)?', tà khí bị thiêu rụi':''}.`};
+  }
+  if(type==='nguson'){
+    if(!state.nguCucSon || c.nguSonUsed) return null;
+    c.nguSonUsed = true; c.frozen = Math.max(c.frozen||0, 1);
+    const r = pathAdjustedDamage(state.stats.atk*2, c.enemy.def*0.5, state.stats.crit, c.enemy, false);
+    return {dmg:r.dmg, msg:`Năm ngọn núi của Nguyên Hợp Ngũ Cực Sơn giáng xuống trấn áp ${c.enemy.name}: ${r.dmg} sát thương, đè bẹp một lượt!`};
+  }
+  if(type==='cuuchan'){
+    if(!state.cuuChan || c.cuuChanUsed) return null;
+    c.cuuChanUsed = true; const ev = isEvilEnemy(c.enemy); const n = ev ? (c.enemy.isBoss?2:3) : 1;
+    c.frozen = Math.max(c.frozen||0, n);
+    return {dmg:0, msg:`Cửu Chân Phục Ma Trận dựng lên quanh ${c.enemy.name}${ev?' — ma khí bị trấn áp hoàn toàn':''}: bị giam ${n} lượt.`};
+  }
   if(type==='codang'){
     if(!state.coDang || c.coDangUsed) return null;
     c.coDangUsed = true; c.enemy.def = Math.round(c.enemy.def*0.8);
@@ -6550,6 +6672,11 @@ function renderCanonCombatButtons(c){
   if(state.kimQuang>0) btns.push(`<button class="btn gold" onclick="playerAttack('kimquang')">${ic('stone')}Kim Quang Chuyên (${state.kimQuang})</button>`);
   if(state.batMon) btns.push(`<button class="btn ghost" ${c.batMonUsed?'disabled':''} onclick="playerAttack('batmon')">${ic('swords')}Bát Môn Kim Quang</button>`);
   if(state.thienLoiTu>0) btns.push(`<button class="btn blood" ${c.thienLoiUsed?'disabled':''} onclick="playerAttack('thienloitu')">${ic('bolt')}Thiên Lôi Tử (${state.thienLoiTu}) · ${beastPower(c.enemy)>=5?'vô dụng':Math.min(100,Math.round(thienLoiPower()/c.enemy.hpMax*100))+'% máu địch'}</button>`);
+  { const rb = renderRareCombatButtons(c); if(rb) btns.push(rb); }
+  if(state.batLinhXich) btns.push(`<button class="btn ghost" ${c.batLinhUsed?'disabled':''} onclick="playerAttack('batlinh')">${ic('seal')}Bát Linh Xích</button>`);
+  if(state.thaiAmHoa) btns.push(`<button class="btn gold" ${c.thaiAmUsed?'disabled':''} onclick="playerAttack('thaiam')">${ic('moon')}Thái Âm Chân Hỏa</button>`);
+  if(state.nguCucSon) btns.push(`<button class="btn gold" ${c.nguSonUsed?'disabled':''} onclick="playerAttack('nguson')">${ic('mountain')}Ngũ Cực Sơn</button>`);
+  if(state.cuuChan) btns.push(`<button class="btn ghost" ${c.cuuChanUsed?'disabled':''} onclick="playerAttack('cuuchan')">${ic('taiji')}Cửu Chân Phục Ma</button>`);
   if(state.coDang) btns.push(`<button class="btn gold" ${c.coDangUsed?'disabled':''} onclick="playerAttack('codang')">${ic('comet')}Cửu Trản Cổ Đăng</button>`);
   if(phaMietOpen()) btns.push(`<button class="btn gold" ${c.phaMietUsed?'disabled':''} onclick="playerAttack('phamiet')">${ic('eye')}Phá Miệt Pháp Mục</button>`);
   return btns.length ? `<div class="btn-row" style="margin-top:8px;">${btns.join('')}</div>` : '';
@@ -6660,6 +6787,9 @@ function lotLabel(l){
     huyenQua:()=>'Huyền Thiên Quả',
     kiemLieu:()=>'Vật liệu tinh luyện phi kiếm',
     thienLoiTu:()=>`Thiên Lôi Tử ×${l.n}`,
+    thanhNgung:()=>'Thanh Ngưng Kính',
+    rare:()=>rareDef(l.id).name,
+    batLinh:()=>'Bát Linh Xích',
     tienkhi:()=>`Tiên Khí ${TIENKHI_GRADE[l.grade]}: ${l.base_name}`,
     dinhLo:()=>'Đỉnh lô tiên giai',
     daoDan:()=>'Đạo Đan',
@@ -6696,6 +6826,9 @@ function lotGrant(l){
   else if(g==='lucGiap') tg().lucGiap = true;
   else if(g==='tinhsa') tg().tinhSa += l.n;
   else if(g==='huyenQua') tg().huyenQua = (tg().huyenQua||0)+1;
+  else if(g==='thanhNgung'){ state.thanhNgungKinh = true; }
+  else if(g==='rare'){ grantRare(l.id); }
+  else if(g==='batLinh'){ state.batLinhXich = true; }
   else if(g==='thienLoiTu'){ const room = THIEN_LOI_MAX-(state.thienLoiTu||0); const k = Math.max(0, Math.min(l.n, room)); state.thienLoiTu = (state.thienLoiTu||0)+k; if(k<l.n){ state.spiritStones += 800*(l.n-k); return `Nhận ${k} hạt Thiên Lôi Tử — túi đã đầy (tối đa ${THIEN_LOI_MAX}), phần dư bán lại được ${800*(l.n-k)} linh thạch.`; } }
   else if(g==='kiemLieu'){ const n = ng(); n.swordRefine = Math.min(3, (n.swordRefine||0)+1); return `Tinh luyện 72 phi kiếm lần ${n.swordRefine}/3 — uy lực Thanh Trúc Phong Vân Kiếm +${n.swordRefine*20}%.`; }
   else if(g==='tienkhi'){ const base = TREASURES.find(t=>t.name===l.base_name) || TREASURES[0], s = (6+state.realmIdx*0.8)*[1,1.3,1.7,2.2][l.grade];
@@ -6705,7 +6838,7 @@ function lotGrant(l){
   else if(g==='daoDan') state.daoDan = (state.daoDan||0)+1;
   else if(g==='lawBao'){ const t = tg(), k = t.mainLaw || pick(Object.keys(LAWS)); t.laws[k] = Math.min(lawCap(), t.laws[k]+8); return `Dị bảo tan vào thức hải — ${LAWS[k].short} +8.`; }
   computeStats();
-  return `Nhận được ${lotLabel(l)}.`;
+  return `Ngươi đã nhận được 【${lotLabel(l)}】.`;
 }
 function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
 function buildLots(a){
@@ -6715,6 +6848,7 @@ function buildLots(a){
     if(!ng().daiDien.have) push({type:'heritage_ng', id:'daiDien', base:900, star:true, note:'Tàn bản bí thuật rèn thần thức — lai lịch bất minh, chủ cũ có lẽ đã nằm dưới đất.'});
     if(!state.learnedNames.includes('Trường Xuân Công') && !state.manuals.includes('truong_sinh')) push({type:'truongXuan', base:150, note:'Tàn phiến công pháp Mộc thuộc tính, có dấu máu khô trên ngọc giản.'});
     push({type:'breakpill', id:'trucCo', base:700, star:true, note:'Không ai hỏi viên đan này từ đâu ra.'});
+    if(!state.thanhNgungKinh && Math.random()<0.3) push({type:'thanhNgung', base:600, note:'Bản phỏng chế Ngưng Quang Bảo Kính — gương cổ hộ thân.'});
     if(Math.random()<0.1) push({type:'thienLoiTu', n:1, base:2500, star:true, note:'Một hạt Thiên Lôi Tử — thứ đủ để tu sĩ Luyện Khí lật ngược thế cờ trước cả Trúc Cơ.'});
     push(pick([{type:'talisman', id:'hoa_dan', n:3, base:60},{type:'talisman', id:'an_than', n:2, base:120},{type:'talisman', id:'huyet_don', n:1, base:200}]));
     push({type:'treasure', tier:1, base_name:pick(TREASURES).name, base:250, note:'Pháp khí còn vương khí tức chủ cũ.'});
@@ -6733,6 +6867,7 @@ function buildLots(a){
   } else if(a.id==='tankinh'){
     push({type:'ngmat', id:'canhTinh', n:2, base:6000, star:true, note:'Hai khối Canh Tinh cùng lúc — cả hội trường chấn động.'});
     push({type:'ngmat', id:'canhTinh', n:1, base:3000});
+    if(!state.batLinhXich && Math.random()<0.25) push({type:'batLinh', base:12000, star:true, note:'Bát Linh Xích — tám đạo linh quang khóa chặt đối thủ.'});
     if(Math.random()<0.15) push({type:'thienLoiTu', n:1, base:6000, star:true, note:'Một hạt Thiên Lôi Tử — ngay cả Nguyên Anh lão quái cũng phải kiêng dè.'});
     push({type:'mat', mat:'khoang', tier:3, n:4, base:5000, note:'Khôi Lỗi Thạch thượng đẳng.'});
     push({type:'mat', mat:'moc', tier:3, n:3, base:4000});
@@ -6789,6 +6924,7 @@ function buildLots(a){
     push({type:'lawBao', base:1000, stolen:true});
     const rel = randomRelicFor(11); if(rel) push({type:'relic', id:rel.id, base:500});
   }
+  if(Math.random()<0.6){ const rr = RARE.filter(r=>r.min<=Math.max(state.realmIdx, a.minRealm)+1 && (r.use||r.stock||!rareHas(r.id))); if(rr.length){ const r = rr[Math.floor(Math.random()*rr.length)]; lots.splice(Math.min(2, lots.length), 0, {type:'rare', id:r.id, base:Math.round((a.currency==='tien'?40:a.currency==='cucpham'?3:600)*(1+r.min)), star:r.min>=3, note:`${r.cat} vốn của ${r.owner}.`}); } }
   const bi = lots.findIndex(l=>l.barter);
   if(bi>=6){ const [b] = lots.splice(bi,1); lots.splice(3,0,b); }
   return lots.slice(0,6).map(l=>{
@@ -7045,6 +7181,8 @@ function aucLeave(){
   let risk = total ? 0.12 + stars*0.25 + total*0.05 : 0.04;
   if(A.greedy) risk += 0.25;
   if(hasTech('Liễm Tức Thuật')) risk *= 0.6;
+  if(hasTech('Hoán Hình Quyết')) risk *= 0.6;
+  if(hasTech('Nặc Thân Thuật')) risk *= 0.85;
   if(A.disguise) risk *= 0.5;
   if(A.vip) risk *= 0.35;
   risk = Math.min(0.85, risk);
@@ -7411,12 +7549,20 @@ function physiqueMods(){
   if(hasTech('Minh Vương Quyết')) m.evilMult *= 1.3;
   if(hasTech('Huyết Ảnh Độn Pháp')) m.fleeBonus += 30;
   if(hasTech('Độn Thổ Thuật')) m.fleeBonus += 10;
+  if(hasTech('Lôi Độn Thuật')) m.fleeBonus += 25;
+  if(hasTech('La Yên Bộ')) m.fleeBonus += 10;
+  if(hasTech('Súc Địa Thuật')) m.fleeBonus += 15;
+  if(hasTech('Điên Phượng Bồi Nguyên Công') && state.realmIdx===1) m.breakBonus += 10;
   if(hasTech('Song Tu Âm Dương Quyết')) m.breakBonus += 5;
+  if(hasTech('Tam Chuyển Trọng Nguyên Công')) m.breakBonus += state.realmIdx===1 ? 15 : state.realmIdx===2 ? 10 : 0;
   if(hasTech('Băng Tâm Tuyệt Tình Quyết')) m.soulGuard = true;
   if(hasAcq('phan_thanh')){ m.defMult *= 1.15; m.atkMult *= 1.2; }
   if(hasAcq('huyen_khieu')){ m.atkMult *= 1.2; m.ignoreDef += 0.2; }
   if(hasAcq('chan_long')){ m.hpMult *= 1.2; }
   if(hasAcq('ngu_hanh')){ m.dmgTaken *= 0.8; }
+  if(state.kimCuongTrao) m.dmgTaken *= 0.9;
+  if(state.nguCucSon){ m.dmgTaken *= 0.85; m.tribMult *= 0.7; }
+  rareMods(m);
   if(hasAcq('cuong_thi')){ m.defMult *= 1.25; m.hpMult *= 1.1; m.pillMult *= 0.7; }
   return m;
 }
@@ -7426,7 +7572,7 @@ function checkAcquiredPhysiques(){
   ACQ_PHYSIQUES.forEach(p=>{
     if(!state.acqPhys.includes(p.id) && p.check()){
       state.acqPhys.push(p.id);
-      addLog(`Nhục thân lột xác — thành tựu Hậu Thiên thể chất 【${p.name}】! ${p.desc}`);
+      addLog(`Ngươi đã thành tựu thể chất 【${p.name}】.`);
       fx('flash',{color:'rgba(240,207,140,.35)',dur:700}); fx('banner',{text:p.name});
     }
   });
@@ -7723,7 +7869,7 @@ function checkEpithets(){
   if(!state || !state.root) return;
   if(!state.epithets) state.epithets = [];
   EPITHETS.forEach(e=>{ let ok = false; try{ ok = !!e.check(); }catch(err){ ok = false; }
-    if(ok && !state.epithets.includes(e.id)){ state.epithets.push(e.id); addLog(`Danh hiệu mới: 【${e.label()}】 — ${e.desc}`); fx('banner',{text:e.label()}); } });
+    if(ok && !state.epithets.includes(e.id)){ state.epithets.push(e.id); addLog(`Ngươi đã đạt danh hiệu 【${e.label()}】.`); fx('banner',{text:e.label()}); } });
 }
 function epithetLabel(id){ const e = EPITHETS.find(x=>x.id===id); try{ return e ? e.label() : ''; }catch(err){ return ''; } }
 function setEpithet(id){ state.epithet = state.epithet===id ? null : id; render(); }
@@ -7816,8 +7962,8 @@ function renderWorldFactions(){
 function renderHeritageAll(){
   const ngH = `<div class="sec-title" style="margin:6px 2px 0;border:none;">${ic('mountain')} Truyền Thừa Nhân Giới</div>` + renderNgHeritage();
   if(state.realmIdx>=8) return renderTgHeritage() + renderLgHeritage() + ngH;
-  if(state.realmIdx>=5) return renderLgHeritage() + ngH;
-  return renderNgHeritage() + renderLgHeritage();
+  if(state.realmIdx>=5) return renderLgHeritage() + renderSwordArts() + ngH;
+  return renderSwordArts() + renderNgHeritage() + renderLgHeritage();
 }
 /* Thẻ "Cần chú ý" ở trang Bế Quan: gom mọi việc đang chờ ngươi xử lý */
 function renderAlertsCard(){
@@ -7855,11 +8001,11 @@ function renderContent(){
   if(state.mortal && tab==='tuluyen' && sub!=='thoigian') body = renderMortalPage();
   else if(state.mortal && ['hanhtau','dongphu','tuido'].includes(tab) && sub!=='yeuthu') body = mortalLocked();
   else if(tab==='cottruyen') body = renderStoryPage();
-  else if(tab==='tuluyen') body = ({tuluyen:()=>renderAlertsCard()+renderCultivatePage(), congphap:renderTechniquesPage, bitruyen:renderHeritageAll, phaptac:renderPhapTac, phithang:renderAscendPage, thoigian:renderTimePage}[sub])();
+  else if(tab==='tuluyen') body = ({tuluyen:()=>renderAlertsCard()+renderCultivatePage(), congphap:()=>renderStoryTechCard()+renderTechniquesPage(), bitruyen:renderHeritageAll, phaptac:renderPhapTac, phithang:renderAscendPage, thoigian:renderTimePage}[sub])();
   else if(tab==='nhanvat') body = ({tongquan:renderOverview, danhhieu:renderTitlePage, tuchat:()=>characterCardsLegacy().cardTuChat, nhanmach:renderNpcPage, linhsung:renderWormTab}[sub])();
   else if(tab==='hanhtau') body = ({bando:renderWorldMap, theluc:renderWorldFactions, bicanh:renderExploreTab, yeuthu:renderBeastPage}[sub])();
   else if(tab==='dongphu') body = ({duocvien:renderGardenPage, luyendan:renderAlchemyPage, luyenkhi:renderForgePage, chephu:renderTalismanPage, tranphap:renderFormationPage, khoiloi:renderPuppetPage}[sub])();
-  else if(tab==='tuido') body = ({vatpham:()=>renderCanonItems()+renderItemsPage(), tailieu:renderMaterialsPage, phuongthi:renderMarketPage, daugia:renderAuctionPage}[sub])();
+  else if(tab==='tuido') body = ({vatpham:()=>renderCanonItems()+renderRareItems()+renderItemsPage(), tailieu:renderMaterialsPage, phuongthi:renderMarketPage, daugia:renderAuctionPage}[sub])();
   const aucA = state.auc && state.auc.active;
   const banner = aucA && !(tab==='tuido' && sub==='daugia') ? `<button class="expd-banner" onclick="goTo('tuido','daugia')">${ic('hall','keep')} Đang ở trong ${AUCTIONS.find(x=>x.id===aucA.id).name}. Chạm để quay lại.</button>`
     : state.expd ? `<button class="expd-banner" onclick="goTo('hanhtau','bicanh')">${ic('mountain','keep')} Đang ở trong ${ZONES[state.expd.z].name} — ${REALMS[state.expd.z].unit.toLowerCase()} ${state.expd.step}/${REALMS[state.expd.z].steps}. Chạm để quay lại.</button>` : '';
@@ -8208,7 +8354,7 @@ function finishAct(){
   const tv = previewMeditateGain()*12*(actAllCanon(a)?2:1);
   state.tuVi += tv;
   const {n, got} = storyItemTotals(a);
-  addLog(`Đọc xong 【${a.title}】 — lĩnh hội thêm ${tv} tu vi${actAllCanon(a)?' (mọi ngã rẽ đều đúng nguyên tác, đạo tâm tương thông)':''}.${n>got?` Còn ${n-got} vật phẩm trong hồi chưa nhận — mở lại cảnh tương ứng khi đủ điều kiện.`:''}`);
+  addLog(`Ngươi đã đọc xong 【${a.title}】, tu vi +${tv}.${n>got?` Còn ${n-got} vật phẩm chưa nhận.`:''}`);
   fx('banner',{text:'Hồi Kết Thúc'});
   computeStats(); checkBreakthroughAvailable();
   closeReader();
@@ -8267,6 +8413,7 @@ function unreadCount(){
 }
 /* Kích phát: khi một điều kiện vừa đạt, bật thông báo cốt truyện */
 function checkStoryTriggers(){
+  autoLearnStoryTechs();
   if(!state || !state.root) return;
   if(state.ng && ng().sect && ngSectDef(ng().sect.id).region==='thiennam') state.everSectTN = true;
   const S = storyState(); if(!S.gates) S.gates = {};
@@ -8299,7 +8446,7 @@ function maybeShowStoryPopup(){
   fx('flash',{color:'rgba(240,207,140,.25)',dur:600});
 }
 function readFromGate(act, idx){ state.activeTab = 'cottruyen'; const S = storyState(); S.cur = {act, i:idx}; S.progress[STORY_ACTS[act].id] = Math.max(S.progress[STORY_ACTS[act].id]||0, idx); render(); window.scrollTo(0,0); }
-function openAct(i){ const S = storyState(), a = STORY_ACTS[i]; S.cur = {act:i, i:Math.max(0, Math.min(S.progress[a.id]||0, reachable(a)-1))}; render(); window.scrollTo(0,0); }
+function openAct(i){ const S = storyState(), a = STORY_ACTS[i]; S.cur = {act:i, i:Math.max(0, Math.min(S.progress[a.id]||0, reachable(a)-1))}; S.progress[a.id] = Math.max(S.progress[a.id]||0, S.cur.i); render(); window.scrollTo(0,0); }
 function storyGo(d){
   const S = storyState(), a = STORY_ACTS[S.cur.act];
   const sc = a.scenes[S.cur.i];
@@ -8321,32 +8468,29 @@ function renderStoryPage(){
   const nextGate = actGates(a).find(g=>!g.need());
   let next = '';
   if(allDone) next = 'Đã đọc hết các hồi hiện có.';
-  else if(!open) next = `Hồi này khai mở khi: <b>${actLockReason(ci)}</b>`;
+  else if(!open) next = `Hồi tiếp theo sẽ khai mở khi: <b>${actLockReason(ci)}</b>`;
   else if(read<r) next = `Cảnh kế tiếp: <b>${a.scenes[Math.min(read, a.scenes.length-1)].title}</b>`;
   else if(nextGate) next = `Cảnh sau khai mở khi: <b>${nextGate.label}</b>${nextGate.prog?` · ${nextGate.prog()}`:''}`;
   const hero = `<div class="card story-hero">
-      <div class="sh-kicker">Hành trình Hàn Lập · ${readTotal}/${total} cảnh</div>
-      <h2>${a.title}</h2>
+      <div class="sh-kicker">${!allDone && open ? a.sub : 'Hành trình Hàn Lập'}</div>
+      <h2>${allDone ? 'Đã đọc hết các hồi hiện có' : open ? a.title : 'Hồi mới chưa khai mở'}</h2>
       <p class="sh-next">${next}</p>
-      <div class="story-prog"><div style="width:${Math.round(readTotal/total*100)}%"></div></div>
-      ${allDone?'':`<button class="btn gold" style="margin-top:10px;" ${open && read<r?'':'disabled'} onclick="openAct(${ci})">${read?'Đọc Tiếp':'Bắt Đầu Đọc'}</button>`}
+      ${allDone||!open?'':`<button class="btn gold" style="margin-top:10px;" ${open && read<r?'':'disabled'} onclick="openAct(${ci})">${read?'Đọc Tiếp':'Bắt Đầu Đọc'}</button>`}
     </div>`;
-  const cards = STORY_ACTS.map((x,i)=>{
-    const ok = actUnlocked(i), done = !!S.done[x.id], n = x.scenes.length, rd = done ? n : (S.progress[x.id]!=null ? S.progress[x.id]+1 : 0);
-    const gates = actGates(x).map(g=>{ const met = (i===0 || S.done[STORY_ACTS[i-1].id]) && g.need();
-      return `<li class="${met?'ok':''}"><span class="gi">${met?'✓':''}</span><span><span class="gl">${x.scenes[g.idx].title}</span><small>${g.label}${!met && g.prog?` · ${g.prog()}`:''}</small></span></li>`; }).join('');
-    return `<div class="card story-act ${ok?'':'locked'} ${done?'done':''}">
-      <div class="story-sub">${x.sub}</div>
-      <h3 class="story-title">${x.title}</h3>
-      <p class="flavor">${x.blurb}</p>
+  const vis = STORY_ACTS.map((x,i)=>i).filter(i=>i===ci && !allDone && actUnlocked(i));
+  const cards = vis.map(i=>{ const x = STORY_ACTS[i];
+    const ok = true, done = false, n = x.scenes.length, rd = S.progress[x.id]!=null ? S.progress[x.id]+1 : 0;
+    const gates = actGates(x).map(g=>{ const met = g.need();
+      return `<li class="${met?'ok':''}"><span class="gi">${met?'✓':''}</span><span><span class="gl">${met?x.scenes[g.idx].title:'Cảnh chưa khai mở'}</span><small>${g.label}${!met && g.prog?` · ${g.prog()}`:''}</small></span></li>`; }).join('');
+    return `<div class="card story-act">
+      <p class="flavor" style="margin-top:0;">${x.blurb}</p>
       <div class="story-prog"><div style="width:${Math.round(rd/n*100)}%"></div></div>
-      <div class="row"><span class="k">${n} cảnh</span><span class="v">${done?'<span class="ok-mark">Đã đọc xong</span>':`${rd}/${n}`}</span></div>
+      <div class="row"><span class="k">${n} cảnh</span><span class="v">${rd}/${n}</span></div>
       <ul class="gate-list">${gates}</ul>
-      ${(()=>{ const t = storyItemTotals(x); return t.n ? `<p class="sec-note" style="margin:8px 0 0;"><b style="color:var(--gold-bright)">Vật phẩm trong hồi:</b> đã nhận ${t.got}/${t.n} · ${x.scenes.flatMap(sc=>(STORY_ITEMS[sc.id]||[]).map(it=>it.name)).join(', ')}</p>` : ''; })()}
-      <button class="btn ${done?'ghost':'gold'}" style="margin-top:10px;" ${ok?'':'disabled'} onclick="openAct(${i})">${!ok?actLockReason(i):done?'Đọc Lại':rd?'Đọc Tiếp':'Bắt Đầu Đọc'}</button>
-    </div>${i===2?`<div class="story-gap">${ic('scroll','keep')} Ch.295–744 chưa được đối chiếu nguyên văn — sẽ bổ sung khi tư liệu đạt độ tin cậy cao.</div>`:''}`;
+      ${(()=>{ const t = storyItemTotals(x); return t.n ? `<p class="sec-note" style="margin:8px 0 0;"><b style="color:var(--gold-bright)">Vật phẩm trong hồi:</b> đã nhận ${t.got}/${t.n}</p>` : ''; })()}
+    </div>`;
   }).join('');
-  return hero + `<p class="sec-note" style="margin:0 0 12px;padding:0 4px;">Chỉ gồm những hồi đã đối chiếu nguyên văn (độ tin cậy Rất cao). Cảnh mới khai mở theo tiến trình tu luyện của ngươi; lựa chọn chỉ đổi cách trải nghiệm, số phận vẫn như nguyên tác.</p>` + cards;
+  return hero + cards;
 }
 
 /* =====================================================================
@@ -8377,6 +8521,11 @@ const STORY_ITEMS = {
   '1.4':  [{name:'Chưởng Thiên Bình', icon:'herb', dest:'duocvien', have:()=>bottleFound(), give:()=>{ state.bottleFound = true; state.luDich = Math.max(state.luDich||0, 3); }}],
   '1.7':  [{name:'Tạo Hóa Lộ ×5', icon:'drop', dest:'duocvien', cond:()=>bottleFound(), condText:'Đã có Chưởng Thiên Bình', give:()=>{ state.luDich = (state.luDich||0)+5; }},
            {name:'Hoàng Long Đan ×3', icon:'pill', dest:'vatpham', cond:notMortal, condText:'Đã bước vào Luyện Khí', give:()=>{ state.pills[1] = (state.pills[1]||0)+3; }}],
+  '1.9':  [{name:'Nhuyễn Cốt Công', icon:'book', dest:'congphap', have:()=>hasTech('Nhuyễn Cốt Công'), give:()=>learnTechByName('Nhuyễn Cốt Công')},
+           {name:'Liễm Tức Công', icon:'book', dest:'congphap', have:()=>hasTech('Liễm Tức Công'), give:()=>learnTechByName('Liễm Tức Công')},
+           {name:'Nguỵ Nặc Thuật', icon:'book', dest:'congphap', have:()=>hasTech('Nguỵ Nặc Thuật'), give:()=>learnTechByName('Nguỵ Nặc Thuật')},
+           {name:'La Yên Bộ', icon:'book', dest:'congphap', have:()=>hasTech('La Yên Bộ'), give:()=>learnTechByName('La Yên Bộ')},
+           {name:'Trát Nhãn Kiếm Pháp', icon:'sword', dest:'congphap', have:()=>hasTech('Trát Nhãn Kiếm Pháp'), give:()=>learnTechByName('Trát Nhãn Kiếm Pháp')}],
   '1.14': [{name:'Hỏa Đạn Thuật', icon:'book', dest:'congphap', have:()=>hasTech('Hỏa Đạn Thuật'), cond:()=>realmAtLeast(0,4), condText:'Luyện Khí tầng 5 trở lên', give:()=>learnTechByName('Hỏa Đạn Thuật')},
            {name:'Ngự Phong Quyết', icon:'book', dest:'congphap', have:()=>hasTech('Ngự Phong Quyết'), cond:()=>realmAtLeast(0,4), condText:'Luyện Khí tầng 5 trở lên', give:()=>learnTechByName('Ngự Phong Quyết')},
            {name:'Thiên Nhãn Thuật', icon:'eye', dest:'congphap', have:()=>hasTech('Thiên Nhãn Thuật'), cond:()=>realmAtLeast(0,4), condText:'Luyện Khí tầng 5 trở lên', give:()=>learnTechByName('Thiên Nhãn Thuật')},
@@ -8385,18 +8534,22 @@ const STORY_ITEMS = {
   '1.25': [{name:'Phi Hành Phù ×2', icon:'scroll', dest:'chephu', cond:()=>(state.pills[1]||0)>=1, condText:'Đổi bằng 1 Hoàng Long Đan', give:()=>{ state.pills[1]--; state.talismans.phi_hanh = (state.talismans.phi_hanh||0)+2; }}],
   '1.27': [{name:'Kim Cương Phù và 50 linh thạch', icon:'scroll', dest:'chephu', give:()=>{ state.talismans.kim_cuong = (state.talismans.kim_cuong||0)+1; state.spiritStones += 50; }}],
   '1.19': [{name:'Hỏa Đạn Phù ×3', icon:'scroll', dest:'chephu', give:()=>{ state.talismans.hoa_dan = (state.talismans.hoa_dan||0)+3; }}],
-  '1.26': [{name:'Thăng Tiên Lệnh', icon:'key', dest:'vatpham', have:()=>!!state.thangTienLenh, cond:()=>!(state.ng && ng().sect && ng().sect.id!=='that_huyen'), condText:'Chưa bái nhập tông môn tu tiên nào', give:()=>{ state.thangTienLenh = true; }}],
+  '1.26': [{name:'Tám pháp thuật sơ cấp', icon:'book', dest:'congphap', have:()=>EXTRA_ARTS.every(n=>hasTech(n)), cond:()=>realmAtLeast(0,8), condText:'Luyện Khí tầng 9', give:()=>{ EXTRA_ARTS.forEach(n=>learnTechByName(n)); }},
+           {name:'Thăng Tiên Lệnh', icon:'key', dest:'vatpham', have:()=>!!state.thangTienLenh, cond:()=>!(state.ng && ng().sect && ng().sect.id!=='that_huyen'), condText:'Chưa bái nhập tông môn tu tiên nào', give:()=>{ state.thangTienLenh = true; }}],
   '2.1':  [{name:'Nhập môn Hoàng Phong Cốc', icon:'pagoda', dest:'theluc', have:()=>!!(state.ng && ng().sect && ng().sect.id==='hoang_phong'), cond:()=>!!state.thangTienLenh && !(ng().sect && ng().sect.id!=='that_huyen'), condText:'Có Thăng Tiên Lệnh và chưa thuộc tông môn tu tiên', give:()=>{ state.thangTienLenh = false; ng().sect = {id:'hoang_phong', rank:0, merit:0, contrib:0, bought:[]}; }}],
   '2.4':  [{name:'Thiên Lôi Tử', icon:'bolt', dest:'vatpham', cost:1500, cond:()=>state.spiritStones>=1500 && realmAtLeast(0,9) && (state.thienLoiTu||0)<THIEN_LOI_MAX, condText:'Di vật cực hiếm ở Vạn Bảo Lâu: 1500 linh thạch, từ Luyện Khí tầng 10, mang tối đa 3 hạt', give:()=>{ state.spiritStones -= 1500; state.thienLoiTu = (state.thienLoiTu||0)+1; }},
            {name:'Kim Quang Chuyên (phù bảo)', icon:'stone', dest:'vatpham', have:()=>state.kimQuang>0, cost:300, cond:()=>state.spiritStones>=300, condText:'Mua ở Vạn Bảo Lâu: 300 linh thạch', give:()=>{ state.spiritStones -= 300; state.kimQuang = 8; }}],
   '2.6':  [{name:'Đạp Vân Ngoa', icon:'bolt', dest:'vatpham', have:()=>!!state.dapVanNgoa, give:()=>{ state.dapVanNgoa = true; }}],
-  '2.21': [{name:'Đại Na Di Lệnh', icon:'key', dest:'vatpham', have:()=>!!state.daiNaDi, give:()=>{ state.daiNaDi = true; }},
+  '2.21': [{name:'Khôi Lỗi Thuật', icon:'puppet', dest:'congphap', have:()=>hasTech('Khôi Lỗi Thuật'), give:()=>{ learnTechByName('Khôi Lỗi Thuật'); if(profLvl('khoiLoi')>=1) gainProfExp('khoiLoi', 60); }},
+           {name:'Đại Na Di Lệnh', icon:'key', dest:'vatpham', have:()=>!!state.daiNaDi, give:()=>{ state.daiNaDi = true; }},
            {name:'Trứng Huyết Ngọc Tri Chu', icon:'bug', dest:'linhsung', have:()=>state.worm.have && state.worm.typeId==='huyet_ngoc', cond:()=>!state.worm.have, condText:'Chưa nuôi linh thú nào khác', give:()=>{ state.worm = {have:true, level:1, typeId:'huyet_ngoc'}; }}],
   '2.9':  [{name:'Trúc Cơ Đan', icon:'pill', dest:'vatpham', give:()=>{ state.breakPills.trucCo = (state.breakPills.trucCo||0)+1; }}],
   '2.10': [{name:'Kinh nghiệm Luyện Đan Sư', icon:'flask', dest:'luyendan', cond:()=>profLvl('danSu')>=1, condText:'Đã học nghề Luyện Đan', give:()=>{ gainProfExp('danSu', 80); }}],
   '2.14': [{name:'Thanh Nguyên Kiếm Quyết (đủ 13 tầng)', icon:'sword', dest:'bitruyen', have:()=>!!(state.ng && ng().thanhNguyen.have), cond:()=>state.realmIdx>=1, condText:'Đạt Trúc Cơ', give:()=>{ ng().thanhNguyen.have = true; }},
+           {name:'Tam Chuyển Trọng Nguyên Công', icon:'book', dest:'congphap', have:()=>hasTech('Tam Chuyển Trọng Nguyên Công'), cond:()=>state.realmIdx>=1, condText:'Đạt Trúc Cơ', give:()=>learnTechByName('Tam Chuyển Trọng Nguyên Công')},
            {name:'Đại Diễn Quyết', icon:'eye', dest:'bitruyen', have:()=>!!(state.ng && ng().daiDien.have), cond:()=>state.realmIdx>=1, condText:'Đạt Trúc Cơ', give:()=>{ ng().daiDien.have = true; }}],
   '2.15': [{name:'Tụ Linh Đan ×3', icon:'pill', dest:'vatpham', cond:()=>profLvl('danSu')>=1, condText:'Đã học nghề Luyện Đan', give:()=>{ state.pills[2] = (state.pills[2]||0)+3; }}],
+  '2.27': [{name:'Lộng Diễm Quyết', icon:'book', dest:'congphap', trade:true, have:()=>hasTech('Lộng Diễm Quyết'), cond:()=>(state.pills[1]||0)>=2, condText:'Đổi bằng 2 Hoàng Long Đan', give:()=>{ state.pills[1] -= 2; learnTechByName('Lộng Diễm Quyết'); }}],
   '6.745':[{name:'Phá Cấm Châu ×3', icon:'crystal', dest:'vatpham', give:()=>{ state.phaCamChau = (state.phaCamChau||0)+3; }}],
   '6.753':[{name:'Cửu Trản Cổ Đăng', icon:'comet', dest:'vatpham', have:()=>!!state.coDang, give:()=>{ state.coDang = true; }}],
   '6.748':[{name:'Hàng Linh Phù ×2', icon:'scroll', dest:'chephu', give:()=>{ state.talismans.kim_cang = (state.talismans.kim_cang||0)+2; }}],
@@ -8411,7 +8564,7 @@ function claimStoryItem(sid, i){
   if(S.claimed[k] || (it.have && it.have())) return;
   if(it.cond && !it.cond()){ toast(`Chưa đủ điều kiện: ${it.condText}`); return; }
   it.give(); S.claimed[k] = true;
-  addLog(`Nhận được 【${it.name}】 — đã cất vào ${DEST[it.dest].label}.`);
+  addLog(`Ngươi đã nhận được 【${it.name}】.`);
   fx('banner',{text:it.name, cls:'jade'});
   computeStats(); checkBreakthroughAvailable(); render();
 }
@@ -8421,13 +8574,59 @@ function renderSceneItems(sid){
   return `<div class="scene-items"><div class="si-head">${ic('bag','keep')} Vật phẩm trong cảnh</div>${list.map((it,i)=>{
     const got = S.claimed[sItemKey(sid,i)], owned = it.have && it.have(), ok = !it.cond || it.cond();
     const d = DEST[it.dest];
-    const right = got ? `<button class="btn sm ghost" onclick="closeReader(); goTo('${d.go[0]}','${d.go[1]}')">Đã nhận · Xem</button>`
+    const auto = AUTO_DEST.includes(it.dest) && !it.trade;
+    const right = got ? `<button class="btn sm ghost" onclick="closeReader(); goTo('${d.go[0]}','${d.go[1]}')">${auto?'Đã học · Xem':'Đã nhận · Xem'}</button>`
+      : auto && !owned ? `<span class="si-own">${ok?'Đang ghi vào mục…':'Tự học khi đủ điều kiện'}</span>`
       : owned ? `<span class="si-own">Đã có</span>`
       : `<button class="btn sm gold" ${ok?'':'disabled'} onclick="claimStoryItem('${sid}',${i})">Nhận${it.cost?` (${it.cost})`:''}</button>`;
     return `<div class="si-row ${got||owned?'done':''}"><span class="si-ic">${ic(it.icon,'keep')}</span><span class="si-body"><b>${it.name}</b><small>→ ${d.label}</small>${it.condText && !got && !owned ? `<small class="${ok?'ok':'no'}">${ok?'✓':'✗'} ${it.condText}</small>`:''}</span>${right}</div>`;
   }).join('')}</div>`;
 }
 function storyItemTotals(a){ const S = storyState(); S.claimed = S.claimed||{}; let n = 0, got = 0; a.scenes.forEach(sc=>{ (STORY_ITEMS[sc.id]||[]).forEach((it,i)=>{ n++; if(S.claimed[sItemKey(sc.id,i)] || (it.have && it.have())) got++; }); }); return {n, got}; }
+
+/* =====================================================================
+   CÔNG PHÁP TỪ CỐT TRUYỆN — học trong truyện là có trong mục Công Pháp
+===================================================================== */
+const AUTO_DEST = ['congphap','bitruyen'];
+function sceneRead(ai, si){ const S = storyState(), a = STORY_ACTS[ai]; return !!S.done[a.id] || (S.progress[a.id]!=null && si<=S.progress[a.id]); }
+function storyTechList(){
+  const out = [];
+  STORY_ACTS.forEach((a,ai)=>a.scenes.forEach((sc,si)=>(STORY_ITEMS[sc.id]||[]).forEach((it,i)=>{ if(AUTO_DEST.includes(it.dest)) out.push({a, ai, sc, si, it, i}); })));
+  return out;
+}
+/* Tự học mọi công pháp của những cảnh đã đọc khi đủ điều kiện */
+function autoLearnStoryTechs(){
+  if(!state || !state.root) return;
+  const S = storyState(); S.claimed = S.claimed||{};
+  storyTechList().forEach(x=>{
+    const k = sItemKey(x.sc.id, x.i);
+    if(S.claimed[k] || x.it.trade || !sceneRead(x.ai, x.si)) return;
+    if(x.it.have && x.it.have()){ S.claimed[k] = true; return; }
+    if(x.it.cond && !x.it.cond()) return;
+    x.it.give(); S.claimed[k] = true;
+    addLog(`Ngươi đã học được 【${x.it.name}】.`);
+    computeStats();
+  });
+}
+function renderStoryTechCard(){
+  const list = storyTechList().filter(x=>x.it.dest==='congphap' && (actUnlocked(x.ai) || storyState().done[x.a.id]) && sceneOpen(x.a, x.si));
+  if(!list.length) return '';
+  const S = storyState(); S.claimed = S.claimed||{};
+  const rows = list.map(x=>{
+    const got = S.claimed[sItemKey(x.sc.id,x.i)] || (x.it.have && x.it.have());
+    const read = sceneRead(x.ai, x.si), ok = !x.it.cond || x.it.cond();
+    let st, cls;
+    if(got){ st = 'Đã học'; cls = 'ok'; }
+    else if(!read){ st = `Đọc tới cảnh “${x.sc.title}”`; cls = ''; }
+    else if(x.it.trade){ st = ok ? 'Đổi trong cảnh truyện' : x.it.condText; cls = 'wait'; }
+    else { st = `Chờ: ${x.it.condText}`; cls = 'wait'; }
+    const btn = !got && read && x.it.trade && ok ? `<button class="btn sm gold" onclick="claimStoryItem('${x.sc.id}',${x.i})">Đổi</button>` : !got && !read && actUnlocked(x.ai) ? `<button class="btn sm ghost" onclick="setTab('cottruyen'); openAct(${x.ai})">Đọc</button>` : '';
+    return `<div class="st-row ${cls}"><span class="st-dot">${got?'✓':''}</span><span class="st-body"><b>${x.it.name}</b><small>${x.a.sub.split(' · ')[0]} · ${x.sc.title}</small><small class="st-state">${st}</small></span>${btn}</div>`;
+  }).join('');
+  const n = list.filter(x=>S.claimed[sItemKey(x.sc.id,x.i)] || (x.it.have && x.it.have())).length;
+  return `<div class="card"><div class="sec-title">${ic('book')} Công Pháp Trong Cốt Truyện<span>${n}/${list.length}</span></div>
+    <p class="sec-note" style="margin:0 0 6px;">Đọc tới cảnh Hàn Lập học công pháp nào thì ngươi cũng học được công pháp đó — tự động khi đủ điều kiện.</p>${rows}</div>`;
+}
 
 function renderStoryReader(){
   const S = storyState(), a = STORY_ACTS[S.cur.act], sc = a.scenes[S.cur.i], n = a.scenes.length, last = S.cur.i===n-1;
@@ -8918,6 +9117,7 @@ function faceTribulationWave(){
   if(lightning && state.path && state.path.tribulationDmgMult){ mitigated = Math.max(1, Math.round(mitigated*state.path.tribulationDmgMult)); extra += ' Ma tính trong người khiến thiên kiếp giáng xuống mãnh liệt hơn hẳn.'; }
   if(lightning && state.phapTacInsight>0){ mitigated = Math.max(1, Math.round(mitigated*(1-Math.min(0.2,state.phapTacInsight*0.05)))); extra += ' Pháp tắc từng lĩnh ngộ giúp dung hòa bớt uy lực thiên kiếp.'; }
   if(lightning && physiqueMods().tribMult<1){ mitigated = Math.max(1, Math.round(mitigated*physiqueMods().tribMult)); extra += ' Lôi Linh Thể hấp thụ một phần lôi lực.'; }
+  if(!lightning && rareHas('hoa_gioi_chau')){ mitigated = Math.max(1, Math.round(mitigated*0.7)); extra += ' Hóa Giới Châu hộ thể.'; }
   if(!lightning && state.daiNaDi){ mitigated = Math.max(1, Math.round(mitigated*0.6)); extra += ' Đại Na Di Lệnh chống đỡ áp lực không gian.'; }
   if(!lightning && hasAcq('huyen_khieu')){ mitigated = Math.max(1, Math.round(mitigated*0.7)); extra += ' Huyền Khiếu Thể chống áp lực không gian.'; }
   state.hp -= mitigated;
@@ -9119,7 +9319,7 @@ function renderBeastPage(){
    dễ chiếm hơn nhưng tu vi sa sút nặng. Thọ nguyên tính theo nguyên thần.
 ===================================================================== */
 const DX_DESC = ['vừa bị trọng thương trong một trận tranh đoạt bảo vật, đang hấp hối trong hẻm núi','một tán tu đi lạc giữa hoang sơn, thần thức yếu ớt sau lần tẩu hỏa nhập ma','một đệ tử tông môn nhỏ đang bế quan một mình trong động phủ hẻo lánh','một tu sĩ vừa kiệt sức sau trận chiến với yêu thú, nằm bất tỉnh bên bờ suối'];
-function dxSoulBonus(){ let b = 0; if(state.path && state.path.id==='hon') b += 10; if(state.ng && ng().daiDien.have) b += ng().daiDien.layer*3; if(state.lg && lg().luyenThan.layer>0) b += lg().luyenThan.layer*3; if(physiqueMods().soulGuard) b += 8; return b; }
+function dxSoulBonus(){ let b = 0; if(hasTech('Huyền Hồn Ngưng Cốt Thuật')) b += 25; if(rareHas('sat_dan')) b += 20; if(state.path && state.path.id==='hon') b += 10; if(state.ng && ng().daiDien.have) b += ng().daiDien.layer*3; if(state.lg && lg().luyenThan.layer>0) b += lg().luyenThan.layer*3; if(physiqueMods().soulGuard) b += 8; return b; }
 function dxCompatible(root){ return !!(root && state.root && root.elements.some(e=>state.root.elements.includes(e))); }
 function dxFloor(){ return state.realmIdx>=8 ? 8 : state.realmIdx>=5 ? 5 : 0; }
 function dxLevel(r, sub){ return r*4 + Math.min(3, sub); }
@@ -9201,6 +9401,179 @@ function doDoatXa(i){
     : `Sau một trận giao tranh trong thức hải, nguyên thần của ${v.name} bị trục xuất. Đoạt xá thành công — thân xác mới mang ${v.root.name.split(' (')[0]}, tu vi ở ${fullRealmName(v.realm, v.sub)}. Ký ức và công pháp còn nguyên, tu luyện lại sẽ nhanh gấp đôi cho tới khi về lại ${MAJOR_REALMS[from].name}.`);
   fx('banner',{text:'Đoạt Xá Thành Công'});
   checkBreakthroughAvailable(); render();
+}
+
+/* =====================================================================
+   BỔ SUNG TỪ TƯ LIỆU: kiếm thuật thần thông, pháp thuật sơ cấp,
+   pháp bảo, phù chú, trận pháp.
+===================================================================== */
+function swordArts(){
+  const g = state.ng ? ng() : null; if(!g) return {cu:false, anh:false, hoLo:false};
+  const L = g.thanhNguyen.have ? g.thanhNguyen.layer : 0;
+  return {cu: L>=3 && g.swords>=7, anh: L>=5 && g.swords>=21, hoLo: state.realmIdx>=5 && g.swords>=72};
+}
+function renderSwordArts(){
+  const g = state.ng ? ng() : null; if(!g || !g.thanhNguyen.have) return '';
+  const a = swordArts(), L = g.thanhNguyen.layer;
+  const row = (ok, name, need, eff)=>`<div class="phy-row ${ok?'has':''}"><div class="phy-row-head"><span>${name}</span><b>${ok?'Đã thông':'Chưa'}</b></div><div class="phy-row-how">${ok?eff:need}</div></div>`;
+  return `<div class="card"><div class="sec-title">${ic('sword')} Kiếm Thuật Thần Thông</div>
+    <p class="sec-note" style="margin:0 0 6px;">Thần thông đi kèm Thanh Nguyên Kiếm Quyết và bộ Thanh Trúc Phong Vân Kiếm (tầng ${L}, ${g.swords} thanh). Tự áp dụng vào đòn phi kiếm.</p>
+    ${row(a.cu,'Cự Kiếm Thuật','Kiếm quyết tầng 3 và từ 7 thanh phi kiếm.','Hợp nhiều phi kiếm thành một cự kiếm — đòn phi kiếm mạnh thêm.')}
+    ${row(a.anh,'Kiếm Ảnh Phân Quang Thuật','Kiếm quyết tầng 5 và từ 21 thanh phi kiếm.','Cự kiếm tách ra nhiều bóng kiếm vừa công vừa mê hoặc — sát thương phi kiếm ×1,6.')}
+    ${row(a.hoLo,'Nguyên Khí Kiếm Hồ Lô','Đủ 72 thanh phi kiếm và lên Linh Giới.','Lấy 72 phi kiếm làm giống, hóa hồ lô hút nguyên khí trời đất luyện kiếm khí vô tận — sát thương ×1,5, hồi chiêu nhanh gấp đôi.')}
+  </div>`;
+}
+const EXTRA_ARTS = ['Truyền Âm Thuật','Lưu Sa Thuật','Băng Đống Thuật','Thăng Không Thuật','Triền Nhiễu Thuật','Nặc Thân Thuật','Hỏa Hoa Thuật','Địa Thứ Thuật'];
+/* Pháp bảo đặc thù */
+function forgeNguCucSon(){
+  if(state.nguCucSon) return;
+  if(state.realmIdx<6){ addLog('Luyện Nguyên Hợp Ngũ Cực Sơn cần tu vi Hợp Thể trở lên.'); render(); return; }
+  if(profLvl('khiSu')<5){ addLog('Cần Luyện Khí Sư cấp 5.'); render(); return; }
+  const ing = [M('khoang',3,15), M('moc',3,5), S(20000)];
+  if(!ingOk(ing)){ addLog(`Luyện Nguyên Hợp Ngũ Cực Sơn còn thiếu: ${ingMissing(ing)}.`); render(); return; }
+  ingTake(ing); advanceTime(120);
+  state.nguCucSon = true;
+  addLog('Mười năm tế luyện, năm ngọn núi — Nguyên Từ Thần Sơn, Thái Ất Sơn, Bắc Cực Nguyên Sơn, Hạo Âm Hàn Phách Sơn, Âm Dương Đại Ngũ Hành Cực Sơn — hợp làm một: 【Nguyên Hợp Ngũ Cực Sơn】, Thông Thiên Linh Bảo phòng ngự tối thượng!' + gainProfExp('khiSu', 60));
+  fx('banner',{text:'Nguyên Hợp Ngũ Cực Sơn'}); computeStats(); render();
+}
+function buildCuuChan(){
+  if(state.cuuChan) return;
+  if(profLvl('tranPhap')<4){ addLog('Bố trí Cửu Chân Phục Ma Trận cần Trận Pháp Sư cấp 4.'); render(); return; }
+  const ing = [M('khoang',2,5), M('yeudan',2,2), S(800)];
+  if(!ingOk(ing)){ addLog(`Còn thiếu: ${ingMissing(ing)}.`); render(); return; }
+  ingTake(ing); state.cuuChan = true;
+  addLog('Chín đạo trận kỳ cắm quanh trận bàn, phật quang và lôi quang đan xen — Cửu Chân Phục Ma Trận đã thành, chuyên giam giữ ma vật.' + gainProfExp('tranPhap', 25));
+  render();
+}
+
+/* =====================================================================
+   BẢO VẬT HIẾM — pháp bảo, dị hỏa, trận bàn, đan dược của các nhân vật
+   khác trong truyện. Có được qua đấu giá, bí cảnh, hạ thủ lĩnh.
+===================================================================== */
+const RARE = [
+  // Pháp bảo
+  {id:'van_yeu_phien', cat:'Pháp bảo', name:'Vạn Yêu Phiên', owner:'Xa lão yêu, Vạn Yêu Cốc', min:3, once:{dmg:1.5, freeze:2}, desc:'Lá phiên hút sinh linh vào trong — mỗi trận hút địch vào phiên giam 2 lượt.'},
+  {id:'am_la_phien', cat:'Pháp bảo', name:'Âm La Phiên', owner:'Âm La Tông', min:3, once:{dmg:1.8, ignore:0.3}, desc:'Ma phiên triệu âm hồn cắn xé — mỗi trận tung âm hồn một lần.'},
+  {id:'bach_cot_phien', cat:'Pháp bảo', name:'Tam Thần Bạch Cốt Phiên', owner:'Lục Đạo Cực Thánh', min:5, once:{dmg:3, selfHp:0.1}, desc:'Phỏng chế một trong bảy đại tà khí Linh Giới. Uy lực cực lớn nhưng tà khí phản phệ, tốn 10% khí huyết mỗi lần dùng.'},
+  {id:'huyet_ma_kiem', cat:'Pháp bảo', name:'Huyết Ma Kiếm', owner:'Ma khí Thiên Nam', min:2, pas:{atk:0.18, crit:5}, backlash:0.12, desc:'Một trong số hiếm "Ma Khí" của Thiên Nam: công kích +18%, bạo kích +5%, nhưng có 12% mỗi trận cắn ngược chủ nhân.'},
+  {id:'hac_phong_ky', cat:'Pháp bảo', name:'Hắc Phong Kỳ', owner:'Nguyên Sát Thánh Tổ', min:4, once:{freeze:3, freezeBoss:2}, desc:'Thông Thiên Linh Bảo phong tỏa không gian — mỗi trận khóa chặt địch 3 lượt (thủ lĩnh 2).'},
+  {id:'tran_hai_chung', cat:'Pháp bảo', name:'Trấn Hải Chung', owner:'Tiểu Cực Cung', min:3, once:{dmg:1.6, freeze:1}, desc:'Chuông trấn hải — tiếng chuông chấn động làm địch đứng hình một lượt.'},
+  {id:'ngung_quang_kinh', cat:'Pháp bảo', name:'Ngưng Quang Bảo Kính', owner:'Cổ bảo Yểm Nguyệt Tông', min:2, pas:{dmgTaken:0.92}, desc:'Cổ bảo mà Thanh Ngưng Kính chỉ là bản phỏng chế — giảm 8% sát thương nhận vào.'},
+  {id:'ta_nguyet_kinh', cat:'Pháp bảo', name:'Tà Nguyệt Huyễn Kính', owner:'Ngân Sí Dạ Xoa', min:3, pas:{dodge:0.08}, desc:'Gương tà nguyệt sinh huyễn ảnh — 8% né hẳn đòn địch.'},
+  {id:'thien_a_kiem', cat:'Pháp bảo', name:'Thiên A Thần Kiếm', owner:'Thái Nhất Môn', min:4, once:{dmg:2.6, evil:1.5}, desc:'Thần kiếm chuyên trấn áp cổ ma — mỗi trận chém một kiếm, gấp rưỡi với yêu tà.'},
+  {id:'cam_ma_hoan', cat:'Pháp bảo', name:'Cấm Ma Hoàn', owner:'Thái Nhất Môn · Thiên Ma Tông', min:3, stock:5, once:{freezeEvil:2}, desc:'Vòng cấm ma, dùng hết thì mất (mỗi bộ 5 chiếc) — khóa ma vật 2 lượt, kẻ khác 1 lượt.'},
+  {id:'hoa_long_an', cat:'Pháp bảo', name:'Hóa Long Ấn', owner:'Côn Ngô Điện', min:3, once:{dmg:2.2, freeze:1}, desc:'Ấn tỷ ngũ trảo chân long — ấn xuống trấn áp địch.'},
+  {id:'binh_son_an', cat:'Pháp bảo', name:'Bình Sơn Ấn', owner:'Phỏng chế linh bảo Diệp gia', min:3, once:{dmg:2, ignore:0.5}, desc:'Ấn san phẳng núi non — bỏ qua một nửa phòng ngự.'},
+  {id:'ma_tuy_phi_dao', cat:'Pháp bảo', name:'Ma Tủy Phi Đao', owner:'Hàn Lập', min:3, once:{dmg:1.8, ignore:1, evil:1.3}, desc:'Phi đao xuyên thủng cả Huyết Ma Châu của Càn lão ma — bỏ qua toàn bộ phòng ngự.'},
+  {id:'o_hac_phi_dao', cat:'Pháp bảo', name:'Ô Hắc Phi Đao', owner:'Hàn Lập', min:5, once:{dmg:2, evil:1.5}, desc:'Phi đao đen chém cả nguyên thần — mạnh gấp rưỡi với tà vật.'},
+  {id:'huyet_ma_chau', cat:'Pháp bảo', name:'Huyết Ma Châu', owner:'Càn lão ma', min:3, pas:{revive:0.2}, desc:'Châu giấu nguyên anh, hóa huyết ảnh bất tử — mỗi trận được trùng sinh một lần với 20% khí huyết.'},
+  {id:'tam_diem_phien', cat:'Pháp bảo', name:'Tam Diễm Phiến', owner:'Hàn Lập', min:3, once:{dmg:2.8}, desc:'Quạt luyện từ ba loại hỏa diễm, từng quạt nát ngọc như ý của đối thủ.'},
+  {id:'luong_nghi_hoan', cat:'Pháp bảo', name:'Lưỡng Nghi Hoàn', owner:'Hàn Lập', min:3, pas:{dmgTaken:0.9}, desc:'Âm hoàn hộ thân không bị Nguyên Quang xuyên thủng — giảm 10% sát thương nhận vào.'},
+  {id:'ngu_hanh_hoan', cat:'Pháp bảo', name:'Ngũ Hành Hoàn', owner:'Hàn Lập', min:2, once:{freeze:1}, desc:'Vòng ngũ hành khóa chặt đối thủ trong chốc lát.'},
+  {id:'chu_hong_dinh', cat:'Pháp bảo', name:'Chu Hồng Tiểu Đỉnh', owner:'Hàn Lập', min:3, pas:{alch:8}, desc:'Tiểu đỉnh thông linh — luyện đan thành công +8%.'},
+  {id:'tu_linh_chau', cat:'Pháp bảo', name:'Tụ Linh Châu', owner:'Lễ vật dâng Hàn Lập', min:2, pas:{tuVi:0.15}, desc:'Châu tụ linh khí quý hiếm — tu luyện nhanh hơn 15%.'},
+  {id:'hoa_gioi_chau', cat:'Pháp bảo', name:'Hóa Giới Châu', owner:'Luyện từ Hóa Giới Thạch', min:4, pas:{phongbao:0.7}, desc:'Châu giúp vượt Không Gian Tiết Điểm — giảm 30% sát thương Không Gian Phong Bạo khi phi thăng.'},
+  {id:'huyen_quy_lenh', cat:'Pháp bảo', name:'Huyền Quỷ Lệnh', owner:'Cung chủ Tiểu Cực Cung', min:3, once:{dmg:2, heal:0.1}, desc:'Lệnh bài giữ Hoàng Tuyền Quỷ Mẫu — mỗi trận triệu quỷ mẫu một lần, hút sinh khí hồi 10% khí huyết.'},
+  {id:'thien_thi_chau', cat:'Pháp bảo', name:'Thiên Thi Châu', owner:'Huyễn Diệp Vương', min:3, pas:{hp:0.1}, desc:'Châu của vạn niên thi vương — khí huyết +10%.'},
+  {id:'moc_sinh_chau', cat:'Pháp bảo', name:'Mộc Sinh Châu', owner:'Hàn Lập', min:5, pas:{hp:0.15}, desc:'Vật liệu luyện Bất Diệt Chi Thể — khí huyết +15%.'},
+  {id:'tu_tuong_xich', cat:'Pháp bảo', name:'Tứ Tượng Xích', owner:'Hóa Tiên Tông', min:2, once:{freeze:1}, desc:'Phỏng chế Bát Linh Xích — khóa địch một lượt.'},
+  // Dị hỏa
+  {id:'tu_la_hoa', cat:'Dị hỏa', name:'Tu La Thánh Hỏa', owner:'Huyền Cốt Thượng Nhân', min:3, once:{dmg:2.6, freeze:1}, desc:'Càn Lam Băng Diễm dung hợp âm hỏa — thiêu và đóng băng cùng lúc.'},
+  {id:'bach_cot_hoa', cat:'Dị hỏa', name:'Thuần Dương Bạch Cốt Hỏa', owner:'Cổ tu phong ấn Nguyên Sát', min:4, once:{dmg:2, evil:2}, desc:'Lửa thuần dương khắc tà — gấp đôi sát thương lên yêu tà.'},
+  {id:'thai_duong_hoa', cat:'Dị hỏa', name:'Thái Dương Tinh Hỏa', owner:'Tam Đại Chân Linh Chi Hỏa', min:3, once:{dmg:2.4}, desc:'Tinh hỏa của mặt trời — một trong Tam Đại Chân Linh Chi Hỏa.'},
+  {id:'cuc_han_diem', cat:'Dị hỏa', name:'Cực Hàn Chi Diễm', owner:'Tiểu Cực Cung', min:3, once:{dmg:1.8, freeze:1}, desc:'Hàn diễm cực lạnh — đóng băng địch một lượt.'},
+  {id:'ngan_sac_hoa', cat:'Dị hỏa', name:'Ngân Sắc Hỏa Diễm', owner:'Tu sĩ Linh Giới thượng cổ', min:4, once:{dmg:1.6, evil:2.5}, desc:'Cấm chế thượng cổ chuyên diệt cổ ma — gấp rưỡi hai lần với tà vật.'},
+  // Trận bàn
+  {id:'khon_ma_tran', cat:'Trận bàn', name:'Khốn Ma Đại Trận', owner:'Thái Chân Thất Bảo', min:3, once:{freeze:2, freezeBoss:1}, desc:'Bảy lồng bảy sắc giam địch — 2 lượt (thủ lĩnh 1).'},
+  {id:'bang_phach_tran', cat:'Trận bàn', name:'Băng Phách Hàn Liệt Trận', owner:'Băng Phách Tiên Tử', min:3, once:{dmg:1.2, freeze:2, freezeBoss:1}, desc:'1008 cột huyền băng phong tỏa, hàn khí cắt thịt.'},
+  {id:'van_moc_tran', cat:'Trận bàn', name:'Vạn Mộc Đại Trận', owner:'Khô Trúc lão nhân', min:3, pas:{tuVi:0.1}, desc:'Mộc trận quanh thần thụ — bày trong động phủ, tu luyện nhanh hơn 10%.'},
+  {id:'van_hon_tran', cat:'Trận bàn', name:'Vạn Hồn Đại Trận', owner:'Pháp sĩ Mộ Lan', min:3, once:{dmg:2, ignore:0.3}, desc:'Vạn hồn cuồn cuộn cắn xé đối thủ.'},
+  // Đan dược
+  {id:'giang_van_dan', cat:'Đan dược', name:'Giáng Vân Đan', owner:'Đan phương thượng cổ', min:3, use:{tuviYears:3}, desc:'Linh đan thượng cổ tăng tiến tu vi — bằng ba năm khổ tu.'},
+  {id:'tuyet_phach_hoan', cat:'Đan dược', name:'Tuyết Phách Hoàn', owner:'Đan phương thượng cổ', min:3, use:{heal:0.6}, desc:'Hồi 60% khí huyết ngay lập tức.'},
+  {id:'hoa_anh_dan', cat:'Đan dược', name:'Hóa Anh Đan', owner:'Đan dược Nguyên Anh', min:2, use:{boost:[2,20]}, desc:'Chỉ dùng ở Kết Đan đỉnh phong: tỷ lệ ngưng kết Nguyên Anh +20%.'},
+  {id:'huyen_bang_dan', cat:'Đan dược', name:'Huyền Băng Đan', owner:'Luyện từ Huyền Băng Hoa', min:3, use:{unseal:30}, desc:'Giải cấm chế trên nguyên anh — lùi hạn chót Luyện Thần Thuật thêm 30 năm, hết phản phệ tạm thời.'},
+  {id:'dinh_nhan_dan', cat:'Đan dược', name:'Định Nhan Đan', owner:'Đan phương Hoàng Phong Cốc', min:1, use:{favor:10}, desc:'Giữ mãi dung nhan — quý nhân quen biết đều có thiện cảm hơn (+10 hảo cảm).'},
+  {id:'sat_dan', cat:'Đan dược', name:'Sát Đan', owner:'Huyền Cốt Thượng Nhân', min:3, pas:{doatXa:20}, desc:'Phân thân sát khí ngưng tụ — khi đoạt xá, tỷ lệ thắng giao tranh +20%.'}
+];
+const rareDef = id => RARE.find(r=>r.id===id);
+const rareHas = id => !!(state.rare && state.rare[id]);
+function grantRare(id){
+  const r = rareDef(id); if(!r) return '';
+  state.rare = state.rare||{};
+  state.rare[id] = (state.rare[id]||0) + (r.stock||1);
+  computeStats();
+  return r.name;
+}
+function rareRandom(){
+  const pool = RARE.filter(r=>r.min<=state.realmIdx+1 && (r.use || r.stock || !rareHas(r.id)));
+  return pool.length ? pool[Math.floor(Math.random()*pool.length)] : null;
+}
+function rareMods(m){
+  if(!state.rare) return;
+  Object.keys(state.rare).forEach(id=>{ const r = rareDef(id); if(!r || !r.pas || !state.rare[id]) return; const p = r.pas;
+    if(p.atk) m.atkMult *= 1+p.atk; if(p.hp) m.hpMult *= 1+p.hp; if(p.crit) m.critBonus += p.crit;
+    if(p.dmgTaken) m.dmgTaken *= p.dmgTaken; if(p.dodge) m.dodge += p.dodge; if(p.tuVi) m.tuVi += p.tuVi; });
+}
+function rareCombat(id){
+  const c = state.combat, r = rareDef(id);
+  if(!r || !r.once || !rareHas(id)) return null;
+  c.rareUsed = c.rareUsed||{}; if(c.rareUsed[id]) return null;
+  c.rareUsed[id] = true;
+  if(r.stock){ state.rare[id]--; if(state.rare[id]<=0) delete state.rare[id]; }
+  const o = r.once, ev = isEvilEnemy(c.enemy);
+  let dmg = 0, notes = [];
+  if(o.dmg){ const rr = pathAdjustedDamage(state.stats.atk*o.dmg, c.enemy.def*(1-(o.ignore||0)), state.stats.crit, c.enemy, false); dmg = Math.round(rr.dmg*(o.evil && ev ? o.evil : 1)); }
+  let fz = o.freeze||0; if(o.freezeEvil) fz = ev ? o.freezeEvil : 1; if(c.enemy.isBoss && o.freezeBoss!=null) fz = o.freezeBoss; else if(c.enemy.isBoss && fz>1 && !o.freezeEvil) fz = fz-1;
+  if(fz){ c.frozen = Math.max(c.frozen||0, fz); notes.push(`giam ${fz} lượt`); }
+  if(o.heal){ const h = Math.round(state.stats.hpMax*o.heal); state.hp = Math.min(state.stats.hpMax, state.hp+h); notes.push(`hồi ${h} khí huyết`); }
+  if(o.selfHp){ const d = Math.round(state.stats.hpMax*o.selfHp); state.hp = Math.max(1, state.hp-d); notes.push(`tà khí phản phệ mất ${d} khí huyết`); }
+  return {dmg, msg:`${r.name} xuất thủ${dmg?`, gây ${dmg} sát thương`:''}${o.evil&&ev?' — khắc chế tà vật':''}${notes.length?` (${notes.join(', ')})`:''}.${r.stock?` Còn ${state.rare[id]||0}.`:''}`};
+}
+function rareRevive(c){
+  if(!rareHas('huyet_ma_chau') || c.rareRevived) return false;
+  c.rareRevived = true; state.hp = Math.round(state.stats.hpMax*0.2);
+  combatLog('Huyết Ma Châu bừng sáng — ngươi hóa huyết ảnh, trùng sinh với 20% khí huyết!');
+  return true;
+}
+function rareBacklash(){
+  const r = rareDef('huyet_ma_kiem');
+  if(rareHas('huyet_ma_kiem') && Math.random()<r.backlash){ const d = Math.round(state.stats.hpMax*0.08); state.hp = Math.max(1, state.hp-d); return ` Huyết Ma Kiếm cắn ngược chủ nhân — mất ${d} khí huyết.`; }
+  return '';
+}
+function useRare(id){
+  const r = rareDef(id); if(!r || !r.use || !rareHas(id)) return;
+  const u = r.use;
+  if(u.boost && !(state.realmIdx===u.boost[0] && isMajorStep())){ addLog(`${r.name} chỉ dùng được ở ${MAJOR_REALMS[u.boost[0]].name} đỉnh phong.`); render(); return; }
+  if(u.unseal && !(state.lg && lg().luyenThan.deadline!=null)){ addLog('Hiện không có cấm chế nào trên nguyên anh cần giải.'); render(); return; }
+  state.rare[id]--; if(state.rare[id]<=0) delete state.rare[id];
+  let msg = '';
+  if(u.tuviYears){ const tv = previewMeditateGain()*12*u.tuviYears; state.tuVi += tv; msg = `tu vi +${tv}`; }
+  if(u.heal){ const h = Math.round(state.stats.hpMax*u.heal); state.hp = Math.min(state.stats.hpMax, state.hp+h); msg = `hồi ${h} khí huyết`; }
+  if(u.boost){ state.breakthroughBoost = Math.min(60, state.breakthroughBoost+u.boost[1]); msg = `tỷ lệ đột phá +${u.boost[1]}%`; }
+  if(u.unseal){ lg().luyenThan.deadline += u.unseal; msg = `hạn chót Luyện Thần Thuật lùi thêm ${u.unseal} năm`; }
+  if(u.favor){ NPCS.filter(n=>n.kind==='friend' && npcRel(n.id).met && !npcRel(n.id).dead).forEach(n=>{ npcRel(n.id).favor = Math.min(100, npcRel(n.id).favor+u.favor); }); msg = `quý nhân quen biết +${u.favor} hảo cảm`; }
+  addLog(`Dùng ${r.name}: ${msg}.`);
+  checkBreakthroughAvailable(); computeStats(); render();
+}
+function renderRareItems(){
+  if(!state.rare || !Object.keys(state.rare).length) return '';
+  const rows = Object.keys(state.rare).map(id=>{ const r = rareDef(id); if(!r) return '';
+    const n = state.rare[id];
+    const btn = r.use ? `<button class="btn sm gold" onclick="useRare('${id}')">Dùng</button>` : r.once ? '<small>dùng trong trận</small>' : '<small>tự phát huy</small>';
+    return `<div class="phy-row has"><div class="phy-row-head"><span>${r.name}${(r.use||r.stock)&&n>1?` ×${n}`:''}</span>${btn}</div><div class="phy-row-how"><b style="color:var(--text-dim)">${r.cat}</b> · vốn của ${r.owner}. ${r.desc}</div></div>`; }).join('');
+  return `<div class="card"><div class="sec-title">${ic('star')} Bảo Vật Hiếm<span>${Object.keys(state.rare).length}</span></div>${rows}</div>`;
+}
+function renderRareCombatButtons(c){
+  if(!state.rare) return '';
+  const used = c.rareUsed||{};
+  return Object.keys(state.rare).map(id=>{ const r = rareDef(id); if(!r || !r.once) return ''; return `<button class="btn ghost" ${used[id]?'disabled':''} onclick="playerAttack('rare:${id}')">${ic('star')}${r.name}${r.stock?` (${state.rare[id]})`:''}</button>`; }).join('');
+}
+function rareOnWin(enemy){
+  if(!enemy.isBoss || Math.random()>=0.05) return '';
+  const r = rareRandom(); if(!r) return '';
+  grantRare(r.id);
+  return ` Ngươi đã nhận được 【${r.name}】.`;
 }
 
 /* =====================================================================
@@ -9353,6 +9726,7 @@ function computeStats(){
   if(state.expd && state.expd.mods && state.expd.mods.pressure){ const f = 1-Math.min(0.5, state.expd.mods.pressure*0.05*(state.path && state.path.id==='the'?0.5:1)); atk = Math.round(atk*f); def = Math.round(def*f); }
   if(state.wings) spd = Math.round(spd*1.2);
   if(state.dapVanNgoa) spd = Math.round(spd*1.15);
+  if(state.thanhNgungKinh) def = Math.round(def*1.08);
   state.stats = {atk,def,spd,hpMax,crit: Math.max(1,crit)};
   if(state.hp>hpMax) state.hp = hpMax;
 }
@@ -9817,7 +10191,7 @@ function winCombat(){
   const matMsg = dropMaterials(c.enemy);
   if(c.enemy.isBoss) fx('banner',{text:'Đắc Thắng'});
   const ngMsg = ngOnCombatWin(c.enemy);
-  const advMsg = advOnCombatWin(c.enemy) + lgOnCombatWin(c.enemy) + tgOnCombatWin(c.enemy) + canonOnCombatWin(c.enemy) + aucOnCombatWin(c.enemy) + examOnCombatWin(c.enemy) + beastOnWin(c.enemy);
+  const advMsg = advOnCombatWin(c.enemy) + lgOnCombatWin(c.enemy) + tgOnCombatWin(c.enemy) + canonOnCombatWin(c.enemy) + aucOnCombatWin(c.enemy) + examOnCombatWin(c.enemy) + beastOnWin(c.enemy) + rareOnWin(c.enemy);
   addLog(`Đánh bại ${c.enemy.name}! Nhận ${rewardTuVi} tu vi, ${stoneReward} linh thạch${herbMsg}${matMsg}${recipeMsg}.${rivalMsg}${ngMsg}${advMsg}`);
   state.combat = null;
   checkBreakthroughAvailable();
