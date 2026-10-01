@@ -1146,6 +1146,10 @@
 
   .bottle-card{background:radial-gradient(ellipse at 20% 0%, rgba(80,200,140,.18), transparent 60%), var(--panel);}
   .bt-head{display:flex;gap:14px;align-items:center;}
+  .bt-svg{flex:none;width:58px;height:90px;filter:drop-shadow(0 0 10px rgba(120,240,180,.35));}
+  .bt-svg .bt-wave{animation:btWave 3s ease-in-out infinite alternate;}
+  @keyframes btWave{from{transform:translateX(-6px)}to{transform:translateX(6px)}}
+  .no-motion .bt-svg .bt-wave{animation:none;}
   .bt-vial{flex:none;position:relative;width:46px;height:70px;border-radius:14px 14px 22px 22px;border:2px solid rgba(120,230,170,.55);overflow:hidden;background:rgba(0,0,0,.35);box-shadow:0 0 18px rgba(80,220,150,.25);}
   .bt-vial::before{content:'';position:absolute;top:-6px;left:14px;width:14px;height:10px;border:2px solid rgba(120,230,170,.55);border-bottom:none;border-radius:3px 3px 0 0;background:#0e1413;}
   .bt-fill{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg,#8ff0c0,#2f9a6a);box-shadow:0 0 12px rgba(120,240,180,.6);transition:height .4s;}
@@ -1293,6 +1297,23 @@
   @keyframes vsUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   .no-motion .vn-sil,.no-motion .vn-pfx i{animation:none;}
 
+  .dly-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-soft);}
+  .dly-row:last-of-type{border-bottom:none;}
+  .dly-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;}
+  .dly-b b{font-size:13px;font-weight:600;}
+  .dly-row.done b{color:var(--text-faint);text-decoration:line-through;}
+  .dly-bar{height:4px;border-radius:2px;background:rgba(255,255,255,.07);overflow:hidden;} .dly-bar span{display:block;height:100%;background:var(--jade);}
+  .dly-row.ready .dly-bar span{background:var(--gold);}
+  .dly-row em{font-style:normal;font-size:11.5px;color:var(--text-faint);white-space:nowrap;}
+  .omen-chip{display:flex;gap:10px;align-items:center;margin:0 0 12px;padding:10px 12px;border-radius:12px;border:1px solid var(--gold-dim);background:linear-gradient(90deg,rgba(212,175,106,.14),rgba(212,175,106,.03));animation:vnIn .5s ease-out;}
+  .omen-chip .ic{width:22px;height:22px;margin:0;color:var(--gold-bright);flex:none;}
+  .omen-chip b{display:block;font-size:13.5px;color:var(--gold-bright);} .omen-chip small{font-size:11.5px;color:var(--text-dim);}
+  .gd-row{display:flex;align-items:center;gap:10px;padding:7px 0;}
+  .gd-c{flex:none;width:20px;height:20px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;}
+  .gd-row.done .gd-c{background:var(--jade-dim);border-color:var(--jade);}
+  .gd-t{flex:1;font-size:13px;} .gd-row.done .gd-t{color:var(--text-faint);text-decoration:line-through;}
+  .gd-foot{display:flex;justify-content:space-between;align-items:center;margin-top:6px;} .gd-foot small{font-size:11.5px;color:var(--text-faint);}
+
   ::-webkit-scrollbar{width:5px;height:5px;}
   ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
@@ -1434,10 +1455,10 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.50.0';
+const GAME_VERSION = '1.51.2';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
-const DEFAULT_SETTINGS = {typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
+const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
 
 function loadSettings(){
   try{ const raw = localStorage.getItem(SETTINGS_KEY); return Object.assign({}, DEFAULT_SETTINGS, raw?JSON.parse(raw):{}); }
@@ -1550,6 +1571,7 @@ function restoreFromSave(d){
   computeStats();
   checkBreakthroughAvailable();
   render();
+  try{ offlineCatchup(d.t); }catch(e){}
 }
 
 /* Hộp xác nhận tự dựng — không dùng confirm() vì trang có thể bị chặn hộp thoại */
@@ -1579,6 +1601,22 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.51.2', date:'01/10/2026', title:'Gọn lại', items:[
+    ['doi','Chưởng Thiên Bình vẽ lại thành chiếc bình nhỏ xanh biếc có hoa văn hình lá như trong truyện; lục dịch dâng lên trong lòng bình, mặt nước khẽ gợn.'],
+    ['doi','Bỏ Nhân Vật Chí ở trang Cốt Truyện và bỏ Nhật Khóa ở trang Tu Luyện.']
+  ]},
+  {v:'1.51.1', date:'01/10/2026', title:'Thiên tai và hội tụ theo nguyên tác', items:[
+    ['doi','Bỏ các dị tượng tự đặt (Linh triều, Huyết nguyệt, Thiên cơ hiển lộ). Thay bằng sự kiện có trong truyện, chỉ xảy ra ở đúng vùng đất.'],
+    ['moi','Loạn Tinh Hải: Thiên Phong (không dùng được truyền tống trận), Quỷ Vụ (thám hiểm có thể bị cuốn đi nửa năm, mất tu vi), Thú Triều (yêu thú hung hãn, rơi thêm yêu huyết).'],
+    ['moi','Thiên Nam: tiểu hội Thái Nam cốc năm năm một lần cho tu sĩ Luyện Khí, Trúc Cơ (Phường Thị giảm giá); Giao Dịch Hội cho tu sĩ Nguyên Anh — vào hội đổi bảo vật hiếm.']
+  ]},
+  {v:'1.51.0', date:'01/10/2026', title:'Nâng cấp hệ thống', items:[
+    ['moi','Bế quan khi vắng mặt: quay lại game, thời gian đã trôi theo tốc độ đang chọn, nhận một nửa tu vi như bế quan (tối đa 24 tháng), có bảng tóm tắt khi xuất quan. Tắt được trong Lối chơi.'],
+    ['moi','Nhật Khóa: ba việc mỗi ngày (bế quan, đánh trận, đọc truyện, chế tác, thu hoạch), mỗi việc thưởng linh thạch; xong cả ba nhận thêm đan dược, linh chủng, lục dịch hoặc bảo vật hiếm.'],
+    ['moi','Thiên địa dị tượng: thỉnh thoảng trong ba tháng có Linh triều dâng, Yêu thú bạo động, Huyết nguyệt, Thiên cơ hiển lộ hoặc Đại hội giao dịch — mỗi thứ một ảnh hưởng riêng.'],
+    ['moi','Thống kê hành trình trong Hệ Thống; Chỉ dẫn tân thủ sáu bước cho người mới.'],
+    ['sua','Tỷ lệ đột phá thật giờ dùng đúng con số hiển thị, gồm cả ảnh hưởng của độ khó.']
+  ]},
   {v:'1.50.0', date:'01/10/2026', title:'Cốt truyện điện ảnh', items:[
     ['moi','Mỗi cảnh có phông cảnh riêng theo bối cảnh truyện — sơn lâm, sơn thôn, biển cả, địa huyệt, cung thành, chiến trường, băng nguyên, hoang mạc, u minh — với dáng núi, sóng biển, mái cung, cờ chiến… trôi nhẹ, cùng hạt hiệu ứng: đom đóm, tuyết rơi, tàn lửa, bọt nước, quỷ hỏa, bụi cát, đèn lồng.'],
     ['moi','Chữ hiện dần như được kể (chạm để hiện hết câu), chỉnh tốc độ hoặc tắt trong Lối chơi.'],
@@ -2632,6 +2670,7 @@ function travelTo(id){
   if(state.realmIdx<to.minRealm){ addLog(`Tu vi còn nông cạn, cần đạt ${MAJOR_REALMS[to.minRealm].name} mới dám vượt đường xa tới ${to.name}.`); render(); return; }
   const cost = Math.max(to.travelCost, from.travelCost);
   const needLenh = to.id==='loantinh' || from.id==='loantinh';
+  { const o = omenLive(); if(needLenh && o && o.id==='thienphong'){ addLog('Thiên Phong đang hoành hành trên biển — Cổ Truyền Tống Trận nối Loạn Tinh Hải không thể dùng lúc này.'); render(); return; } }
   if(needLenh && !state.daiNaDi){ addLog('Cổ Truyền Tống Trận nối tới Loạn Tinh Hải đã ngủ yên vạn năm — không có Đại Na Di Lệnh làm chìa khóa thì trận pháp không thể kích hoạt.'); render(); return; }
   if(state.spiritStones<cost){ addLog(`Cần ${cost} linh thạch để kích hoạt cổ truyền tống trận tới ${to.name}.`); render(); return; }
   state.spiritStones -= cost;
@@ -2679,6 +2718,7 @@ function exploreRegion(locId){
   const loc = region.locations.find(l=>l.id===locId);
   if(!loc || state.realmIdx<loc.power) return;
   state.currentZone = Math.min(loc.power, ZONES.length-1);
+  if(quyVuCatch()) return;
   const hostile = ngHostileSectsHere();
   if(hostile.length && Math.random()<0.12){
     const hs = hostile[Math.floor(Math.random()*hostile.length)];
@@ -3410,6 +3450,7 @@ function gainProfExp(id, amt){
   if(lvl<1 || lvl>=p.maxLevel) return '';
   if(id==='tranPhap' && phyId()==='long_ngam') amt = Math.round(amt*1.5);
   state.profExp[id] = (state.profExp[id]||0)+amt;
+  stat().craft++;
   let msg = '';
   while(lvl<p.maxLevel && state.profExp[id]>=PROF_NEED[lvl]){
     state.profExp[id] -= PROF_NEED[lvl];
@@ -3656,6 +3697,7 @@ function dropMaterials(enemy){
   if(k0!=='human'){
     const t = zoneMatTier(state.currentZone||0), got = [];
     if(k0==='beast'){
+      if(omen()==='thutrieu'){ addMat('huyet',t,1); got.push(`${matName('huyet',t)} (Thú Triều)`); }
       if(enemy.nightBeast && Math.random()<0.5){ addMat('huyet',t,1); got.push(`${matName('huyet',t)} (yêu thú đêm)`); }
       if(Math.random()<0.75){ addMat('huyet',t,1+(enemy.isBoss?1:0)); got.push(matName('huyet',t)); }
       if(Math.random()<0.3){ addMat('moc',t,1); got.push(`${matName('moc',t)} quanh hang ổ`); }
@@ -3742,6 +3784,7 @@ function migrateState(){
 function startCombat(enemy){
   enemy = classifyBeast(Object.assign({}, enemy));
   beastLogSeen(enemy);
+  if(omen()==='thutrieu' && enemy.beastLv && !enemy.sb){ enemy.atk = Math.round(enemy.atk*1.15); enemy.hpMax = enemy.hp = Math.round(enemy.hpMax*1.1); }
   if(isNight() && enemy.beastLv && !enemy.sb){ enemy.atk = Math.round(enemy.atk*1.15); enemy.hpMax = enemy.hp = Math.round(enemy.hpMax*1.1); enemy.nightBeast = true; }
   { const bl = rareBacklash(); if(bl) addLog(bl.trim()); }
   state.combat = {
@@ -4186,6 +4229,7 @@ function advanceTime(months){
   accrueLuDich(months);
   state.month = (state.month||0) + months;
   satKhiDecay(months);
+  omenTick(months);
   while(state.month>=12){ state.month -= 12; state.age++; npcYearTick(); dodeYearTick(); daoLuYearTick(); }
   checkRealmOpenings();
 }
@@ -8875,7 +8919,7 @@ function renderContent(){
   if(state.mortal && tab==='tuluyen' && sub!=='thoigian') body = renderMortalPage();
   else if(state.mortal && ['hanhtau','dongphu','tuido'].includes(tab) && sub!=='yeuthu') body = mortalLocked();
   else if(tab==='cottruyen') body = renderStoryPage();
-  else if(tab==='tuluyen') body = ({tuluyen:()=>renderAlertsCard()+renderCultivatePage()+renderBanMenhCard()+renderSatKhiCard(), congphap:()=>renderStoryTechCard()+renderTechniquesPage(), bitruyen:renderHeritageAll, phaptac:renderPhapTac, phithang:renderAscendPage, thoigian:renderTimePage}[sub])();
+  else if(tab==='tuluyen') body = ({tuluyen:()=>renderOmenChip()+renderGuideCard()+renderAlertsCard()+renderCultivatePage()+renderBanMenhCard()+renderSatKhiCard(), congphap:()=>renderStoryTechCard()+renderTechniquesPage(), bitruyen:renderHeritageAll, phaptac:renderPhapTac, phithang:renderAscendPage, thoigian:renderTimePage}[sub])();
   else if(tab==='nhanvat') body = ({tongquan:renderOverview, daolu:renderDaoLuPage, dode:renderDodePage, danhhieu:renderTitlePage, tuchat:()=>characterCardsLegacy().cardTuChat, nhanmach:renderNpcPage, linhsung:renderWormTab}[sub])();
   else if(tab==='hanhtau') body = ({bando:renderWorldMap, theluc:renderWorldFactions, bicanh:renderExploreTab, yeuthu:renderBeastPage}[sub])();
   else if(tab==='dongphu') body = dpWrap(sub, ({linhtrung:renderTrungPage, duocvien:renderGardenPage, luyendan:renderAlchemyPage, luyenkhi:renderForgePage, chephu:renderTalismanPage, tranphap:renderFormationPage, khoiloi:renderPuppetPage}[sub])());
@@ -11593,7 +11637,7 @@ function renderStoryPageRaw(){
       ${(()=>{ const t = storyItemTotals(a); return t.n ? `<p class="sec-note" style="margin:8px 0 0;">Vật phẩm trong hồi: đã nhận ${t.got}/${t.n}</p>` : ''; })()}</div>` : '';
   const stats = `<div class="jr-stats"><div><b>${readTotal}</b><span>cảnh đã đọc</span></div><div><b>${doneActs}</b><span>hồi hoàn thành</span></div><div><b>${Object.keys(state.sbWon||{}).length}</b><span>trận đã thắng</span></div></div>`;
   const past = doneActs ? `<details class="card jr-past"><summary>${ic('hourglass','keep')} Hồi đã qua (${doneActs})</summary>${STORY_ACTS.map((x,i)=>S.done[x.id]?`<button class="jr-past-i" onclick="openAct(${i})"><span>${x.sub}</span><b>${x.title}</b></button>`:'').join('')}</details>` : '';
-  return hero + stats + renderStoryMsCard() + toc + renderCodexCard() + past;
+  return hero + stats + renderStoryMsCard() + toc + past;
 }
 
 /* =====================================================================
@@ -11829,7 +11873,8 @@ const SYS_PAGES = {
   loichoi:{title:'Lối Chơi', icon:'taiji'},
   capnhat:{title:'Nhật Ký Cập Nhật', icon:'bell'},
   gioithieu:{title:'Giới Thiệu', icon:'book'},
-  amnhac:{title:'Âm Nhạc', icon:'bell'}
+  amnhac:{title:'Âm Nhạc', icon:'bell'},
+  thongke:{title:'Thống Kê', icon:'chart'}
 };
 function sysRow(icon, title, sub, onclick, cls){
   return `<button class="sys-row ${cls||''}" onclick="${onclick}"><span class="sys-ic">${ic(icon,'keep')}</span><span class="sys-txt"><span class="sys-t">${title}</span>${sub?`<span class="sys-s">${sub}</span>`:''}</span><span class="sys-chev">›</span></button>`;
@@ -11858,6 +11903,7 @@ function showSettings(tab){
       <div class="sys-sec">Tùy chỉnh</div>
       <div class="sys-list">
         ${sysRow('eye','Hiển thị', `Cỡ chữ ${scaleName} · phông ${fontName} · hiệu ứng ${settings.motion?'bật':'tắt'}`, "showSettings('hienthi')")}
+        ${sysRow('chart','Thống kê', `${state && state.root ? (state.winCount||0)+' trận thắng · '+seenCount()+' cảnh truyện' : 'Chưa có nhân vật'}`, "showSettings('thongke')")}
         ${sysRow('bell','Âm nhạc', settings.bgm ? `Đang bật · ${bgmCurrent().name}` : 'Nhạc nền đang tắt', "showSettings('amnhac')", settings.bgm?'on':'')}
         ${sysRow('taiji','Lối chơi', `Nhật ký ${settings.logLen} dòng · ${settings.confirmDanger?'hỏi lại thao tác nguy hiểm':'không hỏi lại'}`, "showSettings('loichoi')")}
       </div>
@@ -11913,6 +11959,7 @@ function showSettings(tab){
       ${toggleRow('realTime','Thời gian tự trôi','Ngày đêm luân chuyển khi đang chơi, ba mươi ngày là một tháng. Tạm dừng khi đang đánh, độ kiếp, đọc truyện hoặc rời trang.')}
       ${settings.realTime!==false ? `<div class="set-row col"><div class="set-text"><div class="set-title">Tốc độ thời gian</div><div class="set-desc">Một canh giờ trôi qua sau 20 giây (rất chậm), 10 giây (chậm — một ngày khoảng 2 phút, một tháng khoảng 1 giờ), 5 giây (vừa) hoặc 2,5 giây (nhanh).</div></div>${segButtons('timeSpeed', [[20000,'Rất chậm'],[10000,'Chậm'],[5000,'Vừa'],[2500,'Nhanh']])}</div>` : ''}
       <div class="set-row col"><div class="set-text"><div class="set-title">Tự uống đan liệu thương</div><div class="set-desc">Trong trận, khi khí huyết tụt dưới mức này sẽ tự dùng đan tốt nhất đang có — không mất lượt.</div></div>${segButtons('autoHeal', [[0,'Tắt'],[0.3,'Dưới 30%'],[0.5,'Dưới 50%']])}</div>
+      ${toggleRow('offlineProgress','Bế quan khi vắng mặt','Khi quay lại game, thời gian đã trôi theo tốc độ đang chọn và ngươi nhận một nửa tu vi như bế quan (tối đa 24 tháng mỗi lần).')}
       ${toggleRow('storyPopups','Báo khi cốt truyện khai mở','Hiện bảng thông báo mỗi khi mở được cảnh mới.')}
       <div class="set-row col"><div class="set-text"><div class="set-title">Chữ cốt truyện hiện dần</div><div class="set-desc">Mỗi câu mới hiện từng chữ như được kể; chạm để hiện hết câu.</div></div>${segButtons('typeSpeed', [[0,'Tắt'],[40,'Chậm'],[22,'Vừa'],[10,'Nhanh']])}</div>
       ${toggleRow('autoRead','Tự chạy lời thoại','Trong trình đọc cốt truyện, lời thoại tự hiện tiếp mà không cần chạm.')}
@@ -11925,6 +11972,7 @@ function showSettings(tab){
       ${toggleRow('confirmDanger','Hỏi lại trước thao tác nguy hiểm','Rời tông môn, chơi lại từ đầu, xóa bản lưu.')}
       ${toggleRow('storyOriginalName','Giữ tên Hàn Lập trong Cốt Truyện', `Đọc đúng nguyên tác. Khi tắt, cốt truyện gọi nhân vật chính là ${state && state.root ? '<b>'+escHtml(storyCallName()==='ngươi'?'“ngươi”':storyCallName())+'</b>' : 'tên của ngươi'}${state && state.root && storyCallName()==='ngươi' ? ' vì đạo hiệu không giống tên người' : ''}.`)}`;
     else if(tab==='amnhac') content = renderMusicPage();
+    else if(tab==='thongke') content = state && state.root ? renderStatsPage() : '<p class="flavor">Chưa có nhân vật.</p>';
     else if(tab==='capnhat') content = `<ol class="changelog">${publicChangelog().map((c,i)=>`
       <li class="${i===0?'latest':''}">
         <div class="cl-head"><span class="cl-ver">v${c.v}</span><span class="cl-date">${c.date}</span></div>
@@ -13371,7 +13419,8 @@ function accrueLuDich(months){
   if(state.bottleFound===false) return;
   if(state.luDich==null) state.luDich = 0;
   let base = state.age*12 + state.month - months;
-  for(let i=0;i<Math.min(months, 2400);i++){ state.luAcc = (state.luAcc||0) + luRate()*moonPhase(base+i).mult; }
+  const om = 1;
+  for(let i=0;i<Math.min(months, 2400);i++){ state.luAcc = (state.luAcc||0) + luRate()*moonPhase(base+i).mult*om; }
   if(months>2400) state.luAcc += (months-2400)*luRate();
   const whole = Math.floor(state.luAcc); state.luAcc -= whole;
   state.luDich = Math.min(luCap(), state.luDich + whole);
@@ -13400,17 +13449,40 @@ function gardenHarvest(i){
   const g = garden(), p = g.plots[i]; if(!p || p.age==null) return;
   const t = plotTier(p); if(t<1){ addLog('Cây còn non, chưa đủ mười năm dược tính.'); render(); return; }
   const n = herbYield();
-  state.herbs[t] = (state.herbs[t]||0) + n;
+  state.herbs[t] = (state.herbs[t]||0) + n; stat().harvest++;
   const seedBack = Math.random()<0.5; if(seedBack) state.seeds = (state.seeds||0)+1;
   p.age = null;
   addLog(`Thu hoạch ${n} cây ${HERB_NAMES[t-1]}${seedBack?', còn nhặt được một hạt linh chủng':''}.`); render();
 }
-function gardenHarvestAll(){ const g = garden(); g.plots.forEach((p,i)=>{ if(p.age!=null && plotTier(p)>=1){ const t = plotTier(p); state.herbs[t] = (state.herbs[t]||0)+herbYield(); if(Math.random()<0.5) state.seeds = (state.seeds||0)+1; p.age = null; } }); addLog('Thu hoạch toàn bộ dược viên.'); render(); }
+function gardenHarvestAll(){ const g = garden(); stat().harvest++; g.plots.forEach((p,i)=>{ if(p.age!=null && plotTier(p)>=1){ const t = plotTier(p); state.herbs[t] = (state.herbs[t]||0)+herbYield(); if(Math.random()<0.5) state.seeds = (state.seeds||0)+1; p.age = null; } }); addLog('Thu hoạch toàn bộ dược viên.'); render(); }
 function growKimLoiTruc(){
   const cost = 10;
   if((state.luDich||0)<cost){ addLog('Cần 10 giọt lục dịch để một đoạn Thiên Lôi Trúc hóa Kim Lôi Trúc.'); render(); return; }
   state.luDich -= cost; ng().kimLoiTruc = (ng().kimLoiTruc||0)+1;
   addLog('Lục dịch thấm vào đoạn Thiên Lôi Trúc — thân trúc hóa vàng, lôi quang chớp động: một đoạn Kim Lôi Trúc vạn năm.'); render();
+}
+/* Chiếc bình nhỏ xanh biếc, hoa văn hình lá — mực lục dịch dâng theo số giọt */
+function bottleSvg(f){
+  const top = 30, bot = 92, y = (bot - (bot-top)*f).toFixed(1);
+  return `<svg class="bt-svg" viewBox="0 0 64 100" aria-label="Chưởng Thiên Bình">
+    <defs>
+      <clipPath id="btBody"><path d="M26 22 L26 30 C14 36 8 48 8 62 C8 82 20 94 32 94 C44 94 56 82 56 62 C56 48 50 36 38 30 L38 22 Z"/></clipPath>
+      <linearGradient id="btGlass" x1="0" x2="1"><stop offset="0" stop-color="#1f6e4c"/><stop offset=".45" stop-color="#3fae7c"/><stop offset="1" stop-color="#16573b"/></linearGradient>
+      <linearGradient id="btLiq" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b8ffd9"/><stop offset="1" stop-color="#3cc98a"/></linearGradient>
+      <radialGradient id="btGlow"><stop offset="0" stop-color="rgba(140,255,200,.55)"/><stop offset="1" stop-color="rgba(140,255,200,0)"/></radialGradient>
+    </defs>
+    <ellipse cx="32" cy="64" rx="30" ry="34" fill="url(#btGlow)"/>
+    <path d="M26 22 L26 30 C14 36 8 48 8 62 C8 82 20 94 32 94 C44 94 56 82 56 62 C56 48 50 36 38 30 L38 22 Z" fill="url(#btGlass)" stroke="#8ff0c0" stroke-opacity=".55" stroke-width="1.2"/>
+    <g clip-path="url(#btBody)">
+      <rect x="0" y="${y}" width="64" height="100" fill="url(#btLiq)" opacity=".9"/>
+      <path class="bt-wave" d="M0 ${y} Q8 ${(+y-2).toFixed(1)} 16 ${y} T32 ${y} T48 ${y} T64 ${y} V100 H0 Z" fill="#d6ffe9" opacity=".35"/>
+      <path d="M20 58 C24 50 30 50 32 56 C30 62 24 62 20 58 Z M44 70 C40 62 34 62 32 68 C34 74 40 74 44 70 Z M24 78 C28 72 32 74 32 78 C30 82 26 82 24 78 Z" fill="none" stroke="#c8ffe3" stroke-opacity=".55" stroke-width="1"/>
+      <path d="M32 56 V82 M20 58 L32 60 M44 70 L32 70" stroke="#c8ffe3" stroke-opacity=".35" stroke-width=".8"/>
+      <path d="M14 50 C12 58 12 70 16 80" stroke="#ffffff" stroke-opacity=".35" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    </g>
+    <rect x="23.5" y="14" width="17" height="9" rx="2.5" fill="#2a8a5e" stroke="#8ff0c0" stroke-opacity=".6" stroke-width="1"/>
+    <rect x="25" y="10" width="14" height="5" rx="2" fill="#1d6a48" stroke="#8ff0c0" stroke-opacity=".5" stroke-width=".8"/>
+  </svg>`;
 }
 function renderGardenPage(){
   const g = garden(), ph = moonPhase(), nextPh = moonPhase(state.age*12 + state.month + 1);
@@ -13428,7 +13500,7 @@ function renderGardenPage(){
   const kimLoi = state.ng && (ng().kimLoiTruc>0 || (typeof storySceneRead==='function' && storySceneRead('2.66')));
   return `<div class="card bottle-card">
       <div class="bt-head">
-        <div class="bt-vial"><div class="bt-fill" style="height:${Math.min(100,(state.luDich||0)/cap*100)}%"></div></div>
+        ${bottleSvg(Math.min(1,(state.luDich||0)/cap))}
         <div class="bt-info">
           <div class="bt-name">Chưởng Thiên Bình <span>Nguyệt Hoa ${lv}/6</span></div>
           <div class="bt-drops"><b>${state.luDich||0}</b> / ${cap} giọt lục dịch</div>
@@ -13462,7 +13534,7 @@ function renderGardenPage(){
 const SHOP_TABS = [['dan','Đan dược','pill'],['phu','Phù lục','scroll'],['lieu','Nguyên liệu','stone'],['thao','Dược liệu','herb'],['phap','Công pháp','book']];
 const TUVI_PRICE = [40,150,500,1500,5000,15000];
 const HERB_PRICE = [12,45,150,500,1500,5000];
-function shopPrice(p){ return Math.round(p*(state.flags.discount?0.8:1)); }
+function shopPrice(p){ return Math.round(p*(state.flags.discount?0.8:1)*(omen()==='thainam'?0.85:1)); }
 function shopTechPrice(t){ const b = t.bonus||{}; return 60 + Object.values(b).reduce((a,v)=>a+Math.abs(v),0)*12; }
 function shopItems(tab){
   const R = state.realmIdx, L = [];
@@ -13605,6 +13677,7 @@ let tickLast = performance.now();
 function timeTick(){
   setTimeout(timeTick, 200);
   const now = performance.now(), dt = now - tickLast; tickLast = now;
+  if(state && state.root && document.visibilityState!=='hidden' && dt<2000) stat().playMs += dt;
   if(timePaused()){ lastCanhAt += dt; return; }
   const sp = settings.timeSpeed || CANH_MS;
   if(now - lastCanhAt < sp) return;
@@ -13658,6 +13731,168 @@ function scheduleAutoRead(){
   const S = state.story, sc = STORY_ACTS[S.cur.act].scenes[S.cur.i];
   if(sceneRev(sc) >= sceneLines(sc).length) return;
   autoReadTimer = setTimeout(function go(){ if(!settings.autoRead || !state.story.cur) return; if(typing){ autoReadTimer = setTimeout(go, 400); return; } storyReveal(); }, settings.autoReadMs || 2600);
+}
+
+/* =====================================================================
+   NÂNG CẤP HỆ THỐNG
+   · Bế quan khi vắng mặt  · Nhật Khóa mỗi ngày  · Thiên địa dị tượng
+   · Thống kê hành trình   · Chỉ dẫn tân thủ
+===================================================================== */
+function stat(){ if(!state.stat) state.stat = {craft:0, harvest:0, brkOk:0, brkFail:0, playMs:0, kills:0, offline:0}; return state.stat; }
+
+/* ---------- Bế quan khi vắng mặt ---------- */
+function offlineCatchup(savedAt){
+  if(!savedAt || !state || !state.root || state.dead || state.mortal) return;
+  if(settings.realTime===false || settings.offlineProgress===false) return;
+  const ms = Date.now() - savedAt; if(ms < 5*60*1000) return;
+  const sp = settings.timeSpeed || CANH_MS;
+  const days = Math.floor(ms / (sp*12)); if(days<1) return;
+  const months = Math.min(24, Math.floor(days/30)), extraDays = months>=24 ? 0 : days%30;
+  let gain = 0;
+  if(months>0){ gain = Math.round(previewMeditateGain()*months*0.5); state.tuVi += gain; bmGain(months); advanceTime(months); }
+  state.day = ((state.day||0) + extraDays); if(state.day>=30){ state.day -= 30; advanceTime(1); }
+  stat().offline += months;
+  checkBreakthroughAvailable(); computeStats();
+  const hrs = (ms/3600000).toFixed(1);
+  setTimeout(()=>{
+    document.getElementById('modalBody').innerHTML = `<div class="story-pop"><div class="sp-glow"></div>
+      <div class="sp-kicker">${ic('hourglass','keep')} Trong lúc ngươi vắng mặt</div>
+      <h2 class="sp-title">${months?`${months} tháng`:`${days} ngày`} trôi qua</h2>
+      <p class="sp-blurb">Ngươi rời đi khoảng ${hrs} giờ. Động phủ vẫn yên tĩnh, ngươi khoanh chân tĩnh tọa${months?' — tu vi tự vận chuyển':''}.</p>
+      <div class="fin-rw">${months?`<div><b>+${gain}</b><small>tu vi</small></div>`:''}<div><b>${state.luDich||0}</b><small>giọt lục dịch trong bình</small></div></div>
+      ${months>=24?'<p class="sec-note" style="margin:8px 0 0;">Bế quan khi vắng mặt tối đa 24 tháng mỗi lần.</p>':''}
+      <button class="btn gold" style="margin-top:12px;" onclick="closeModal()">Xuất Quan</button></div>`;
+    document.getElementById('overlay').classList.add('show');
+  }, 900);
+  render();
+}
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden' && state && state.root) saveGame(true); });
+
+/* ---------- Nhật Khóa ---------- */
+const DAILY_POOL = [
+  {id:'med',  label:'Bế quan tu luyện 10 lần', goal:10, val:()=>state.medCount||0},
+  {id:'win',  label:'Thắng 3 trận', goal:3, val:()=>state.winCount||0},
+  {id:'read', label:'Đọc 2 cảnh cốt truyện', goal:2, val:()=>seenCount()},
+  {id:'craft',label:'Chế tác thành công 2 lần', goal:2, val:()=>stat().craft},
+  {id:'harv', label:'Thu hoạch dược viên 1 lần', goal:1, val:()=>stat().harvest},
+  {id:'win5', label:'Thắng 6 trận', goal:6, val:()=>state.winCount||0},
+  {id:'med2', label:'Bế quan tu luyện 20 lần', goal:20, val:()=>state.medCount||0}
+];
+function todayKey(){ const d = new Date(); return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+function daily(){
+  const k = todayKey();
+  if(!state.daily || state.daily.date!==k){
+    let h = hashStr(k), pool = DAILY_POOL.slice(), tasks = [];
+    while(tasks.length<3 && pool.length){ const i = h % pool.length; const t = pool.splice(i,1)[0]; if(!tasks.some(x=>x.id.slice(0,3)===t.id.slice(0,3))) tasks.push({id:t.id, base:t.val(), done:false}); h = Math.floor(h/7)+13; }
+    state.daily = {date:k, tasks, bonus:false};
+  }
+  return state.daily;
+}
+function dailyProg(t){ const d = DAILY_POOL.find(x=>x.id===t.id); return Math.min(d.goal, Math.max(0, d.val()-t.base)); }
+function claimDaily(i){
+  const D = daily(), t = D.tasks[i], d = DAILY_POOL.find(x=>x.id===t.id); if(!t || t.done || dailyProg(t)<d.goal) return;
+  t.done = true; const st = 60*(state.realmIdx+1); state.spiritStones += st;
+  addLog(`Nhật Khóa — ${d.label}: ngươi đã nhận được ${st} linh thạch.`);
+  if(D.tasks.every(x=>x.done) && !D.bonus){ D.bonus = true; const r = Math.random(); if(r<0.4){ state.pills[Math.min(6,state.realmIdx+1)] = (state.pills[Math.min(6,state.realmIdx+1)]||0)+2; addLog('Hoàn thành Nhật Khóa: ngươi đã nhận được 2 viên đan tu vi.'); } else if(r<0.75){ state.seeds = (state.seeds||0)+3; state.luDich = Math.min(luCap(), (state.luDich||0)+5); addLog('Hoàn thành Nhật Khóa: ngươi đã nhận được 3 linh chủng và 5 giọt lục dịch.'); } else { const rr = rareRandom(); if(rr){ grantRare(rr.id); addLog(`Hoàn thành Nhật Khóa: ngươi đã nhận được 【${rr.name}】.`); } else { state.spiritStones += st*3; } } fx('banner',{text:'Nhật Khóa viên mãn'}); }
+  computeStats(); render();
+}
+function renderDailyCard(){
+  if(state.mortal) return '';
+  const D = daily();
+  return `<div class="card daily-card"><div class="sec-title">${ic('check')} Nhật Khóa<span>${D.tasks.filter(t=>t.done).length}/3</span></div>
+    ${D.tasks.map((t,i)=>{ const d = DAILY_POOL.find(x=>x.id===t.id), p = dailyProg(t), ok = p>=d.goal;
+      return `<div class="dly-row ${t.done?'done':ok?'ready':''}"><div class="dly-b"><b>${d.label}</b><span class="dly-bar"><span style="width:${p/d.goal*100}%"></span></span></div>
+        ${t.done?`<em>Đã nhận</em>`:ok?`<button class="btn sm gold" onclick="claimDaily(${i})">Nhận</button>`:`<em>${p}/${d.goal}</em>`}</div>`; }).join('')}
+    <p class="sec-note" style="margin:6px 0 0;">Làm mới mỗi ngày. Hoàn thành cả ba có thêm phần thưởng.</p></div>`;
+}
+
+/* ---------- Thiên tai và hội tụ theo nguyên tác ----------
+   Loạn Tinh Hải: tam đại thiên tai (Thiên Phong, yêu thú biển, Quỷ Vụ) và Thú Triều Ngoại Tinh Hải.
+   Thiên Nam: tiểu hội Thái Nam cốc năm năm một lần; Giao Dịch Hội của tu sĩ Nguyên Anh. */
+const OMENS = {
+  thienphong:{name:'Thiên Phong', region:'loantinh', months:2, icon:'storm', desc:'Một trong tam đại thiên tai Loạn Tinh Hải — cuồng phong trên biển, mọi đường đi lại qua Cổ Truyền Tống Trận đều phải tạm dừng.'},
+  quyvu:{name:'Quỷ Vụ', region:'loantinh', months:2, icon:'cloud', desc:'Sương đen đáng sợ nhất Loạn Tinh Hải — thám hiểm lúc này có thể bị cuốn đi, trôi dạt rất lâu mới thoát.'},
+  thutrieu:{name:'Thú Triều', region:'loantinh', months:3, icon:'claw', desc:'Yêu thú biển tràn ra như năm nào Hắc Thạch Thành tan hoang — yêu thú hung hãn hơn, nhưng rơi thêm yêu huyết.'},
+  thainam:{name:'Tiểu hội Thái Nam cốc', region:'thiennam', months:1, icon:'hall', desc:'Năm năm một lần, tán tu tụ về Thái Nam cốc trao đổi — Phường Thị giảm giá 15%.'},
+  giaodich:{name:'Giao Dịch Hội Thiên Nam', region:'thiennam', months:2, icon:'star', desc:'Tu sĩ Nguyên Anh đeo mặt nạ tụ họp trao đổi bảo vật — có thể vào hội đổi lấy bảo vật hiếm.'}
+};
+function monthIndex(){ return state.age*12 + (state.month||0); }
+function omenLive(){ const o = state.omen; return o && OMENS[o.id] && monthIndex() < o.until ? o : null; }
+function omen(){ const o = omenLive(); if(!o) return null; const here = state.ng && state.realmIdx<=4 ? ng().region : null; return here===OMENS[o.id].region ? o.id : null; }
+function startOmen(k){
+  state.omen = {id:k, until:monthIndex()+OMENS[k].months, region:OMENS[k].region, seed:Math.floor(Math.random()*1e6), bought:[]};
+  addLog(`【${OMENS[k].name}】 — ${OMENS[k].desc}`); fx('banner',{text:OMENS[k].name});
+}
+function omenTick(months){
+  if(state.mortal || !state.ng || state.realmIdx>4) return;
+  for(let i=0;i<Math.min(months, 60);i++){
+    if(omenLive()) continue;
+    const here = ng().region;
+    if(here==='thiennam' && state.realmIdx<=1 && monthIndex() - (state.thaiNamLast||-999) >= 60){ state.thaiNamLast = monthIndex(); startOmen('thainam'); break; }
+    if(Math.random()<0.08){
+      const pool = here==='loantinh' ? ['thienphong','quyvu','thutrieu'] : here==='thiennam' && state.realmIdx>=3 ? ['giaodich'] : [];
+      if(pool.length){ startOmen(pool[Math.floor(Math.random()*pool.length)]); break; }
+    }
+  }
+}
+function quyVuCatch(){
+  if(omen()!=='quyvu' || Math.random()>=0.2) return false;
+  const lost = Math.round(state.tuVi*0.15);
+  state.tuVi -= lost; state.hp = Math.max(1, Math.round(state.stats.hpMax*0.3));
+  advanceTime(6);
+  addLog(`Quỷ Vụ cuộn tới không một dấu hiệu báo trước — ngươi bị cuốn vào làn sương đen, pháp lực như bị phong ấn. Nửa năm sau mới lần mò thoát ra được, mất ${lost} tu vi.`);
+  fx('flash',{color:'rgba(20,20,30,.8)',dur:900});
+  render(); return true;
+}
+function giaoDichOffers(){ const o = state.omen; const pool = RARE.filter(r=>r.min<=state.realmIdx+1 && !r.use); const L = []; let h = o.seed; for(let i=0;i<3 && pool.length;i++){ L.push(pool.splice(h % pool.length,1)[0]); h = Math.floor(h/3)+17; } return L; }
+function showGiaoDich(){
+  const o = omenLive(); if(!o || o.id!=='giaodich') return;
+  const offers = giaoDichOffers();
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="display:flex;align-items:center;gap:8px;">${ic('star','keep')} Giao Dịch Hội</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <p class="sec-note" style="margin:0 0 10px;">Các vị đạo hữu đeo mặt nạ, ai cũng giấu tu vi. Mỗi món chỉ một cái.</p>
+    ${offers.map(r=>{ const price = 2500*(r.min+1); const got = o.bought.includes(r.id) || rareHas(r.id);
+      return `<div class="shop-row"><div class="shop-b"><b>${r.name}</b><small>${r.cat} · ${r.desc}</small></div><div class="shop-p"><span>${ic('stone','keep')}${price}</span><div class="shop-btns"><button class="btn sm gold" ${got||state.spiritStones<price?'disabled':''} onclick="buyGiaoDich('${r.id}',${price})">${got?'Đã có':'Đổi'}</button></div></div></div>`; }).join('')}`;
+  document.getElementById('overlay').classList.add('show');
+}
+function buyGiaoDich(id, price){ const o = omenLive(); if(!o || state.spiritStones<price) return; state.spiritStones -= price; o.bought.push(id); grantRare(id); addLog(`Ngươi đã đổi được 【${rareDef(id).name}】 ở Giao Dịch Hội.`); computeStats(); render(); showGiaoDich(); }
+function renderOmenChip(){
+  const k = omen(); if(!k) return '';
+  const left = state.omen.until - monthIndex();
+  return `<div class="omen-chip">${ic(OMENS[k].icon,'keep')}<div><b>${OMENS[k].name}</b><small>${OMENS[k].desc} Còn ${left} tháng.</small>${k==='giaodich'?`<button class="btn sm gold" style="margin-top:6px;" onclick="showGiaoDich()">Vào hội</button>`:''}</div></div>`;
+}
+
+/* ---------- Thống kê ---------- */
+function renderStatsPage(){
+  const st = stat(), hrs = (st.playMs/3600000);
+  const rows = [
+    ['Tuổi', `${state.age} tuổi`], ['Cảnh giới', fullRealmName(state.realmIdx, state.subStage||0)],
+    ['Thời gian chơi', hrs>=1 ? `${hrs.toFixed(1)} giờ` : `${Math.round(st.playMs/60000)} phút`],
+    ['Bế quan', `${state.medCount||0} lần`], ['Bế quan khi vắng mặt', `${st.offline} tháng`],
+    ['Trận thắng', `${state.winCount||0}`], ['Đột phá thành công', `${st.brkOk}`], ['Đột phá thất bại', `${st.brkFail}`],
+    ['Chế tác thành công', `${st.craft}`], ['Thu hoạch dược viên', `${st.harvest}`],
+    ['Cảnh truyện đã đọc', `${seenCount()}`], ['Trận cốt truyện đã thắng', `${Object.keys(state.sbWon||{}).length}/${STORY_BATTLES.length}`],
+    ['Nhân vật quen biết', `${NPCS.filter(n=>npcRel(n.id).met).length}`], ['Danh hiệu', `${(state.epithets||[]).length}/${EPITHETS.length}`],
+    ['Bảo vật hiếm', `${Object.keys(state.rare||{}).length}`], ['Linh thạch hiện có', `${state.spiritStones}`]
+  ];
+  return rows.map(([k,v])=>`<div class="row"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+}
+
+/* ---------- Chỉ dẫn tân thủ ---------- */
+const GUIDE = [
+  {label:'Bế quan tu luyện một lần', done:()=>(state.medCount||0)>=1, go:"goTo('tuluyen','tuluyen')"},
+  {label:'Đọc cảnh đầu tiên trong Cốt Truyện', done:()=>seenCount()>=1, go:"setTab('cottruyen')"},
+  {label:'Thám hiểm Bí Cảnh và thắng một trận', done:()=>(state.winCount||0)>=1, go:"goTo('hanhtau','bicanh')"},
+  {label:'Gieo một hạt linh chủng', done:()=>!!(state.garden && state.garden.plots.some(p=>p.age!=null)) || stat().harvest>0, go:"goTo('dongphu','duocvien')"},
+  {label:'Bái sư học một nghề', done:()=>PROFESSIONS.some(p=>profLvl(p.id)>=1), go:"goTo('dongphu','luyendan')"},
+  {label:'Bái nhập một tông môn', done:()=>!!(state.ng && state.ng.sect), go:"goTo('hanhtau','theluc')"}
+];
+function renderGuideCard(){
+  if(state.mortal || state.guideOff || state.realmIdx>=2) return '';
+  const left = GUIDE.filter(g=>!g.done());
+  if(!left.length){ if(!state.guideDone){ state.guideDone = true; state.spiritStones += 200; addLog('Hoàn thành chỉ dẫn tân thủ: ngươi đã nhận được 200 linh thạch.'); } return ''; }
+  return `<div class="card guide-card"><div class="sec-title">${ic('compass')} Chỉ Dẫn Tân Thủ<span>${GUIDE.length-left.length}/${GUIDE.length}</span></div>
+    ${GUIDE.map(g=>{ const d = g.done(); return `<div class="gd-row ${d?'done':''}"><span class="gd-c">${d?'✓':''}</span><span class="gd-t">${g.label}</span>${d?'':`<button class="btn sm ghost" onclick="${g.go}">Đi</button>`}</div>`; }).join('')}
+    <div class="gd-foot"><small>Xong hết nhận 200 linh thạch.</small><button class="ls-link" onclick="state.guideOff=true; render()">Ẩn chỉ dẫn</button></div></div>`;
 }
 
 /* =====================================================================
@@ -13946,10 +14181,11 @@ function attemptBreakthrough(){
   const mods = rootMods(state.root, state.realmIdx);
   const easeFactor = state.realmIdx<=2 ? 1 : 0.5; // tư chất tốt giúp ích rõ nhất ở các bình cảnh đầu
   const danSuBonus = (state.professions ? (state.professions.danSu||0) : 0)*3;
-  const chance = Math.min(95, Math.max(5, 55+state.buffStack*10+mods.breakEase*easeFactor+danSuBonus+state.breakthroughBoost+physiqueMods().breakBonus));
+  const chance = breakChanceNow().total;
   state.buffStack = 0;
   state.breakthroughBoost = 0;
   const success = Math.random()*100 < chance;
+  if(success) stat().brkOk++; else stat().brkFail++;
   if(success){
     const curStats = realmStatsAt(state.realmIdx, state.subStage||0);
     const overflow = state.tuVi-curStats.tuViMax;
