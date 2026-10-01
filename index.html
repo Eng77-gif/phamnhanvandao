@@ -1204,6 +1204,95 @@
   .fin-rw div{background:rgba(0,0,0,.3);border-radius:10px;padding:10px;text-align:center;}
   .fin-rw b{display:block;font-family:var(--fh);font-size:22px;color:var(--gold-bright);} .fin-rw small{font-size:11px;color:var(--text-dim);}
 
+  html[data-theme="huyet"]{--jade:#c4605a;--jade-dim:#73322d;--jade-bright:#ff8f7e;--jade-glow:rgba(196,96,90,.25);--bg-hero:radial-gradient(ellipse at 50% -20%, #321e1e 0%, #140d0d 45%, #0b0909 80%);}
+  html[data-theme="bang"]{--jade:#5aa6d8;--jade-dim:#2b5a7a;--jade-bright:#9ad6ff;--jade-glow:rgba(90,166,216,.25);--gold:#c4d0dc;--gold-dim:#6b7884;--gold-bright:#eef5fb;--gold-glow:rgba(196,208,220,.2);--bg-hero:radial-gradient(ellipse at 50% -20%, #1b2836 0%, #0c1218 45%, #090b0e 80%);}
+  html[data-theme="tu"]{--jade:#9c74d6;--jade-dim:#4e3a72;--jade-bright:#c9a8ff;--jade-glow:rgba(156,116,214,.25);--gold:#e0a8b8;--gold-dim:#7a5560;--gold-bright:#ffd0dc;--gold-glow:rgba(224,168,184,.2);--bg-hero:radial-gradient(ellipse at 50% -20%, #2a1e36 0%, #120d18 45%, #0a090d 80%);}
+  html[data-theme="kim"]{--jade:#d6b25a;--jade-dim:#77622d;--jade-bright:#ffe29a;--jade-glow:rgba(214,178,90,.25);--gold:#f0d08a;--gold-dim:#8a7440;--gold-bright:#fff0c2;--bg-hero:radial-gradient(ellipse at 50% -20%, #33291a 0%, #15110b 45%, #0c0a08 80%);}
+  .theme-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+  .theme-sw{display:flex;flex-direction:column;align-items:center;gap:5px;font-family:inherit;font-size:11px;color:var(--text-dim);background:none;border:1px solid var(--border);border-radius:10px;padding:8px 2px;}
+  .theme-sw.on{border-color:var(--gold);color:var(--text);}
+  .theme-sw i{width:26px;height:26px;border-radius:50%;}
+
+  .sky{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;--night:0;--warm:0;}
+  .topbar > *:not(.sky){position:relative;z-index:1;}
+  .sky-glow{position:absolute;inset:0;opacity:calc(var(--warm)*.95);background:radial-gradient(ellipse 70% 55% at var(--gx,50%) 100%, rgba(255,140,70,.55), rgba(255,90,60,.18) 45%, transparent 75%);transition:opacity 1.5s;}
+  .sky-night{position:absolute;inset:0;opacity:calc(var(--night)*.9);background:radial-gradient(ellipse at var(--mx,50%) 0%, rgba(110,140,255,.14), transparent 65%);}
+  .sky-stars{position:absolute;inset:0;opacity:var(--night);}
+  .sky-stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;box-shadow:0 0 4px rgba(200,215,255,.9);animation:twinkle var(--d,3s) ease-in-out infinite;animation-delay:var(--dl,0s);}
+  .sky-stars i.b{width:2.6px;height:2.6px;}
+  @keyframes twinkle{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.15)}}
+  .sky-shoot{position:absolute;width:90px;height:1.5px;border-radius:2px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.95));transform:rotate(-24deg);opacity:0;animation:shoot 1.3s ease-out forwards;filter:drop-shadow(0 0 4px rgba(200,220,255,.9));}
+  @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(-24deg) scaleX(.3)}15%{opacity:1}100%{opacity:0;transform:translate(-160px,72px) rotate(-24deg) scaleX(1)}}
+  .sky-cloud{position:absolute;height:26px;border-radius:30px;background:radial-gradient(ellipse at 30% 40%, rgba(255,255,255,.14), transparent 65%), radial-gradient(ellipse at 70% 60%, rgba(255,255,255,.1), transparent 65%);filter:blur(3px);opacity:calc(.9 - var(--night)*.6);}
+  .sky-cloud.c1{width:150px;top:22%;left:-160px;animation:drift 95s linear infinite;}
+  .sky-cloud.c2{width:110px;top:48%;left:-120px;animation:drift 140s linear infinite;animation-delay:-60s;}
+  @keyframes drift{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 300px))}}
+  .sky-sun,.sky-moon{position:absolute;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;will-change:transform,opacity;}
+  .sky-sun i,.sky-moon i{position:absolute;border-radius:50%;}
+  .sky-sun .rays{inset:-26px;background:repeating-conic-gradient(from 0deg, rgba(255,226,140,.22) 0deg 6deg, transparent 6deg 18deg);-webkit-mask:radial-gradient(circle, #000 28%, transparent 70%);mask:radial-gradient(circle, #000 28%, transparent 70%);animation:spin 40s linear infinite;}
+  .sky-sun .halo{inset:-30px;background:radial-gradient(circle, rgba(255,214,120,.42), rgba(255,190,90,.12) 45%, transparent 70%);animation:breathe 5s ease-in-out infinite;}
+  .sky-sun .core{inset:0;background:radial-gradient(circle at 38% 36%, #fffdf0, #ffe58a 45%, #ffb53e 80%, #f09a2c);box-shadow:0 0 22px 6px rgba(255,205,100,.55);}
+  .sky-sun .warm{inset:0;background:radial-gradient(circle at 40% 40%, #ffe0bf, #ff8f4c 55%, #d9502a);opacity:var(--warm);box-shadow:0 0 26px 8px rgba(255,110,60,calc(var(--warm)*.5));}
+  .sky-moon .halo{inset:-22px;background:radial-gradient(circle, rgba(215,228,255,.32), rgba(190,205,255,.08) 50%, transparent 72%);animation:breathe 7s ease-in-out infinite;}
+  .sky-moon .core{inset:3px;overflow:hidden;background:
+      radial-gradient(circle at 30% 34%, rgba(0,0,0,.12) 0 3px, transparent 3.5px),
+      radial-gradient(circle at 62% 58%, rgba(0,0,0,.1) 0 4px, transparent 4.5px),
+      radial-gradient(circle at 48% 76%, rgba(0,0,0,.08) 0 2.5px, transparent 3px),
+      radial-gradient(circle at 70% 28%, rgba(0,0,0,.07) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 38% 38%, #fffdf2, #ece4c8 60%, #cfc6a8);
+    box-shadow:inset var(--ph,0px) 0 0 0 #0a0f18, 0 0 10px 2px rgba(225,235,255,.35);}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes breathe{0%,100%{transform:scale(.92);opacity:.8}50%{transform:scale(1.08);opacity:1}}
+  .no-motion .sky-sun .rays,.no-motion .sky-sun .halo,.no-motion .sky-moon .halo,.no-motion .sky-stars i,.no-motion .sky-cloud{animation:none;}
+  .no-motion .sky-shoot{display:none;}
+
+  .vn-scene{position:relative;height:170px;margin:-14px -14px 10px;overflow:hidden;--s1:#05080a;--s2:rgba(255,255,255,.07);background:linear-gradient(180deg,var(--c1),var(--c2));}
+  .th-nui{--c1:#1d3a3a;--c2:#0c1716;} .th-thon{--c1:#3a2f1e;--c2:#141009;} .th-bien{--c1:#123349;--c2:#08141c;--s2:rgba(120,190,230,.16);--s1:#06111a;}
+  .th-hang{--c1:#22201c;--c2:#0b0a09;} .th-cung{--c1:#3a1f24;--c2:#130a0c;} .th-chien{--c1:#4a1e14;--c2:#140806;}
+  .th-bang{--c1:#2a4a5e;--c2:#0c1a22;--s2:rgba(200,230,255,.2);--s1:#0d1d27;} .th-samac{--c1:#5a3f1e;--c2:#1a1108;--s2:rgba(255,200,130,.14);--s1:#140d06;} .th-umminh{--c1:#251a33;--c2:#0b0810;}
+  .vn-scene::after{content:'';position:absolute;left:0;right:0;bottom:0;height:40px;z-index:1;background:linear-gradient(180deg,transparent,rgba(8,11,12,.85));}
+  .vn-scene::before{content:'';position:absolute;left:50%;top:18%;width:60px;height:60px;margin-left:-30px;border-radius:50%;background:radial-gradient(circle, rgba(255,240,200,.35), transparent 70%);opacity:.6;}
+  .vn-sil{position:absolute;left:-4%;bottom:0;width:108%;height:82px;z-index:1;filter:drop-shadow(0 -1px 0 rgba(255,255,255,.08));animation:silDrift 26s ease-in-out infinite alternate;}
+  @keyframes silDrift{from{transform:translateX(0)}to{transform:translateX(-3%)}}
+  .vn-scene-t{position:absolute;left:0;right:0;bottom:12px;text-align:center;z-index:2;padding:0 14px;}
+  .vn-scene-t span{font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.6);}
+  .vn-scene-t h2{font-family:var(--fh);font-size:23px;line-height:1.2;margin:4px 0 0;color:var(--gold-bright);text-shadow:0 2px 12px rgba(0,0,0,.8);animation:vnIn .7s ease-out;}
+  .vn-scene-t h2.long{font-size:17px;}
+  .vn-pfx{position:absolute;inset:0;}
+  .vn-pfx i{position:absolute;border-radius:50%;animation:var(--an) var(--d) linear infinite;animation-delay:var(--dl);}
+  .fx-firefly i{width:3px;height:3px;background:#d8ff9a;box-shadow:0 0 6px #b8f070;--an:pfFloat;}
+  .fx-snow i{width:3px;height:3px;background:#fff;opacity:.8;--an:pfFall;}
+  .fx-ember i{width:3px;height:3px;background:#ffb060;box-shadow:0 0 6px #ff7a30;--an:pfRise;}
+  .fx-bubble i{width:5px;height:5px;border:1px solid rgba(180,230,255,.6);background:transparent;--an:pfRise;}
+  .fx-wisp i{width:5px;height:5px;background:rgba(170,140,255,.55);box-shadow:0 0 10px rgba(150,120,255,.8);--an:pfFloat;}
+  .fx-dust i{width:2px;height:2px;background:rgba(255,230,190,.5);--an:pfDrift;}
+  .fx-lantern i{width:4px;height:5px;border-radius:2px;background:#ff9a5a;box-shadow:0 0 8px #ff7a3a;--an:pfFloat;}
+  @keyframes pfFall{from{transform:translateY(-40px)}to{transform:translateY(170px)}}
+  @keyframes pfRise{from{transform:translateY(40px);opacity:0}20%{opacity:1}to{transform:translateY(-150px);opacity:0}}
+  @keyframes pfFloat{0%,100%{transform:translate(0,0);opacity:.3}50%{transform:translate(12px,-14px);opacity:1}}
+  @keyframes pfDrift{from{transform:translateX(-20px)}to{transform:translateX(60px)}}
+  .vn-pt{flex:none;position:relative;width:42px;height:42px;border-radius:12px;overflow:hidden;background:radial-gradient(circle at 35% 25%, hsl(var(--h),50%,52%), hsl(var(--h),45%,22%));border:1px solid hsla(var(--h),55%,70%,.5);box-shadow:0 2px 8px rgba(0,0,0,.4);}
+  .vn-pt.me{background:radial-gradient(circle at 35% 25%, #f6dca0, #8a6420);border-color:rgba(240,207,140,.7);}
+  .vn-pt svg{position:absolute;inset:0;width:100%;height:100%;}
+  .vn-pt b{position:absolute;right:3px;bottom:1px;font-family:var(--fh);font-size:12px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8);}
+  .vn-line .vn-av{display:none;}
+  .typing::after{content:'▍';margin-left:1px;opacity:.7;animation:vnPulse .8s infinite;}
+  .vn-recap{margin:0 0 10px;border:1px dashed var(--border);border-radius:10px;padding:0 12px;background:rgba(0,0,0,.25);}
+  .vn-recap summary{display:flex;align-items:center;gap:6px;cursor:pointer;list-style:none;font-size:12px;color:var(--text-faint);padding:8px 0;}
+  .vn-recap summary .ic{width:13px;height:13px;margin:0;}
+  .vn-recap p{font-size:12.5px;color:var(--text-dim);font-style:italic;line-height:1.6;margin:0 0 9px;}
+  .vn-end{text-align:center;font-size:11px;letter-spacing:2px;color:var(--text-faint);margin:16px 0 4px;}
+  .vn-splash{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:30px;background:radial-gradient(ellipse at 50% 40%, hsla(var(--h),50%,30%,.55), #050708 70%);animation:vsIn .6s ease-out;}
+  .vn-splash.out{animation:vsOut .5s ease-in forwards;}
+  .vs-in{text-align:center;max-width:440px;}
+  .vs-in span{display:block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:hsl(var(--h),55%,72%);animation:vsUp .8s .2s both;}
+  .vs-in h1{font-family:var(--fh);font-size:34px;line-height:1.2;color:var(--gold-bright);margin:12px 0;text-shadow:0 0 30px rgba(240,207,140,.35);animation:vsUp .9s .45s both;}
+  .vs-in p{font-size:14px;line-height:1.7;color:var(--text-dim);animation:vsUp .9s .8s both;}
+  .vs-in small{display:block;margin-top:18px;font-size:11px;color:var(--text-faint);animation:vsUp 1s 1.4s both;}
+  @keyframes vsIn{from{opacity:0}to{opacity:1}} @keyframes vsOut{to{opacity:0}}
+  @keyframes vsUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .no-motion .vn-sil,.no-motion .vn-pfx i{animation:none;}
+
   ::-webkit-scrollbar{width:5px;height:5px;}
   ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
@@ -1291,6 +1380,7 @@
 </div>
 <div id="app">
   <div class="topbar">
+    <div class="sky" id="sky" aria-hidden="true"><div class="sky-night"></div><div class="sky-glow"></div><div class="sky-stars" id="skyStars"></div><div class="sky-cloud c1"></div><div class="sky-cloud c2"></div><div class="sky-sun" id="skySun"><i class="halo"></i><i class="rays"></i><i class="core"></i><i class="warm"></i></div><div class="sky-moon" id="skyMoon"><i class="halo"></i><i class="core"></i></div></div>
     <div class="name-row">
       <div>
         <div class="name" id="hdrName" onclick="debugTap()">—</div>
@@ -1344,10 +1434,10 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.48.0';
+const GAME_VERSION = '1.50.0';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
-const DEFAULT_SETTINGS = {realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
+const DEFAULT_SETTINGS = {typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
 
 function loadSettings(){
   try{ const raw = localStorage.getItem(SETTINGS_KEY); return Object.assign({}, DEFAULT_SETTINGS, raw?JSON.parse(raw):{}); }
@@ -1395,6 +1485,8 @@ function applySettings(){
   ensureFont(settings.font);
   r.classList.toggle('no-motion', !settings.motion);
   r.classList.toggle('no-icons', !settings.showIcons);
+  r.dataset.theme = settings.theme || 'ngoc';
+  if(!settings.tsMig){ settings.tsMig = true; settings.timeSpeed = 10000; persistSettings(); }
   if(typeof bgmApply==='function') bgmApply();
 }
 function setSetting(k, v){
@@ -1487,6 +1579,30 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.50.0', date:'01/10/2026', title:'Cốt truyện điện ảnh', items:[
+    ['moi','Mỗi cảnh có phông cảnh riêng theo bối cảnh truyện — sơn lâm, sơn thôn, biển cả, địa huyệt, cung thành, chiến trường, băng nguyên, hoang mạc, u minh — với dáng núi, sóng biển, mái cung, cờ chiến… trôi nhẹ, cùng hạt hiệu ứng: đom đóm, tuyết rơi, tàn lửa, bọt nước, quỷ hỏa, bụi cát, đèn lồng.'],
+    ['moi','Chữ hiện dần như được kể (chạm để hiện hết câu), chỉnh tốc độ hoặc tắt trong Lối chơi.'],
+    ['moi','Mở hồi mới có màn tựa đề toàn màn hình; vào cảnh mới có mục "Lần trước" nhắc lại đoạn cuối cảnh trước; cuối cảnh có dấu "hết cảnh".'],
+    ['doi','Nhân vật nói chuyện có chân dung riêng theo màu từng người.']
+  ]},
+  {v:'1.49.3', date:'01/10/2026', title:'Mặt trời lặn êm', items:[
+    ['sua','Mặt trời, mặt trăng không còn giật khi lặn hay khi vừa thoát khỏi trận đánh, bảng thông báo: đồng hồ trời dừng đúng chỗ và chạy tiếp từ đó.'],
+    ['doi','Mặt trời, mặt trăng chìm dần xuống dưới chân trời và mờ đi êm; ngày đêm chuyển sắc mượt hơn.']
+  ]},
+  {v:'1.49.2', date:'01/10/2026', title:'Bầu trời sống động', items:[
+    ['doi','Mặt trời và mặt trăng trôi liên tục, mượt từng khung hình theo canh giờ thay vì nhảy từng nấc; mọc lặn mờ dần ở chân trời.'],
+    ['moi','Mặt trời có quầng sáng thở nhẹ và tia nắng xoay chậm, ửng cam đỏ khi xuống thấp; chân trời rực hồng lúc bình minh, hoàng hôn theo đúng chỗ mặt trời.'],
+    ['moi','Mặt trăng có miệng hố, quầng sáng bạc, hình trăng theo tuần. Ban đêm sao lấp lánh, thỉnh thoảng có sao băng; mây mỏng trôi ngang trời.']
+  ]},
+  {v:'1.49.1', date:'01/10/2026', title:'Trời trăng', items:[
+    ['moi','Trên nền đầu màn hình có mặt trời và mặt trăng đi theo canh giờ: mặt trời mọc từ giờ Mão, lên cao giữa trưa, lặn đỏ ối giờ Dậu; ban đêm trăng lên cùng sao, hình trăng đổi theo tuần — trăng non, thượng huyền, trăng tròn, hạ huyền.'],
+    ['doi','Thời gian trôi chậm hơn: mặc định 10 giây một canh giờ (một ngày khoảng 2 phút, một tháng khoảng 1 giờ). Thêm mức Rất chậm 20 giây.']
+  ]},
+  {v:'1.49.0', date:'01/10/2026', title:'Thêm cài đặt', items:[
+    ['moi','Hiển thị: chọn màu chủ đạo — Ngọc bích, Huyết sắc, Băng lam, Tử vi, Kim quang.'],
+    ['moi','Lối chơi: tốc độ thời gian (5 · 2,5 · 1 giây mỗi canh giờ), tự uống đan liệu thương dưới 30% hoặc 50% khí huyết, bật tắt thông báo cốt truyện khai mở, tự chạy lời thoại kèm tốc độ, rung khi trúng đòn.'],
+    ['moi','Âm nhạc: âm thanh hiệu ứng cho đánh trúng, bạo kích, bị thương, đột phá và lật lời thoại, có chỉnh âm lượng.']
+  ]},
   {v:'1.48.0', date:'01/10/2026', title:'Thêm pháp bảo, trận pháp, phù chú', items:[
     ['moi','Hai mươi hai pháp bảo từ cốt truyện: Dẫn Hồn Chung, Bích Quang Đao, Mê Tung Kỳ, Già Thiên Chung, Tụ Hồn Bát, Huyết Linh Toản, Bạch Lân Thuẫn, Thần Phong Chu, Kim Ti Võng, Ích Hỏa Bảo Y, Bạch Tê Bội, Hàn Băng Châu, Bà La Châu, Hoàng Lân Giáp, Ngũ Xuyến Đồng Hoàn, Huyết Sắc Phi Phong, Kiền Lam Châu, Tử Vân Đấu, Thanh Tàm Bào, Kiền Lam Đỉnh, Tử U Châu, Hoàng Sắc Cổ Kiếm.'],
     ['moi','Bảy trận bàn: Hắc Phong Trận, Lục Độn Thủy Ba Trận, Bích Thủy Thanh Giáp Trận, Tứ Tượng Huyền Vũ Trận, Câu Linh Trận, Tiểu Canh Kiếm Trận, Tiểu Tu Di Kim Cương Trận.'],
@@ -3760,6 +3876,7 @@ function enemyTurn(){
   combatLog(`${c.enemy.name} phản kích${r.crit?' chí mạng':''}, ngươi chịu ${dmg} sát thương${notes.length?` (${notes.join(', ')})`:''}.${sp}`);
   tickCombatCooldowns(c);
   if(state.hp<=0 && !(state.tg && tgSeen() && tgTryRevive(c)) && !rareRevive(c)){ loseCombat(); return; }
+  autoHealCheck(c);
   render();
 }
 
@@ -8383,7 +8500,7 @@ function renderTimePage(){
    (tự tắt khi tắt "Hiệu ứng chuyển động" trong Cài Đặt)
 ===================================================================== */
 let fxQueue = [];
-function fx(type, opts){ if(!settings.motion) return; fxQueue.push({type, opts:opts||{}}); }
+function fx(type, opts){ if(type==='banner') sfx('ok'); if(!settings.motion) return; fxQueue.push({type, opts:opts||{}}); }
 function fxLayer(){ let l = document.getElementById('fxLayer'); if(!l){ l = document.createElement('div'); l.id = 'fxLayer'; document.body.appendChild(l); } return l; }
 function flushFx(){
   if(!fxQueue.length) return;
@@ -8768,6 +8885,8 @@ function renderContent(){
     : state.expd ? `<button class="expd-banner" onclick="goTo('hanhtau','bicanh')">${ic('mountain','keep')} Đang ở trong ${ZONES[state.expd.z].name} — ${REALMS[state.expd.z].unit.toLowerCase()} ${state.expd.step}/${REALMS[state.expd.z].steps}. Chạm để quay lại.</button>` : '';
   el.innerHTML = renderFeed() + banner + renderEventCard() + (state.mortal && tab!=='nhanvat' && !(tab==='tuluyen' && sub==='thoigian') ? (tab==='tuluyen' ? `<div class="subtab-row"><button class="subtab-btn ${sub!=='thoigian'?'active':''}" onclick="setSubTab('tuluyen','tuluyen')">${ic('mountain')}Phàm Nhân</button><button class="subtab-btn" onclick="setSubTab('tuluyen','thoigian')">${ic('hourglass')}Thời Gian</button></div>` : '') : renderSubnav(tab)) + body;
   try{ polishContent(tab, sub); }catch(e){}
+  try{ scheduleAutoRead(); }catch(e){}
+  try{ if(state.activeTab==='cottruyen' && state.story && state.story.cur) runTypewriter(); }catch(e){}
 }
 
 /* =====================================================================
@@ -10752,7 +10871,7 @@ function checkStoryTriggers(){
 function maybeShowStoryPopup(){
   const S = state && state.story;
   if(!S || !S.popup) return;
-  if(state.activeTab==='cottruyen' && S.cur){ S.popup = null; return; }
+  if((state.activeTab==='cottruyen' && S.cur) || settings.storyPopups===false){ S.popup = null; return; }
   const ov = document.getElementById('overlay'), ls = document.getElementById('loadingScreen'), cr = document.getElementById('creation');
   if(state.combat || state.tribulation || state.expd || state.pendingEvent || (ov && ov.classList.contains('show')) || (ls && !ls.classList.contains('hide')) || (cr && cr.classList.contains('show'))) return;
   const {act, gate} = S.popup; S.popup = null;
@@ -10774,7 +10893,7 @@ function maybeShowStoryPopup(){
   fx('flash',{color:'rgba(240,207,140,.25)',dur:600});
 }
 function readFromGate(act, idx){ state.activeTab = 'cottruyen'; const S = storyState(); S.cur = {act, i:idx}; S.progress[STORY_ACTS[act].id] = Math.max(S.progress[STORY_ACTS[act].id]||0, idx); storyVisit(act, idx); render(); window.scrollTo(0,0); }
-function openAct(i){ const S = storyState(), a = STORY_ACTS[i]; S.cur = {act:i, i:Math.max(0, Math.min(S.progress[a.id]||0, reachable(a)-1))}; S.progress[a.id] = Math.max(S.progress[a.id]||0, S.cur.i); storyVisit(i, S.cur.i); render(); window.scrollTo(0,0); }
+function openAct(i){ const S = storyState(), a = STORY_ACTS[i]; S.splash = S.splash||{}; if(!S.splash[a.id] && !(S.progress[a.id]>0)){ S.splash[a.id] = 1; setTimeout(()=>actSplash(i), 30); } S.cur = {act:i, i:Math.max(0, Math.min(S.progress[a.id]||0, reachable(a)-1))}; S.progress[a.id] = Math.max(S.progress[a.id]||0, S.cur.i); storyVisit(i, S.cur.i); render(); window.scrollTo(0,0); }
 function storyGo(d){
   const S = storyState(), a = STORY_ACTS[S.cur.act];
   const sc = a.scenes[S.cur.i];
@@ -11049,6 +11168,8 @@ function renderMusicPage(){
   const vol = settings.bgmVol ?? 0.5;
   return `
     ${toggleRow('bgm','Nhạc nền','Phát nhạc khi chơi. Tự tạm dừng khi rời trang.')}
+    ${toggleRow('sfx','Âm thanh hiệu ứng','Tiếng đánh trúng, bạo kích, bị thương, đột phá, lật lời thoại.')}
+    ${settings.sfx ? `<div class="set-row col"><div class="set-text"><div class="set-title">Âm lượng hiệu ứng</div></div>${segButtons('sfxVol', [[0.25,'Nhỏ'],[0.5,'Vừa'],[0.9,'Lớn']])}</div>` : ''}
     <div class="set-row col">
       <div class="set-text"><div class="set-title">Âm lượng</div></div>
       ${segButtons('bgmVol', [[0.2,'Nhỏ'],[0.5,'Vừa'],[0.85,'Lớn']])}
@@ -11272,10 +11393,90 @@ const ACT_HUES = [150, 30, 200, 260, 190, 280, 170, 45, 10, 330, 0, 220, 120, 10
 function actHue(ai){ return ACT_HUES[ai % ACT_HUES.length]; }
 function speakerHue(name){ let h = 0; for(const ch of name) h = (h*31 + ch.charCodeAt(0)) % 360; return h; }
 function sceneRev(sc){ const S = storyState(); S.rev = S.rev||{}; const L = sceneLines(sc); if(S.cur){ const a = STORY_ACTS[S.cur.act]; if(S.done[a.id] || (S.progress[a.id]||0) > S.cur.i) return L.length; } return Math.min(L.length, S.rev[sc.id]||1); }
+/* =====================================================================
+   CỐT TRUYỆN ĐIỆN ẢNH — phông cảnh theo bối cảnh, hạt hiệu ứng, chân dung,
+   chữ hiện dần, màn mở hồi, "lần trước" nhắc lại.
+===================================================================== */
+const SCENE_THEMES = [
+  ['umminh', /Âm Minh|Quỷ Vụ|Thi Vương|thi nhân|Cổ Ma|Ma Hồn|âm hồn|Âm La Tông|Trụy Ma Cốc|Âm Dương Quật|Huyết Quỷ|Huyết Thị|luyện thi/i],
+  ['chien',  /đại chiến|chiến tranh|tử trận|đại doanh|tiền tuyến|quân Mộ Lan|Ma Đạo Lục Tông|huyết tế|đổ chiến|Hoàng Long Sơn|biên giới|Kinh Long Chung/i],
+  ['hang',   /cấm địa|Huyết Sắc|hang|động phủ|mật thất|thạch thất|địa cung|lòng núi|mộ cổ|mật quật|Hư Thiên Điện|Hư Linh Điện|Côn Ngô|Trấn Ma Tháp|Huyền Ngọc Động/i],
+  ['cung',   /hoàng cung|Vương phủ|cung điện|Việt Kinh|Tấn Kinh|tửu lâu|Tần phủ|Mặc phủ|đấu giá|phường thị|Thiên Cơ Các|Hoàng Thanh Quan|Yến Linh Bảo/i],
+  ['bang',   /Bắc Minh|Tiểu Cực Cung|băng nguyên|tuyết|Huyền Băng|Hàn Ly|Băng Đảo|Tuyết Liên Sơn/i],
+  ['bien',   /Loạn Tinh Hải|Vô Biên Hải|biển|Tiểu Hoàn Đảo|Khôi Tinh Đảo|Thiên Tinh Thành|Ngoại Tinh Hải|Hải Viên Đảo|thuyền|trôi dạt|Kỳ Uyên Đảo|Hắc Thạch Thành/i],
+  ['samac',  /sa mạc|thảo nguyên|Thiên Lan|hoang mạc|bão cát/i],
+  ['thon',   /sơn thôn|thôn|quê|Ngũ Lý Câu|Thất Huyền Môn|Thái Hà|Luyện Cốt Nhai|Thần Thủ Cốc|Gia Nguyên/i],
+  ['nui',    /./]
+];
+const THEME_FX = {bang:'snow', bien:'bubble', umminh:'wisp', chien:'ember', hang:'dust', cung:'lantern', samac:'dust', thon:'firefly', nui:'firefly'};
+const THEME_NAME = {bang:'Băng nguyên', bien:'Biển cả', umminh:'U minh', chien:'Chiến trường', hang:'Địa huyệt', cung:'Cung thành', samac:'Hoang mạc', thon:'Sơn thôn', nui:'Sơn lâm'};
+const ACT_THEME = {h1:'thon', h1b:'thon', h2:'nui', h2b:'cung', h2c:'bien', h2d:'bien', h2e:'bien', h2f:'nui', h2g:'nui', h2h:'chien', h6:'chien', h2i:'umminh', h3a:'nui', h3b:'samac', h3c:'cung', h3d:'hang', h3e:'hang', h3f:'bang'};
+function sceneTheme(sc, a){
+  const t = sc.title + ' ' + (sc.text||[]).join(' ').slice(0,350) + ' ' + (sc.setting||'');
+  const hit = SCENE_THEMES.slice(0,-1).find(([k,rx])=>rx.test(sc.title)) || SCENE_THEMES.slice(0,-1).find(([k,rx])=>rx.test(t));
+  if(hit) return hit[0];
+  if(!a) a = STORY_ACTS.find(x=>x.scenes.includes(sc));
+  return (a && ACT_THEME[a.id]) || 'nui';
+}
+function sceneSilhouette(th){
+  const P = {
+    nui:'<path d="M0 120 L40 70 L70 95 L110 45 L150 90 L190 60 L230 100 L270 55 L320 95 L360 65 L400 120Z" fill="var(--s2)"/><path d="M0 120 L50 95 L90 110 L140 85 L200 108 L250 88 L300 110 L350 92 L400 120Z" fill="var(--s1)"/>',
+    thon:'<path d="M0 120 L60 80 L110 100 L170 70 L230 100 L300 75 L400 120Z" fill="var(--s2)"/><path d="M60 120 V100 L80 88 L100 100 V120Z M250 120 V96 L274 82 L298 96 V120Z M300 120 V104 L314 95 L328 104 V120Z" fill="var(--s1)"/><path d="M0 120 L400 120 L400 112 C300 106 100 116 0 110Z" fill="var(--s1)"/>',
+    bien:'<path d="M0 95 C50 88 90 102 140 95 C190 88 230 102 280 95 C330 88 370 100 400 95 V120 H0Z" fill="var(--s2)"/><path d="M0 106 C60 100 100 112 160 106 C220 100 270 113 330 106 C360 103 380 108 400 106 V120 H0Z" fill="var(--s1)"/><path d="M300 95 L312 70 L316 70 L318 95Z M308 70 L330 84 L308 84Z" fill="var(--s1)"/>',
+    hang:'<path d="M0 0 H400 V120 H330 C330 60 290 30 200 30 C110 30 70 60 70 120 H0Z" fill="var(--s1)"/><path d="M120 120 L135 98 L150 120Z M250 120 L262 104 L275 120Z" fill="var(--s2)"/>',
+    cung:'<path d="M0 120 V100 H400 V120Z" fill="var(--s1)"/><path d="M120 100 V70 H280 V100Z" fill="var(--s2)"/><path d="M100 72 Q200 40 300 72 L290 66 Q200 38 110 66Z" fill="var(--s1)"/><path d="M150 70 L200 48 L250 70Z" fill="var(--s1)"/><path d="M30 100 V82 L50 72 L70 82 V100Z M330 100 V82 L350 72 L370 82 V100Z" fill="var(--s2)"/>',
+    chien:'<path d="M0 120 L50 95 L100 108 L170 90 L240 106 L310 92 L400 110 V120Z" fill="var(--s1)"/><path d="M80 100 V58 M80 58 L104 66 L80 74 M300 96 V62 M300 62 L276 70 L300 78" stroke="var(--s1)" stroke-width="3" fill="var(--s1)"/>',
+    bang:'<path d="M0 120 L30 80 L45 100 L70 60 L95 105 L130 75 L160 110 L200 70 L230 105 L270 65 L300 100 L330 72 L360 108 L400 85 V120Z" fill="var(--s2)"/><path d="M0 120 L400 120 L400 110 L0 112Z" fill="var(--s1)"/>',
+    samac:'<path d="M0 105 C80 90 140 112 220 100 C290 90 340 108 400 98 V120 H0Z" fill="var(--s2)"/><path d="M0 114 C100 106 180 118 280 110 C330 106 370 112 400 110 V120 H0Z" fill="var(--s1)"/>',
+    umminh:'<path d="M0 120 L400 120 L400 108 C300 102 100 112 0 106Z" fill="var(--s1)"/><path d="M90 110 L92 70 L80 55 M92 70 L104 52 M92 82 L76 74 M300 112 L302 66 L314 50 M302 78 L288 64 M302 90 L318 84" stroke="var(--s1)" stroke-width="3" fill="none" stroke-linecap="round"/>'
+  };
+  return `<svg class="vn-sil" viewBox="0 0 400 120" preserveAspectRatio="none">${P[th]||P.nui}</svg>`;
+}
+function sceneFx(kind){ let h = ''; for(let i=0;i<14;i++){ const x = (i*29+11)%100, y = (i*41+5)%90, d = 4 + (i%5)*1.3, dl = (i%7)*0.9; h += `<i style="left:${x}%;top:${y}%;--d:${d}s;--dl:-${dl}s"></i>`; } return `<div class="vn-pfx fx-${kind}">${h}</div>`; }
+function sceneBanner(sc, a){
+  const th = sceneTheme(sc, a);
+  return `<div class="vn-scene th-${th}">${sceneFx(THEME_FX[th])}${sceneSilhouette(th)}
+    <div class="vn-scene-t"><span>${sc.kind==='dialogue'?'Thoại':sc.ch} · ${THEME_NAME[th]}</span><h2 class="${sc.title.length>38?'long':''}">${sc.title}</h2></div></div>`;
+}
+function portrait(name, hue, me){
+  const init = name.replace(/[“"(]/g,'').trim().slice(0,1).toUpperCase();
+  return `<div class="vn-pt ${me?'me':''}" style="--h:${hue}"><svg viewBox="0 0 40 40"><circle cx="20" cy="15" r="7.5" fill="rgba(0,0,0,.45)"/><path d="M6 40 C7 28 13 24 20 24 C27 24 33 28 34 40Z" fill="rgba(0,0,0,.45)"/></svg><b>${init}</b></div>`;
+}
+/* Lần trước — nhắc lại khi vừa vào một cảnh mới */
+function recapCard(a, i){
+  if(i<1) return '';
+  const prev = a.scenes[i-1]; if(!prev || prev.kind==='dialogue') return '';
+  const last = storyChunks(prev.text||[]).slice(-1)[0] || '';
+  return `<details class="vn-recap"><summary>${ic('hourglass','keep')} Lần trước: ${prev.title}</summary><p>${last}</p></details>`;
+}
+/* Chữ hiện dần cho câu mới nhất */
+let typing = null;
+function runTypewriter(){
+  if(typing){ clearInterval(typing.t); typing = null; }
+  const el = document.querySelector('.vn-stage .new .vn-say, .vn-stage p.vn-nar.new');
+  if(!el || !settings.motion || settings.typeSpeed===0) return;
+  const full = el.textContent; if(full.length<4) return;
+  el.textContent = ''; el.classList.add('typing');
+  let n = 0; const step = Math.max(1, Math.round(full.length/90));
+  typing = {el, full, t:setInterval(()=>{ n += step; el.textContent = full.slice(0,n); if(n>=full.length){ clearInterval(typing.t); el.classList.remove('typing'); typing = null; } }, settings.typeSpeed||22)};
+}
+function finishTyping(){ if(!typing) return false; clearInterval(typing.t); typing.el.textContent = typing.full; typing.el.classList.remove('typing'); typing = null; return true; }
+/* Màn mở hồi */
+function actSplash(ai){
+  const a = STORY_ACTS[ai];
+  const el = document.createElement('div'); el.className = 'vn-splash'; el.style.setProperty('--h', actHue(ai));
+  el.innerHTML = narr(`<div class="vs-in"><span>${a.sub}</span><h1>${a.title}</h1><p>${a.blurb}</p><small>Chạm để bắt đầu</small></div>`);
+  el.onclick = ()=>{ el.classList.add('out'); setTimeout(()=>el.remove(), 500); };
+  document.body.appendChild(el);
+  setTimeout(()=>{ if(el.isConnected){ el.classList.add('out'); setTimeout(()=>el.remove(), 500); } }, 4200);
+}
+
 function storyReveal(all){
+  if(!all && finishTyping()) return;
   const S = storyState(), sc = STORY_ACTS[S.cur.act].scenes[S.cur.i];
   S.rev = S.rev||{}; const L = sceneLines(sc);
   S.rev[sc.id] = all ? L.length : Math.min(L.length, (S.rev[sc.id]||1)+1);
+  if(!all) sfx('tap');
   S._justRev = true;
   render();
   setTimeout(()=>{ const st = document.querySelector('.vn-stage'); if(st) st.scrollTo({top:st.scrollHeight, behavior:'smooth'}); }, 30);
@@ -11289,7 +11490,7 @@ function vnLine(l, isNew){
   const nm = storyNameMode();
   const init = me ? (nm.mode==='name' ? nm.full.split(' ').slice(-1)[0].slice(0,1) : nm.mode==='orig' ? 'L' : 'N') : l.w.replace(/[“"(]/g,'').trim().slice(0,1).toUpperCase();
   return `<div class="vn-line ${me?'me':''}${cls}">
-    <div class="vn-av" style="--h:${hue}">${me?`<span class="vn-me-init">${init}</span>`:init}</div>
+    ${portrait(me ? (nm.mode==='name' ? nm.full.split(' ').slice(-1)[0] : nm.mode==='orig' ? 'Lập' : 'Ngươi') : l.w, hue, me)}
     <div class="vn-bub"><div class="vn-who">${l.w}${l.m?` <i>${l.m}</i>`:''}</div><div class="vn-say">${l.t}</div></div>
   </div>`;
 }
@@ -11318,10 +11519,12 @@ function renderStoryReaderRaw(){
     </div>
     <div class="vn-prog"><div style="width:${pct}%"></div></div>
     <div class="vn-stage" ${full?'':'onclick="storyReveal()"'}>
-      <div class="vn-title"><span>${sc.kind==='dialogue'?'Thoại':sc.ch}</span><h2>${sc.title}</h2></div>
+      ${sceneBanner(sc, a)}
+      ${rev<=1 ? recapCard(a, S.cur.i) : ''}
       ${L.slice(0, rev).map((l,i)=>vnLine(l, justRev && i===rev-1)).join('')}
       ${full ? `${choice}
         ${renderMortalAction(sc.id)}
+        <div class="vn-end">— hết cảnh —</div>
         ${!blocked && nextOpen ? renderGuessBox(a, S.cur.i) : ''}
         ${renderSceneItems(sc.id)}
         ${lock}
@@ -11699,11 +11902,22 @@ function showSettings(tab){
         <div class="set-text"><div class="set-title">Phông chữ</div><div class="set-desc">Tất cả đều hỗ trợ đầy đủ dấu tiếng Việt. Phông Pixel và Chấm điện tử được phóng to tự động cho dễ đọc.</div></div>
         ${renderFontPicker()}
       </div>
+      <div class="set-row col">
+        <div class="set-text"><div class="set-title">Màu chủ đạo</div><div class="set-desc">Đổi sắc ngọc và sắc vàng của toàn bộ giao diện.</div></div>
+        <div class="theme-row">${THEMES.map(([k,l])=>`<button class="theme-sw ${(settings.theme||'ngoc')===k?'on':''}" onclick="setSetting('theme','${k}')"><i style="background:${({ngoc:'linear-gradient(135deg,#57bb96,#d4af6a)',huyet:'linear-gradient(135deg,#c4605a,#d4af6a)',bang:'linear-gradient(135deg,#5aa6d8,#c4d0dc)',tu:'linear-gradient(135deg,#9c74d6,#e0a8b8)',kim:'linear-gradient(135deg,#d6b25a,#fff0c2)'})[k]}"></i>${l}</button>`).join('')}</div>
+      </div>
       ${toggleRow('showIcons','Hiện biểu tượng','Tắt đi để giao diện chỉ còn chữ.')}
       ${toggleRow('motion','Hiệu ứng chuyển động','Số sát thương bay, rung màn hình, chớp sáng, sét lôi kiếp. Tắt nếu máy chậm hoặc dễ chóng mặt.')}`;
     else if(tab==='loichoi') content = `
       ${renderDiffPicker()}
-      ${toggleRow('realTime','Thời gian tự trôi','Khi đang chơi, cứ khoảng 2,5 giây là một canh giờ trôi qua — ngày đêm luân chuyển, ba mươi ngày là một tháng. Tạm dừng khi đang đánh, độ kiếp, đọc truyện hoặc rời trang.')}
+      ${toggleRow('realTime','Thời gian tự trôi','Ngày đêm luân chuyển khi đang chơi, ba mươi ngày là một tháng. Tạm dừng khi đang đánh, độ kiếp, đọc truyện hoặc rời trang.')}
+      ${settings.realTime!==false ? `<div class="set-row col"><div class="set-text"><div class="set-title">Tốc độ thời gian</div><div class="set-desc">Một canh giờ trôi qua sau 20 giây (rất chậm), 10 giây (chậm — một ngày khoảng 2 phút, một tháng khoảng 1 giờ), 5 giây (vừa) hoặc 2,5 giây (nhanh).</div></div>${segButtons('timeSpeed', [[20000,'Rất chậm'],[10000,'Chậm'],[5000,'Vừa'],[2500,'Nhanh']])}</div>` : ''}
+      <div class="set-row col"><div class="set-text"><div class="set-title">Tự uống đan liệu thương</div><div class="set-desc">Trong trận, khi khí huyết tụt dưới mức này sẽ tự dùng đan tốt nhất đang có — không mất lượt.</div></div>${segButtons('autoHeal', [[0,'Tắt'],[0.3,'Dưới 30%'],[0.5,'Dưới 50%']])}</div>
+      ${toggleRow('storyPopups','Báo khi cốt truyện khai mở','Hiện bảng thông báo mỗi khi mở được cảnh mới.')}
+      <div class="set-row col"><div class="set-text"><div class="set-title">Chữ cốt truyện hiện dần</div><div class="set-desc">Mỗi câu mới hiện từng chữ như được kể; chạm để hiện hết câu.</div></div>${segButtons('typeSpeed', [[0,'Tắt'],[40,'Chậm'],[22,'Vừa'],[10,'Nhanh']])}</div>
+      ${toggleRow('autoRead','Tự chạy lời thoại','Trong trình đọc cốt truyện, lời thoại tự hiện tiếp mà không cần chạm.')}
+      ${settings.autoRead ? `<div class="set-row col"><div class="set-text"><div class="set-title">Tốc độ tự chạy</div></div>${segButtons('autoReadMs', [[4000,'Chậm'],[2600,'Vừa'],[1500,'Nhanh']])}</div>` : ''}
+      ${toggleRow('vibrate','Rung khi trúng đòn','Điện thoại rung nhẹ khi ngươi bị đánh trúng.')}
       <div class="set-row col">
         <div class="set-text"><div class="set-title">Độ dài nhật ký</div><div class="set-desc">Số sự kiện gần nhất được giữ lại trong Nhật Ký Hành Trình.</div></div>
         ${segButtons('logLen', [[50,'50'],[90,'90'],[200,'200']])}
@@ -12494,6 +12708,7 @@ function renderCombatPanel(){
   c._ePct = ePct; c._pPct = hPct;
   const recent = (c.log.length ? c.log.slice(0, eHit||pHit ? 2 : 1) : [`Bất ngờ chạm trán ${e.name}!`]).reverse();
   const crit = eHit && recent.some(l=>/bạo kích/i.test(l));
+  if(eHit) sfx(crit?'crit':'hit'); if(pHit){ sfx('hurt'); buzz(crit?[30,30,60]:40); }
   const atkLabel = (state.path && state.path.atkLabel) ? state.path.atkLabel : 'Tấn Công';
   const petLabel = state.worm.have ? petName() : 'Linh Sủng';
   const status = [];
@@ -13306,18 +13521,76 @@ function renderMarketPage(){
    Giờ Tý (nửa đêm): âm dương giao hòa — bế quan được thêm tu vi.
 ===================================================================== */
 const CANH = ['Tý','Sửu','Dần','Mão','Thìn','Tỵ','Ngọ','Mùi','Thân','Dậu','Tuất','Hợi'];
-const CANH_MS = 2500;
+const CANH_MS = 10000;
 function canh(){ return state && state.canh!=null ? state.canh : 6; }
 function todOf(c){ return c===3 ? 'dawn' : (c>=4 && c<=8) ? 'day' : c===9 ? 'dusk' : 'night'; }
 function isNight(){ return todOf(canh())==='night'; }
 function isTyHour(){ return canh()===0; }
 function todLabel(){ return {dawn:'Bình minh', day:'Ban ngày', dusk:'Hoàng hôn', night:'Ban đêm'}[todOf(canh())]; }
+/* Bầu trời: mặt trời, mặt trăng trôi liên tục theo canh giờ (khung hình mượt),
+   chân trời ửng đỏ lúc bình minh, hoàng hôn; sao lấp lánh, sao băng, mây trôi */
+let lastCanhAt = performance.now(), frozenFrac = 0, skyBox = null;
+function skyFrac(){
+  const sp = settings.timeSpeed || CANH_MS;
+  if(timePaused()) return frozenFrac;
+  frozenFrac = Math.max(0, Math.min(0.9999, (performance.now()-lastCanhAt)/sp));
+  return frozenFrac;
+}
+function smooth(a, b, x){ const t = Math.max(0, Math.min(1, (x-a)/(b-a))); return t*t*(3-2*t); }
+function buildStars(){
+  const el = document.getElementById('skyStars'); if(!el || el.childElementCount) return;
+  let h = ''; for(let i=0;i<22;i++){ const x = (i*37+13)%100, y = (i*53+7)%92, d = 2.2 + (i%5)*0.7, dl = (i%7)*0.45; h += `<i class="${i%6===0?'b':''}" style="left:${x}%;top:${y}%;--d:${d}s;--dl:-${dl}s"></i>`; }
+  el.innerHTML = h;
+}
+function skyFrame(){
+  requestAnimationFrame(skyFrame);
+  if(document.visibilityState==='hidden' || !state || !state.root) return;
+  const sky = document.getElementById('sky'), sun = document.getElementById('skySun'), moon = document.getElementById('skyMoon'); if(!sky || !sun) return;
+  if(!skyBox || skyBox.w!==sky.clientWidth || skyBox.h!==sky.clientHeight) skyBox = {w:sky.clientWidth, h:sky.clientHeight};
+  const H = canh() + skyFrac();
+  const place = (el, p)=>{ const inr = Math.max(0, Math.min(1, p)), out = p<0 ? -p : p>1 ? p-1 : 0;
+    const x = (0.04 + p*0.92)*skyBox.w, y = (0.66 - Math.sin(inr*Math.PI)*0.5 + out*1.6)*skyBox.h;
+    el.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)`; return {x, alt: Math.sin(inr*Math.PI)}; };
+  // mặt trời: từ đầu giờ Mão (3) tới hết giờ Dậu (10)
+  let sunAlt = 0, sunX = 0;
+  if(H>=2.4 && H<=10.6){ const p = (H-3)/7; const r = place(sun, p); sunAlt = r.alt; sunX = r.x; sun.style.opacity = (smooth(2.4, 3.1, H) * (1 - smooth(9.9, 10.6, H))).toFixed(3); }
+  else sun.style.opacity = 0;
+  // mặt trăng: từ giữa giờ Dậu (9.5) tới giữa giờ Mão (3.5)
+  const mh = (H - 9.5 + 12) % 12; let moonX = 0;
+  if(mh <= 6.6 || mh >= 11.6){ const m2 = mh >= 11.6 ? mh-12 : mh; const p = m2/6; const r = place(moon, p); moonX = r.x; moon.style.opacity = (smooth(-0.4, 0.4, m2) * (1 - smooth(5.8, 6.6, m2))).toFixed(3); }
+  else moon.style.opacity = 0;
+  const warm = (smooth(2.2, 3.0, H) * (1 - smooth(10.0, 10.8, H))) * Math.max(0, 1 - sunAlt*2.2);
+  const night = H>=6 ? smooth(9, 10.5, H) : 1 - smooth(2.5, 4, H);
+  sky.style.setProperty('--warm', warm.toFixed(3));
+  sky.style.setProperty('--night', night.toFixed(3));
+  sky.style.setProperty('--gx', (sunX/skyBox.w*100).toFixed(1)+'%');
+  sky.style.setProperty('--mx', (moonX/skyBox.w*100).toFixed(1)+'%');
+}
+function shootingStar(){
+  setTimeout(shootingStar, 9000 + Math.random()*16000);
+  if(!settings.motion || document.visibilityState==='hidden' || !state || !state.root || !isNight()) return;
+  const sky = document.getElementById('sky'); if(!sky) return;
+  const s = document.createElement('i'); s.className = 'sky-shoot';
+  s.style.left = (45 + Math.random()*50)+'%'; s.style.top = (5 + Math.random()*30)+'%';
+  sky.appendChild(s); setTimeout(()=>s.remove(), 1500);
+}
+function renderSky(){
+  buildStars();
+  const moon = document.getElementById('skyMoon'); if(!moon) return;
+  const ph = moonPhase();
+  moon.style.setProperty('--ph', {'Trăng non':'21px','Trăng thượng huyền':'14px','Trăng tròn':'0px','Trăng hạ huyền':'-14px'}[ph.name] || '0px');
+  moon.title = ph.name;
+}
+requestAnimationFrame(skyFrame);
+setTimeout(shootingStar, 6000);
+
 function renderClock(){
   const el = document.getElementById('hdrClock'); if(!el || !state || !state.root) return;
   const t = todOf(canh());
   el.innerHTML = `${ic(t==='night'||t==='dusk'?'moon':'star','keep')} Giờ ${CANH[canh()]} · ${({dawn:'Sáng sớm', day:'Ngày', dusk:'Chiều tối', night:'Đêm'})[t]}`;
   el.title = `Ngày ${(state.day||0)+1} tháng ${(state.month||0)+1}`;
   document.documentElement.dataset.tod = t;
+  renderSky();
 }
 function timePaused(){
   if(!state || !state.root || state.dead || state.combat || state.tribulation) return true;
@@ -13328,15 +13601,64 @@ function timePaused(){
   if(state.activeTab==='cottruyen' && state.story && state.story.cur) return true;
   return false;
 }
-setInterval(()=>{
-  if(timePaused()) return;
+let tickLast = performance.now();
+function timeTick(){
+  setTimeout(timeTick, 200);
+  const now = performance.now(), dt = now - tickLast; tickLast = now;
+  if(timePaused()){ lastCanhAt += dt; return; }
+  const sp = settings.timeSpeed || CANH_MS;
+  if(now - lastCanhAt < sp) return;
+  lastCanhAt += sp; if(now - lastCanhAt > sp) lastCanhAt = now;
   state.canh = (canh()+1) % 12;
   if(state.canh===0){
     state.day = (state.day||0) + 1;
     if(state.day>=30){ state.day = 0; advanceTime(1); render(); scheduleSave(); return; }
   }
   renderClock();
-}, CANH_MS);
+}
+setTimeout(timeTick, 200);
+
+/* =====================================================================
+   CÀI ĐẶT BỔ SUNG — màu chủ đạo, tốc độ thời gian, tự uống đan,
+   tự chạy lời thoại, thông báo cốt truyện, rung, âm thanh hiệu ứng
+===================================================================== */
+const THEMES = [['ngoc','Ngọc bích'],['huyet','Huyết sắc'],['bang','Băng lam'],['tu','Tử vi'],['kim','Kim quang']];
+/* Tự uống đan liệu thương khi khí huyết xuống thấp (không mất lượt) */
+function autoHealCheck(c){
+  const th = settings.autoHeal||0; if(!th || !c || state.hp<=0) return;
+  if(state.hp >= state.stats.hpMax*th) return;
+  const t = [3,2,1].find(x=>(state.healPills[x]||0)>0); if(!t) return;
+  const p = HEAL_PILLS.find(x=>x.tier===t);
+  state.healPills[t]--; const h = Math.round(state.stats.hpMax*p.pct);
+  state.hp = Math.min(state.stats.hpMax, state.hp+h);
+  combatLog(`Tự dùng 【${p.name}】, khí huyết +${h}.`);
+}
+/* Rung */
+function buzz(pat){ if(settings.vibrate && navigator.vibrate){ try{ navigator.vibrate(pat); }catch(e){} } }
+/* Âm thanh hiệu ứng — tổng hợp bằng WebAudio, không cần tệp */
+let sfxCtx = null;
+function sfx(kind){
+  if(!settings.sfx) return;
+  try{
+    sfxCtx = sfxCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const ctx = sfxCtx, now = ctx.currentTime, vol = (settings.sfxVol ?? 0.5)*0.25;
+    const tone = (f, t0, dur, type='sine', g=1)=>{ const o = ctx.createOscillator(), gn = ctx.createGain(); o.type = type; o.frequency.setValueAtTime(f, now+t0); gn.gain.setValueAtTime(0.0001, now+t0); gn.gain.exponentialRampToValueAtTime(vol*g, now+t0+0.01); gn.gain.exponentialRampToValueAtTime(0.0001, now+t0+dur); o.connect(gn).connect(ctx.destination); o.start(now+t0); o.stop(now+t0+dur+0.02); };
+    if(kind==='hit'){ tone(220,0,0.12,'square',0.6); tone(140,0.03,0.12,'triangle',0.6); }
+    else if(kind==='crit'){ tone(660,0,0.1,'square',0.7); tone(990,0.07,0.18,'triangle',0.8); }
+    else if(kind==='hurt'){ tone(120,0,0.18,'sawtooth',0.5); }
+    else if(kind==='ok'){ [523,659,784,1046].forEach((f,i)=>tone(f, i*0.08, 0.25, 'sine', 0.7)); }
+    else if(kind==='tap'){ tone(880,0,0.05,'sine',0.35); }
+  }catch(e){}
+}
+/* Tự chạy lời thoại */
+let autoReadTimer = null;
+function scheduleAutoRead(){
+  clearTimeout(autoReadTimer);
+  if(!settings.autoRead || !state || !state.story || !state.story.cur || state.activeTab!=='cottruyen') return;
+  const S = state.story, sc = STORY_ACTS[S.cur.act].scenes[S.cur.i];
+  if(sceneRev(sc) >= sceneLines(sc).length) return;
+  autoReadTimer = setTimeout(function go(){ if(!settings.autoRead || !state.story.cur) return; if(typing){ autoReadTimer = setTimeout(go, 400); return; } storyReveal(); }, settings.autoReadMs || 2600);
+}
 
 /* =====================================================================
    TRẠNG THÁI TRÒ CHƠI
