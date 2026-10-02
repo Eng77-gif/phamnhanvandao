@@ -958,6 +958,9 @@
   .cb-phu{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding:10px;border-radius:12px;background:rgba(212,175,106,.06);border:1px dashed var(--gold-dim);}
   .cb-phu-b{font-family:inherit;font-size:12px;font-weight:600;color:var(--gold-bright);background:rgba(0,0,0,.3);border:1px solid var(--gold-dim);border-radius:8px;padding:7px 10px;}
   .cb-phu-b b{margin-left:5px;color:var(--text-faint);font-weight:600;}
+  .cbag{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:62vh;overflow-y:auto;}
+  .cbag .btn{font-size:12px;padding:9px 6px;min-height:0;line-height:1.3;}
+  .cbag .btn[disabled]{opacity:.35;}
   .cb-extra{margin-top:10px;padding:10px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.02);}
   .cb-extra-h{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--text-faint);margin-bottom:2px;}
   .cb-extra .btn-row{display:grid !important;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px !important;}
@@ -1068,6 +1071,8 @@
   .vn-main[disabled]{opacity:.45;}
   .no-motion .new,.no-motion .vn-title,.no-motion .vn-tap{animation:none !important;}
 
+  .flag-row{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border-soft);} .flag-row.hard b{color:var(--blood-bright);}
+  .flag-b{flex:1;min-width:0;display:flex;flex-direction:column;} .flag-b b{font-size:13.5px;} .flag-b small{font-size:11px;color:var(--text-faint);}
   .dbg-tabs{display:grid !important;grid-template-columns:repeat(4,1fr);gap:4px;}
   .dbg-tabs button{font-size:11.5px;padding:7px 4px;}
   .rc2{border:1px solid var(--border);border-radius:12px;background:var(--panel2);margin-bottom:7px;overflow:hidden;}
@@ -1332,6 +1337,38 @@
   .duel-log{height:200px;overflow-y:auto;margin:12px 0;padding:8px;border-radius:10px;background:rgba(0,0,0,.3);}
   .duel-ln{font-size:12.5px;padding:4px 0;animation:vnIn .3s ease-out;} .duel-ln.a{color:var(--jade-bright);} .duel-ln.d{color:#ff9a84;}
   .duel-res{text-align:center;font-family:var(--fh);font-size:30px;} .duel-res.win{color:var(--gold-bright);} .duel-res.lose{color:var(--blood-bright);}
+  .pa-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft);}
+  .pa-row.mine{background:rgba(212,175,106,.06);border-radius:10px;padding:10px 8px;}
+  .pa-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;} .pa-b > b{font-size:14px;} .pa-b small{font-size:11.5px;color:var(--text-faint);}
+  .pa-p{color:var(--gold-bright);}
+  .pa-act{flex:none;display:flex;flex-direction:column;gap:5px;align-items:flex-end;} .pa-act .btn{padding:6px 10px;min-height:0;font-size:12px;} .pa-act em{font-style:normal;font-size:11px;color:var(--gold);}
+  .pa-mail{border-color:var(--gold-dim);background:radial-gradient(ellipse at 0% 0%, rgba(212,175,106,.14), transparent 60%), var(--panel);}
+  .pa-ml{display:flex;flex-direction:column;padding:7px 0;border-bottom:1px solid var(--border-soft);} .pa-ml b{font-size:13.5px;} .pa-ml small{font-size:11.5px;color:var(--text-faint);}
+  .pa-row{position:relative;}
+  .pa-row.flash{animation:paFlash 1.6s ease-out;} @keyframes paFlash{0%{background:rgba(255,200,90,.28)}100%{background:transparent}}
+  .pa-row.lead{box-shadow:inset 3px 0 0 var(--jade);} .pa-row.out{box-shadow:inset 3px 0 0 var(--blood-bright);}
+  .pa-row.rare .pa-b > b{color:#d8b8ff;text-shadow:0 0 8px rgba(170,120,255,.45);}
+  .pa-tag{display:inline-block;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:6px;margin-left:5px;vertical-align:1px;}
+  .pa-tag.sys{background:rgba(212,175,106,.18);color:var(--gold-bright);} .pa-tag.ext{background:rgba(255,120,80,.2);color:#ffb39a;animation:vnPulse 1s infinite;}
+  .pa-cd{font-variant-numeric:tabular-nums;font-weight:700;color:var(--text-dim);}
+  .pa-cd.hot{color:#ff8a6a;animation:vnPulse .8s infinite;}
+  .pa-mhead{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .pa-mhead div{background:rgba(0,0,0,.3);border-radius:10px;padding:8px;text-align:center;} .pa-mhead small{display:block;font-size:10.5px;color:var(--text-faint);} .pa-mhead b{font-size:16px;color:var(--gold-bright);}
+  .pa-mhead b.hot{color:#ff8a6a;}
+  .pa-quick{display:flex;flex-wrap:wrap;gap:6px;} .pa-quick .btn{flex:1;min-width:80px;}
+  .pa-custom{display:flex;gap:6px;margin-top:8px;} .pa-custom input{flex:1;}
+  .pa-hist{margin-top:12px;border-top:1px solid var(--border-soft);padding-top:8px;}
+  .pa-hh{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-faint);margin-bottom:4px;}
+  .pa-hr{display:flex;gap:8px;align-items:center;padding:5px 0;font-size:12.5px;} .pa-hr span{flex:1;} .pa-hr b{color:var(--gold-bright);} .pa-hr small{color:var(--text-faint);font-size:10.5px;}
+  .pa-hr.top span{color:var(--jade-bright);font-weight:700;}
+  .so-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden;} .so-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--jade),var(--gold));}
+  .so-list{margin-top:10px;}
+  .so-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border-soft);} .so-row b{flex:1;font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;} .so-row small{font-size:11px;color:var(--text-faint);} .so-row em{font-style:normal;font-weight:700;color:var(--gold-bright);font-size:12.5px;min-width:44px;text-align:right;}
+  .tl-hero{border-color:rgba(193,93,74,.5);background:radial-gradient(ellipse at 50% 0%, rgba(193,60,50,.22), transparent 60%), var(--panel);}
+  .tl-me{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;} .tl-me div{background:rgba(0,0,0,.3);border-radius:10px;padding:8px 4px;text-align:center;} .tl-me b{display:block;font-family:var(--fh);font-size:19px;color:var(--gold-bright);} .tl-me small{font-size:10.5px;color:var(--text-faint);}
+  .tl-last{margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(0,0,0,.3);border-left:3px solid var(--blood-bright);font-size:13px;animation:vnIn .35s ease-out;}
+  .tl-log{font-size:12.5px;color:var(--text-dim);padding:6px 0;border-bottom:1px solid var(--border-soft);}
+  .tl-sects{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;} .tl-sects span{font-size:11.5px;padding:4px 9px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text-dim);} .tl-sects b{color:var(--gold-bright);}
   .shop-tabs{display:grid !important;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:8px;}
   .shop-tabs button{font-size:10.5px;padding:7px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;}
   .shop-tabs .ic{width:14px;height:14px;margin:0;}
@@ -1620,7 +1657,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.54.0';
+const GAME_VERSION = '1.57.2';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1694,10 +1731,16 @@ function toast(msg){
   el._t = setTimeout(()=>el.classList.remove('show'), 1800);
 }
 
+/* Bản lưu không còn nằm trên máy: chỉ giữ trong bộ nhớ khi đang chơi và đẩy thẳng lên máy chủ */
+const CLOUD_ONLY = true;
+let MEMSAVE = null;
+(function(){ try{ const raw = localStorage.getItem(SAVE_KEY); if(raw){ const d = JSON.parse(raw); if(d && d.state && d.state.root && d.state.path){ MEMSAVE = d; window.__legacyLocal = true; } } }catch(e){} })();
+let warnedNoCloud = false;
 function saveGame(silent){
   if(!state || !state.root || !state.path) return false;
   try{
-    localStorage.setItem(SAVE_KEY, JSON.stringify({v:GAME_VERSION, t:Date.now(), state}));
+    MEMSAVE = JSON.parse(JSON.stringify({v:GAME_VERSION, t:Date.now(), state}));
+    if(CLOUD_ONLY && !(cloud.user && cloud.status==='in') && !warnedNoCloud){ warnedNoCloud = true; toast('Chưa đăng nhập — tiến trình chưa được lưu lên máy chủ'); }
     lastSaveAt = Date.now();
     if(typeof scheduleCloudPush==='function') scheduleCloudPush();
     if(!silent) toast('Đã lưu tiến trình');
@@ -1713,15 +1756,12 @@ function scheduleSave(){
   saveTimer = setTimeout(()=>saveGame(true), 500);
 }
 function readSave(){
-  try{
-    const raw = localStorage.getItem(SAVE_KEY);
-    if(!raw) return null;
-    const d = JSON.parse(raw);
-    if(!d || !d.state || !d.state.root || !d.state.path) return null;
-    return d;
-  }catch(e){ return null; }
+  const d = MEMSAVE;
+  if(!d || !d.state || !d.state.root || !d.state.path) return null;
+  return d;
 }
 function deleteSave(){
+  MEMSAVE = null;
   try{ localStorage.removeItem(SAVE_KEY); }catch(e){}
   lastSaveAt = null;
   toast('Đã xóa bản lưu');
@@ -1766,6 +1806,30 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.57.2', date:'02/10/2026', title:'Gọn màn chiến đấu', items:[
+    ['doi','Bảo vật và thần thông trong trận gom vào ô "Bảo Vật" trên lưới chiêu thức, ghi số món còn dùng được; chạm để mở túi hai cột, món dùng được xếp trước, chọn xong tự đóng.']
+  ]},
+  {v:'1.57.1', date:'02/10/2026', title:'Chống tăng chỉ số dần dần', items:[
+    ['moi','Máy chủ tính thời gian tu luyện thực tế của từng nhân vật: đột phá đại cảnh giới, số bảo vật hiếm và số công pháp không được vượt quá mức có thể đạt trong thời gian đó.'],
+    ['doi','Tu Sĩ Bảng, đấu pháp và Huyết Sắc mùa dùng sức mạnh do máy chủ tự tính theo cảnh giới, đạo lộ, bảo vật và công pháp — chỉ số trên máy người chơi không còn ảnh hưởng tới trận đấu trực tuyến.']
+  ]},
+  {v:'1.57.0', date:'02/10/2026', title:'Chống gian lận, tông môn chung, Huyết Sắc mùa', items:[
+    ['moi','Máy chủ so sánh mỗi lần đồng bộ với lần trước theo thời gian thực: cảnh giới, linh thạch, bảo vật hiếm tăng nhanh hơn mức có thể thì thay đổi bị bỏ, tiến trình quay về bản hợp lệ gần nhất. Ba lần như vậy thì khóa mọi tính năng trực tuyến. Nhân vật mới phải bắt đầu từ đầu.'],
+    ['moi','Đấu giá: khách NPC (Hắc bào lão giả, Nữ tu che mặt, Khách đeo mặt nạ đồng...) liên tục tranh nhau trả giá các món hiếm, càng gần giờ chốt càng dồn dập; món người chơi đăng bán cũng có thể được họ mua.'],
+    ['moi','Đồng Môn Trực Tuyến (Thế Lực): người chơi cùng tông môn góp linh thạch nâng linh mạch năm cấp, mỗi cấp cho cả tông tu luyện nhanh hơn 2%; bảng cống hiến.'],
+    ['moi','Huyết Sắc Thí Luyện mùa (Hành Tẩu): cấm địa chung ba ngày một mùa cho đệ tử Luyện Khí — hái linh dược, giao chiến với tu sĩ khác để đoạt điểm; hạng cao nhận chủ dược Trúc Cơ. Có bảng xếp hạng người và tông môn.']
+  ]},
+  {v:'1.56.0', date:'02/10/2026', title:'Lưu trên máy chủ, đấu giá kịch tính', items:[
+    ['doi','Tiến trình chỉ còn lưu trên máy chủ: phải đăng nhập mới vào game, tự đồng bộ vài giây sau mỗi thay đổi và khi rời trang. Không còn bản lưu trên máy, không nhập file bản lưu từ ngoài. Bản lưu cũ trên máy được tự đưa lên máy chủ một lần rồi xóa.'],
+    ['moi','Đấu Giá Tu Sĩ luôn có khoảng mười món do các đấu giá hội đem ra (Đấu Giá Hội Thiên Tinh Thành, Thiên Cơ Các, Đấu Giá Hội Tấn Kinh...) — bảo vật hiếm, dị hỏa, trận bàn, đan dược, linh phù, nguyên liệu, linh thảo; phiên từ hai mươi phút tới ba giờ.'],
+    ['moi','Cập nhật trực tiếp năm giây một lần, đồng hồ đếm từng giây và đỏ lên khi sắp chốt; trả giá trong hai phút cuối thì phiên gia hạn thêm hai phút; dòng sáng lên khi có người trả giá; báo ngay khi bị vượt giá; chuông chốt giá khi thắng.'],
+    ['moi','Bảng trả giá: giá hiện tại, đồng hồ, nút trả nhanh mức tối thiểu, +10%, +25%, mua đứt, và lịch sử trả giá của phiên.']
+  ]},
+  {v:'1.55.0', date:'02/10/2026', title:'Đấu Giá Tu Sĩ', items:[
+    ['moi','Đấu Giá Tu Sĩ (Túi Đồ): đăng bán bảo vật, đan dược, linh phù, nguyên liệu, linh thảo, linh chủng cho người chơi khác; đặt giá khởi điểm, giá mua đứt, thời gian 1, 6 hoặc 24 giờ.'],
+    ['moi','Trả giá cao hơn ít nhất 5%, hoặc mua đứt. Máy chủ giữ đồ và linh thạch: đăng bán là đồ rời túi ngay, trả giá là linh thạch bị giữ ngay; bị vượt giá thì được hoàn.'],
+    ['moi','Hộp Thư: nhận đồ thắng đấu giá, tiền bán (trừ 5% phí hội), linh thạch hoàn và đồ không ai mua.']
+  ]},
   {v:'1.54.0', date:'02/10/2026', title:'Tu Sĩ Bảng và Đấu Pháp', items:[
     ['moi','Tu Sĩ Bảng (Hành Tẩu): xếp hạng người chơi theo cảnh giới hoặc danh vọng. Lưu danh lên bảng bằng bản lưu đám mây — máy chủ đọc thẳng bản lưu, không lấy số liệu từ máy người chơi.'],
     ['moi','Đấu pháp với phân thân của người chơi khác: máy chủ tự tính trận theo chỉ số hai bên, trận đấu hiện từng chiêu với thanh khí huyết. Thắng được danh vọng (đánh người cảnh giới cao hơn được nhiều hơn) và linh thạch; mỗi ngày mười trận.']
@@ -3492,7 +3556,7 @@ function renderNgSects(){
     }).join('');
     return `<div class="sec-title" style="margin:6px 2px 0;border:none;">${ic(r.icon)} Tông môn ở ${r.name}</div>${sects || '<p class="flavor">Vùng này không có tông môn nào nhận đệ tử.</p>'}<p class="sec-note" style="margin:4px 4px 12px;">Mỗi vùng đất có những tông môn riêng — tới nơi mới biết.</p>`;
   }).join('');
-  return status + renderExamCard() + list;
+  return status + renderSectOnline() + renderExamCard() + list;
 }
 
 function renderSwordGrid(n){
@@ -4159,9 +4223,9 @@ const NAV = [
   {id:'tuluyen', icon:'taiji',  label:'Tu Luyện', subs:[['tuluyen','Bế Quan','taiji'],['congphap','Công Pháp','book'],['bitruyen','Bí Truyền','key'],['phaptac','Pháp Tắc','taiji'],['phithang','Phi Thăng','cloud'],['thoigian','Thời Gian','hourglass']]},
   {id:'cottruyen', icon:'book', label:'Cốt Truyện', subs:null},
   {id:'nhanvat', icon:'person', label:'Nhân Vật', subs:[['tongquan','Tổng Quan','chart'],['tuchat','Tư Chất','root'],['daolu','Đạo Lữ','lotus'],['dode','Đồ Đệ','person'],['nhanmach','Nhân Mạch','person'],['linhsung','Linh Sủng','bug']]},
-  {id:'hanhtau', icon:'map',    label:'Hành Tẩu', subs:[['bando','Bản Đồ','map'],['theluc','Thế Lực','pagoda'],['bicanh','Bí Cảnh','mountain'],['yeuthu','Yêu Thú','claw'],['tusibang','Tu Sĩ Bảng','star']]},
+  {id:'hanhtau', icon:'map',    label:'Hành Tẩu', subs:[['bando','Bản Đồ','map'],['theluc','Thế Lực','pagoda'],['bicanh','Bí Cảnh','mountain'],['yeuthu','Yêu Thú','claw'],['tusibang','Tu Sĩ Bảng','star'],['thiluyen','Huyết Sắc Mùa','swords']]},
   {id:'dongphu', icon:'ding',   label:'Động Phủ', subs:[['duocvien','Dược Viên','herb'],['linhtrung','Linh Trùng','bug'],['luyendan','Luyện Đan','flask'],['luyenkhi','Luyện Khí','hammer'],['chephu','Chế Phù','scroll'],['tranphap','Trận Pháp','seal'],['khoiloi','Khôi Lỗi','puppet']]},
-  {id:'tuido',   icon:'bag',    label:'Túi Đồ',   subs:[['vatpham','Vật Phẩm','pill'],['tailieu','Tài Liệu','stone'],['phuongthi','Phường Thị','hall'],['daugia','Đấu Giá','key']]}
+  {id:'tuido',   icon:'bag',    label:'Túi Đồ',   subs:[['vatpham','Vật Phẩm','pill'],['tailieu','Tài Liệu','stone'],['phuongthi','Phường Thị','hall'],['daugia','Đấu Giá','key'],['dgts','Đấu Giá Tu Sĩ','star']]}
 ];
 let lastFeedTop = null;
 
@@ -8960,13 +9024,35 @@ function debugMortalRestart(){ if(!Admin.ok()) return; state.mortal = true; stat
 function debugWins(n){ if(!Admin.ok()) return; state.winCount = (state.winCount||0) + n; dbgDone(`+${n} trận thắng (tổng ${state.winCount}).`); }
 function debugBgm(){ if(!Admin.ok()) return; settings.bgm = !settings.bgm; persistSettings(); bgmApply(); dbgDone(`Nhạc nền: ${settings.bgm?'bật':'tắt'}.`); }
 
+/* Admin Panel: tài khoản bị máy chủ đánh dấu */
+let DBG_FLAGS = null, DBG_FLAGS_ERR = '';
+async function debugCheatLoad(){
+  if(!Admin.ok()) return;
+  DBG_FLAGS = null; DBG_FLAGS_ERR = '';
+  try{ const {data, error} = await cloud.client.rpc('admin_list_flags'); if(error) throw error; DBG_FLAGS = data||[]; }catch(e){ DBG_FLAGS_ERR = cloudErrMsg(e); DBG_FLAGS = []; }
+  if(document.getElementById('overlay').classList.contains('show')) showDebugPanel('cheat');
+}
+async function debugClearFlag(uid){
+  if(!Admin.ok()) return;
+  try{ const {error} = await cloud.client.rpc('admin_clear_strikes', {target:uid}); if(error) throw error; toast('Đã xóa đánh dấu'); }catch(e){ toast(cloudErrMsg(e)); }
+  debugCheatLoad();
+}
+function renderCheatTab(){
+  if(DBG_FLAGS===null){ setTimeout(debugCheatLoad, 0); return '<p class="flavor">Đang tải danh sách…</p>'; }
+  return `<div class="dbg-group">Tài khoản bị máy chủ đánh dấu (${DBG_FLAGS.length})</div>
+    ${DBG_FLAGS_ERR?`<p class="sec-note" style="color:var(--blood-bright);">${escHtml(DBG_FLAGS_ERR)}</p>`:''}
+    ${DBG_FLAGS.map(f=>`<div class="flag-row ${f.strikes>=3?'hard':''}"><div class="flag-b"><b>${escHtml(f.name||'?')}</b><small>${escHtml(f.email||'')} · ${MAJOR_REALMS[f.realm]?.name||''} · tu ${f.active_minutes} phút</small>
+      <small>${f.strikes}/3 lần · ${escHtml(f.reject_reason||'')}${f.rejected_at?` · ${new Date(f.rejected_at).toLocaleString('vi-VN')}`:''}</small></div>
+      <button class="btn sm gold" onclick="debugClearFlag('${f.user_id}')">Xóa đánh dấu</button></div>`).join('') || '<p class="flavor">Không có tài khoản nào bị đánh dấu.</p>'}
+    <button class="ls-link" style="margin-top:8px;" onclick="debugCheatLoad()">Làm mới</button>`;
+}
 function showDebugPanel(tab){
   if(!state.root || !state.path) return;
   if(state.dead){ showDeathModal(); return; }
   if(!Admin.ok()){ showAdminLogin(); return; }
   state.debugUsed = true;
   if(tab) dbgTab = tab;
-  const tabs = [['res','Tài nguyên','stone'],['realm','Cảnh giới','bolt'],['story','Cốt truyện','book'],['nuoi','Nuôi dưỡng','bug'],['char','Nhân vật','person'],['world','Thế giới','map'],['sys','Hệ thống','gear']];
+  const tabs = [['res','Tài nguyên','stone'],['realm','Cảnh giới','bolt'],['story','Cốt truyện','book'],['nuoi','Nuôi dưỡng','bug'],['char','Nhân vật','person'],['world','Thế giới','map'],['cheat','Gian lận','warn'],['sys','Hệ thống','gear']];
   const lm = lifeMax();
   let body = '';
   if(dbgTab==='res') body = `
@@ -9005,6 +9091,7 @@ function showDebugPanel(tab){
     <div class="dbg-grid">${Object.entries(DIFFS).map(([k,d])=>dbgBtn(d.name,`debugDiff('${k}')`, (state.diff||'thuong')===k?'gold':'')).join('')}</div>
     <div class="dbg-group">Nhân vật & danh hiệu</div>
     <div class="dbg-grid">${dbgBtn('Gặp mọi nhân vật','debugNpcAll()')}${dbgBtn('Mở mọi danh hiệu','debugEpithets()')}${dbgBtn('Mọi bảo vật hiếm','debugRareAll()')}${dbgBtn('Chơi lại phần phàm nhân','debugMortalRestart()','blood')}${dbgBtn(settings.bgm?'Tắt nhạc nền':'Bật nhạc nền','debugBgm()')}</div>`;
+  else if(dbgTab==='cheat') body = renderCheatTab();
   else if(dbgTab==='world') body = `
     <div class="dbg-group">Truyền thừa từng giới</div>
     <div class="dbg-grid">${dbgBtn('Nhân Giới: bí truyền + tài liệu','debugNhanGioi()')}${dbgBtn('Linh Giới: truyền thừa + chân huyết','debugLinhGioi()')}${dbgBtn('Tiên Giới: pháp tắc + công pháp','debugTienGioi()')}</div>
@@ -9100,15 +9187,16 @@ function renderContent(){
   else if(tab==='cottruyen') body = renderStoryPage();
   else if(tab==='tuluyen') body = ({tuluyen:()=>renderOmenChip()+renderGuideCard()+renderAlertsCard()+renderCultivatePage()+renderBanMenhCard()+renderSatKhiCard(), congphap:()=>renderStoryTechCard()+renderTechniquesPage(), bitruyen:()=>`<div class="bt-wrap">${renderHeritageAll()}</div>`, phaptac:renderPhapTac, phithang:renderAscendPage, thoigian:renderTimePage}[sub])();
   else if(tab==='nhanvat') body = ({tongquan:renderOverview, daolu:renderDaoLuPage, dode:renderDodePage, danhhieu:renderTitlePage, tuchat:()=>characterCardsLegacy().cardTuChat, nhanmach:renderNpcPage, linhsung:renderWormTab}[sub])();
-  else if(tab==='hanhtau') body = ({bando:renderWorldMap, theluc:renderWorldFactions, bicanh:renderExploreTab, yeuthu:renderBeastPage, tusibang:renderTuSiBang}[sub])();
+  else if(tab==='hanhtau') body = ({bando:renderWorldMap, theluc:renderWorldFactions, bicanh:renderExploreTab, yeuthu:renderBeastPage, tusibang:renderTuSiBang, thiluyen:renderTrialSeason}[sub])();
   else if(tab==='dongphu') body = dpWrap(sub, ({linhtrung:renderTrungPage, duocvien:renderGardenPage, luyendan:renderAlchemyPage, luyenkhi:renderForgePage, chephu:renderTalismanPage, tranphap:renderFormationPage, khoiloi:renderPuppetPage}[sub])());
-  else if(tab==='tuido') body = ({vatpham:renderInventoryPage, tailieu:renderMaterialsInv, phuongthi:renderMarketPage, daugia:renderAuctionPage}[sub])();
+  else if(tab==='tuido') body = ({vatpham:renderInventoryPage, tailieu:renderMaterialsInv, phuongthi:renderMarketPage, daugia:renderAuctionPage, dgts:renderPlayerAuction}[sub])();
   const aucA = state.auc && state.auc.active;
   const banner = aucA && !(tab==='tuido' && sub==='daugia') ? `<button class="expd-banner" onclick="goTo('tuido','daugia')">${ic('hall','keep')} Đang ở trong ${AUCTIONS.find(x=>x.id===aucA.id).name}. Chạm để quay lại.</button>`
     : state.expd ? `<button class="expd-banner" onclick="goTo('hanhtau','bicanh')">${ic('mountain','keep')} Đang ở trong ${ZONES[state.expd.z].name} — ${REALMS[state.expd.z].unit.toLowerCase()} ${state.expd.step}/${REALMS[state.expd.z].steps}. Chạm để quay lại.</button>` : '';
   el.innerHTML = renderFeed() + banner + renderEventCard() + (state.mortal && tab!=='nhanvat' && !(tab==='tuluyen' && sub==='thoigian') ? (tab==='tuluyen' ? `<div class="subtab-row"><button class="subtab-btn ${sub!=='thoigian'?'active':''}" onclick="setSubTab('tuluyen','tuluyen')">${ic('mountain')}Phàm Nhân</button><button class="subtab-btn" onclick="setSubTab('tuluyen','thoigian')">${ic('hourglass')}Thời Gian</button></div>` : '') : renderSubnav(tab)) + body;
   try{ polishContent(tab, sub); }catch(e){}
   try{ scheduleAutoRead(); }catch(e){}
+  try{ paWatch(); }catch(e){}
   try{ if(state.activeTab==='cottruyen' && state.story && state.story.cur) runTypewriter(); }catch(e){}
 }
 
@@ -9232,8 +9320,9 @@ async function cloudSignOut(){
   await cloud.client.auth.signOut();
   cloud.formPw = '';
   cloud.user = null; cloud.status = 'out'; cloud.lastSync = null;
-  toast('Đã đăng xuất — bản lưu trên máy vẫn còn');
+  toast('Đã đăng xuất');
   refreshCloudUI();
+  if(CLOUD_ONLY){ MEMSAVE = null; setTimeout(()=>location.reload(), 600); }
 }
 
 /* ---------- Đồng bộ ---------- */
@@ -9250,6 +9339,8 @@ async function cloudPush(silent){
     const {error} = await cloud.client.from('saves').upsert({user_id:cloud.user.id, data:local, version:GAME_VERSION, updated_at:new Date().toISOString()});
     if(error) throw error;
     cloud.lastSync = Date.now(); cloud.remoteT = local.t; cloud.error = '';
+    if(window.__legacyLocal){ try{ localStorage.removeItem(SAVE_KEY); }catch(e){} window.__legacyLocal = false; }
+    setTimeout(checkSaveStatus, 300);
     if(!silent) toast('Đã đồng bộ lên đám mây');
     refreshCloudUI();
     return true;
@@ -9258,9 +9349,9 @@ async function cloudPush(silent){
 function scheduleCloudPush(){
   if(!cloud.user) return;
   if(cloud.pushTimer) return;
-  cloud.pushTimer = setTimeout(()=>{ cloud.pushTimer = null; cloudPush(true); }, 20000);
+  cloud.pushTimer = setTimeout(()=>{ cloud.pushTimer = null; cloudPush(true); }, 4000);
 }
-function writeLocalSave(d){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(d)); }catch(e){} }
+function writeLocalSave(d){ MEMSAVE = d; }
 /* Lúc mở game: bản đám mây mới hơn thì âm thầm thay bản trên máy */
 async function cloudPullIfNewer(atStart){
   const remote = await cloudFetch();
@@ -9285,10 +9376,11 @@ async function cloudAfterLogin(){
     const remote = await cloudFetch();
     const local = readSave();
     cloud.remoteT = remote ? remote.t : null;
-    if(!remote){ if(local) await cloudPush(false); return; }
-    if(!local){ writeLocalSave(remote); askUseCloud(remote, true); return; }
-    if((remote.t||0) > (local.t||0)) askUseCloud(remote, false);
-    else if((local.t||0) > (remote.t||0)) await cloudPush(false);
+    if(!remote){ if(local) await cloudPush(false); }
+    else if(!local || (remote.t||0) >= (local.t||0)) writeLocalSave(remote);
+    else await cloudPush(false);
+    const ls = document.getElementById('loadingScreen');
+    if(ls && !ls.classList.contains('hide')) showTitleActions();
   }catch(e){ toast(cloudErrMsg(e)); }
 }
 function saveSummary(d){ const st = d.state; return `${st.name} · ${fullRealmName(st.realmIdx, st.subStage||0)} · ${st.age} tuổi · lưu lúc ${new Date(d.t).toLocaleString('vi-VN')}`; }
@@ -9330,6 +9422,8 @@ function refreshCloudUI(){
   if(ov && ov.classList.contains('show') && typeof settingsTab!=='undefined' && settingsTab==='taikhoan' && document.getElementById('accPanel')) showSettings('taikhoan');
   const t = document.getElementById('lsAccount');
   if(t) t.innerHTML = titleAccountLine();
+  const ls = document.getElementById('loadingScreen'), box = document.getElementById('lsActions');
+  if(CLOUD_ONLY && ls && !ls.classList.contains('hide') && box && box.classList.contains('show') && !cloud._titleBusy){ cloud._titleBusy = true; try{ showTitleActions(); } finally { cloud._titleBusy = false; } }
 }
 function titleAccountLine(){
   if(cloud.status==='in') return `${ic('cloud','keep')} <span>${cloud.user.email}</span> <button class="ls-link" onclick="showSettings('taikhoan')">Tài khoản</button>`;
@@ -12203,15 +12297,7 @@ function showSettings(tab){
         <div class="btn-row" style="margin-top:12px;">
           <button class="btn gold" ${hasGame?'':'disabled'} onclick="saveGame(false); ${cloud.status==='in'?'cloudPush(true);':''} showSettings('luutru')">${ic('save')} Lưu Ngay</button>
         </div>
-        <div class="set-group">Sao lưu thủ công</div>
-        <p class="sec-note" style="margin:0 0 8px;">Tải bản lưu về máy thành một file .json để cất giữ hoặc chuyển sang máy khác mà không cần tài khoản.</p>
-        <div class="btn-row">
-          <button class="btn ghost" ${local?'':'disabled'} onclick="exportSave()">Xuất File Bản Lưu</button>
-          <button class="btn ghost" onclick="document.getElementById('importFile').click()">Nhập File Bản Lưu</button>
-        </div>
-        <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importSave(this)">
-        <div class="set-group">Vùng nguy hiểm</div>
-        <button class="btn ghost" onclick="askConfirm('wipe')">${ic('trash')} Xóa Bản Lưu Trên Máy</button>`;
+        <p class="sec-note" style="margin:10px 0 0;">Tiến trình chỉ được lưu trên máy chủ — không còn bản lưu trên máy, không nhập file bản lưu từ ngoài vào. Tự động đồng bộ vài giây sau mỗi thay đổi và khi rời trang.</p>`;
     }
     else if(tab==='hienthi') content = `
       <div class="set-row col">
@@ -12275,6 +12361,7 @@ function exportSave(){
   toast('Đã xuất file bản lưu');
 }
 function importSave(input){
+  if(CLOUD_ONLY){ toast('Không thể nhập bản lưu từ file'); return; }
   const f = input.files && input.files[0]; if(!f) return;
   const r = new FileReader();
   r.onload = ()=>{
@@ -13020,6 +13107,16 @@ function hpBar(cls, pct, prev, label, num){
     </div>
   </div>`;
 }
+/* Bảo vật & thần thông trong trận: gom vào túi riêng thay vì danh sách dài */
+const COMBAT_EXTRA = {html:[], n:0, ready:0};
+function openCombatBag(){
+  if(!state.combat) return;
+  const items = COMBAT_EXTRA.html.map(h=>h.replace(/onclick="/, 'onclick="closeModal(); ')).sort((a,b)=>(/disabled/.test(a)?1:0)-(/disabled/.test(b)?1:0));
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="display:flex;align-items:center;gap:8px;">${ic('crystal','keep')} Bảo Vật & Thần Thông</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <p class="sec-note" style="margin:0 0 10px;">Mỗi món dùng được một lần mỗi trận. Món đã dùng hoặc không hợp đối thủ để mờ.</p>
+    <div class="cbag">${items.join('')}</div>`;
+  document.getElementById('overlay').classList.add('show');
+}
 function renderCombatPanel(){
   const c = state.combat, e = c.enemy;
   const ePct = Math.max(0, Math.min(100,(e.hp/e.hpMax)*100));
@@ -13042,6 +13139,7 @@ function renderCombatPanel(){
   const phuOwned = TALISMANS.filter(t=>state.talismans[t.id]);
   const kind = enemyKind(e);
   const extra = [renderNgCombatButtons(c), renderLgCombatButtons(c), renderTgCombatButtons(c), renderCanonCombatButtons(c)].join('');
+  { const tmp = document.createElement('div'); tmp.innerHTML = extra; const bs = [...tmp.querySelectorAll('button')]; COMBAT_EXTRA.html = bs.map(b=>b.outerHTML); COMBAT_EXTRA.n = bs.length; COMBAT_EXTRA.ready = bs.filter(b=>!b.disabled).length; }
   const skill = (icon, label, sub, dis, act, cls) => `<button class="cb-skill ${cls||''}" ${dis?'disabled':''} onclick="${act}"><span class="cb-sk-ic">${ic(icon,'keep')}</span><span class="cb-sk-t">${label}</span>${sub!=null&&sub!==''?`<span class="cb-sk-s">${sub}</span>`:''}</button>`;
   return `
     <div class="cb-arena ${kind} ${eHit?'e-hit':''} ${pHit?'p-hit':''}">
@@ -13079,9 +13177,10 @@ function renderCombatPanel(){
         ${skill('scroll', 'Phù Lục', talismanCount(), phuOwned.length<1, "playerAttack('phuMenu')", c.phuMenu?'on':'')}
         ${skill('puppet', c.puppetsOut?'Đã xuất trận':'Khôi Lỗi', c.puppetsOut?'':puppetCount(), puppetCount()<1||c.puppetsOut, "playerAttack('khoiLoi')")}
         ${state.tranKyTier ? skill('seal', c.formationActive?'Đã bố trận':'Bố Trận', '', c.formationActive, "playerAttack('tran')") : ''}
+        ${COMBAT_EXTRA.n ? skill('crystal', 'Bảo Vật', `${COMBAT_EXTRA.ready}/${COMBAT_EXTRA.n} dùng được`, COMBAT_EXTRA.ready<1, 'openCombatBag()', 'gold') : ''}
       </div>
       ${c.phuMenu?`<div class="cb-phu">${phuOwned.map(t=>`<button class="cb-phu-b" onclick="playerAttack('phu:${t.id}')">${t.name}<b>×${state.talismans[t.id]}</b></button>`).join('')}</div>`:''}
-      ${extra.trim()?`<div class="cb-extra"><div class="cb-extra-h">Thần thông & bảo vật</div>${extra}</div>`:''}
+      ${COMBAT_EXTRA.n?'':''}
       <details class="cb-log"><summary>Diễn biến trận đấu (${c.log.length})</summary>${c.log.map(l=>`<div>${l}</div>`).join('')}</details>
       <button class="cb-flee" onclick="playerAttack('flee')">Chạy trốn</button>
     </div>`;
@@ -14199,7 +14298,7 @@ function offlineCatchup(savedAt){
   }, 900);
   render();
 }
-document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden' && state && state.root) saveGame(true); });
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden' && state && state.root){ saveGame(true); if(cloud.user) cloudPush(true); } });
 
 /* ---------- Nhật Khóa ---------- */
 const DAILY_POOL = [
@@ -14431,6 +14530,355 @@ function renderTuSiBang(){
 }
 
 /* =====================================================================
+   ĐẤU GIÁ TU SĨ — đấu giá giữa người chơi, máy chủ giữ đồ và linh thạch
+   Đăng bán: máy chủ trừ vật phẩm trong bản lưu đám mây ngay.
+   Trả giá: máy chủ trừ linh thạch ngay, người bị vượt giá được hoàn qua Hộp Thư.
+   Hết giờ: người thắng nhận đồ, người bán nhận linh thạch (trừ 5% phí hội) qua Hộp Thư.
+===================================================================== */
+const PA = {list:[], mine:[], mail:[], loading:false, err:'', ts:0, form:null};
+function paItemName(it){
+  if(!it) return '?';
+  const b = +it.b;
+  switch(it.k){
+    case 'rare': { const r = rareDef(it.a); return r ? r.name : 'Bảo vật lạ'; }
+    case 'pill': return PILL_NAMES[b-1] || 'Đan tu vi';
+    case 'heal': return (HEAL_PILLS.find(p=>p.tier===b)||{}).name || 'Đan liệu thương';
+    case 'phu': return (TALISMANS.find(t=>t.id===it.a)||{}).name || 'Linh phù';
+    case 'mat': return matName(it.a, b);
+    case 'herb': return HERB_NAMES[b-1] || 'Linh thảo';
+    case 'seed': return 'Linh Chủng';
+  }
+  return '?';
+}
+function paLocalGet(it){
+  const b = +it.b;
+  switch(it.k){
+    case 'rare': return (state.rare||{})[it.a]||0;
+    case 'pill': return state.pills[b]||0;
+    case 'heal': return state.healPills[b]||0;
+    case 'phu': return state.talismans[it.a]||0;
+    case 'mat': return (state.mats[it.a]||{})[b]||0;
+    case 'herb': return state.herbs[b]||0;
+    case 'seed': return state.seeds||0;
+    case 'stones': return state.spiritStones;
+  }
+  return 0;
+}
+function paLocalAdd(it, d){
+  const b = +it.b;
+  switch(it.k){
+    case 'rare': state.rare = state.rare||{}; state.rare[it.a] = (state.rare[it.a]||0)+d; break;
+    case 'pill': state.pills[b] = (state.pills[b]||0)+d; break;
+    case 'heal': state.healPills[b] = (state.healPills[b]||0)+d; break;
+    case 'phu': state.talismans[it.a] = (state.talismans[it.a]||0)+d; break;
+    case 'mat': addMat(it.a, b, d); break;
+    case 'herb': state.herbs[b] = (state.herbs[b]||0)+d; break;
+    case 'seed': state.seeds = (state.seeds||0)+d; break;
+    case 'stones': state.spiritStones += d; break;
+  }
+}
+function paOwned(){
+  const L = [];
+  Object.entries(state.rare||{}).forEach(([id,n])=>{ if(n>0 && rareDef(id)) L.push({k:'rare',a:id,n}); });
+  [1,2,3,4,5,6].forEach(t=>{ if(state.pills[t]>0) L.push({k:'pill',b:t,n:state.pills[t]}); });
+  [1,2,3].forEach(t=>{ if(state.healPills[t]>0) L.push({k:'heal',b:t,n:state.healPills[t]}); });
+  Object.entries(state.talismans||{}).forEach(([id,n])=>{ if(n>0) L.push({k:'phu',a:id,n}); });
+  ['khoang','moc','huyet','yeudan'].forEach(k=>[1,2,3].forEach(t=>{ const n = (state.mats[k]||{})[t]||0; if(n>0) L.push({k:'mat',a:k,b:t,n}); }));
+  [1,2,3,4,5,6].forEach(t=>{ if(state.herbs[t]>0) L.push({k:'herb',b:t,n:state.herbs[t]}); });
+  if(state.seeds>0) L.push({k:'seed',n:state.seeds});
+  return L;
+}
+function paLeft(ts){ const ms = new Date(ts).getTime() - Date.now(); if(ms<=0) return 'Đã hết giờ'; const h = Math.floor(ms/3600000), m = Math.floor(ms%3600000/60000); return h ? `còn ${h} giờ ${m} phút` : `còn ${m} phút`; }
+async function paReady(){
+  if(!tsbOnline()) throw new Error('Cần đăng nhập tài khoản đám mây');
+  const ok = await cloudPush(true);
+  if(!ok) throw new Error(cloud.error || 'Không đồng bộ được bản lưu lên đám mây');
+}
+function paApply(rev){ if(rev!=null){ state._srv = rev; } computeStats(); saveGame(true); cloudPush(true); }
+async function paLoad(force){
+  if(!tsbOnline() || PA.loading) return;
+  if(!force && Date.now()-PA.ts < 30000) return;
+  PA.loading = true; PA.err = '';
+  try{
+    await cloud.client.rpc('auction_settle');
+    const now = new Date().toISOString();
+    const a = await cloud.client.from('auctions').select('*').eq('status','open').gt('ends_at', now).order('ends_at', {ascending:true}).limit(60); if(a.error) throw a.error;
+    paDiff(a.data||[]);
+    PA.list = a.data||[];
+    const m = await cloud.client.from('auctions').select('*').eq('seller', cloud.user.id).order('created_at', {ascending:false}).limit(15); if(m.error) throw m.error;
+    PA.mine = m.data||[];
+    const mb = await cloud.client.from('mailbox').select('*').eq('user_id', cloud.user.id).eq('claimed', false).order('id', {ascending:true}); if(mb.error) throw mb.error;
+    PA.mail = mb.data||[];
+    PA.ts = Date.now();
+  }catch(e){ PA.err = cloudErrMsg(e); }
+  PA.loading = false;
+  if(state.activeTab==='tuido' && state.subTabs.tuido==='dgts') render();
+}
+async function paClaim(){
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('mail_claim'); if(error) throw error;
+    (data.items||[]).forEach(x=>{ if(x.stones>0) state.spiritStones += x.stones; if(x.item && x.qty>0) paLocalAdd(x.item, x.qty); });
+    paApply(data.rev);
+    addLog(`Hộp thư Đấu Giá Tu Sĩ: ${(data.items||[]).map(x=>x.stones>0?`${x.stones} linh thạch`:`${paItemName(x.item)} ×${x.qty}`).join(', ')||'trống'}.`);
+    toast('Đã nhận hộp thư');
+  }catch(e){ toast(cloudErrMsg(e)); }
+  PA.ts = 0; paLoad(true);
+}
+async function paBid(id, buyout){
+  const a = PA.list.find(x=>x.id===id); if(!a) return;
+  const min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
+  let amt = buyout ? a.buyout : parseInt(prompt(`Trả giá cho ${paItemName(a.item)} ×${a.qty}\nÍt nhất ${min} linh thạch (ngươi có ${state.spiritStones}):`, min), 10);
+  if(!amt || isNaN(amt)) return;
+  if(amt > state.spiritStones){ toast('Không đủ linh thạch'); return; }
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('auction_bid', {p_id:id, p_amount:amt}); if(error) throw error;
+    state.spiritStones -= data.paid; paApply(data.rev);
+    addLog(data.bought ? `Ngươi mua đứt ${paItemName(a.item)} ×${a.qty} với ${data.paid} linh thạch — nhận ở Hộp Thư.` : `Ngươi trả ${data.paid} linh thạch cho ${paItemName(a.item)} ×${a.qty}.`);
+    toast(data.bought ? 'Đã mua — nhận ở Hộp Thư' : 'Đã trả giá');
+  }catch(e){ toast(cloudErrMsg(e)); }
+  PA.ts = 0; paLoad(true);
+}
+async function paCancel(id){
+  try{ const {error} = await cloud.client.rpc('auction_cancel', {p_id:id}); if(error) throw error; toast('Đã hủy — đồ trả về Hộp Thư'); }catch(e){ toast(cloudErrMsg(e)); }
+  PA.ts = 0; paLoad(true);
+}
+function paSellForm(){
+  const own = paOwned();
+  if(!own.length){ toast('Túi trữ vật không có gì để bán'); return; }
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="display:flex;align-items:center;gap:8px;">${ic('hall','keep')} Đăng Bán</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <label class="cr-label">Vật phẩm</label>
+    <select id="paItem" class="acc-input">${own.map((x,i)=>`<option value="${i}">${paItemName(x)} (có ${x.n})</option>`).join('')}</select>
+    <label class="cr-label" style="margin-top:8px;">Số lượng</label><input id="paQty" class="acc-input" type="number" min="1" value="1">
+    <label class="cr-label" style="margin-top:8px;">Giá khởi điểm (linh thạch)</label><input id="paStart" class="acc-input" type="number" min="1" value="100">
+    <label class="cr-label" style="margin-top:8px;">Giá mua đứt (bỏ trống nếu không)</label><input id="paBuy" class="acc-input" type="number" min="2" placeholder="Không bắt buộc">
+    <label class="cr-label" style="margin-top:8px;">Thời gian</label>
+    <select id="paHours" class="acc-input"><option value="1">1 giờ</option><option value="6" selected>6 giờ</option><option value="24">24 giờ</option></select>
+    <p class="sec-note" style="margin:8px 0 0;">Vật phẩm rời túi ngay khi đăng. Bán được thì nhận linh thạch trừ 5% phí hội; không ai mua thì đồ trả về Hộp Thư.</p>
+    <button class="btn gold" style="margin-top:12px;" onclick="paSubmit()">Đăng Bán</button>`;
+  PA.form = own;
+  document.getElementById('overlay').classList.add('show');
+}
+async function paSubmit(){
+  const it = PA.form[+document.getElementById('paItem').value];
+  const qty = parseInt(document.getElementById('paQty').value,10), start = parseInt(document.getElementById('paStart').value,10);
+  const bv = document.getElementById('paBuy').value.trim(), buy = bv ? parseInt(bv,10) : null, hours = +document.getElementById('paHours').value;
+  if(!qty || qty<1 || qty>it.n){ toast('Số lượng không hợp lệ'); return; }
+  if(!start || start<1){ toast('Giá khởi điểm không hợp lệ'); return; }
+  if(buy!=null && (!buy || buy<=start)){ toast('Giá mua đứt phải cao hơn giá khởi điểm'); return; }
+  const item = {k:it.k, a:it.a||null, b:it.b||null};
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('auction_list', {p_item:item, p_qty:qty, p_start:start, p_buyout:buy, p_hours:hours}); if(error) throw error;
+    paLocalAdd(item, -qty); paApply(data.rev);
+    addLog(`Ngươi đăng bán ${paItemName(item)} ×${qty} ở Đấu Giá Tu Sĩ, khởi điểm ${start} linh thạch.`);
+    closeModal(); toast('Đã đăng bán');
+  }catch(e){ toast(cloudErrMsg(e)); }
+  PA.ts = 0; paLoad(true);
+}
+/* ---------- Đấu giá kịch tính: cập nhật trực tiếp, đếm ngược, gia hạn, lịch sử trả giá ---------- */
+PA.prev = {}; PA.flash = {}; PA.myTop = {};
+let paPoll = null, paTick = null;
+function paWatch(){
+  const on = state && state.activeTab==='tuido' && state.subTabs && state.subTabs.tuido==='dgts' && tsbOnline() && document.visibilityState!=='hidden';
+  if(on && !paPoll){ paPoll = setInterval(()=>{ PA.ts = 0; paLoad(true); }, 5000); paTick = setInterval(paTickDom, 1000); }
+  if(!on && paPoll){ clearInterval(paPoll); clearInterval(paTick); paPoll = paTick = null; }
+}
+function paTickDom(){
+  document.querySelectorAll('[data-end]').forEach(el=>{
+    const ms = new Date(el.dataset.end).getTime() - Date.now();
+    el.textContent = ms<=0 ? 'Đang chốt…' : ms<3600000 ? `${Math.floor(ms/60000)}:${String(Math.floor(ms%60000/1000)).padStart(2,'0')}` : paLeft(el.dataset.end).replace('còn ','');
+    el.classList.toggle('hot', ms>0 && ms<120000);
+  });
+}
+function paDiff(newList){
+  const me = cloud.user && cloud.user.id, seen = {};
+  newList.forEach(a=>{
+    seen[a.id] = 1;
+    const p = PA.prev[a.id];
+    if(p && (a.top_bid||0) > (p.top_bid||0)){
+      PA.flash[a.id] = Date.now();
+      if(p.top_bidder===me && a.top_bidder!==me){ toast(`Bị vượt giá: ${paItemName(a.item)} — giờ ${a.top_bid}`); sfx('hurt'); buzz([40,40,40]); }
+      else if(a.top_bidder!==me) sfx('tap');
+    }
+    if(p && new Date(a.ends_at) > new Date(p.ends_at) && a.top_bid) PA.flash[a.id+'x'] = Date.now();
+  });
+  Object.values(PA.prev).forEach(p=>{
+    if(!seen[p.id] && p.top_bidder===me){ toast(`Chốt! Ngươi thắng ${paItemName(p.item)} — nhận ở Hộp Thư`); sfx('ok'); fx('banner',{text:'Chốt Giá!'}); }
+  });
+  PA.prev = {}; newList.forEach(a=>PA.prev[a.id] = {id:a.id, top_bid:a.top_bid, top_bidder:a.top_bidder, ends_at:a.ends_at, item:a.item});
+}
+async function paBidModal(id){
+  const a = PA.list.find(x=>x.id===id); if(!a) return;
+  const min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
+  const steps = [min, Math.ceil(min*1.1), Math.ceil(min*1.25)].filter((v,i,arr)=>arr.indexOf(v)===i && (!a.buyout || v<a.buyout));
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${paItemName(a.item)} ×${a.qty}</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <div class="pa-mhead"><div><small>${a.top_bid?'Giá hiện tại':'Khởi điểm'}</small><b>${a.top_bid||a.start_price}</b></div><div><small>Kết thúc sau</small><b data-end="${a.ends_at}">…</b></div><div><small>Ngươi có</small><b>${state.spiritStones}</b></div></div>
+    <p class="sec-note" style="margin:6px 0 10px;">${escHtml(a.seller_name)}${a.system?' · hàng của hội':''}. Trả giá trong hai phút cuối sẽ gia hạn thêm hai phút.</p>
+    <div class="pa-quick">${steps.map(v=>`<button class="btn sm gold" ${state.spiritStones<v?'disabled':''} onclick="paPlace(${a.id},${v})">${v}</button>`).join('')}
+      ${a.buyout?`<button class="btn sm blood" ${state.spiritStones<a.buyout?'disabled':''} onclick="paPlace(${a.id},${a.buyout})">Mua đứt ${a.buyout}</button>`:''}</div>
+    <div class="pa-custom"><input id="paAmt" class="acc-input" type="number" min="${min}" value="${min}"><button class="btn sm ghost" onclick="paPlace(${a.id}, parseInt(document.getElementById('paAmt').value,10))">Trả giá</button></div>
+    <div class="pa-hist" id="paHist"><p class="flavor">Đang tải lịch sử trả giá…</p></div>`;
+  document.getElementById('overlay').classList.add('show');
+  paTickDom();
+  try{
+    const {data} = await cloud.client.from('auction_bids').select('bidder_name,amount,created_at').eq('auction_id', id).order('id', {ascending:false}).limit(8);
+    const h = document.getElementById('paHist');
+    if(h) h.innerHTML = data && data.length ? `<div class="pa-hh">Lịch sử trả giá</div>` + data.map((b,i)=>`<div class="pa-hr ${i===0?'top':''}"><span>${escHtml(b.bidder_name)}</span><b>${b.amount}</b><small>${new Date(b.created_at).toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}</small></div>`).join('') : '<p class="flavor" style="margin:0;">Chưa ai trả giá — hãy là người đầu tiên.</p>';
+  }catch(e){}
+}
+async function paPlace(id, amt){
+  const a = PA.list.find(x=>x.id===id); if(!a || !amt || isNaN(amt)) return;
+  if(amt > state.spiritStones){ toast('Không đủ linh thạch'); return; }
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('auction_bid', {p_id:id, p_amount:amt}); if(error) throw error;
+    state.spiritStones -= data.paid; paApply(data.rev);
+    PA.myTop[id] = true;
+    addLog(data.bought ? `Ngươi mua đứt ${paItemName(a.item)} ×${a.qty} với ${data.paid} linh thạch — nhận ở Hộp Thư.` : `Ngươi trả ${data.paid} linh thạch cho ${paItemName(a.item)} ×${a.qty}.`);
+    closeModal();
+    if(data.bought){ fx('banner',{text:'Mua Đứt!'}); sfx('ok'); } else { toast(data.extended ? 'Đã trả giá — phiên được gia hạn hai phút!' : 'Đã trả giá — ngươi đang dẫn đầu'); sfx('crit'); }
+  }catch(e){ toast(cloudErrMsg(e)); }
+  PA.ts = 0; paLoad(true);
+}
+
+function renderPlayerAuction(){
+  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ</div><p class="sec-note" style="margin:0 0 10px;">Đấu giá giữa các tu sĩ cần tài khoản đám mây — máy chủ giữ đồ và linh thạch để không ai gian lận được.</p><button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập</button></div>`;
+  if(!PA.ts && !PA.loading) paLoad();
+  const meId = cloud.user.id;
+  const mail = PA.mail.length ? `<div class="card pa-mail"><div class="sec-title">${ic('bell')} Hộp Thư<span>${PA.mail.length}</span></div>
+      ${PA.mail.map(m=>`<div class="pa-ml"><b>${m.stones>0?`${m.stones} linh thạch`:`${paItemName(m.item)} ×${m.qty}`}</b><small>${escHtml(m.note||'')}</small></div>`).join('')}
+      <button class="btn gold" style="margin-top:8px;" onclick="paClaim()">Nhận Tất Cả</button></div>` : '';
+  const rows = PA.list.map(a=>{ const mine = a.seller===meId, top = a.top_bidder===meId, min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
+    const fl = PA.flash[a.id] && Date.now()-PA.flash[a.id] < 2000, ext = PA.flash[a.id+'x'] && Date.now()-PA.flash[a.id+'x'] < 6000;
+    const wasMine = PA.myTop[a.id] && !top;
+    return `<div class="pa-row ${mine?'mine':''} ${fl?'flash':''} ${top?'lead':wasMine?'out':''} ${a.item.k==='rare'?'rare':''}"><div class="pa-b"><b>${paItemName(a.item)} ×${a.qty}${a.system?'<span class="pa-tag sys">Hội</span>':''}${ext?'<span class="pa-tag ext">Gia hạn!</span>':''}</b>
+      <small>${escHtml(a.seller_name)} · <span class="pa-cd" data-end="${a.ends_at}">${paLeft(a.ends_at)}</span></small>
+      <small>${a.top_bid?`Giá hiện tại <b class="pa-p">${a.top_bid}</b> — ${top?'ngươi đang dẫn':escHtml(a.top_name||'')}`:`Khởi điểm <b class="pa-p">${a.start_price}</b>`}${a.buyout?` · mua đứt ${a.buyout}`:''}</small></div>
+      <div class="pa-act">${mine?'<em>Của ngươi</em>':`${top?'<em>Đang dẫn</em>':`<button class="btn sm gold" ${state.spiritStones<min?'disabled':''} onclick="paBidModal(${a.id})">Trả giá</button>`}`}</div></div>`; }).join('');
+  const mineRows = PA.mine.map(a=>`<div class="pa-ml"><b>${paItemName(a.item)} ×${a.qty}</b><small>${({open:paLeft(a.ends_at)+(a.top_bid?` · đang ${a.top_bid}`:''),sold:`Đã bán ${a.top_bid}`,expired:'Không ai mua',cancelled:'Đã hủy'})[a.status]||a.status}</small>${a.status==='open'&&!a.top_bid?`<button class="ls-link" onclick="paCancel(${a.id})">Hủy</button>`:''}</div>`).join('');
+  setTimeout(()=>{ paWatch(); paTickDom(); }, 0);
+  return mail + `<div class="card"><div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ<span>${PA.list.length} phiên · cập nhật trực tiếp</span></div>
+    <p class="sec-note" style="margin:0 0 8px;">Tu sĩ khắp nơi và các đấu giá hội đem đồ ra đấu giá. Trả giá cao hơn ít nhất 5%; trả trong hai phút cuối thì phiên gia hạn thêm hai phút. Bị vượt giá thì linh thạch hoàn về Hộp Thư.</p>
+    <button class="btn gold" onclick="paSellForm()">${ic('hall')}Đăng Bán Vật Phẩm</button>
+    ${PA.err?`<p class="sec-note" style="color:var(--blood-bright);margin-top:8px;">${escHtml(PA.err)}</p>`:''}
+    <div style="margin-top:10px;">${PA.loading && !PA.list.length ? '<p class="flavor">Đang tải…</p>' : rows || '<p class="flavor">Chưa có phiên đấu giá nào.</p>'}</div>
+    <button class="ls-link" style="margin-top:8px;" onclick="PA.ts=0; paLoad(true)">Làm mới</button></div>
+    ${mineRows?`<div class="card"><div class="sec-title">${ic('key')} Món Ngươi Đăng</div>${mineRows}</div>`:''}`;
+}
+
+/* =====================================================================
+   CHỐNG GIAN LẬN (phía game) — máy chủ so sánh mỗi lần đồng bộ;
+   thay đổi bất thường bị bỏ, tiến trình quay về bản hợp lệ gần nhất.
+===================================================================== */
+let lastRejectSeen = null;
+async function checkSaveStatus(){
+  try{
+    const {data, error} = await cloud.client.rpc('my_save_status'); if(error || !data) return;
+    if(data.at && data.at !== lastRejectSeen){
+      const fresh = lastRejectSeen !== null || (Date.now() - new Date(data.at).getTime() < 60000);
+      lastRejectSeen = data.at;
+      if(!fresh) return;
+      const remote = await cloudFetch();
+      if(remote && state && state.root){ writeLocalSave(remote); restoreFromSave(remote); }
+      document.getElementById('modalBody').innerHTML = `<div class="story-pop"><div class="sp-kicker">${ic('warn','keep')} Máy chủ từ chối thay đổi</div>
+        <h2 class="sp-title">Tiến trình đã được khôi phục</h2>
+        <p class="sp-blurb">Lý do: ${escHtml(data.reason||'bản lưu bất thường')}. Ngươi được đưa về bản lưu hợp lệ gần nhất trên máy chủ.</p>
+        ${data.strikes>=3?'<p class="sec-note" style="color:var(--blood-bright);">Tài khoản đã bị đánh dấu ba lần — các tính năng trực tuyến (Tu Sĩ Bảng, Đấu Giá Tu Sĩ, Tông Môn, Huyết Sắc Mùa) bị khóa cho tới khi quản trị viên xem xét.</p>':`<p class="sec-note">Lần ${data.strikes}/3.</p>`}
+        <button class="btn gold" style="margin-top:12px;" onclick="closeModal()">Đã Hiểu</button></div>`;
+      document.getElementById('overlay').classList.add('show');
+    } else if(lastRejectSeen === null) lastRejectSeen = data.at || '';
+  }catch(e){}
+}
+
+/* =====================================================================
+   TÔNG MÔN TRỰC TUYẾN — đồng môn cùng góp linh thạch nâng linh mạch tông môn
+===================================================================== */
+const SO = {sect:null, level:1, total:0, members:[], ts:0, loading:false, err:''};
+const SECT_LV = [0, 20000, 80000, 250000, 700000];
+function sectOnlineBonus(){ return state && state.ng && ng().sect && SO.sect===ng().sect.id ? (SO.level-1)*0.02 : 0; }
+async function soLoad(force){
+  if(!tsbOnline() || SO.loading || (!force && Date.now()-SO.ts < 60000)) return;
+  SO.loading = true; SO.err = '';
+  try{
+    await cloudPush(true);
+    const {data, error} = await cloud.client.rpc('sect_sync'); if(error) throw error;
+    SO.sect = data.sect; SO.level = data.level||1; SO.total = data.total||0;
+    if(SO.sect){ const m = await cloud.client.from('sect_members').select('name,realm_idx,contribution').eq('sect_id', SO.sect).order('contribution', {ascending:false}).limit(15); SO.members = m.data||[]; }
+    SO.ts = Date.now();
+  }catch(e){ SO.err = cloudErrMsg(e); }
+  SO.loading = false;
+  if(state.activeTab==='hanhtau' && state.subTabs.hanhtau==='theluc') render();
+}
+async function soDonate(n){
+  if(state.spiritStones < n){ toast('Không đủ linh thạch'); return; }
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('sect_donate', {p_amount:n}); if(error) throw error;
+    state.spiritStones -= n; paApply(data.rev);
+    const up = data.level > SO.level; SO.total = data.total; SO.level = data.level;
+    addLog(`Ngươi góp ${n} linh thạch vào linh mạch tông môn.`);
+    if(up){ fx('banner',{text:`Linh mạch cấp ${data.level}`}); sfx('ok'); } else toast('Đã góp vào tông môn');
+  }catch(e){ toast(cloudErrMsg(e)); }
+  SO.ts = 0; soLoad(true);
+}
+function renderSectOnline(){
+  if(!(state.ng && ng().sect)) return '';
+  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('pagoda')} Đồng Môn Trực Tuyến</div><p class="sec-note" style="margin:0;">Đăng nhập để thấy đồng môn và góp sức cho tông môn.</p></div>`;
+  if(!SO.ts && !SO.loading) soLoad();
+  const nx = SECT_LV[SO.level] || null, prev = SECT_LV[SO.level-1] || 0;
+  return `<div class="card so-card"><div class="sec-title">${ic('pagoda')} Đồng Môn Trực Tuyến<span>Linh mạch cấp ${SO.level}/5</span></div>
+    <div class="so-bar"><span style="width:${nx?Math.min(100,(SO.total-prev)/(nx-prev)*100):100}%"></span></div>
+    <p class="sec-note" style="margin:4px 0 8px;">Tổng cống hiến ${SO.total.toLocaleString('vi-VN')} linh thạch${nx?` · cấp sau ở ${nx.toLocaleString('vi-VN')}`:' · viên mãn'}. Mỗi cấp linh mạch trên 1 cho mọi đồng môn tu luyện nhanh hơn 2% (hiện +${(SO.level-1)*2}%).</p>
+    <div class="btn-row">${[500,2000,10000].map(n=>`<button class="btn sm ${n===2000?'gold':'ghost'}" ${state.spiritStones<n?'disabled':''} onclick="soDonate(${n})">Góp ${n.toLocaleString('vi-VN')}</button>`).join('')}</div>
+    ${SO.err?`<p class="sec-note" style="color:var(--blood-bright);">${escHtml(SO.err)}</p>`:''}
+    ${SO.members.length?`<div class="so-list">${SO.members.map((m,i)=>`<div class="so-row"><span class="tsb-rank r${i+1}">${i+1}</span><b>${escHtml(m.name)}</b><small>${MAJOR_REALMS[m.realm_idx]?.name||''}</small><em>${Number(m.contribution).toLocaleString('vi-VN')}</em></div>`).join('')}</div>`:''}</div>`;
+}
+
+/* =====================================================================
+   HUYẾT SẮC THÍ LUYỆN MÙA — cấm địa chung cho đệ tử Luyện Khí, ba ngày một mùa
+===================================================================== */
+const TL = {d:null, loading:false, err:'', ts:0, last:''};
+async function tlLoad(force){
+  if(!tsbOnline() || TL.loading || (!force && Date.now()-TL.ts < 20000)) return;
+  TL.loading = true; TL.err = '';
+  try{ const {data, error} = await cloud.client.rpc('trial_status'); if(error) throw error; TL.d = data; TL.ts = Date.now(); }catch(e){ TL.err = cloudErrMsg(e); }
+  TL.loading = false;
+  if(state.activeTab==='hanhtau' && state.subTabs.hanhtau==='thiluyen') render();
+}
+async function tlJoin(){
+  try{ await paReady(); const {data, error} = await cloud.client.rpc('trial_join'); if(error) throw error; TL.d = data; addLog('Ngươi bước qua cửa Huyết Sắc Cấm Địa — giết chóc khắp nơi.'); fx('banner',{text:'Huyết Sắc Cấm Địa'}); }catch(e){ toast(cloudErrMsg(e)); }
+  TL.ts = 0; tlLoad(true);
+}
+async function tlExplore(){
+  try{
+    const {data, error} = await cloud.client.rpc('trial_explore'); if(error) throw error;
+    TL.last = data.txt; sfx(/thắng|\+/.test(data.txt)?'ok':/bại|mất/.test(data.txt)?'hurt':'tap');
+  }catch(e){ toast(cloudErrMsg(e)); }
+  TL.ts = 0; tlLoad(true);
+}
+function renderTrialSeason(){
+  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('swords')} Huyết Sắc Thí Luyện</div><p class="sec-note" style="margin:0 0 10px;">Cấm địa chung của mọi tu sĩ — cần đăng nhập.</p><button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập</button></div>`;
+  if(!TL.ts && !TL.loading) tlLoad();
+  const d = TL.d;
+  if(!d) return `<div class="card"><p class="flavor">${TL.err?escHtml(TL.err):'Đang mở cấm địa…'}</p></div>`;
+  const me = d.me, actsLeft = me ? 12 - (me.acts||0) : 12;
+  return `<div class="card tl-hero"><div class="sec-title">${ic('swords')} Huyết Sắc Thí Luyện · Mùa ${d.season}<span><span data-end="${d.ends_at}">${paLeft(d.ends_at)}</span></span></div>
+      <p class="sec-note" style="margin:0 0 8px;">Như trong truyện: chỉ đệ tử Luyện Khí vào được cấm địa. Hái linh dược để lấy điểm; gặp tu sĩ khác thì giao chiến — thắng đoạt ba phần điểm của họ, thua mất một phần tư. Mỗi ngày mười hai lần thám hiểm. Hết mùa: hạng nhất nhận đủ ba chủ dược Trúc Cơ (Ngọc Tủy Chi, Tử Hầu Hoa, Thiên Linh Quả), hạng nhì và ba nhận một vị, tới hạng mười nhận linh thảo ngàn năm; ai có điểm cũng nhận linh dược đã hái.</p>
+      ${me ? `<div class="tl-me"><div><b>${me.score}</b><small>điểm</small></div><div><b>${me.herbs}</b><small>linh dược</small></div><div><b>${me.kills}</b><small>thắng trận</small></div><div><b>${actsLeft}</b><small>lượt hôm nay</small></div></div>
+        <button class="btn blood" style="margin-top:10px;" ${actsLeft<=0?'disabled':''} onclick="tlExplore()">${ic('swords')}Thám Hiểm Sâu Hơn</button>
+        ${TL.last?`<div class="tl-last">${escHtml(TL.last)}</div>`:''}`
+      : `<button class="btn blood" ${state.realmIdx!==0||state.mortal?'disabled':''} onclick="tlJoin()">${ic('swords')}Vào Cấm Địa</button>${state.realmIdx!==0?'<p class="sec-note" style="margin:6px 0 0;">Tu sĩ Trúc Cơ trở lên bị cấm chế đẩy ra ngoài.</p>':''}`}
+    </div>
+    ${me && d.log && d.log.length ? `<div class="card"><div class="sec-title">${ic('book')} Diễn Biến</div>${d.log.map(l=>`<div class="tl-log">${escHtml(l.txt)}</div>`).join('')}</div>`:''}
+    <div class="card"><div class="sec-title">${ic('star')} Bảng Mùa Này<span>${d.count} tu sĩ</span></div>
+      ${(d.top||[]).map((t,i)=>`<div class="so-row"><span class="tsb-rank r${i+1}">${i+1}</span><b>${escHtml(t.name)}</b><small>${t.sect_id?(ngSectDef(t.sect_id)||{}).name||'':'Tán tu'}</small><em>${t.score}</em></div>`).join('') || '<p class="flavor">Chưa ai vào cấm địa mùa này.</p>'}
+      ${(d.sects||[]).length?`<div class="tl-sects">${d.sects.map(x=>`<span>${(ngSectDef(x.sect_id)||{}).name||x.sect_id}: <b>${x.score}</b> (${x.n})</span>`).join('')}</div>`:''}
+      <button class="ls-link" style="margin-top:8px;" onclick="TL.ts=0; tlLoad(true)">Làm mới</button></div>`;
+}
+
+/* =====================================================================
    TRẠNG THÁI TRÒ CHƠI
 ===================================================================== */
 let state = null;
@@ -14587,7 +15035,7 @@ function computeStats(){
 
 function tuViRateBonus(){
   if(state.doatXaRecover!=null && state.realmIdx>=state.doatXaRecover) state.doatXaRecover = null;
-  return diff().tuVi + (state.doatXaRecover!=null ? 1 : 0) + (state.root ? physiqueMods().tuVi : 0) + state.techniques.reduce((s,t)=>s+(t.bonus.tuViRate||0),0) + (state.ng ? ngTuViRate() : 0) + (state.lg && lgSeen() ? lgStatBonus().tuViRate : 0) + (state.tg && tgSeen() ? tgStatBonus().tuViRate : 0);
+  return sectOnlineBonus() + diff().tuVi + (state.doatXaRecover!=null ? 1 : 0) + (state.root ? physiqueMods().tuVi : 0) + state.techniques.reduce((s,t)=>s+(t.bonus.tuViRate||0),0) + (state.ng ? ngTuViRate() : 0) + (state.lg && lgSeen() ? lgStatBonus().tuViRate : 0) + (state.tg && tgSeen() ? tgStatBonus().tuViRate : 0);
 }
 
 function checkBreakthroughAvailable(){
@@ -15401,6 +15849,16 @@ function runTitleScreen(){
 }
 function showTitleActions(){
   const box = document.getElementById('lsActions');
+  if(CLOUD_ONLY && !(cloud.user && cloud.status==='in')){
+    const st = cloud.status;
+    box.innerHTML = st==='connecting' || st==='unknown' || !st ? `<div class="ls-note">Đang kết nối máy chủ…</div>`
+      : `<div class="ls-note" style="margin-bottom:8px;">Tiến trình tu luyện nay chỉ được lưu trên máy chủ. Đăng nhập để bước vào đạo đồ.</div>
+         <button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập / Đăng Ký</button>
+         ${st==='error'?`<button class="btn ghost" onclick="cloudInit().then(showTitleActions)">Thử Kết Nối Lại</button>`:''}`;
+    requestAnimationFrame(()=>box.classList.add('show'));
+    const acc = document.getElementById('lsAccount'); if(acc) acc.innerHTML = titleAccountLine();
+    return;
+  }
   const sv = readSave();
   if(sv){
     const st = sv.state;
