@@ -1146,10 +1146,22 @@
 
   .bottle-card{background:radial-gradient(ellipse at 20% 0%, rgba(80,200,140,.18), transparent 60%), var(--panel);}
   .bt-head{display:flex;gap:14px;align-items:center;}
-  .bt-svg{flex:none;width:58px;height:90px;filter:drop-shadow(0 0 10px rgba(120,240,180,.35));}
-  .bt-svg .bt-wave{animation:btWave 3s ease-in-out infinite alternate;}
-  @keyframes btWave{from{transform:translateX(-6px)}to{transform:translateX(6px)}}
-  .no-motion .bt-svg .bt-wave{animation:none;}
+  .bt-svg{flex:none;width:66px;height:96px;overflow:visible;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5));}
+  .bt-svg .bt-halo{opacity:calc(var(--glow)*.9);animation:btHalo 4s ease-in-out infinite;transform-origin:40px 64px;}
+  @keyframes btHalo{0%,100%{transform:scale(.94)}50%{transform:scale(1.04)}}
+  .bt-svg .bt-wave{animation:btWave 3.2s ease-in-out infinite alternate;}
+  @keyframes btWave{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
+  .bt-svg .bt-leaf{fill:rgba(200,255,228,.16);stroke:rgba(210,255,232,.55);stroke-width:.8;}
+  .bt-svg .bt-vein{stroke:rgba(210,255,232,.45);stroke-width:.6;fill:none;}
+  .bt-svg.fresh .bt-leaf{animation:btLeaf 1.8s ease-out;}
+  @keyframes btLeaf{0%{fill:rgba(255,236,150,.9);stroke:#ffe9a0;filter:drop-shadow(0 0 4px #ffd970)}100%{}}
+  .bt-svg .bt-bub{animation:btBub 4s ease-in infinite;opacity:0;}
+  .bt-svg .b2{animation-delay:1.3s} .bt-svg .b3{animation-delay:2.6s}
+  @keyframes btBub{0%{transform:translateY(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-40px);opacity:0}}
+  .bt-svg .bt-drop{opacity:0;}
+  .bt-svg.fresh .bt-drop{animation:btDrop 1.2s ease-in .2s;}
+  @keyframes btDrop{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(34px)}}
+  .no-motion .bt-svg *{animation:none !important;}
   .bt-vial{flex:none;position:relative;width:46px;height:70px;border-radius:14px 14px 22px 22px;border:2px solid rgba(120,230,170,.55);overflow:hidden;background:rgba(0,0,0,.35);box-shadow:0 0 18px rgba(80,220,150,.25);}
   .bt-vial::before{content:'';position:absolute;top:-6px;left:14px;width:14px;height:10px;border:2px solid rgba(120,230,170,.55);border-bottom:none;border-radius:3px 3px 0 0;background:#0e1413;}
   .bt-fill{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg,#8ff0c0,#2f9a6a);box-shadow:0 0 12px rgba(120,240,180,.6);transition:height .4s;}
@@ -1167,6 +1179,159 @@
   .plot-n{font-size:12px;font-weight:600;line-height:1.25;}
   .plot-a{font-size:10.5px;color:var(--text-faint);}
   .plot-b{display:flex;gap:4px;margin-top:2px;} .plot-b .btn{padding:5px 7px;font-size:11px;min-height:0;}
+  .garden-card{background:radial-gradient(ellipse at 50% 0%, rgba(120,200,120,.12), transparent 60%), var(--panel);}
+  .plot-grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+  .plot2{display:flex;flex-direction:column;align-items:center;text-align:center;padding:6px 8px 10px;border-radius:14px;border:1px solid rgba(160,120,70,.35);background:linear-gradient(180deg,rgba(40,60,40,.35),rgba(30,22,14,.55));}
+  .plot2.empty{border-style:dashed;opacity:.85;}
+  .plot2.ripe{border-color:rgba(240,207,140,.55);box-shadow:0 0 14px rgba(240,207,140,.12) inset;}
+  .plot2.t4,.plot2.t5,.plot2.t6{border-color:rgba(255,190,120,.7);box-shadow:0 0 18px rgba(255,180,90,.18);}
+  .pl-svg{width:100%;max-width:150px;height:86px;overflow:visible;}
+  .pl-sway{transform-origin:50px 72px;animation:plSway 4.5s ease-in-out infinite;}
+  @keyframes plSway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+  .pl-flower{animation:plBloom 3s ease-in-out infinite;}
+  @keyframes plBloom{0%,100%{opacity:.9}50%{opacity:1;filter:drop-shadow(0 0 3px #fff3b0)}}
+  .pl-aura{animation:plAura 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+  @keyframes plAura{0%,100%{transform:scale(.8);opacity:.5}50%{transform:scale(1.15);opacity:1}}
+  .pl-spark{animation:plSpark 2.4s ease-in-out infinite;opacity:0;} .pl-spark.s1{animation-delay:.8s} .pl-spark.s2{animation-delay:1.6s}
+  @keyframes plSpark{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+  .pl-drop{opacity:0;} .pl-svg.grew .pl-drop{animation:plDrop .9s ease-in;}
+  @keyframes plDrop{0%{opacity:0;transform:translateY(0)}15%{opacity:1}100%{opacity:0;transform:translateY(44px)}}
+  .pl-svg.grew .pl-sway{animation:plGrow .7s ease-out, plSway 4.5s ease-in-out .7s infinite;}
+  @keyframes plGrow{0%{transform:scale(.85)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+  .pl-name{font-size:13.5px;font-weight:700;margin-top:2px;display:flex;align-items:center;gap:5px;}
+  .pl-ripe{font-size:9.5px;font-weight:700;letter-spacing:.5px;color:#1a1206;background:var(--gold);border-radius:6px;padding:1px 5px;}
+  .pl-age{font-size:11px;color:var(--text-dim);margin-top:1px;}
+  .pl-bar{width:86%;height:4px;border-radius:2px;background:rgba(255,255,255,.07);overflow:hidden;margin:6px 0 3px;} .pl-bar span{display:block;height:100%;background:linear-gradient(90deg,#4cc38a,#d4e98a);}
+  .pl-hint{font-size:10.5px;color:var(--text-faint);min-height:14px;line-height:1.3;}
+  .pl-btns{display:flex;gap:5px;margin-top:7px;} .pl-btns .btn{padding:6px 9px;min-height:0;font-size:11.5px;} .pl-btns .ic{width:12px;height:12px;margin-right:3px;}
+  .plot2 .btn.sm{margin-top:6px;}
+  .no-motion .pl-svg *{animation:none !important;}
+  .ws-card{background:radial-gradient(ellipse at 15% 0%, rgba(212,175,106,.12), transparent 55%), var(--panel);}
+  .ws-card.locked{background:var(--panel);}
+  .ws-head{display:flex;gap:14px;align-items:center;}
+  .ws-pic{flex:none;width:84px;height:84px;border-radius:16px;background:radial-gradient(circle at 50% 60%, rgba(255,255,255,.06), rgba(0,0,0,.35));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .ws-art{width:76px;height:76px;overflow:visible;}
+  .ws-info{flex:1;min-width:0;}
+  .ws-name{font-family:var(--fh);font-size:20px;color:var(--gold-bright);line-height:1.2;}
+  .ws-rank{font-size:12px;color:var(--jade-bright);margin-top:2px;} .locked .ws-rank{color:var(--text-faint);}
+  .ws-pips{display:flex;gap:3px;margin-top:7px;} .ws-pips i{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.08);} .ws-pips i.on{background:linear-gradient(90deg,var(--jade),var(--jade-bright));}
+  .ws-exp{height:3px;border-radius:2px;background:rgba(255,255,255,.06);margin-top:5px;overflow:hidden;} .ws-exp span{display:block;height:100%;background:var(--gold);}
+  .ws-expn{font-size:10.5px;color:var(--text-faint);margin-top:3px;}
+  .ws-line{font-size:12.5px;font-style:italic;color:var(--text-dim);line-height:1.55;margin:10px 0 0;padding-left:10px;border-left:2px solid var(--gold-dim);}
+  .ws-flame{transform-origin:50px 86px;animation:wsFlame .5s ease-in-out infinite alternate;} @keyframes wsFlame{from{transform:scaleY(.85) scaleX(1.05)}to{transform:scaleY(1.12) scaleX(.95)}}
+  .ws-glow{animation:wsGlow 1.4s ease-in-out infinite;} @keyframes wsGlow{0%,100%{opacity:.6}50%{opacity:1}}
+  .ws-smoke{animation:wsSmoke 3.5s ease-out infinite;} @keyframes wsSmoke{0%{transform:translateY(8px);opacity:0}30%{opacity:1}100%{transform:translateY(-8px);opacity:0}}
+  .ws-hammer{transform-origin:86.5px 30px;animation:wsHammer 1.2s ease-in infinite;} @keyframes wsHammer{0%,60%{transform:translateY(-6px) rotate(-22deg)}75%{transform:translateY(0) rotate(2deg)}100%{transform:translateY(-6px) rotate(-22deg)}}
+  .ws-hotbar{animation:wsGlow 1.2s ease-in-out infinite;} .ws-vent{animation:wsGlow .9s ease-in-out infinite;}
+  .ws-khiSu .ws-sparks circle{animation-duration:1.2s;animation-delay:.85s;} .ws-khiSu .ws-sparks circle:nth-child(2){animation-delay:.88s} .ws-khiSu .ws-sparks circle:nth-child(3){animation-delay:.92s} .ws-khiSu .ws-sparks circle:nth-child(4){animation-delay:.96s} .ws-khiSu .ws-sparks circle:nth-child(5){animation-delay:.9s}
+  .ws-khiSu .ws-hammer{transform-origin:86.5px 30px;}
+  .ws-float{animation:wsFloat 2.8s ease-in-out infinite;} @keyframes wsFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  .ws-sparks circle{animation:wsSpark 1.2s ease-out infinite;} .ws-sparks circle:nth-child(2){animation-delay:.4s} .ws-sparks circle:nth-child(3){animation-delay:.8s}
+  @keyframes wsSpark{0%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--sx,6px),-14px);opacity:0}}
+  .ws-rune{animation:wsRune 2.4s ease-in-out infinite;} @keyframes wsRune{0%,100%{filter:drop-shadow(0 0 0 #ff6a4a)}50%{filter:drop-shadow(0 0 4px #ff8a5a)}}
+  .ws-brush{animation:wsBrush 2.4s ease-in-out infinite;transform-origin:84px 10px;} @keyframes wsBrush{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}
+  .ws-spin{transform-origin:50px 50px;animation:wsSpin 24s linear infinite;} @keyframes wsSpin{to{transform:rotate(360deg)}}
+  .ws-bob{animation:wsFloat 3.4s ease-in-out infinite;} .ws-eyes{animation:wsGlow 2s ease-in-out infinite;} .ws-core{animation:wsGlow 1.6s ease-in-out infinite;}
+  .tg-d{transform:rotate(var(--a)) translateX(var(--r));animation:tgOrb var(--t) linear infinite;}
+  @keyframes tgOrb{from{transform:rotate(var(--a)) translateX(var(--r))}to{transform:rotate(calc(var(--a) + 360deg)) translateX(var(--r))}}
+  .locked .ws-art{opacity:.55;filter:grayscale(.4);}
+  .no-motion .ws-art *{animation:none !important;}
+  .hero2{display:flex;gap:14px;align-items:center;overflow:hidden;position:relative;background:radial-gradient(ellipse at 10% 30%, hsla(var(--h),60%,40%,.22), transparent 60%), var(--panel);}
+  .h2-port{flex:none;width:90px;height:108px;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.45));border:1px solid hsla(var(--h),50%,60%,.4);}
+  .h2-port svg{width:100%;height:100%;}
+  .h2-aura{animation:breathe 4s ease-in-out infinite;transform-origin:50px 52px;}
+  .h2-ribbon{transform-origin:56px 24px;animation:h2Rib 4s ease-in-out infinite;} @keyframes h2Rib{0%,100%{transform:rotate(0)}50%{transform:rotate(6deg)}}
+  .h2-hair{transform-origin:50px 34px;animation:h2Hair 5s ease-in-out infinite;} @keyframes h2Hair{0%,100%{transform:skewX(0)}50%{transform:skewX(2deg)}}
+  .h2-fig{animation:wsFloat 6s ease-in-out infinite;}
+  .no-motion .h2-port *{animation:none !important;}
+  .h2-text{flex:1;min-width:0;}
+  .h2-name{font-family:var(--fh);font-size:22px;color:var(--gold-bright);line-height:1.15;}
+  .h2-realm{font-size:13.5px;font-weight:700;color:hsl(var(--h),60%,72%);margin-top:3px;}
+  .h2-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+  .h2-tags span{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text-dim);}
+  .h2-tags .ic{width:11px;height:11px;margin:0;}
+  .h2-age{font-size:11px;color:var(--text-faint);margin-top:6px;}
+  .stat-grid .stat-tile{background:linear-gradient(180deg,#151c1d,#101516);}
+  .inv-hero{display:flex;gap:12px;align-items:center;background:radial-gradient(ellipse at 10% 20%, rgba(212,175,106,.16), transparent 60%), var(--panel);}
+  .inv-bag{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(212,175,106,.12);border:1px solid var(--gold-dim);}
+  .inv-bag .ic{width:24px;height:24px;margin:0;color:var(--gold-bright);}
+  .inv-ht{font-family:var(--fh);font-size:19px;color:var(--gold-bright);} .inv-hs{font-size:12px;color:var(--text-dim);}
+  .inv-card.tone-jade .inv-ic{background:rgba(80,200,140,.14);} .inv-card.tone-jade .inv-ic svg{color:var(--jade-bright);}
+  .inv-card.tone-gold .inv-ic{background:rgba(212,175,106,.16);}
+  .inv-card.tone-violet .inv-ic{background:rgba(160,120,230,.16);} .inv-card.tone-violet .inv-ic svg{color:#c9a8ff;} .inv-card.tone-violet .inv-tile{border-color:rgba(160,120,230,.35);}
+  .inv-card.tone-earth .inv-ic{background:rgba(190,140,90,.16);} .inv-card.tone-earth .inv-ic svg{color:#e6b67a;}
+  .inv-tile{box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+  .inv-c{background:rgba(0,0,0,.45);border:1px solid var(--gold-dim);border-radius:8px;padding:0 5px;line-height:16px;}
+  .hero4{background:radial-gradient(ellipse at 0% 0%, hsla(var(--h),60%,40%,.22), transparent 60%), var(--panel);border-color:hsla(var(--h),50%,55%,.3);}
+  .hero3{padding:0;overflow:hidden;}
+  .hp-scene{display:block;width:100%;height:180px;}
+  .hp-text{padding:12px 14px 14px;margin-top:-22px;position:relative;background:linear-gradient(180deg,transparent,var(--panel) 34px);}
+  .hp-aura{animation:breathe 4.5s ease-in-out infinite;transform-origin:112px 54px;}
+  .hp-mote{animation:hpMote var(--d) ease-in-out infinite;animation-delay:var(--dl);}
+  @keyframes hpMote{0%,100%{opacity:.15;transform:translateY(0)}50%{opacity:1;transform:translateY(-6px)}}
+  .hp-fig{animation:wsFloat 6s ease-in-out infinite;}
+  .hp-sleeve{transform-origin:100px 76px;animation:hpSleeve 5s ease-in-out infinite;} @keyframes hpSleeve{0%,100%{transform:rotate(0)}50%{transform:rotate(-2deg)}}
+  .hp-orb{transform-box:fill-box;transform-origin:center;animation:hpOrb 1.8s ease-in-out infinite;} @keyframes hpOrb{0%,100%{transform:scale(.85);opacity:.8}50%{transform:scale(1.2);opacity:1}}
+  .hp-hair{transform-origin:114px 34px;animation:h2Hair 5s ease-in-out infinite;}
+  .hp-ribbon{transform-origin:119px 26px;animation:h2Rib 4s ease-in-out infinite;}
+  .no-motion .hero3 *{animation:none !important;}
+  .tk-tot{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+  .tk-tot span{display:flex;flex-direction:column;align-items:center;min-width:62px;padding:7px 8px;border-radius:10px;background:rgba(80,200,140,.08);border:1px solid rgba(80,200,140,.25);font-size:10.5px;color:var(--text-faint);}
+  .tk-tot b{font-size:15px;color:var(--jade-bright);}
+  .tk-filter{display:grid !important;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:10px;}
+  .tk-filter button{font-size:11px;padding:7px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;} .tk-filter .ic{width:13px;height:13px;margin:0;}
+  .tk-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+  .tk-tile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;font-family:inherit;color:var(--text);padding:10px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,#161d1e,#101516);min-height:86px;}
+  .tk-tile:active{transform:scale(.98);}
+  .tk-ic{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);}
+  .tk-ic .ic{width:15px;height:15px;margin:0;}
+  .k-atk .tk-ic{background:rgba(220,110,90,.15);} .k-atk .tk-ic .ic{color:#ff9a84;}
+  .k-def .tk-ic{background:rgba(212,175,106,.15);} .k-def .tk-ic .ic{color:var(--gold-bright);}
+  .k-spd .tk-ic{background:rgba(110,180,230,.15);} .k-spd .tk-ic .ic{color:#9fd4ff;}
+  .k-tu .tk-ic{background:rgba(80,200,140,.15);} .k-tu .tk-ic .ic{color:var(--jade-bright);}
+  .tk-n{font-size:13px;font-weight:700;line-height:1.3;}
+  .tk-b{font-size:10.5px;color:var(--jade-bright);line-height:1.35;}
+  .tk-chips{display:flex;flex-wrap:wrap;gap:5px;} .tk-chips span{font-size:12px;padding:4px 9px;border-radius:12px;background:rgba(80,200,140,.1);border:1px solid rgba(80,200,140,.3);color:var(--jade-bright);}
+  .tk-man{padding:11px;border-radius:12px;border:1px solid var(--gold-dim);background:rgba(212,175,106,.05);margin-bottom:8px;}
+  .tk-man.locked{opacity:.6;border-color:var(--border);}
+  .tk-man-h{display:flex;justify-content:space-between;gap:8px;} .tk-man-h b{font-size:14px;} .tk-man-h em{font-style:normal;font-size:11px;color:var(--text-faint);}
+  .tk-man-d{font-size:12px;color:var(--text-dim);margin:5px 0 7px;line-height:1.5;}
+  .tk-story{display:flex;flex-wrap:wrap;gap:6px;}
+  .tk-story span{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border-radius:14px;border:1px solid var(--border);}
+  .tk-story .ok{background:rgba(80,200,140,.1);border-color:rgba(80,200,140,.35);color:var(--jade-bright);} .tk-story .ok .ic{width:11px;height:11px;margin:0;}
+  .tk-story .wait{color:var(--text-faint);border-style:dashed;}
+  .bt-wrap > .card:not(.fold-card){border-left:3px solid var(--gold-dim);background:radial-gradient(ellipse at 0% 0%, rgba(212,175,106,.1), transparent 55%), var(--panel);}
+  .bt-wrap .sec-title{font-size:16px;}
+  .cr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+  .cr-tile{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px 9px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,#161d1e,#101516);font-family:inherit;color:var(--text);}
+  .cr-tile.off{opacity:.5;} .cr-tile.off .cr-art{filter:grayscale(.6);}
+  .cr-art{width:46px;height:46px;display:flex;align-items:center;justify-content:center;} .cr-art svg{width:44px;height:44px;}
+  .cr-nm{font-size:11.5px;font-weight:700;text-align:center;line-height:1.2;}
+  .cr-rk{font-size:10px;color:var(--jade-bright);} .off .cr-rk{color:var(--text-faint);}
+  .cr-tile .cr-pips{display:flex;gap:2px;width:80%;} .cr-tile .cr-pips i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.08);} .cr-tile .cr-pips i.on{background:var(--jade);}
+  .cr-tile .cr-exp{width:80%;height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;} .cr-tile .cr-exp span{display:block;height:100%;background:var(--gold);}
+  .tl-art{width:56px !important;height:80px !important;}
+  .tl-sway{transform-origin:30px 4px;animation:tlSway 4s ease-in-out infinite;} @keyframes tlSway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+  .tl-glow{animation:wsGlow 2.4s ease-in-out infinite;}
+  .tl-border{animation:tlBorder 3s linear infinite;} @keyframes tlBorder{to{stroke-dashoffset:-18}}
+  .tl-ink path{stroke-dasharray:80;stroke-dashoffset:80;animation:tlInk 5s ease-in-out infinite;}
+  .tl-ink path:nth-child(2){animation-delay:.4s} .tl-ink path:nth-child(3){animation-delay:.8s} .tl-ink path:nth-child(4){animation-delay:1.2s} .tl-ink path:nth-child(5){animation-delay:1.6s} .tl-ink path:nth-child(6){animation-delay:2s}
+  @keyframes tlInk{0%{stroke-dashoffset:80}35%,85%{stroke-dashoffset:0;filter:drop-shadow(0 0 2px #ff5a3a)}100%{stroke-dashoffset:0}}
+  .tl-spark circle{animation:plSpark 2.6s ease-in-out infinite;} .tl-spark circle:nth-child(2){animation-delay:.9s} .tl-spark circle:nth-child(3){animation-delay:1.7s}
+  .no-motion .tl-ink path{stroke-dashoffset:0;}
+  .tsb-mine b{display:block;font-family:var(--fh);font-size:18px;color:var(--gold-bright);} .tsb-mine small{font-size:12px;color:var(--text-dim);}
+  .tsb-row{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--border-soft);}
+  .tsb-row.me{background:rgba(212,175,106,.07);border-radius:10px;padding:9px 8px;}
+  .tsb-rank{flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:rgba(255,255,255,.05);color:var(--text-dim);}
+  .tsb-rank.r1{background:linear-gradient(180deg,#f6dc9a,#b8893e);color:#1a1206;} .tsb-rank.r2{background:linear-gradient(180deg,#e6ecee,#8e989c);color:#111;} .tsb-rank.r3{background:linear-gradient(180deg,#e0a878,#8a5a2c);color:#1a1206;}
+  .tsb-b{flex:1;min-width:0;display:flex;flex-direction:column;} .tsb-b b{font-size:14px;} .tsb-b b em{font-style:normal;font-size:10.5px;color:var(--gold);margin-left:4px;} .tsb-b small{font-size:11px;color:var(--text-faint);}
+  .tsb-you{font-size:11px;color:var(--gold);}
+  .duel-vs{display:flex;align-items:center;gap:10px;} .duel-vs > div{flex:1;min-width:0;} .duel-vs b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;} .duel-vs em{font-style:normal;font-family:var(--fh);color:var(--gold);}
+  .duel-hp{display:block;height:8px;border-radius:4px;background:rgba(0,0,0,.4);overflow:hidden;margin-top:4px;} .duel-hp i{display:block;height:100%;background:linear-gradient(90deg,#2f8f67,#6fe0a8);transition:width .3s;}
+  .duel-hp.foe i{background:linear-gradient(90deg,#b8412f,#ff7a5c);}
+  .duel-log{height:200px;overflow-y:auto;margin:12px 0;padding:8px;border-radius:10px;background:rgba(0,0,0,.3);}
+  .duel-ln{font-size:12.5px;padding:4px 0;animation:vnIn .3s ease-out;} .duel-ln.a{color:var(--jade-bright);} .duel-ln.d{color:#ff9a84;}
+  .duel-res{text-align:center;font-family:var(--fh);font-size:30px;} .duel-res.win{color:var(--gold-bright);} .duel-res.lose{color:var(--blood-bright);}
   .shop-tabs{display:grid !important;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:8px;}
   .shop-tabs button{font-size:10.5px;padding:7px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;}
   .shop-tabs .ic{width:14px;height:14px;margin:0;}
@@ -1455,7 +1620,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.51.2';
+const GAME_VERSION = '1.54.0';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1601,6 +1766,57 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.54.0', date:'02/10/2026', title:'Tu Sĩ Bảng và Đấu Pháp', items:[
+    ['moi','Tu Sĩ Bảng (Hành Tẩu): xếp hạng người chơi theo cảnh giới hoặc danh vọng. Lưu danh lên bảng bằng bản lưu đám mây — máy chủ đọc thẳng bản lưu, không lấy số liệu từ máy người chơi.'],
+    ['moi','Đấu pháp với phân thân của người chơi khác: máy chủ tự tính trận theo chỉ số hai bên, trận đấu hiện từng chiêu với thanh khí huyết. Thắng được danh vọng (đánh người cảnh giới cao hơn được nhiều hơn) và linh thạch; mỗi ngày mười trận.']
+  ]},
+  {v:'1.53.7', date:'01/10/2026', title:'Phù lục và cái đe', items:[
+    ['doi','Phù Lục Sư: lá phù dài hơi cong, nền ngọc lam viền hoa văn chạy quanh, khung ấn ở giữa, chu sa đỏ tự viết từng nét rồi phát sáng, lá phù khẽ đung đưa, linh quang lấp lánh.'],
+    ['doi','Luyện Khí Sư: cái đe vẽ lại theo dáng đe rèn thật — mỏ dài sáng bóng, mặt đe phẳng có lỗ, eo thắt, chân đế bậc rộng — với thỏi thép nung đỏ tóe lửa trên mặt đe.']
+  ]},
+  {v:'1.53.6', date:'01/10/2026', title:'Công pháp, bí truyền, tay nghề', items:[
+    ['sua','Thông báo nhận vật phẩm từ cốt truyện dùng đúng chữ: công pháp thì "học được", vật phẩm như Chưởng Thiên Bình thì "có được".'],
+    ['doi','Công Pháp: tổng chỉ số cộng thêm từ mọi công pháp, lọc theo Công / Thủ / Tốc / Tu luyện, mỗi công pháp một ô có biểu tượng màu — chạm để xem mô tả. Công pháp trong cốt truyện thành hàng nhãn gọn, không lộ tên cảnh chưa đọc.'],
+    ['doi','Bí Truyền: thẻ truyền thừa đã có viền vàng nổi bật. Tay Nghề ở Nhân Vật thành các ô có minh họa từng nghề, cấp bậc và vạch cấp.']
+  ]},
+  {v:'1.53.5', date:'01/10/2026', title:'Bỏ chân dung', items:[
+    ['doi','Bỏ hình chân dung ở Tổng Quan; thẻ nhân vật chỉ còn tên, cảnh giới, đạo lộ, linh căn, tông môn, tuổi và thọ nguyên trên nền sắc theo cảnh giới.']
+  ]},
+  {v:'1.53.4', date:'01/10/2026', title:'Chân dung mới', items:[
+    ['doi','Thẻ nhân vật thành bức tranh ngang: tu sĩ nửa người giơ tay niệm pháp quyết, đầu ngón tay ngưng một luồng linh quang; ống tay áo rộng, tóc dài, dải lụa bay; nền rừng sương đêm với linh khí lơ lửng.'],
+    ['doi','Màu y phục theo đạo lộ (Pháp Tu tím, Kiếm Tu ngọc, Thể Tu nâu, Ma Tu đỏ, Phật Tu vàng...), hào quang và linh quang theo màu cảnh giới.']
+  ]},
+  {v:'1.53.3', date:'01/10/2026', title:'Minh họa tinh xảo hơn', items:[
+    ['doi','Chân dung tu sĩ: mặt thanh tú, tóc mái lệch, búi tóc đai ngọc cài trâm, dải lụa buộc tóc bay theo gió, áo giao lĩnh lớp trong lớp ngoài, đai lưng có ngọc, chuôi kiếm sau vai.'],
+    ['doi','Lò luyện đan kiểu lư hương cổ: ba chân, thân tròn viền hồi văn với đồ hình âm dương, quai cuộn hai bên, tầng trên có cửa sổ hình thoi phát lửa, mái lầu lục giác và chóp nhọn, khói cuộn bay lên. Cái đe theo kiểu đe rèn thật: mỏ dài thon, mặt đe vuông có lỗ, eo thắt cong, chân đế bậc rộng.']
+  ]},
+  {v:'1.53.2', date:'01/10/2026', title:'Vẽ lại minh họa', items:[
+    ['doi','Chân dung tu sĩ vẽ lại: búi tóc cài trâm, tóc dài buông hai bên, áo giao lĩnh tay rộng thắt đai, viền sáng theo màu cảnh giới, hào quang thở nhẹ.'],
+    ['doi','Lò luyện đan vẽ lại kiểu đan lư đồng ba chân, hai quai dựng đứng, nắp nhiều tầng có chóp, cửa lò đỏ rực, lửa cháy dưới đáy. Cái đe vẽ lại đủ mỏ, eo, chân đế, thỏi thép nung đỏ và búa nện tóe lửa.']
+  ]},
+  {v:'1.53.1', date:'01/10/2026', title:'Trau chuốt', items:[
+    ['doi','Tên linh thảo viết hoa: Linh Thảo Mười Năm, Trăm Năm, Ngàn Năm...'],
+    ['doi','Luyện Đan Sư có đan lư ba chân, nắp vòm, quai hai bên, lửa cháy dưới đáy và ô lửa đỏ rực giữa thân; Luyện Khí Sư có cái đe sắt với thỏi thép nung đỏ và búa nện xuống tóe lửa.'],
+    ['doi','Nhân Vật: thẻ chân dung tu sĩ có hào quang theo màu cảnh giới, tên, cảnh giới, đạo lộ, linh căn, tông môn, tuổi và thọ nguyên.'],
+    ['doi','Túi Đồ: thẻ Túi Trữ Vật đầu trang; mỗi nhóm một sắc riêng — đan dược xanh ngọc, phù vàng, bảo vật tím, nguyên liệu nâu đất.']
+  ]},
+  {v:'1.53.0', date:'01/10/2026', title:'Động phủ trau chuốt', items:[
+    ['doi','Mỗi xưởng nghề trong Động Phủ có minh họa động riêng: đan lô bập bùng lửa và khói, phi kiếm lơ lửng trên đe tóe lửa, lá phù chu sa phát sáng cùng ngọn bút, trận bàn bát quái xoay chậm, khôi lỗi mắt sáng lơ lửng; Linh Trùng Viên có đàn Phệ Kim Trùng bay quanh, đông dần theo số lượng.'],
+    ['doi','Đầu mỗi xưởng ghi cấp bậc (học đồ tới tông sư), vạch cấp, thanh thành thạo, và một dòng nhắc chuyện của Hàn Lập với nghề đó trong truyện.']
+  ]},
+  {v:'1.52.2', date:'01/10/2026', title:'Dược viên mới', items:[
+    ['doi','Dược viên vẽ lại thành các luống đất có cây linh thảo: mầm non, cây con, bụi lá, nở hoa, rồi linh thảo ngàn năm vạn năm tỏa hào quang và tia sáng; cây đung đưa nhẹ, lớn bật lên khi được nhỏ lục dịch.'],
+    ['doi','Mỗi luống ghi rõ dược tính, thanh tiến độ tới mốc kế tiếp, nhãn "Chín" khi thu được, và nói rõ khi bình Nguyệt Hoa chưa đủ cấp để thúc lâu năm hơn.']
+  ]},
+  {v:'1.52.1', date:'01/10/2026', title:'Chưởng Thiên Bình mới', items:[
+    ['doi','Chưởng Thiên Bình vẽ lại tinh xảo hơn theo mô tả nguyên tác: men ngọc xanh biếc nhiều lớp, lá khắc nổi quanh thân, lục dịch gợn sóng với bọt nhỏ nổi lên.'],
+    ['moi','Mỗi khi bình ngưng thêm giọt mới, hoa văn lá sáng vàng kim và một giọt lục dịch rơi từ miệng bình; quầng sáng quanh bình mạnh yếu theo tuần trăng.']
+  ]},
+  {v:'1.52.0', date:'01/10/2026', title:'Thời gian cốt truyện đúng nguyên tác', items:[
+    ['doi','Khoảng thời gian giữa các cảnh giờ đúng như truyện: bế quan bốn tháng thì bốn tháng sau mới tới hạn, hai mươi năm tu luyện thì phải hai mươi năm, hai mươi bảy năm trong Linh Miểu Viên... Có gần ba mươi mốc như vậy.'],
+    ['moi','Khi thời gian chưa tới, trình đọc và danh sách cảnh ghi còn bao lâu và vì sao; có nút bế quan chờ (nhận tu vi như bế quan) hoặc cứ chơi tiếp để thời gian tự trôi.'],
+    ['doi','Trượt khảo thí Thất Huyền Môn phải đợi đủ năm năm tới kỳ sau, có đếm ngược thay vì nhảy thời gian tức thì.']
+  ]},
   {v:'1.51.2', date:'01/10/2026', title:'Gọn lại', items:[
     ['doi','Chưởng Thiên Bình vẽ lại thành chiếc bình nhỏ xanh biếc có hoa văn hình lá như trong truyện; lục dịch dâng lên trong lòng bình, mặt nước khẽ gợn.'],
     ['doi','Bỏ Nhân Vật Chí ở trang Cốt Truyện và bỏ Nhật Khóa ở trang Tu Luyện.']
@@ -2031,7 +2247,7 @@ const ENEMY_NAMES = [
    ngươi cũng bị hắn bỏ xa thêm một đoạn. */
 const RIVAL_NAMES = ["Bạch Vân Phong","Tiêu Nguyệt Hàn","Diệp Thiên Hành","Chu Tử Yên","Hàn Nhược Vi"];
 
-const HERB_NAMES = ["Linh thảo mười năm","Linh thảo trăm năm","Linh thảo ba trăm năm","Linh thảo ngàn năm","Linh thảo ba ngàn năm","Linh thảo vạn năm"];
+const HERB_NAMES = ["Linh Thảo Mười Năm","Linh Thảo Trăm Năm","Linh Thảo Ba Trăm Năm","Linh Thảo Ngàn Năm","Linh Thảo Ba Ngàn Năm","Linh Thảo Vạn Năm"];
 const PILL_NAMES = ["Hoàng Long Đan","Tụ Linh Đan","Chân Nguyên Đan","Tăng Nguyên Đan","Đằng Long Đan","Tu vi đan thượng phẩm"];
 
 /* Đan dược tăng chỉ số vĩnh viễn — cực kỳ hiếm, không thể luyện chế mà chỉ có
@@ -3374,8 +3590,8 @@ function renderNgHeritage(){
    công thức đều hiện rõ nguyên liệu + tỷ lệ thành công trước khi làm.
 ===================================================================== */
 const MAT_TYPES = {
-  khoang:{name:'Khoáng Thạch', icon:'stone',   use:'Luyện khí, trận kỳ, thủ khôi', tiers:['Khoáng thạch hạ phẩm','Khoáng thạch trung phẩm','Khoáng thạch thượng phẩm']},
-  moc:   {name:'Linh Mộc',     icon:'root',    use:'Khôi lỗi, trận pháp',          tiers:['Linh mộc trăm năm','Linh mộc ngàn năm','Linh mộc vạn năm']},
+  khoang:{name:'Khoáng Thạch', icon:'stone',   use:'Luyện khí, trận kỳ, thủ khôi', tiers:['Khoáng Thạch Hạ Phẩm','Khoáng Thạch Trung Phẩm','Khoáng Thạch Thượng Phẩm']},
+  moc:   {name:'Linh Mộc',     icon:'root',    use:'Khôi lỗi, trận pháp',          tiers:['Linh Mộc Trăm Năm','Linh Mộc Ngàn Năm','Linh Mộc Vạn Năm']},
   huyet: {name:'Yêu Huyết',    icon:'drop',    use:'Mực vẽ phù, đan liệu thương',  tiers:['Yêu Huyết cấp 1–4','Yêu Huyết cấp 5–7','Yêu Huyết cấp 8–10']},
   yeudan:{name:'Yêu Đan',      icon:'crystal', use:'Lõi khôi lỗi, phù cao cấp, Phá Cảnh Đan', tiers:['Yêu Đan cấp 5–6','Yêu Đan cấp 7–8','Yêu Đan cấp 9–10']}
 };
@@ -3472,9 +3688,9 @@ function craftChance(id, difficulty, hasRecipe, extra){
 
 /* ---------------- Luyện Đan ---------------- */
 const HEAL_PILLS = [
-  {tier:1, name:'Liệu Thương Đan hạ phẩm', pct:0.30, minLvl:1, diff:0, price:30,  ing:[H(1,2), M('huyet',1,1)]},
-  {tier:2, name:'Liệu Thương Đan trung phẩm', pct:0.50, minLvl:2, diff:2, price:120, ing:[H(3,2), M('huyet',2,1)]},
-  {tier:3, name:'Liệu Thương Đan thượng phẩm', pct:0.80, minLvl:4, diff:4, price:400, ing:[H(5,2), M('huyet',3,1)]}
+  {tier:1, name:'Liệu Thương Đan Hạ Phẩm', pct:0.30, minLvl:1, diff:0, price:30,  ing:[H(1,2), M('huyet',1,1)]},
+  {tier:2, name:'Liệu Thương Đan Trung Phẩm', pct:0.50, minLvl:2, diff:2, price:120, ing:[H(3,2), M('huyet',2,1)]},
+  {tier:3, name:'Liệu Thương Đan Thượng Phẩm', pct:0.80, minLvl:4, diff:4, price:400, ing:[H(5,2), M('huyet',3,1)]}
 ];
 function breakthroughPillRecipe(){
   const r = state.realmIdx;
@@ -3943,7 +4159,7 @@ const NAV = [
   {id:'tuluyen', icon:'taiji',  label:'Tu Luyện', subs:[['tuluyen','Bế Quan','taiji'],['congphap','Công Pháp','book'],['bitruyen','Bí Truyền','key'],['phaptac','Pháp Tắc','taiji'],['phithang','Phi Thăng','cloud'],['thoigian','Thời Gian','hourglass']]},
   {id:'cottruyen', icon:'book', label:'Cốt Truyện', subs:null},
   {id:'nhanvat', icon:'person', label:'Nhân Vật', subs:[['tongquan','Tổng Quan','chart'],['tuchat','Tư Chất','root'],['daolu','Đạo Lữ','lotus'],['dode','Đồ Đệ','person'],['nhanmach','Nhân Mạch','person'],['linhsung','Linh Sủng','bug']]},
-  {id:'hanhtau', icon:'map',    label:'Hành Tẩu', subs:[['bando','Bản Đồ','map'],['theluc','Thế Lực','pagoda'],['bicanh','Bí Cảnh','mountain'],['yeuthu','Yêu Thú','claw']]},
+  {id:'hanhtau', icon:'map',    label:'Hành Tẩu', subs:[['bando','Bản Đồ','map'],['theluc','Thế Lực','pagoda'],['bicanh','Bí Cảnh','mountain'],['yeuthu','Yêu Thú','claw'],['tusibang','Tu Sĩ Bảng','star']]},
   {id:'dongphu', icon:'ding',   label:'Động Phủ', subs:[['duocvien','Dược Viên','herb'],['linhtrung','Linh Trùng','bug'],['luyendan','Luyện Đan','flask'],['luyenkhi','Luyện Khí','hammer'],['chephu','Chế Phù','scroll'],['tranphap','Trận Pháp','seal'],['khoiloi','Khôi Lỗi','puppet']]},
   {id:'tuido',   icon:'bag',    label:'Túi Đồ',   subs:[['vatpham','Vật Phẩm','pill'],['tailieu','Tài Liệu','stone'],['phuongthi','Phường Thị','hall'],['daugia','Đấu Giá','key']]}
 ];
@@ -3996,43 +4212,28 @@ function showLogModal(){
 
 /* ---------- mảnh ghép dùng chung ---------- */
 function statTile(label, val, icon){ return `<div class="stat-tile">${ic(icon)}<span class="st-v">${val}</span><span class="st-l">${label}</span></div>`; }
-function profHeader(id, extraRows){
-  const p = profDef(id); const lvl = profLvl(id);
-  if(lvl<1){
-    return `<div class="card prof-card">
-      <div class="sec-title">${ic(PROF_ICON[id])} ${p.name}<span>chưa nhập môn</span></div>
-      <p class="flavor">${p.desc}</p>
-      <button class="btn gold" ${state.spiritStones<APPRENTICE_COST?'disabled':''} onclick="learnOrLevelProfession('${id}')">Bái Sư Học Nghề (${APPRENTICE_COST} linh thạch)</button>
-    </div>`;
-  }
-  const maxed = lvl>=p.maxLevel;
-  const need = PROF_NEED[lvl]||1;
-  const exp = state.profExp[id]||0;
-  return `<div class="card prof-card">
-    <div class="sec-title">${ic(PROF_ICON[id])} ${p.name}<span>cấp ${lvl}/${p.maxLevel}</span></div>
-    <div class="bar-row"><div class="bar-label" style="width:64px;">Thành thạo</div>
-      <div class="bar-track"><div class="bar-fill tuvi" style="width:${maxed?100:Math.min(100,exp/need*100)}%"></div></div>
-      <div class="bar-num">${maxed?'Viên mãn':`${exp}/${need}`}</div></div>
-    <p class="sec-note" style="margin:8px 0 0;">${p.desc}</p>
-    ${extraRows||''}
-  </div>`;
-}
 function recipeFlag(ok, yes, no){ return `<span class="${ok?'ok-mark':'bad-mark'}">${ok?ic('check'):ic('warn')} ${ok?yes:no}</span>`; }
 
 /* ---------- NHÂN VẬT ---------- */
+/* Chân dung tu sĩ — thiết kế riêng cho game: nửa người, tay niệm pháp quyết,
+   ống tay áo rộng, y phục màu theo đạo lộ, hào quang theo cảnh giới */
+const PATH_ROBE = {phap:[265,'#b9a2ff'], the:[28,'#e2b07a'], hon:[200,'#9fe0ff'], kiem:[165,'#a8f0d0'], ma:[350,'#ff7a7a'], phat:[42,'#ffd27a'], yeuquy:[300,'#e9a0ff']};
+function renderHeroPortrait(g){
+  const H = [150,190,45,30,280,200,260,50,40,0,300,190,45][state.realmIdx]||150;
+  return `<div class="card hero4" style="--h:${H}">
+      <div class="h2-name">${state.name}</div>
+      <div class="h2-realm">${fullRealmName(state.realmIdx, state.subStage||0)}</div>
+      <div class="h2-tags"><span>${ic(PATH_ICONS[state.path.id]||'seal','keep')}${state.path.name}</span><span>${ic('root','keep')}${state.root.name.split(' (')[0]}</span>${g.sect?`<span>${ic('pagoda','keep')}${SECT_RANKS[g.sect.rank]} ${ngSectDef(g.sect.id).name}</span>`:''}</div>
+      <div class="h2-age">${state.age} tuổi · thọ nguyên ${lifeMax()===Infinity?'vô tận':lifeMax()}</div>
+    </div>`;
+}
 function renderOverview(){
   const s = state.stats;
   const g = ng();
   const pet = state.worm.have ? PET_TYPES.find(p=>p.id===state.worm.typeId)||PET_TYPES[0] : null;
   const tb = state.treasure;
   return `
-    <div class="card hero-card">
-      <div class="hero-sigil">${ic(PATH_ICONS[state.path.id]||'seal','keep')}</div>
-      <div class="hero-text">
-        <div class="hero-realm">${fullRealmName(state.realmIdx, state.subStage||0)}</div>
-        <div class="hero-sub">${state.path.name} · ${state.root.name}${g.sect?` · ${SECT_RANKS[g.sect.rank]} ${ngSectDef(g.sect.id).name}`:''}</div>
-      </div>
-    </div>
+    ${renderHeroPortrait(g)}
     <div class="stat-grid">
       ${statTile('Công kích', s.atk, 'sword')}
       ${statTile('Phòng ngự', s.def, 'mountain')}
@@ -4052,28 +4253,6 @@ function renderOverview(){
     ${renderCraftCard()}`;
 }
 
-function renderTechniquesPage(){
-  const manuals = state.manuals.map(id=>{
-    const t = ADVANCED_TECHNIQUES.find(x=>x.id===id);
-    const realmOk = state.realmIdx>=t.minRealm;
-    const ing = [H(t.cost.herbTier, t.cost.herbCount), S(t.cost.stones)];
-    return `<div class="recipe ${realmOk?'':'locked'}">
-      <div class="recipe-head"><span class="rn">${t.name}</span><span class="rc">${MAJOR_REALMS[t.minRealm].name}</span></div>
-      <div class="rd">${t.desc}</div>
-      ${ingChips(ing)}
-      ${t.madnessRisk?`<div class="rnote bad-mark">${ic('warn')} Có nguy cơ tẩu hỏa nhập ma nếu cảnh giới còn thấp.</div>`:''}
-      <div class="recipe-foot"><span class="rate ${realmOk?'hi':'lo'}">${realmOk?'Đủ cảnh giới':'Chưa đủ cảnh giới'}</span>
-        <button class="btn sm gold" ${realmOk&&ingOk(ing)?'':'disabled'} onclick="learnAdvancedTechnique('${t.id}')">Tu Luyện</button></div>
-    </div>`;
-  }).join('');
-  return `
-    ${state.manuals.length?`<div class="card"><div class="sec-title">${ic('key')} Bí Kíp Chờ Luyện<span>${state.manuals.length}</span></div>
-      <p class="flavor">Có bí kíp trong tay chưa có nghĩa là luyện được — cần đủ cảnh giới và tài nguyên phụ trợ.</p>${manuals}</div>`:''}
-    <div class="card">
-      <div class="sec-title">${ic('book')} Công Pháp Đã Lĩnh Ngộ<span>${state.techniques.length}</span></div>
-      ${state.techniques.length ? state.techniques.map(t=>`<div class="tech-row"><div class="tech-name">${t.name}</div><div class="tech-bonus">${ngFmtBonus(t.bonus)}</div><div class="tech-desc">${t.desc}</div></div>`).join('') : `<p class="flavor">Chưa lĩnh ngộ công pháp nào. Bí cảnh, tông môn và cơ duyên đều có thể mang lại công pháp.</p>`}
-    </div>`;
-}
 
 /* ---------- TU LUYỆN ---------- */
 function breakChanceNow(){
@@ -8919,9 +9098,9 @@ function renderContent(){
   if(state.mortal && tab==='tuluyen' && sub!=='thoigian') body = renderMortalPage();
   else if(state.mortal && ['hanhtau','dongphu','tuido'].includes(tab) && sub!=='yeuthu') body = mortalLocked();
   else if(tab==='cottruyen') body = renderStoryPage();
-  else if(tab==='tuluyen') body = ({tuluyen:()=>renderOmenChip()+renderGuideCard()+renderAlertsCard()+renderCultivatePage()+renderBanMenhCard()+renderSatKhiCard(), congphap:()=>renderStoryTechCard()+renderTechniquesPage(), bitruyen:renderHeritageAll, phaptac:renderPhapTac, phithang:renderAscendPage, thoigian:renderTimePage}[sub])();
+  else if(tab==='tuluyen') body = ({tuluyen:()=>renderOmenChip()+renderGuideCard()+renderAlertsCard()+renderCultivatePage()+renderBanMenhCard()+renderSatKhiCard(), congphap:()=>renderStoryTechCard()+renderTechniquesPage(), bitruyen:()=>`<div class="bt-wrap">${renderHeritageAll()}</div>`, phaptac:renderPhapTac, phithang:renderAscendPage, thoigian:renderTimePage}[sub])();
   else if(tab==='nhanvat') body = ({tongquan:renderOverview, daolu:renderDaoLuPage, dode:renderDodePage, danhhieu:renderTitlePage, tuchat:()=>characterCardsLegacy().cardTuChat, nhanmach:renderNpcPage, linhsung:renderWormTab}[sub])();
-  else if(tab==='hanhtau') body = ({bando:renderWorldMap, theluc:renderWorldFactions, bicanh:renderExploreTab, yeuthu:renderBeastPage}[sub])();
+  else if(tab==='hanhtau') body = ({bando:renderWorldMap, theluc:renderWorldFactions, bicanh:renderExploreTab, yeuthu:renderBeastPage, tusibang:renderTuSiBang}[sub])();
   else if(tab==='dongphu') body = dpWrap(sub, ({linhtrung:renderTrungPage, duocvien:renderGardenPage, luyendan:renderAlchemyPage, luyenkhi:renderForgePage, chephu:renderTalismanPage, tranphap:renderFormationPage, khoiloi:renderPuppetPage}[sub])());
   else if(tab==='tuido') body = ({vatpham:renderInventoryPage, tailieu:renderMaterialsInv, phuongthi:renderMarketPage, daugia:renderAuctionPage}[sub])();
   const aucA = state.auc && state.auc.active;
@@ -10884,7 +11063,7 @@ const STORY_GATES = {
 function actGates(a){ return (STORY_GATES[a.id]||[]).map(g=>Object.assign({}, g, {idx:Math.max(0, a.scenes.findIndex(s=>s.id===g.from))})); }
 function gateOf(a, i){ const gs = actGates(a).filter(g=>g.idx<=i); return gs[gs.length-1] || null; }
 function baseSceneOpen(a, i){ const g = gateOf(a, i); return !g || g.need(); }
-function sceneOpen(a, i){ if(state && state.dbgStoryFree) return true; return baseSceneOpen(a, i) && !sbBlocking(a.scenes[i].id); }
+function sceneOpen(a, i){ if(state && state.dbgStoryFree) return true; return baseSceneOpen(a, i) && !sbBlocking(a.scenes[i].id) && !timeGateLeft(a.scenes[i].id); }
 function reachable(a){ let n = 0; while(n<a.scenes.length && sceneOpen(a, n)) n++; return n; }
 function actUnlocked(i){
   const a = STORY_ACTS[i];
@@ -11098,30 +11277,58 @@ function autoLearnStoryTechs(){
     if(x.it.have && x.it.have()){ S.claimed[k] = true; return; }
     if(x.it.cond && !x.it.cond()) return;
     x.it.give(); S.claimed[k] = true;
-    addLog(`Ngươi đã học được 【${x.it.name}】.`);
+    addLog(['congphap','bitruyen'].includes(x.it.dest) ? `Ngươi đã học được 【${x.it.name}】.` : `Ngươi đã có được 【${x.it.name}】.`);
     computeStats();
   });
 }
-function renderStoryTechCard(){ return narr(renderStoryTechCardRaw()); }
+const TECH_KIND = [['all','Tất cả','book'],['atk','Công','sword'],['def','Thủ','mountain'],['spd','Tốc','wave'],['tu','Tu luyện','taiji']];
+function techKind(t){ const b = t.bonus||{}; if(b.tuViRate) return 'tu'; const k = Object.keys(b).sort((a,c)=>Math.abs(b[c])-Math.abs(b[a]))[0]; return k==='atk'||k==='crit' ? 'atk' : k==='def'||k==='hp' ? 'def' : k==='spd' ? 'spd' : 'tu'; }
+function techTotals(){ const T = {}; state.techniques.forEach(t=>Object.entries(t.bonus||{}).forEach(([k,v])=>T[k]=(T[k]||0)+v)); return T; }
+function showTech(i){
+  const t = state.techniques[i]; if(!t) return;
+  const k = techKind(t), kd = TECH_KIND.find(x=>x[0]===k);
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="display:flex;align-items:center;gap:8px;">${ic(kd[2],'keep')} ${t.name}</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <div class="tk-chips">${ngFmtBonus(t.bonus).split(', ').filter(Boolean).map(x=>`<span>${x}</span>`).join('')}</div>
+    <p class="flavor" style="margin:10px 0 0;line-height:1.65;">${t.desc}</p>`;
+  document.getElementById('overlay').classList.add('show');
+}
+function renderTechniquesPage(){
+  const f = state.techFilter || 'all';
+  const manuals = state.manuals.map(id=>{
+    const t = ADVANCED_TECHNIQUES.find(x=>x.id===id);
+    const realmOk = state.realmIdx>=t.minRealm;
+    const ing = [H(t.cost.herbTier, t.cost.herbCount), S(t.cost.stones)];
+    return `<div class="tk-man ${realmOk?'':'locked'}"><div class="tk-man-h"><b>${t.name}</b><em>${MAJOR_REALMS[t.minRealm].name}</em></div>
+      <div class="tk-man-d">${t.desc}</div>${ingChips(ing)}
+      ${t.madnessRisk?`<div class="rnote bad-mark">${ic('warn')} Có nguy cơ tẩu hỏa nhập ma nếu cảnh giới còn thấp.</div>`:''}
+      <button class="btn sm gold" style="margin-top:8px;" ${realmOk&&ingOk(ing)?'':'disabled'} onclick="learnAdvancedTechnique('${t.id}')">${realmOk?'Tu Luyện':'Chưa đủ cảnh giới'}</button></div>`;
+  }).join('');
+  const list = state.techniques.map((t,i)=>({t,i,k:techKind(t)})).filter(x=>f==='all'||x.k===f);
+  const tot = techTotals();
+  const totStr = [['atk','Công'],['def','Thủ'],['spd','Tốc'],['crit','Bạo kích'],['hp','Khí huyết']].filter(([k])=>tot[k]).map(([k,l])=>`<span><b>+${tot[k]}${k==='crit'?'%':''}</b>${l}</span>`).join('') + (tot.tuViRate?`<span><b>+${Math.round(tot.tuViRate*100)}%</b>Tu luyện</span>`:'');
+  return `
+    ${state.manuals.length?`<div class="card"><div class="sec-title">${ic('key')} Bí Kíp Chờ Luyện<span>${state.manuals.length}</span></div>${manuals}</div>`:''}
+    <div class="card">
+      <div class="sec-title">${ic('book')} Công Pháp Đã Lĩnh Ngộ<span>${state.techniques.length}</span></div>
+      ${totStr?`<div class="tk-tot">${totStr}</div>`:''}
+      <div class="seg tk-filter">${TECH_KIND.map(([k,l,icn])=>`<button class="${f===k?'on':''}" onclick="state.techFilter='${k}'; render()">${ic(icn,'keep')} ${l}</button>`).join('')}</div>
+      ${list.length ? `<div class="tk-grid">${list.map(({t,i,k})=>{ const kd = TECH_KIND.find(x=>x[0]===k); return `<button class="tk-tile k-${k}" onclick="showTech(${i})"><span class="tk-ic">${ic(kd[2],'keep')}</span><span class="tk-n">${t.name}</span><span class="tk-b">${ngFmtBonus(t.bonus)}</span></button>`; }).join('')}</div>` : `<p class="flavor" style="margin:8px 0 0;">${state.techniques.length?'Không có công pháp loại này.':'Chưa lĩnh ngộ công pháp nào. Bí cảnh, tông môn và cơ duyên đều có thể mang lại công pháp.'}</p>`}
+    </div>`;
+}
 function renderStoryTechCardRaw(){
   const list = storyTechList().filter(x=>x.it.dest==='congphap' && (actUnlocked(x.ai) || storyState().done[x.a.id]) && sceneOpen(x.a, x.si));
   if(!list.length) return '';
   const S = storyState(); S.claimed = S.claimed||{};
-  const rows = list.map(x=>{
-    const got = S.claimed[sItemKey(x.sc.id,x.i)] || (x.it.have && x.it.have());
-    const read = sceneRead(x.ai, x.si), ok = !x.it.cond || x.it.cond();
-    let st, cls;
-    if(got){ st = 'Đã học'; cls = 'ok'; }
-    else if(!read){ st = `Đọc tới cảnh “${x.sc.title}”`; cls = ''; }
-    else if(x.it.trade){ st = ok ? 'Đổi trong cảnh truyện' : x.it.condText; cls = 'wait'; }
-    else { st = `Chờ: ${x.it.condText}`; cls = 'wait'; }
-    const btn = !got && read && x.it.trade && ok ? `<button class="btn sm gold" onclick="claimStoryItem('${x.sc.id}',${x.i})">Đổi</button>` : !got && !read && actUnlocked(x.ai) ? `<button class="btn sm ghost" onclick="setTab('cottruyen'); openAct(${x.ai})">Đọc</button>` : '';
-    return `<div class="st-row ${cls}"><span class="st-dot">${got?'✓':''}</span><span class="st-body"><b>${x.it.name}</b><small>${x.a.sub.split(' · ')[0]} · ${x.sc.title}</small><small class="st-state">${st}</small></span>${btn}</div>`;
-  }).join('');
-  const n = list.filter(x=>S.claimed[sItemKey(x.sc.id,x.i)] || (x.it.have && x.it.have())).length;
-  return `<div class="card"><div class="sec-title">${ic('book')} Công Pháp Trong Cốt Truyện<span>${n}/${list.length}</span></div>
-    <p class="sec-note" style="margin:0 0 6px;">Đọc tới cảnh học công pháp nào trong truyện thì ngươi học được công pháp đó — tự động khi đủ điều kiện.</p>${rows}</div>`;
+  const got = list.filter(x=>S.claimed[sItemKey(x.sc.id,x.i)] || (x.it.have && x.it.have()));
+  const pend = list.filter(x=>!got.includes(x) && sceneRead(x.ai, x.si));
+  const hidden = list.length - got.length - pend.length;
+  return `<div class="card"><div class="sec-title">${ic('book')} Công Pháp Trong Cốt Truyện<span>${got.length}/${list.length}</span></div>
+    <div class="tk-story">${got.map(x=>`<span class="ok">${ic('check','keep')}${x.it.name}</span>`).join('')}
+    ${pend.map(x=>{ const ok = !x.it.cond || x.it.cond(); return `<span class="wait" title="${x.it.condText||''}">${x.it.name}${x.it.trade&&ok?` <button class="ls-link" onclick="claimStoryItem('${x.sc.id}',${x.i})">Đổi</button>`:''}</span>`; }).join('')}</div>
+    ${pend.length?`<p class="sec-note" style="margin:6px 0 0;">Mục mờ: đã đọc tới nhưng chưa đủ điều kiện (${pend.map(x=>x.it.condText).filter(Boolean).slice(0,2).join('; ')}).</p>`:''}
+    ${hidden?`<p class="sec-note" style="margin:6px 0 0;">Còn ${hidden} công pháp sẽ học được khi đọc tiếp cốt truyện.</p>`:''}</div>`;
 }
+function renderStoryTechCard(){ return narr(renderStoryTechCardRaw()); }
 
 /* =====================================================================
    CỐT TRUYỆN NHẬP VAI — thay "Hàn Lập" bằng tên người chơi
@@ -11351,7 +11558,7 @@ function sbPending(){
   for(const b of STORY_BATTLES){
     if(sbWon(b.id)) continue;
     const L = sbLoc(b); if(!L || L.ti<0) continue;
-    if(actUnlocked(L.ai) && sceneRead(L.ai, L.ti) && baseSceneOpen(L.a, L.gi)) return b;
+    if(actUnlocked(L.ai) && sceneRead(L.ai, L.ti) && baseSceneOpen(L.a, L.gi) && !timeGateLeft(b.gate)) return b;
   }
   return null;
 }
@@ -11544,14 +11751,17 @@ function renderStoryReaderRaw(){
   const justRev = S._justRev; S._justRev = false;
   const k = S.choices[sc.id];
   let choice = '';
-  if(full && sc.choice && k==null) choice = `<div class="vn-choice"><div class="vn-q">${ic('taiji','keep')} ${sc.choice.q}</div>${sc.choice.opts.map((o,j)=>`<button class="vn-opt" onclick="storyChoose(${j})">${o.label}</button>`).join('')}</div>`;
+  const examWait = sc.id==='1.2' && state.mortal && state.pham && state.pham.nextExam && monthIndex() < state.pham.nextExam;
+  if(examWait){ const left = state.pham.nextExam - monthIndex(); choice = `<div class="vn-lock"><div class="vn-lock-t">${ic('hourglass','keep')} Chờ kỳ khảo thí sau</div><div class="vn-lock-c">Còn ${fmtMonths(left)}</div><div class="vn-lock-p">Thất Huyền Môn năm năm mới mở khảo thí một lần.</div><button class="btn gold" style="margin-top:10px;" onclick="advanceTime(${left}); addLog('Ngươi về quê làm ruộng, ${fmtMonths(left)} trôi qua. Kỳ khảo thí mới lại tới.'); render()">Về quê chờ đợi</button></div>`; }
+  else if(full && sc.choice && k==null) choice = `<div class="vn-choice"><div class="vn-q">${ic('taiji','keep')} ${sc.choice.q}</div>${sc.choice.opts.map((o,j)=>`<button class="vn-opt" onclick="storyChoose(${j})">${o.label}</button>`).join('')}</div>`;
   else if(sc.choice && k!=null && sc.kind!=='dialogue'){ const o = sc.choice.opts[k]; choice = `<div class="vn-chosen"><div class="vn-q">${sc.choice.q}</div><div class="vn-pick">${o.label}</div>${o.result?`<p class="vn-nar">${o.result}</p>`:''}</div>`; }
   const blocked = sc.choice && k==null;
   const nextOpen = !last && sceneOpen(a, S.cur.i+1);
   let lock = '';
   if(full && !last && !nextOpen){
     const sb = baseSceneOpen(a, S.cur.i+1) ? sbBlocking(a.scenes[S.cur.i+1].id) : null;
-    if(sb) lock = `<div class="vn-lock battle"><div class="vn-lock-t">${ic('swords','keep')} Trận chiến bắt buộc</div><div class="vn-lock-c">${sb.title}</div><button class="btn blood" onclick="showSbModal()">${ic('swords')}Xuất Chiến</button></div>`;
+    if(baseSceneOpen(a, S.cur.i+1) && timeGateLeft(a.scenes[S.cur.i+1].id)) lock = renderTimeLock(a.scenes[S.cur.i+1].id);
+    else if(sb) lock = `<div class="vn-lock battle"><div class="vn-lock-t">${ic('swords','keep')} Trận chiến bắt buộc</div><div class="vn-lock-c">${sb.title}</div><button class="btn blood" onclick="showSbModal()">${ic('swords')}Xuất Chiến</button></div>`;
     else { const g = gateOf(a, S.cur.i+1); lock = `<div class="vn-lock"><div class="vn-lock-t">${ic('seal','keep')} Cảnh sau chưa khai mở</div><div class="vn-lock-c">${g.label}</div>${g.prog?`<div class="vn-lock-p">${g.prog()}</div>`:''}</div>`; }
   }
   const pct = Math.round(((S.cur.i + (full?1:rev/L.length)) / n)*100);
@@ -11601,8 +11811,8 @@ function renderSceneList(ai, inModal){
     if(!open && !isRead){
       if(lockedShown) return '';
       lockedShown = true;
-      const sb = baseSceneOpen(a, i) ? sbBlocking(sc.id) : null, g = gateOf(a, i);
-      return `<li class="toc-lock"><span class="toc-n">${ic('seal','keep')}</span><span class="toc-b"><b>${sb?'Trận chiến bắt buộc':'Chưa khai mở'}</b><small>${sb ? sb.title : g ? g.label+(g.prog?` · ${g.prog()}`:'') : ''}</small></span></li><li class="toc-more">… còn ${a.scenes.length-i-1} cảnh phía sau</li>`;
+      const tl = baseSceneOpen(a, i) ? timeGateLeft(sc.id) : 0, sb = baseSceneOpen(a, i) && !tl ? sbBlocking(sc.id) : null, g = gateOf(a, i);
+      return `<li class="toc-lock"><span class="toc-n">${ic(tl?'hourglass':'seal','keep')}</span><span class="toc-b"><b>${sb?'Trận chiến bắt buộc':tl?'Thời gian chưa tới':'Chưa khai mở'}</b><small>${sb ? sb.title : tl ? `Còn ${fmtMonths(tl)} — ${TIME_GATES[sc.id].why}` : g ? g.label+(g.prog?` · ${g.prog()}`:'') : ''}</small></span></li><li class="toc-more">… còn ${a.scenes.length-i-1} cảnh phía sau</li>`;
     }
     const act = isRead||isNext ? `onclick="${inModal?'closeModal(); ':''}readFromGate(${ai},${i})"` : '';
     return `<li class="${isRead?'read':''} ${isNext?'next':''} ${S.cur&&S.cur.act===ai&&S.cur.i===i?'cur':''}" ${act}><span class="toc-n">${isRead?'✓':i+1}</span><span class="toc-b"><b>${sc.title}</b><small>${sc.kind==='dialogue'?'Thoại':sc.ch}${battle?' · ⚔ trận chiến':''}</small></span></li>`;
@@ -11623,7 +11833,9 @@ function renderStoryPageRaw(){
   else if(!open) cta = `<div class="jr-req">${ic('seal','keep')}<div><b>Hồi mới chưa khai mở</b><small>${actLockReason(ci)}</small></div></div>`;
   else if(pend) cta = `<div class="jr-req battle">${ic('swords','keep')}<div><b>Trận chiến bắt buộc</b><small>${pend.title}</small></div></div><button class="btn blood" onclick="showSbModal()">${ic('swords')}Xuất Chiến</button>`;
   else if(read<r) cta = `<p class="jr-next">Cảnh kế tiếp: <b>${a.scenes[Math.min(read,n-1)].title}</b></p><button class="btn gold" onclick="openAct(${ci})">${ic('book')}${read?'Đọc Tiếp':'Bắt Đầu Đọc'}</button>`;
-  else { const g = actGates(a).find(x=>!x.need()); cta = `<div class="jr-req">${ic('seal','keep')}<div><b>Cảnh sau chưa khai mở</b><small>${g?g.label+(g.prog?` · ${g.prog()}`:''):''}</small></div></div>${read?`<button class="btn ghost" onclick="openAct(${ci})">Đọc lại cảnh gần nhất</button>`:''}`; }
+  else { const nx = a.scenes[read]; const tl = nx && baseSceneOpen(a, read) ? timeGateLeft(nx.id) : 0; const g = actGates(a).find(x=>!x.need());
+    cta = tl ? `<div class="jr-req">${ic('hourglass','keep')}<div><b>Thời gian chưa tới — còn ${fmtMonths(tl)}</b><small>${TIME_GATES[nx.id].why}</small></div></div><button class="btn gold" onclick="storyWait('${nx.id}')">${state.mortal?'Sống qua những ngày ấy':`Bế quan ${fmtMonths(tl)}`}</button>`
+      : `<div class="jr-req">${ic('seal','keep')}<div><b>Cảnh sau chưa khai mở</b><small>${g?g.label+(g.prog?` · ${g.prog()}`:''):''}</small></div></div>${read?`<button class="btn ghost" onclick="openAct(${ci})">Đọc lại cảnh gần nhất</button>`:''}`; }
   const ring = open && !allDone ? Math.round(read/n*100) : 100;
   const hero = `<div class="card jr-hero" style="--h:${actHue(ci)}">
       <div class="jr-kicker">${open && !allDone ? a.sub : 'Hành trình tu tiên'}</div>
@@ -11651,7 +11863,7 @@ function renderStoryPageRaw(){
 function storyVisit(ai, i){
   const S = storyState(); S.seen = S.seen||{};
   const sc = STORY_ACTS[ai].scenes[i]; if(!sc || S.seen[sc.id]) return;
-  S.seen[sc.id] = 1;
+  S.seen[sc.id] = 1; S.readAt = S.readAt||{}; S.readAt[sc.id] = monthIndex();
   if(state.mortal) return;
   const tv = Math.max(1, Math.round(previewMeditateGain()*1.5));
   state.tuVi += tv; checkBreakthroughAvailable();
@@ -11746,6 +11958,68 @@ function finishAct(){
   fx('banner',{text:'Hồi Kết Thúc'});
 }
 
+/* =====================================================================
+   THỜI GIAN TRONG CỐT TRUYỆN — đúng như nguyên tác
+   Giữa hai cảnh có một khoảng thời gian nhất định đã trôi qua trong truyện
+   (bế quan bốn tháng, hai năm sau, hai mươi năm tu luyện...). Cảnh sau chỉ mở
+   khi thời gian trong game cũng đã trôi đủ — chờ tự nhiên hoặc bế quan chờ.
+===================================================================== */
+const TIME_GATES = {
+  '1.5':  {from:'1.4',  months:36,  why:'Bốn năm sau, cậu mười bốn tuổi'},
+  '1.10': {from:'1.9',  months:4,   why:'Mặc đại phu để lại thư "bế quan bốn tháng"'},
+  '1.15': {from:'1.14', months:6,   why:'Học Hỏa Đạn Thuật hơn nửa năm'},
+  '1.21': {from:'1.20', months:3,   why:'Đi ba tháng mới tới Gia Nguyên thành'},
+  '1.24': {from:'1.23', months:2,   why:'Hai tháng sau'},
+  '2.3':  {from:'2.2',  months:24,  why:'Hai năm sau Trường Xuân Công đạt tầng mười một'},
+  '2.10': {from:'2.9',  months:36,  why:'Ba năm gom đủ dược liệu phụ trợ'},
+  '2.11': {from:'2.10', months:12,  why:'Gần một năm bế quan trong phòng địa hỏa'},
+  '2.16': {from:'2.15', months:48,  why:'Bế quan bốn năm'},
+  '2.27': {from:'2.26', months:2,   why:'Hai tháng hòa nhập vai thiếu gia Tần gia'},
+  '2.53': {from:'2.52', months:240, why:'Hơn hai mươi năm tu luyện không rời động phủ'},
+  '2.57': {from:'2.56', months:48,  why:'Bế quan kết đan suốt bốn năm'},
+  '2.60': {from:'2.59', months:60,  why:'Năm năm săn yêu thú qua các đảo san hô'},
+  '2.61': {from:'2.60', months:744, why:'Luyện đan hai năm rồi bế quan tuyệt đối sáu mươi năm'},
+  '2.67': {from:'2.66', months:240, why:'Hơn hai mươi năm luyện bảy mươi hai thanh phi kiếm'},
+  '2.105':{from:'2.104',months:12,  why:'Bế quan gần một năm'},
+  '2.107':{from:'2.106',months:6,   why:'Nửa năm luyện hóa sáu viên Ngũ Sắc Châu'},
+  '2.110':{from:'2.109',months:180, why:'Mười lăm, mười sáu năm bế quan lên Kết Đan trung kỳ'},
+  '2.134':{from:'2.133',months:6,   why:'Nửa năm luyện hóa Minh Hồn Châu'},
+  '2.143':{from:'2.142',months:240, why:'Hơn hai mươi năm bế quan trước khi kết anh'},
+  '2.155':{from:'2.154',months:6,   why:'Nửa năm nghiền ngẫm ngọc giản của Tân Như Âm'},
+  '2.181':{from:'2.180',months:2,   why:'Hai tháng bế quan'},
+  '2.183':{from:'2.182',months:2,   why:'Hai tháng bế quan tìm cách hóa giải'},
+  '2.229':{from:'2.228',months:324, why:'Hai mươi bảy năm bị kẹt trong Linh Miểu Viên'},
+  '2.242':{from:'2.241',months:12,  why:'Trôi dạt trên sông hơn một năm'},
+  '2.243':{from:'2.242',months:6,   why:'Dưỡng thương nửa năm trên thuyền'},
+  '2.250':{from:'2.249',months:12,  why:'Một năm cường đoạt tài liệu khắp Nam Bộ Đại Tấn'},
+  '2.308':{from:'2.307',months:6,   why:'Bế quan nửa năm luyện Bồi Anh Đan'},
+  '2.309':{from:'2.308',months:120, why:'Hơn mười năm bế quan tại Tuyết Liên Sơn'}
+};
+function storyReadAt(id){ const S = storyState(); return S.readAt && S.readAt[id]; }
+function timeGateLeft(sceneId){
+  const g = TIME_GATES[sceneId]; if(!g) return 0;
+  const S = storyState(); S.seen = S.seen||{};
+  const at = storyReadAt(g.from);
+  if(at==null){ if(S.seen[g.from]) return 0; const fa = STORY_ACTS.find(x=>x.scenes.some(sc=>sc.id===g.from)); return fa && S.done && S.done[fa.id] ? 0 : g.months; }
+  return Math.max(0, g.months - (monthIndex() - at));
+}
+function fmtMonths(m){ const y = Math.floor(m/12), mo = m%12; return [y?`${y} năm`:'', mo?`${mo} tháng`:''].filter(Boolean).join(' ') || 'chưa tới một tháng'; }
+function storyWait(sceneId){
+  const left = timeGateLeft(sceneId); if(!left) return;
+  if(state.mortal){ advanceTime(left); addLog(`Ngươi sống những ngày bình thường, ${fmtMonths(left)} trôi qua.`); render(); return; }
+  const gain = Math.round(previewMeditateGain()*left);
+  state.tuVi += gain; bmGain(left); advanceTime(left);
+  addLog(`Ngươi bế quan ${fmtMonths(left)}, tu vi +${gain}.`);
+  checkBreakthroughAvailable(); computeStats(); render();
+}
+function renderTimeLock(sceneId){
+  const g = TIME_GATES[sceneId], left = timeGateLeft(sceneId);
+  return `<div class="vn-lock"><div class="vn-lock-t">${ic('hourglass','keep')} Thời gian chưa tới</div><div class="vn-lock-c">Còn ${fmtMonths(left)}</div>
+    <div class="vn-lock-p">${g.why} — trong truyện, khoảng thời gian này đã trôi qua.</div>
+    <button class="btn gold" style="margin-top:10px;" onclick="storyWait('${sceneId}')">${state.mortal?'Sống qua những ngày ấy':`Bế quan ${fmtMonths(left)}`}</button>
+    <p class="sec-note" style="margin:8px 0 0;">Hoặc cứ chơi tiếp — thời gian trong game tự trôi.</p></div>`;
+}
+
 function renderStoryReader(){ return narr(renderStoryReaderRaw()); }
 
 /* =====================================================================
@@ -11817,8 +12091,8 @@ function phamDo(act, arg){
     advanceTime(1);
     if(arg==='give'){
       P.tries++;
-      addLog('Ngươi buông dây, ngồi phịch xuống đất. Chính ngọ trôi qua — trượt khảo thí, đành về quê chờ kỳ sau.');
-      advanceTime(59);
+      P.nextExam = monthIndex() + 59;
+      addLog('Ngươi buông dây, ngồi phịch xuống đất. Chính ngọ trôi qua — trượt khảo thí. Thất Huyền Môn năm năm mới mở khảo thí một lần, đành về quê chờ kỳ sau.');
     } else {
       P.step = 2;
       if(state.ng && !ng().sect) ng().sect = {id:'that_huyen', rank:0, merit:0, contrib:0};
@@ -12888,12 +13162,137 @@ function trungFeed(kind){
   advanceTime(1); render();
 }
 function trungDmgMult(){ const T = trung(); return (0.6 + T.n/250) * TRUNG_GENS[T.gen].mult; }
+/* =====================================================================
+   ĐỘNG PHỦ — xưởng nghề có minh họa động, cấp bậc, thành thạo
+===================================================================== */
+const PROF_RANKS = ['Chưa nhập môn','Học đồ','Sơ cấp','Trung cấp','Cao cấp','Đại sư','Tông sư'];
+const PROF_ART = {
+  danSu:`<svg viewBox="0 0 100 120" class="ws-art"><defs>
+      <linearGradient id="lcM" x1="0" x2="1"><stop offset="0" stop-color="#1c1814"/><stop offset=".35" stop-color="#4a3e34"/><stop offset=".55" stop-color="#6e5e50"/><stop offset=".75" stop-color="#3a3028"/><stop offset="1" stop-color="#16120e"/></linearGradient>
+      <linearGradient id="lcR" x1="0" x2="1"><stop offset="0" stop-color="#2a221c"/><stop offset=".5" stop-color="#7a6656"/><stop offset="1" stop-color="#221c16"/></linearGradient>
+      <radialGradient id="lcG" cx=".5" cy=".5"><stop offset="0" stop-color="#fff3b0"/><stop offset=".55" stop-color="#ff9a30"/><stop offset="1" stop-color="#b03a08"/></radialGradient>
+      <radialGradient id="lcH" cx=".5" cy=".5"><stop offset="0" stop-color="rgba(255,160,60,.45)"/><stop offset="1" stop-color="rgba(255,120,40,0)"/></radialGradient></defs>
+    <g class="ws-smoke"><path d="M50 10 C44 4 56 -2 48 -10" stroke="rgba(225,235,230,.35)" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M52 8 C58 2 50 -4 56 -12" stroke="rgba(225,235,230,.22)" stroke-width="2" fill="none" stroke-linecap="round"/></g>
+    <ellipse class="ws-glow" cx="50" cy="66" rx="40" ry="34" fill="url(#lcH)"/>
+    <path d="M32 92 C31 100 31 106 34 112 H40 C40 106 40 100 41 94Z M68 92 C69 100 69 106 66 112 H60 C60 106 60 100 59 94Z M46 95 V112 H54 V95Z" fill="url(#lcM)" stroke="#a88a6a" stroke-opacity=".35"/>
+    <path d="M20 70 C14 70 12 64 15 60 C17 57 21 58 21 61 M20 70 C14 72 14 80 19 82 C22 83 24 80 22 78" fill="none" stroke="#9a6a3a" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M80 70 C86 70 88 64 85 60 C83 57 79 58 79 61 M80 70 C86 72 86 80 81 82 C78 83 76 80 78 78" fill="none" stroke="#9a6a3a" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M18 66 C18 88 32 98 50 98 C68 98 82 88 82 66 C82 62 78 60 72 60 H28 C22 60 18 62 18 66Z" fill="url(#lcM)" stroke="#a88a6a" stroke-opacity=".4"/>
+    <path d="M20 74 H80 M21 84 H79" stroke="#c89a5a" stroke-opacity=".55" stroke-width=".9"/>
+    <path d="M24 79 h4 v-4 h-3 v2 h1.5" fill="none" stroke="#d9a868" stroke-width=".9" stroke-opacity=".8"/><path d="M30 79 h4 v-4 h-3 v2 h1.5" fill="none" stroke="#d9a868" stroke-width=".9" stroke-opacity=".8"/><path d="M36 79 h4 v-4 h-3 v2 h1.5" fill="none" stroke="#d9a868" stroke-width=".9" stroke-opacity=".8"/><path d="M62 79 h4 v-4 h-3 v2 h1.5" fill="none" stroke="#d9a868" stroke-width=".9" stroke-opacity=".8"/><path d="M68 79 h4 v-4 h-3 v2 h1.5" fill="none" stroke="#d9a868" stroke-width=".9" stroke-opacity=".8"/><path d="M74 79 h4 v-4 h-3 v2 h1.5" fill="none" stroke="#d9a868" stroke-width=".9" stroke-opacity=".8"/>
+    <circle cx="50" cy="79" r="7.5" fill="#f2efe6" stroke="#1a1612" stroke-width=".8"/>
+    <path d="M50 71.5 A7.5 7.5 0 0 1 50 86.5 A3.75 3.75 0 0 1 50 79 A3.75 3.75 0 0 0 50 71.5Z" fill="#141210"/>
+    <circle cx="50" cy="75.25" r="1.2" fill="#141210"/><circle cx="50" cy="82.75" r="1.2" fill="#f2efe6"/>
+    <path d="M28 60 C26 50 34 44 50 44 C66 44 74 50 72 60Z" fill="url(#lcM)" stroke="#a88a6a" stroke-opacity=".4"/>
+    <path d="M30 50 H70" stroke="#c89a5a" stroke-opacity=".45" stroke-width=".8"/>
+    <g class="ws-vent"><path d="M38 52 l3 -3 l3 3 l-3 3Z M56 52 l3 -3 l3 3 l-3 3Z" fill="url(#lcG)"/><rect x="45" y="51" width="10" height="2" fill="url(#lcG)"/><rect x="45" y="54.5" width="10" height="1.6" fill="url(#lcG)"/><rect x="31" y="51.5" width="4" height="2" fill="url(#lcG)"/><rect x="65" y="51.5" width="4" height="2" fill="url(#lcG)"/></g>
+    <path d="M32 44 V38 H68 V44Z" fill="url(#lcM)" stroke="#a88a6a" stroke-opacity=".4"/>
+    <g class="ws-vent"><circle cx="40" cy="41" r="2" fill="url(#lcG)"/><circle cx="50" cy="41" r="2" fill="url(#lcG)"/><circle cx="60" cy="41" r="2" fill="url(#lcG)"/></g>
+    <path d="M34 41 h2 M44 41 h2 M54 41 h2 M64 41 h2" stroke="#c89a5a" stroke-opacity=".6"/>
+    <path d="M24 38 C34 36 40 30 44 22 H56 C60 30 66 36 76 38 C72 39 68 38 66 37 H34 C32 38 28 39 24 38Z" fill="url(#lcR)" stroke="#b89a7a" stroke-opacity=".5"/>
+    <path d="M44 22 C46 24 54 24 56 22" stroke="#c89a5a" stroke-opacity=".5" fill="none"/>
+    <path d="M46 22 V17 H54 V22Z" fill="url(#lcM)"/>
+    <path d="M47 17 C47 12 49 8 50 2 C51 8 53 12 53 17Z" fill="url(#lcR)" stroke="#b89a7a" stroke-opacity=".5"/>
+    <circle cx="50" cy="13" r="1.3" fill="#c89a5a"/></svg>`,
+  khiSu:`<svg viewBox="0 0 100 76" class="ws-art"><defs>
+      <linearGradient id="avTop" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e6ebec"/><stop offset="1" stop-color="#a8b0b3"/></linearGradient>
+      <linearGradient id="avFace" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8d969a"/><stop offset=".5" stop-color="#626b6f"/><stop offset="1" stop-color="#40474a"/></linearGradient>
+      <linearGradient id="avHorn" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d9dfe1"/><stop offset=".35" stop-color="#9aa3a6"/><stop offset=".75" stop-color="#5b6366"/><stop offset="1" stop-color="#3a4144"/></linearGradient>
+      <linearGradient id="avWaist" x1="0" x2="1"><stop offset="0" stop-color="#2b3134"/><stop offset=".35" stop-color="#5f686c"/><stop offset=".55" stop-color="#717a7e"/><stop offset=".8" stop-color="#454c4f"/><stop offset="1" stop-color="#262b2d"/></linearGradient>
+      <linearGradient id="avBase" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6a7377"/><stop offset="1" stop-color="#33393b"/></linearGradient>
+      <linearGradient id="avHot" x1="0" x2="1"><stop offset="0" stop-color="#ff5a10"/><stop offset=".5" stop-color="#fff2a8"/><stop offset="1" stop-color="#ff5a10"/></linearGradient></defs>
+    <ellipse cx="54" cy="70" rx="40" ry="3.5" fill="rgba(0,0,0,.5)"/>
+    <path d="M32 26 C20 26 10 27.5 3 30.5 C10 33 21 35 32 36Z" fill="url(#avHorn)" stroke="#eef2f3" stroke-opacity=".35" stroke-width=".6"/>
+    <path d="M6 30 C14 29 23 28.5 31 28.5" stroke="#fff" stroke-opacity=".55" stroke-width=".8" fill="none"/>
+    <path d="M30 22 H92 L96 26 H33Z" fill="url(#avTop)"/>
+    <path d="M33 26 H96 V35 L88 39 H44 L33 36Z" fill="url(#avFace)" stroke="#c8d0d3" stroke-opacity=".3" stroke-width=".5"/>
+    <rect x="80" y="23.2" width="5" height="1.8" fill="#2a2f31"/><ellipse cx="89.5" cy="24.1" rx="1.2" ry=".7" fill="#2a2f31"/>
+    <path d="M44 39 H88 C82 43 79 49 79 56 H53 C53 49 50 43 44 39Z" fill="url(#avWaist)"/>
+    <path d="M50 56 H82 L86 60 H46Z" fill="url(#avBase)"/>
+    <path d="M38 60 H94 L97 67 H35Z" fill="url(#avBase)" stroke="#9aa3a6" stroke-opacity=".25" stroke-width=".5"/>
+    <path d="M35 67 H43 V70 H35Z M89 67 H97 V70 H89Z" fill="#2a3032"/>
+    <g fill="#000" opacity=".18"><circle cx="60" cy="31" r=".7"/><circle cx="72" cy="33" r=".5"/><circle cx="66" cy="47" r=".8"/><circle cx="58" cy="50" r=".5"/><circle cx="78" cy="64" r=".7"/><circle cx="50" cy="63" r=".5"/></g>
+    <ellipse class="ws-glow" cx="60" cy="21" rx="15" ry="4" fill="rgba(255,150,60,.4)"/>
+    <rect class="ws-hotbar" x="50" y="18.6" width="22" height="3.6" rx="1.8" fill="url(#avHot)"/>
+    <g class="ws-sparks"><circle cx="58" cy="17" r="1.3" fill="#ffe08a" style="--sx:-12px"/><circle cx="63" cy="16" r="1.1" fill="#ffb84a" style="--sx:9px"/><circle cx="61" cy="15.5" r="1.5" fill="#fff4c0" style="--sx:-3px"/><circle cx="66" cy="17" r=".9" fill="#ff9a3a" style="--sx:14px"/></g></svg>`,
+  phuLuc:`<svg viewBox="0 0 60 100" class="ws-art tl-art"><defs>
+      <linearGradient id="tlP" x1="0" x2="1"><stop offset="0" stop-color="#0f5a56"/><stop offset=".45" stop-color="#2aa294"/><stop offset=".6" stop-color="#36b8a6"/><stop offset="1" stop-color="#0d4e4a"/></linearGradient>
+      <radialGradient id="tlG"><stop offset="0" stop-color="rgba(120,255,230,.55)"/><stop offset="1" stop-color="rgba(120,255,230,0)"/></radialGradient></defs>
+    <ellipse class="tl-glow" cx="30" cy="50" rx="30" ry="50" fill="url(#tlG)"/>
+    <g class="tl-sway">
+      <path d="M10 4 C20 2 40 6 50 4 L52 96 C42 98 20 94 8 96Z" fill="url(#tlP)" stroke="#bff8ec" stroke-opacity=".7" stroke-width=".8"/>
+      <path class="tl-border" d="M13 8 C22 6.5 38 9.5 47 8 L48.5 92 C40 93.5 22 90.5 11.5 92Z" fill="none" stroke="#a6f5e6" stroke-width=".9" stroke-dasharray="3 1.5"/>
+      <rect x="21" y="40" width="18" height="16" fill="none" stroke="#073c38" stroke-opacity=".7" stroke-width="1.2"/>
+      <rect x="23.5" y="42.5" width="13" height="11" fill="none" stroke="#073c38" stroke-opacity=".55" stroke-width=".8"/>
+      <g class="tl-ink" fill="none" stroke="#e0302a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24 12 C28 10 33 11 36 13 M30 10 V20 M25 17 C28 15 32 16 35 18"/>
+        <path d="M30 20 C27 26 33 30 29 36 C26 40 34 44 30 50 C26 58 35 62 30 70"/>
+        <path d="M22 28 C26 27 30 30 33 27 C36 25 38 28 39 30"/>
+        <path d="M33 34 C38 36 38 42 33 44 C29 46 30 51 34 52"/>
+        <path d="M24 62 C28 60 32 63 36 61 M27 66 C30 70 33 70 36 67"/>
+        <path d="M30 70 V80 M24 78 C27 76 33 76 36 78 M26 84 C28 88 32 88 34 84"/>
+      </g>
+      <path d="M30 86 L28 90 H32Z" fill="#e0302a"/>
+    </g>
+    <g class="tl-spark"><circle cx="12" cy="20" r="1" fill="#c8fff2"/><circle cx="50" cy="40" r=".8" fill="#c8fff2"/><circle cx="14" cy="70" r=".9" fill="#c8fff2"/></g></svg>`,
+  tranPhap:`<svg viewBox="0 0 100 100" class="ws-art"><g class="ws-spin"><circle cx="50" cy="50" r="40" fill="none" stroke="#d4af6a" stroke-opacity=".55" stroke-width="1.2"/><circle cx="50" cy="50" r="31" fill="none" stroke="#d4af6a" stroke-opacity=".35" stroke-dasharray="3 3"/>
+    ${[0,45,90,135,180,225,270,315].map((r,i)=>`<g transform="rotate(${r} 50 50)"><path d="M43 14 H57 M43 18 H${i%2?'49 M51 18 H57':'57'} M43 22 H${i%3?'57':'49 M51 22 H57'}" stroke="#f0cf8c" stroke-width="2"/></g>`).join('')}</g>
+    <circle cx="50" cy="50" r="13" fill="#0d1414" stroke="#f0cf8c" stroke-opacity=".6"/><path d="M50 37 A13 13 0 0 1 50 63 A6.5 6.5 0 0 1 50 50 A6.5 6.5 0 0 0 50 37Z" fill="#f0cf8c"/><circle cx="50" cy="43.5" r="2" fill="#0d1414"/><circle cx="50" cy="56.5" r="2" fill="#f0cf8c"/></svg>`,
+  khoiLoi:`<svg viewBox="0 0 100 100" class="ws-art"><g class="ws-bob" fill="#8a6a44" stroke="#c8a46a" stroke-opacity=".6"><circle cx="50" cy="22" r="10"/><rect x="38" y="34" width="24" height="28" rx="4"/><rect x="26" y="36" width="10" height="22" rx="4"/><rect x="64" y="36" width="10" height="22" rx="4"/><rect x="40" y="62" width="8" height="24" rx="3"/><rect x="52" y="62" width="8" height="24" rx="3"/></g>
+    <g class="ws-eyes"><circle cx="46" cy="21" r="1.8" fill="#7fe8ff"/><circle cx="54" cy="21" r="1.8" fill="#7fe8ff"/></g><circle cx="50" cy="46" r="4" fill="none" stroke="#7fe8ff" stroke-opacity=".8" class="ws-core"/></svg>`
+};
+const PROF_LINE = {
+  danSu:'Hàn Lập dùng lục dịch thúc linh thảo, luyện đan không tiếc — nhờ vậy tu vi vượt xa người cùng lứa.',
+  khiSu:'Luyện bảy mươi hai thanh Thanh Trúc Phong Vân Kiếm từ Kim Lôi Trúc mất hơn hai mươi năm.',
+  phuLuc:'Từ Định Thần Phù chép trong sách cổ của Mặc đại phu tới Hàng Linh Phù, Phá Giới Phù.',
+  tranPhap:'Điên Đảo Ngũ Hành Trận, Đại Canh Kiếm Trận — trận pháp giữ mạng Hàn Lập không biết bao lần.',
+  khoiLoi:'Khôi Lỗi Thuật từ Khúc Hồn tới khôi lỗi ngang Nguyên Anh hậu kỳ của Đại Diễn Thần Quân.'
+};
+function profHeader(id, extraRows){
+  const p = profDef(id), lvl = profLvl(id), maxed = lvl>=p.maxLevel;
+  const need = PROF_NEED[lvl]||1, exp = state.profExp[id]||0;
+  const pct = lvl<1 ? 0 : maxed ? 100 : Math.min(100, exp/need*100);
+  return `<div class="card prof-card ws-card ws-${id} ${lvl<1?'locked':''}">
+    <div class="ws-head">
+      <div class="ws-pic">${PROF_ART[id]||''}</div>
+      <div class="ws-info">
+        <div class="ws-name">${p.name}</div>
+        <div class="ws-rank">${lvl<1?'Chưa nhập môn':`${PROF_RANKS[Math.min(lvl,6)]} · cấp ${lvl}/${p.maxLevel}`}</div>
+        ${lvl>=1?`<div class="ws-pips">${Array.from({length:p.maxLevel},(_,i)=>`<i class="${i<lvl?'on':''}"></i>`).join('')}</div>
+        <div class="ws-exp"><span style="width:${pct}%"></span></div><div class="ws-expn">${maxed?'Viên mãn':`Thành thạo ${exp}/${need}`}</div>`:''}
+      </div>
+    </div>
+    <p class="ws-line">${PROF_LINE[id]||''}</p>
+    <p class="sec-note" style="margin:6px 0 0;">${p.desc}</p>
+    ${lvl<1?`<button class="btn gold" style="margin-top:10px;" ${state.spiritStones<APPRENTICE_COST?'disabled':''} onclick="learnOrLevelProfession('${id}')">Bái Sư Học Nghề (${APPRENTICE_COST} linh thạch)</button>`:''}
+    ${extraRows||''}
+  </div>`;
+}
+function trungBanner(){
+  const T = trung(), n = Math.min(26, 6 + Math.floor(T.n/40));
+  const dots = Array.from({length:n},(_,i)=>`<circle class="tg-d" r="${1.4+(i%3)*.5}" fill="${['#f0cf8c','#d8dde4','#2a2a2a'][T.gen>=1 ? i%3 : i%2]}" style="--a:${(i*137)%360}deg;--r:${16+(i*7)%22}px;--t:${3+(i%5)*.7}s"/>`).join('');
+  return `<svg viewBox="0 0 100 100" class="ws-art tg-art"><g transform="translate(50 50)">${dots}</g><circle cx="50" cy="50" r="6" fill="rgba(240,207,140,.25)"/></svg>`;
+}
+function renderCraftCard(){
+  const tiles = PROFESSIONS.map(p=>{
+    const lv = profLvl(p.id), max = p.maxLevel, need = PROF_NEED[lv]||1, exp = state.profExp[p.id]||0;
+    const pct = lv<1 ? 0 : lv>=max ? 100 : Math.min(100, exp/need*100);
+    return `<button class="cr-tile ${lv?'':'off'}" onclick="goTo('dongphu','${PROF_PAGE[p.id]}')">
+      <span class="cr-art">${PROF_ART[p.id]||''}</span>
+      <span class="cr-nm">${p.name}</span>
+      <span class="cr-rk">${lv?PROF_RANKS[Math.min(lv,6)]:'Chưa học'}</span>
+      <span class="cr-pips">${Array.from({length:max},(_,i)=>`<i class="${i<lv?'on':''}"></i>`).join('')}</span>
+      ${lv && lv<max ? `<span class="cr-exp"><span style="width:${pct}%"></span></span>` : ''}
+    </button>`;
+  }).join('');
+  return `<div class="card"><div class="sec-title">${ic('hammer')} Tay Nghề<span>${PROFESSIONS.filter(p=>profLvl(p.id)>=1).length}/${PROFESSIONS.length}</span></div><div class="cr-grid">${tiles}</div></div>`;
+}
 function renderTrungPage(){
   const T = trung();
   if(!trungHas()) return `<div class="card zone-card locked"><h3>${ic('bug')} Linh Trùng Viên</h3><p>Chưa có kỳ trùng nào. Phệ Kim Trùng — đứng thứ mười hai trên kỳ trùng bảng — đôi khi gặp khi thám hiểm Loạn Tinh Hải, hoặc có được theo cốt truyện.</p></div>`;
   const G = TRUNG_GENS[T.gen], pct = Math.min(100, T.n/G.cap*100);
-  return `<div class="card"><div class="sec-title">${ic('bug')} Linh Trùng Viên<span>${G.name}</span></div>
-      <p class="flavor" style="margin-top:0;">${G.desc}</p>
+  return `<div class="card ws-card"><div class="ws-head"><div class="ws-pic">${trungBanner()}</div><div class="ws-info"><div class="ws-name">Linh Trùng Viên</div><div class="ws-rank">Phệ Kim Trùng · ${G.name}</div><div class="ws-expn">${T.n} / ${G.cap} con</div></div></div>
+      <p class="flavor" style="margin-top:8px;">${G.desc}</p>
       <div class="row"><span class="k">Số lượng</span><span class="v">${T.n} / ${G.cap}</span></div>
       <div class="life-track gold"><div class="life-fill" style="width:${pct}%"></div></div>
       <div class="row"><span class="k">Uy lực Phệ Kim Trùng Vân</span><span class="v">×${trungDmgMult().toFixed(2)} công kích</span></div>
@@ -13240,19 +13639,6 @@ function renderGearCard(){
   return `<div class="card"><div class="sec-title">${ic('swords')} Hành Trang</div><div class="ov-grid">${tiles.join('')}</div></div>`;
 }
 const PROF_PAGE = {danSu:'luyendan', khiSu:'luyenkhi', phuLuc:'chephu', tranPhap:'tranphap', khoiLoi:'khoiloi'};
-function renderCraftCard(){
-  const rows = PROFESSIONS.map(p=>{
-    const lv = profLvl(p.id), max = p.maxLevel, need = PROF_NEED[lv]||1, exp = state.profExp[p.id]||0;
-    const pct = lv<1 ? 0 : lv>=max ? 100 : Math.min(100, exp/need*100);
-    return `<button class="cr-row ${lv?'':'off'}" onclick="goTo('dongphu','${PROF_PAGE[p.id]}')">
-      <span class="cr-ic">${ic(PROF_ICON[p.id],'keep')}</span>
-      <span class="cr-body"><span class="cr-top"><b>${p.name}</b><em>${lv?`cấp ${lv}/${max}`:'chưa học'}</em></span>
-        <span class="cr-pips">${Array.from({length:max},(_,i)=>`<i class="${i<lv?'on':''}"></i>`).join('')}</span>
-        ${lv && lv<max ? `<span class="cr-exp"><span style="width:${pct}%"></span></span>` : ''}</span>
-    </button>`;
-  }).join('');
-  return `<div class="card"><div class="sec-title">${ic('hammer')} Tay Nghề</div>${rows}</div>`;
-}
 
 /* =====================================================================
    NHÂN MẠCH — danh bạ gọn, chạm để xem chi tiết
@@ -13355,10 +13741,12 @@ function invFromHtml(html){
   });
   return groups;
 }
+function invTone(title){ return /Đan/.test(title)?'jade':/Phù/.test(title)?'gold':/Bảo Vật|Kỳ Vật/.test(title)?'violet':/Khoáng|Mộc|Huyết|Yêu Đan|Dược/.test(title)?'earth':'jade'; }
 function renderInvGroups(groups){
   INV = [];
   if(!groups.length) return `<div class="card"><p class="flavor" style="margin:0;text-align:center;">Túi trữ vật trống rỗng.</p></div>`;
-  return groups.map(g=>`<div class="card inv-card"><div class="sec-title">${g.icon} ${g.title}<span>${g.items.length}</span></div>
+  const total = groups.reduce((t,g)=>t+g.items.length,0);
+  return `<div class="card inv-hero"><div class="inv-bag">${ic('bag','keep')}</div><div><div class="inv-ht">Túi Trữ Vật</div><div class="inv-hs">${total} loại vật phẩm · ${state.spiritStones.toLocaleString('vi-VN')} linh thạch</div></div></div>` + groups.map(g=>`<div class="card inv-card tone-${invTone(g.title)}"><div class="sec-title">${g.icon} ${g.title}<span>${g.items.length}</span></div>
     <div class="inv-grid">${g.items.map(it=>{ const i = INV.push(it)-1; return `<button class="inv-tile" onclick="showInvItem(${i})"><span class="inv-ic">${it.icon}</span><span class="inv-n">${it.name}</span>${it.count?`<span class="inv-c">${it.count}</span>`:''}${it.btns?'<span class="inv-use"></span>':''}</button>`; }).join('')}</div></div>`).join('');
 }
 function showInvItem(i){
@@ -13461,41 +13849,86 @@ function growKimLoiTruc(){
   state.luDich -= cost; ng().kimLoiTruc = (ng().kimLoiTruc||0)+1;
   addLog('Lục dịch thấm vào đoạn Thiên Lôi Trúc — thân trúc hóa vàng, lôi quang chớp động: một đoạn Kim Lôi Trúc vạn năm.'); render();
 }
-/* Chiếc bình nhỏ xanh biếc, hoa văn hình lá — mực lục dịch dâng theo số giọt */
+/* Chưởng Thiên Bình — thiết kế riêng cho game theo mô tả nguyên tác:
+   "bình nhỏ xanh biếc, hoa văn hình lá". Men ngọc nhiều lớp, lá khắc nổi
+   phát sáng khi vừa ngưng giọt mới, lục dịch gợn sóng, quầng sáng theo tuần trăng. */
+let lastLuSeen = null;
 function bottleSvg(f){
-  const top = 30, bot = 92, y = (bot - (bot-top)*f).toFixed(1);
-  return `<svg class="bt-svg" viewBox="0 0 64 100" aria-label="Chưởng Thiên Bình">
+  const fresh = lastLuSeen!=null && (state.luDich||0) > lastLuSeen; lastLuSeen = state.luDich||0;
+  const glow = Math.max(.25, Math.min(1, moonPhase().mult/1.8));
+  const top = 40, bot = 104, y = (bot - (bot-top)*f).toFixed(1);
+  const body = "M30 16 C30 22 31 26 33 28 C19 33 10 45 10 61 C10 82 24 98 40 98 C56 98 70 82 70 61 C70 45 61 33 47 28 C49 26 50 22 50 16 Z";
+  const leaf = (x,y,r,flip)=>`<g transform="translate(${x} ${y}) rotate(${r})${flip?' scale(-1 1)':''}"><path d="M0 0 C5 -7 13 -7 16 0 C13 7 5 7 0 0 Z" class="bt-leaf"/><path d="M1 0 L14 0" class="bt-vein"/><path d="M5 0 L8 -3 M9 0 L12 -3 M5 0 L8 3 M9 0 L12 3" class="bt-vein"/></g>`;
+  return `<svg class="bt-svg ${fresh?'fresh':''}" viewBox="0 0 80 116" aria-label="Chưởng Thiên Bình" style="--glow:${glow.toFixed(2)}">
     <defs>
-      <clipPath id="btBody"><path d="M26 22 L26 30 C14 36 8 48 8 62 C8 82 20 94 32 94 C44 94 56 82 56 62 C56 48 50 36 38 30 L38 22 Z"/></clipPath>
-      <linearGradient id="btGlass" x1="0" x2="1"><stop offset="0" stop-color="#1f6e4c"/><stop offset=".45" stop-color="#3fae7c"/><stop offset="1" stop-color="#16573b"/></linearGradient>
-      <linearGradient id="btLiq" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b8ffd9"/><stop offset="1" stop-color="#3cc98a"/></linearGradient>
-      <radialGradient id="btGlow"><stop offset="0" stop-color="rgba(140,255,200,.55)"/><stop offset="1" stop-color="rgba(140,255,200,0)"/></radialGradient>
+      <clipPath id="btBody"><path d="${body}"/></clipPath>
+      <radialGradient id="btGlass" cx=".38" cy=".38" r=".75"><stop offset="0" stop-color="#5fd6a2"/><stop offset=".45" stop-color="#1f8f5f"/><stop offset=".85" stop-color="#0c5236"/><stop offset="1" stop-color="#083a27"/></radialGradient>
+      <linearGradient id="btLiq" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d4ffe8"/><stop offset=".3" stop-color="#7ef0b8"/><stop offset="1" stop-color="#22a46c"/></linearGradient>
+      <radialGradient id="btHalo"><stop offset="0" stop-color="rgba(150,255,205,.6)"/><stop offset=".6" stop-color="rgba(120,240,190,.15)"/><stop offset="1" stop-color="rgba(120,240,190,0)"/></radialGradient>
+      <linearGradient id="btRim" x1="0" x2="1"><stop offset="0" stop-color="#0e5a3c"/><stop offset=".5" stop-color="#4fcf98"/><stop offset="1" stop-color="#0e5a3c"/></linearGradient>
     </defs>
-    <ellipse cx="32" cy="64" rx="30" ry="34" fill="url(#btGlow)"/>
-    <path d="M26 22 L26 30 C14 36 8 48 8 62 C8 82 20 94 32 94 C44 94 56 82 56 62 C56 48 50 36 38 30 L38 22 Z" fill="url(#btGlass)" stroke="#8ff0c0" stroke-opacity=".55" stroke-width="1.2"/>
+    <ellipse class="bt-halo" cx="40" cy="64" rx="40" ry="46" fill="url(#btHalo)"/>
+    <ellipse cx="40" cy="104" rx="20" ry="3" fill="rgba(0,0,0,.45)"/>
+    <path d="${body}" fill="url(#btGlass)"/>
     <g clip-path="url(#btBody)">
-      <rect x="0" y="${y}" width="64" height="100" fill="url(#btLiq)" opacity=".9"/>
-      <path class="bt-wave" d="M0 ${y} Q8 ${(+y-2).toFixed(1)} 16 ${y} T32 ${y} T48 ${y} T64 ${y} V100 H0 Z" fill="#d6ffe9" opacity=".35"/>
-      <path d="M20 58 C24 50 30 50 32 56 C30 62 24 62 20 58 Z M44 70 C40 62 34 62 32 68 C34 74 40 74 44 70 Z M24 78 C28 72 32 74 32 78 C30 82 26 82 24 78 Z" fill="none" stroke="#c8ffe3" stroke-opacity=".55" stroke-width="1"/>
-      <path d="M32 56 V82 M20 58 L32 60 M44 70 L32 70" stroke="#c8ffe3" stroke-opacity=".35" stroke-width=".8"/>
-      <path d="M14 50 C12 58 12 70 16 80" stroke="#ffffff" stroke-opacity=".35" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <rect x="0" y="${y}" width="80" height="120" fill="url(#btLiq)" opacity=".82"/>
+      <path class="bt-wave" d="M-10 ${y} Q0 ${(+y-2.4).toFixed(1)} 10 ${y} T30 ${y} T50 ${y} T70 ${y} T90 ${y} V120 H-10 Z" fill="#effff6" opacity=".4"/>
+      <circle class="bt-bub b1" cx="30" cy="96" r="1.2" fill="#f0fff8"/><circle class="bt-bub b2" cx="48" cy="98" r="1" fill="#f0fff8"/><circle class="bt-bub b3" cx="40" cy="97" r=".9" fill="#f0fff8"/>
+      <g class="bt-leaves">${leaf(17,58,-28)}${leaf(63,58,-28,true)}${leaf(22,74,12)}${leaf(58,74,12,true)}${leaf(40,86,-90)}<path d="M40 45 C36 55 36 70 40 84" class="bt-vein" style="stroke-width:1"/>${leaf(40,52,-90)}</g>
+      <path d="M18 48 C14 60 15 76 22 88" stroke="#fff" stroke-opacity=".38" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M60 52 C63 62 62 72 58 80" stroke="#fff" stroke-opacity=".12" stroke-width="2" fill="none" stroke-linecap="round"/>
     </g>
-    <rect x="23.5" y="14" width="17" height="9" rx="2.5" fill="#2a8a5e" stroke="#8ff0c0" stroke-opacity=".6" stroke-width="1"/>
-    <rect x="25" y="10" width="14" height="5" rx="2" fill="#1d6a48" stroke="#8ff0c0" stroke-opacity=".5" stroke-width=".8"/>
+    <path d="${body}" fill="none" stroke="#a6ffd6" stroke-opacity=".5" stroke-width="1"/>
+    <path d="M24 92 C30 98 50 98 56 92 L54 101 C48 104 32 104 26 101 Z" fill="url(#btRim)" opacity=".9"/>
+    <rect x="28" y="12" width="24" height="6" rx="3" fill="url(#btRim)" stroke="#a6ffd6" stroke-opacity=".5" stroke-width=".8"/>
+    <path d="M32 12 C32 6 36 3 40 3 C44 3 48 6 48 12 Z" fill="#14724b" stroke="#a6ffd6" stroke-opacity=".55" stroke-width=".8"/>
+    <circle cx="40" cy="3.5" r="2" fill="#8ff0c0"/>
+    <path class="bt-drop" d="M40 21 C38 24 38 26 40 27 C42 26 42 24 40 21 Z" fill="#c8ffe3"/>
   </svg>`;
+}
+/* Dược viên — luống đất có cây linh thảo vẽ theo độ tuổi */
+let lastPlotAges = [];
+function plantSvg(p, i){
+  const empty = p.age==null, stage = empty ? -1 : Math.min(herbTierByAge(p.age), state.bottleLevel||1);
+  const grew = !empty && lastPlotAges[i]!=null && p.age > lastPlotAges[i] + 5;
+  lastPlotAges[i] = empty ? null : p.age;
+  const hue = [140,140,120,95,45,320,280][Math.max(0,stage)] ;
+  const leaf = (x,y,r,sz,c)=>`<path d="M0 0 C${sz*.35} ${-sz*.45} ${sz*.85} ${-sz*.45} ${sz} 0 C${sz*.85} ${sz*.45} ${sz*.35} ${sz*.45} 0 0Z" transform="translate(${x} ${y}) rotate(${r})" fill="${c}"/>`;
+  const G = 'hsl(140,55%,42%)', G2 = 'hsl(130,60%,55%)';
+  let plant = '';
+  if(stage===0) plant = `<path d="M50 70 V60" stroke="${G}" stroke-width="2"/>${leaf(50,61,-150,9,G2)}${leaf(50,61,-30,9,G2)}`;
+  else if(stage>=1){
+    const h = [0,20,26,32,36,40,42][stage], top = 70-h;
+    plant = `<path d="M50 70 C50 ${70-h*.5} 49 ${top+6} 50 ${top}" stroke="${G}" stroke-width="2.2" fill="none"/>`;
+    const pairs = Math.min(4, 1+stage);
+    for(let k=0;k<pairs;k++){ const yy = 66 - k*(h/(pairs+0.5)); const sz = 10 + (stage>=3?3:0) - k; plant += leaf(50,yy,-160+k*6,sz,k%2?G:G2) + leaf(50,yy-2,-20-k*6,sz,k%2?G2:G); }
+    if(stage>=3){ const c = `hsl(${hue},85%,65%)`; plant += `<g class="pl-flower" transform="translate(50 ${top})">${[0,72,144,216,288].map(r=>`<ellipse rx="3.4" ry="6.5" cy="-5" transform="rotate(${r})" fill="${c}" opacity=".95"/>`).join('')}<circle r="3" fill="#fff6c8"/></g>`; }
+    if(stage>=5) plant += `<circle cx="50" cy="${top}" r="16" fill="hsla(${hue},90%,70%,.28)" class="pl-aura"/>` + [0,1,2].map(k=>`<circle class="pl-spark s${k}" cx="${38+k*12}" cy="${top+8-k*4}" r="1.3" fill="#fffbe0"/>`).join('');
+  }
+  return `<svg class="pl-svg ${grew?'grew':''}" viewBox="0 0 100 86">
+    <ellipse cx="50" cy="74" rx="40" ry="9" fill="#3a2a1a"/><ellipse cx="50" cy="72" rx="38" ry="7" fill="#5a4026"/>
+    <path d="M22 72 Q30 69 38 72 M44 73 Q52 70 60 73 M64 72 Q71 69 78 72" stroke="#7a5836" stroke-width="1" fill="none"/>
+    ${empty ? `<circle cx="50" cy="66" r="7" fill="none" stroke="rgba(240,207,140,.5)" stroke-dasharray="2 2"/><path d="M50 62 V70 M46 66 H54" stroke="rgba(240,207,140,.7)" stroke-width="1.4"/>` : `<g class="pl-sway">${plant}</g>`}
+    <path class="pl-drop" d="M50 8 C47 13 47 16 50 17 C53 16 53 13 50 8Z" fill="#9ff5cc"/>
+  </svg>`;
+}
+function renderPlot(p, i, lv){
+  if(p.age==null) return `<div class="plot2 empty">${plantSvg(p,i)}<div class="pl-name">Luống Trống</div><button class="btn sm ghost" ${state.seeds>0?'':'disabled'} onclick="gardenPlant(${i})">${ic('herb')}Gieo hạt</button></div>`;
+  const realT = herbTierByAge(p.age), t = Math.min(realT, lv), a = Math.floor(p.age);
+  const capped = realT > lv, nextAge = HERB_AGE.find(x=>x>p.age), prevAge = [0,...HERB_AGE].filter(x=>x<=p.age).pop();
+  const pct = capped || !nextAge ? 100 : Math.round((p.age-prevAge)/(nextAge-prevAge)*100);
+  const nm = t ? HERB_NAMES[t-1].replace('Linh Thảo ','') : 'Mầm Non';
+  return `<div class="plot2 t${t} ${t?'ripe':''}">${plantSvg(p,i)}
+    <div class="pl-name">${t?`<span class="pl-ripe">Chín</span>`:''}${nm}</div>
+    <div class="pl-age">${a.toLocaleString('vi-VN')} năm dược tính</div>
+    <div class="pl-bar"><span style="width:${pct}%"></span></div>
+    <div class="pl-hint">${capped?`Bình chỉ thúc tới ${HERB_NAMES[lv-1].replace('Linh Thảo ','')}`:nextAge?`Tới ${nextAge.toLocaleString('vi-VN')} năm: ${HERB_NAMES[HERB_AGE.indexOf(nextAge)].replace('Linh Thảo ','')}`:'Đã đến cực hạn'}</div>
+    <div class="pl-btns"><button class="btn sm ghost" ${(state.luDich||0)<1||capped?'disabled':''} onclick="gardenDrop(${i})">${ic('drop')}1 giọt</button><button class="btn sm ${t?'gold':'ghost'}" ${t?'':'disabled'} onclick="gardenHarvest(${i})">Thu</button></div></div>`;
 }
 function renderGardenPage(){
   const g = garden(), ph = moonPhase(), nextPh = moonPhase(state.age*12 + state.month + 1);
   const cap = luCap(), lv = state.bottleLevel||1;
-  const plots = g.plots.map((p,i)=>{
-    if(p.age==null) return `<div class="plot empty"><div class="plot-ic">${ic('herb','keep')}</div><div class="plot-n">Đất trống</div><button class="btn sm ghost" ${state.seeds>0?'':'disabled'} onclick="gardenPlant(${i})">Gieo hạt</button></div>`;
-    const t = plotTier(p), a = Math.floor(p.age), nextAge = HERB_AGE.find(x=>x>p.age);
-    const capped = herbTierByAge(p.age) > lv;
-    return `<div class="plot t${t}"><div class="plot-ic">${ic('herb','keep')}</div>
-      <div class="plot-n">${t?HERB_NAMES[t-1].replace('Linh thảo ',''):'Mầm non'}</div>
-      <div class="plot-a">${a} năm${capped?' · bình giới hạn':nextAge?` · tới ${nextAge}`:''}</div>
-      <div class="plot-b"><button class="btn sm ghost" ${(state.luDich||0)<1?'disabled':''} onclick="gardenDrop(${i})">+1 giọt</button><button class="btn sm ${t?'gold':'ghost'}" ${t?'':'disabled'} onclick="gardenHarvest(${i})">Thu</button></div></div>`;
-  }).join('');
+  const plots = g.plots.map((p,i)=>renderPlot(p,i,lv)).join('');
   const sh = state.specHerbs;
   const kimLoi = state.ng && (ng().kimLoiTruc>0 || (typeof storySceneRead==='function' && storySceneRead('2.66')));
   return `<div class="card bottle-card">
@@ -13510,13 +13943,13 @@ function renderGardenPage(){
       <p class="sec-note" style="margin:10px 0 0;">Ban đêm bình hứng ánh trăng sao, bảy đêm ngưng một giọt — trăng tròn nhanh gần gấp đôi, trăng non chậm một nửa. Nguyên giọt đủ để thú nhỏ nổ tung, nên chỉ nhỏ vào cây hoặc pha loãng.${state.realmIdx>=8?' Ở Tiên Giới, bình lộ ra liên hệ với Thời Gian Pháp Tắc: lục dịch ngưng nhanh gấp đôi.':''}</p>
       ${lv<6?`<div class="row"><span class="k">Nguyệt Hoa tinh túy</span><span class="v">${state.bottleShards}/${lv*2}</span></div><p class="sec-note" style="margin:2px 0 0;">Gom đủ để nâng bình: giữ nhiều giọt hơn, thêm ô đất, thúc được dược tính lâu năm hơn.</p>`:''}
     </div>
-    <div class="card"><div class="sec-title">${ic('herb')} Dược Viên<span>${state.seeds||0} linh chủng</span></div>
-      <div class="plot-grid">${plots}</div>
+    <div class="card garden-card"><div class="sec-title">${ic('herb')} Dược Viên<span>${g.plots.filter(p=>p.age!=null).length}/${g.plots.length} luống · ${state.seeds||0} linh chủng</span></div>
+      <div class="plot-grid2">${plots}</div>
       <div class="btn-row" style="margin-top:10px;">
         <button class="btn ghost" ${(state.luDich||0)<1||!g.plots.some(p=>p.age!=null)?'disabled':''} onclick="gardenDilute()">Pha loãng tưới cả vườn (+10 năm)</button>
         <button class="btn gold" ${g.plots.some(p=>p.age!=null&&plotTier(p)>=1)?'':'disabled'} onclick="gardenHarvestAll()">Thu hoạch hết</button>
       </div>
-      <p class="sec-note" style="margin:8px 0 0;">Cây tự lớn theo năm tháng. Mốc dược tính: 10 · 100 · 300 · 1.000 · 3.000 · 10.000 năm — bình Nguyệt Hoa cấp ${lv} thúc được tới ${HERB_NAMES[lv-1].replace('Linh thảo ','')}.${state.tucNhuong?' Ngũ Sắc Tức Nhưỡng: mỗi lần thu gấp đôi.':''}</p>
+      <p class="sec-note" style="margin:8px 0 0;">Cây tự lớn theo năm tháng. Mốc dược tính: 10 · 100 · 300 · 1.000 · 3.000 · 10.000 năm — bình Nguyệt Hoa cấp ${lv} thúc được tới ${HERB_NAMES[lv-1].replace('Linh Thảo ','')}.${state.tucNhuong?' Ngũ Sắc Tức Nhưỡng: mỗi lần thu gấp đôi.':''}</p>
     </div>
     <div class="card"><div class="sec-title">${ic('herb')} Kỳ Hoa Dị Thảo</div>
       <div class="row"><span class="k">Nghê Thường Thảo ×${sh.ngheThuong||0}<br><small>Hương hoa dụ yêu thú tới; kích thích kỳ trùng sinh sản</small></span><span class="v btn-inline">
@@ -13893,6 +14326,108 @@ function renderGuideCard(){
   return `<div class="card guide-card"><div class="sec-title">${ic('compass')} Chỉ Dẫn Tân Thủ<span>${GUIDE.length-left.length}/${GUIDE.length}</span></div>
     ${GUIDE.map(g=>{ const d = g.done(); return `<div class="gd-row ${d?'done':''}"><span class="gd-c">${d?'✓':''}</span><span class="gd-t">${g.label}</span>${d?'':`<button class="btn sm ghost" onclick="${g.go}">Đi</button>`}</div>`; }).join('')}
     <div class="gd-foot"><small>Xong hết nhận 200 linh thạch.</small><button class="ls-link" onclick="state.guideOff=true; render()">Ẩn chỉ dẫn</button></div></div>`;
+}
+
+/* =====================================================================
+   TU SĨ BẢNG & ĐẤU PHÁP (trực tuyến)
+   Bảng lấy dữ liệu từ bản lưu đám mây (máy chủ đọc, không tin máy người chơi).
+   Đấu pháp với phân thân của người khác: máy chủ tự tính trận, mỗi ngày mười trận.
+===================================================================== */
+const TSB = {rows:[], tab:'realm', loading:false, err:'', ts:0, my:null, left:null};
+function tsbOnline(){ return cloud.client && cloud.user && cloud.status==='in'; }
+async function tsbLoad(force){
+  if(!tsbOnline() || TSB.loading) return;
+  if(!force && Date.now()-TSB.ts < 60000) return;
+  TSB.loading = true; TSB.err = '';
+  try{
+    const order = TSB.tab==='fame' ? [['fame',false],['realm_idx',false]] : [['realm_idx',false],['sub_stage',false],['fame',false]];
+    let q = cloud.client.from('cultivators').select('user_id,name,realm_idx,sub_stage,path_name,root_name,age,epithet,treasure,atk,def,spd,crit,hp,fame,wins,losses,updated_at');
+    order.forEach(([c,asc])=>{ q = q.order(c, {ascending:asc}); });
+    const {data, error} = await q.limit(50); if(error) throw error;
+    TSB.rows = data||[];
+    const me = await cloud.client.from('cultivators').select('*').eq('user_id', cloud.user.id).maybeSingle();
+    TSB.my = me.data || null;
+    const since = new Date(Date.now()-86400000).toISOString();
+    const dc = await cloud.client.from('duels').select('id', {count:'exact', head:true}).eq('attacker', cloud.user.id).gte('created_at', since);
+    TSB.left = Math.max(0, 10 - (dc.count||0));
+    TSB.ts = Date.now();
+  }catch(e){ TSB.err = cloudErrMsg(e); }
+  TSB.loading = false;
+  if(state.activeTab==='hanhtau' && state.subTabs.hanhtau==='tusibang') render();
+}
+async function tsbPublish(){
+  if(!tsbOnline()) return;
+  TSB.err = ''; TSB.loading = true; render();
+  try{
+    await cloudPush(true);
+    const {data, error} = await cloud.client.rpc('publish_cultivator'); if(error) throw error;
+    TSB.my = data; toast('Đã lưu danh lên Tu Sĩ Bảng');
+  }catch(e){ TSB.err = cloudErrMsg(e); }
+  TSB.loading = false; TSB.ts = 0; tsbLoad(true);
+}
+function tsbTab(t){ TSB.tab = t; TSB.ts = 0; tsbLoad(true); render(); }
+async function tsbDuel(id){
+  const foe = TSB.rows.find(r=>r.user_id===id); if(!foe) return;
+  document.getElementById('modalBody').innerHTML = `<div class="story-pop"><div class="sp-kicker">${ic('swords','keep')} Đấu Pháp</div><h2 class="sp-title">${escHtml(foe.name)}</h2><p class="sp-blurb">Đang triệu phân thân đối thủ…</p></div>`;
+  document.getElementById('overlay').classList.add('show');
+  try{
+    const {data, error} = await cloud.client.rpc('duel', {target:id}); if(error) throw error;
+    tsbShowDuel(foe, data);
+  }catch(e){
+    document.getElementById('modalBody').innerHTML = `<div class="story-pop"><h2 class="sp-title">Không thể đấu pháp</h2><p class="sp-blurb">${escHtml(cloudErrMsg(e))}</p><button class="btn ghost" style="margin-top:12px;" onclick="closeModal()">Đóng</button></div>`;
+  }
+}
+function tsbShowDuel(foe, r){
+  const me = TSB.my || {name:state.name, hp:r.aHp};
+  const reward = r.won ? 30*(state.realmIdx+1) : 0;
+  if(r.won){ state.spiritStones += reward; addLog(`Đấu pháp thắng phân thân 【${foe.name}】: danh vọng +${r.gain}, ${reward} linh thạch.`); }
+  else addLog(`Đấu pháp thua phân thân 【${foe.name}】, danh vọng ${r.gain}.`);
+  scheduleSave();
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `<div class="duel-box">
+    <div class="duel-vs"><div><b>${escHtml(state.name)}</b><span class="duel-hp"><i id="dHpA" style="width:100%"></i></span></div><em>VS</em><div><b>${escHtml(foe.name)}</b><span class="duel-hp foe"><i id="dHpD" style="width:100%"></i></span></div></div>
+    <div class="duel-log" id="duelLog"></div>
+    <div id="duelEnd"></div></div>`;
+  const log = r.log||[]; let i = 0;
+  const step = ()=>{
+    if(!document.getElementById('duelLog')) return;
+    if(i>=log.length){
+      document.getElementById('duelEnd').innerHTML = `<div class="duel-res ${r.won?'win':'lose'}">${r.won?'Thắng':'Bại'}</div>
+        <p class="sec-note" style="text-align:center;margin:4px 0 10px;">Danh vọng ${r.gain>0?'+':''}${r.gain}${reward?` · ${reward} linh thạch`:''} · còn ${r.left} trận hôm nay</p>
+        <button class="btn gold" onclick="closeModal(); TSB.ts=0; tsbLoad(true)">Đóng</button>`;
+      if(r.won) fx('banner',{text:'Đấu Pháp Thắng'});
+      return;
+    }
+    const e = log[i++], mine = e.s==='a';
+    const el = document.createElement('div'); el.className = 'duel-ln '+(mine?'a':'d');
+    el.textContent = `${mine?state.name:foe.name} ${e.c?'bạo kích':'ra đòn'}: ${e.d} sát thương`;
+    document.getElementById('duelLog').prepend(el);
+    const bar = document.getElementById(mine?'dHpD':'dHpA'); const max = mine ? r.dHp : r.aHp;
+    if(bar) bar.style.width = Math.max(0, e.h/max*100)+'%';
+    if(mine) sfx(e.c?'crit':'hit'); else sfx('hurt');
+    setTimeout(step, settings.motion ? 380 : 60);
+  };
+  setTimeout(step, 300);
+}
+function renderTuSiBang(){
+  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('star')} Tu Sĩ Bảng</div>
+    <p class="sec-note" style="margin:0 0 10px;">Bảng tu sĩ và đấu pháp cần tài khoản đám mây — để máy chủ đọc bản lưu của ngươi, không ai sửa được thứ hạng trên máy mình.</p>
+    <button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập</button></div>`;
+  if(!TSB.ts && !TSB.loading) tsbLoad();
+  const my = TSB.my;
+  const myCard = `<div class="card tsb-me"><div class="sec-title">${ic('person')} Danh Của Ngươi</div>
+    ${my ? `<div class="tsb-mine"><div><b>${escHtml(my.name)}</b><small>${fullRealmName(my.realm_idx, my.sub_stage)} · danh vọng ${my.fame} · ${my.wins} thắng ${my.losses} bại</small></div></div>` : '<p class="sec-note" style="margin:0 0 8px;">Chưa lưu danh lên bảng.</p>'}
+    <div class="btn-row" style="margin-top:8px;"><button class="btn gold" ${TSB.loading?'disabled':''} onclick="tsbPublish()">${my?'Cập Nhật Lên Bảng':'Lưu Danh Lên Bảng'}</button></div>
+    <p class="sec-note" style="margin:6px 0 0;">Bảng lấy theo bản lưu đám mây mới nhất. Đấu pháp: ${TSB.left==null?'…':TSB.left}/10 trận hôm nay — máy chủ tự tính trận với phân thân của đối thủ.</p></div>`;
+  const rows = TSB.rows.map((r,i)=>{ const me = cloud.user && r.user_id===cloud.user.id;
+    return `<div class="tsb-row ${me?'me':''}"><span class="tsb-rank r${i+1}">${i+1}</span>
+      <span class="tsb-b"><b>${escHtml(r.name)}${r.epithet?` <em>${escHtml(EPITHETS.find(e=>e.id===r.epithet)?.label?.()||'')}</em>`:''}</b><small>${fullRealmName(r.realm_idx, r.sub_stage)} · ${escHtml(r.path_name||'')}</small><small>Danh vọng ${r.fame} · ${r.wins}T ${r.losses}B</small></span>
+      ${me?'<span class="tsb-you">Ngươi</span>':`<button class="btn sm ${TSB.my&&TSB.left>0?'blood':'ghost'}" ${TSB.my&&TSB.left>0?'':'disabled'} onclick="tsbDuel('${r.user_id}')">Đấu</button>`}</div>`; }).join('');
+  return myCard + `<div class="card"><div class="sec-title">${ic('star')} Tu Sĩ Bảng<span>${TSB.rows.length}</span></div>
+    <div class="seg" style="margin-bottom:8px;"><button class="${TSB.tab==='realm'?'on':''}" onclick="tsbTab('realm')">Cảnh giới</button><button class="${TSB.tab==='fame'?'on':''}" onclick="tsbTab('fame')">Danh vọng</button></div>
+    ${TSB.err?`<p class="sec-note" style="color:var(--blood-bright);">${escHtml(TSB.err)}</p>`:''}
+    ${TSB.loading && !TSB.rows.length ? '<p class="flavor">Đang tải…</p>' : rows || '<p class="flavor">Chưa có ai lưu danh.</p>'}
+    <button class="ls-link" style="margin-top:8px;" onclick="TSB.ts=0; tsbLoad(true)">Làm mới</button></div>`;
 }
 
 /* =====================================================================
