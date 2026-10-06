@@ -1668,7 +1668,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.59.1';
+const GAME_VERSION = '1.60.0';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1817,6 +1817,10 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.60.0', date:'02/10/2026', title:'Luyện đan, chế phù do máy chủ quyết định', items:[
+    ['moi','Khi đã đăng nhập: bái sư học Luyện Đan Sư, Phù Lục Sư; luyện đan tu vi, đan liệu thương; vẽ linh phù — máy chủ kiểm tra tay nghề, trừ nguyên liệu, tung tỷ lệ, trao thành phẩm và cộng thành thạo. Tay nghề hai nghề này không thể tự tăng trên máy.'],
+    ['moi','Có bản ứng dụng Android (APK) cài thẳng, mở trang phamnhan.click toàn màn hình.']
+  ]},
   {v:'1.59.1', date:'02/10/2026', title:'Cài thành ứng dụng', items:[
     ['moi','Cài game ra màn hình chính Android (và iPhone): mở toàn màn hình như một ứng dụng, có biểu tượng Chưởng Thiên Bình. Vào Hệ Thống ▸ Cài ra màn hình chính.']
   ]},
@@ -3741,6 +3745,7 @@ function learnOrLevelProfession(id){
   const p = profDef(id);
   if(profLvl(id)>0){ addLog(`${p.name} chỉ tinh tấn nhờ thực hành — cứ chế tác, tay nghề sẽ tự tăng.`); render(); return; }
   if(state.spiritStones<APPRENTICE_COST){ addLog(`Cần ${APPRENTICE_COST} linh thạch làm lễ bái sư học nghề ${p.name}.`); render(); return; }
+  if((id==='danSu'||id==='phuLuc') && craftSrvOk()){ serverLearnProf(id).then(done=>{ if(!done) learnOrLevelProfession(id); }); return; }
   state.spiritStones -= APPRENTICE_COST;
   state.professions[id] = 1;
   state.profExp[id] = 0;
@@ -3793,6 +3798,7 @@ function brewPill(kind, tier){
   else { rec = breakthroughPillRecipe(); name = BREAKTHROUGH_PILL_NAME; }
   if(profLvl('danSu')<rec.minLvl){ addLog(`Luyện ${name} cần Luyện Đan Sư cấp ${rec.minLvl}.`); render(); return; }
   if(!ingOk(rec.ing)){ addLog(`Luyện ${name} còn thiếu: ${ingMissing(rec.ing)}.`); render(); return; }
+  if((kind==='tuvi'||kind==='heal') && craftSrvOk()){ serverCraft(kind, tier, rec, name).then(done=>{ if(!done) brewPill(kind, tier); }); return; }
   ingTake(rec.ing);
   const chance = craftChance('danSu', rec.diff, hasRecipe);
   const lvl = profLvl('danSu');
@@ -7290,6 +7296,7 @@ function craftTalisman(id){
   if(talismanLocked(t)){ addLog(t.needFlag ? `Chưa biết cách vẽ ${t.name} — phép chế nằm cuối sách Trường Xuân Công (cốt truyện Hồi 1-bis).` : `${t.name} là tiên phù — phải có Lục Giáp Thiên Thư mới biết cách vẽ.`); render(); return; }
   if(profLvl('phuLuc')<t.minLvl){ addLog(`Vẽ ${t.name} cần Phù Lục Sư cấp ${t.minLvl}.`); render(); return; }
   if(!ingOk(t.ing)){ addLog(`Vẽ ${t.name} còn thiếu: ${ingMissing(t.ing)}.`); render(); return; }
+  if(!t.ing.some(i=>i.kind==='tien') && craftSrvOk()){ serverCraft('phu', t.id, t, t.name).then(done=>{ if(!done) craftTalisman(t.id); }); return; }
   ingTake(t.ing);
   const chance = craftChance('phuLuc', (t.tier-1)*1.5 + (t.hard?3:0));
   const lvl = profLvl('phuLuc');
@@ -13322,6 +13329,50 @@ async function serverBreakthrough(){
   }catch(e){ toast(cloudErrMsg(e)); }
   cultBusy = false;
   render();
+}
+
+/* =====================================================================
+   BƯỚC 3: LUYỆN ĐAN & CHẾ PHÙ DO MÁY CHỦ QUYẾT ĐỊNH
+   Máy chủ kiểm tra tay nghề, trừ nguyên liệu, tung tỷ lệ, trao thành phẩm,
+   cộng thành thạo. Nếu máy chủ chưa có chức năng này thì tạm làm trên máy.
+===================================================================== */
+let craftBusy = false, craftSrvMissing = false;
+function craftSrvOk(){ return scEnabled() && !craftSrvMissing; }
+function isMissingFn(e){ const m = (e && (e.message||e.code||'')) + ''; return /PGRST202|Could not find the function|does not exist/i.test(m); }
+async function serverCraft(kind, key, rec, name){
+  if(craftBusy) return true; craftBusy = true;
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('craft_server', {p_kind: kind, p_key: String(key)});
+    if(error){ if(isMissingFn(error)){ craftSrvMissing = true; craftBusy = false; return false; } throw error; }
+    ingTake(rec.ing);
+    const pid = data.prof;
+    state.professions[pid] = data.lvl; state.profExp[pid] = data.exp; stat().craft++;
+    if(data.ok){
+      if(kind==='tuvi') state.pills[key] = (state.pills[key]||0) + data.n;
+      else if(kind==='heal') state.healPills[key] = (state.healPills[key]||0) + data.n;
+      else state.talismans[key] = (state.talismans[key]||0) + data.n;
+      addLog(kind==='phu' ? `Một nét liền mạch, vẽ thành ${data.n} đạo ${name} (tỷ lệ ${data.chance}%).` : `Đan hương ngào ngạt — luyện thành ${data.n} viên ${name} (tỷ lệ ${data.chance}%).`);
+    } else {
+      if(kind!=='phu' && data.chance<35){ const dmg = Math.round(state.stats.hpMax*0.1); state.hp = Math.max(1, state.hp-dmg); addLog(`Hỏa hầu mất kiểm soát, lò đan nổ tung! ${name} không thành, ngươi chịu ${dmg} sát thương.`); }
+      else addLog(kind==='phu' ? `Nét bút cuối run tay, phù văn ${name} đứt mạch — tờ phù cháy thành tro.` : `Dược lực không dung hợp, mẻ ${name} hóa thành tro.`);
+    }
+    if(data.up){ const p = profDef(pid); addLog(`Tay nghề tinh tấn — ${p.name} đạt cấp ${data.lvl}!`); fx('banner',{text:`${p.name} cấp ${data.lvl}`, cls:'jade'}); }
+    state._srv = data.rev; computeStats(); saveGame(true);
+  }catch(e){ toast(cloudErrMsg(e)); }
+  craftBusy = false; render();
+  return true;
+}
+async function serverLearnProf(id){
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('prof_learn', {p_id: id});
+    if(error){ if(isMissingFn(error)){ craftSrvMissing = true; return false; } throw error; }
+    state.spiritStones -= APPRENTICE_COST; state.professions[id] = 1; state.profExp[id] = 0; state._srv = data.rev;
+    addLog(`Ngươi bái sư, chính thức nhập môn ${profDef(id).name}. Từ đây, mỗi lần chế tác đều tích lũy thành thạo.`);
+    computeStats(); saveGame(true);
+  }catch(e){ toast(cloudErrMsg(e)); }
+  render(); return true;
 }
 
 function renderCombatPanel(){
