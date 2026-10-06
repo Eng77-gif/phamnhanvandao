@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>Phàm Nhân Vấn Đạo — Tam Giới Tu Tiên</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b0f10">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vấn Đạo">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -958,6 +966,9 @@
   .cb-phu{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding:10px;border-radius:12px;background:rgba(212,175,106,.06);border:1px dashed var(--gold-dim);}
   .cb-phu-b{font-family:inherit;font-size:12px;font-weight:600;color:var(--gold-bright);background:rgba(0,0,0,.3);border:1px solid var(--gold-dim);border-radius:8px;padding:7px 10px;}
   .cb-phu-b b{margin-left:5px;color:var(--text-faint);font-weight:600;}
+  .sc-srv{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--jade-bright);} .sc-srv .ic{width:11px;height:11px;margin:0;}
+  .sc-swing .cb-emblem{animation:cbShake .35s;}
+  .sc-end{text-align:center;} .sc-end-t{font-family:var(--fh);font-size:30px;color:var(--gold-bright);} .sc-end.lost .sc-end-t{color:var(--blood-bright);} .sc-end.fled .sc-end-t{color:var(--text-dim);}
   .cbag{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:62vh;overflow-y:auto;}
   .cbag .btn{font-size:12px;padding:9px 6px;min-height:0;line-height:1.3;}
   .cbag .btn[disabled]{opacity:.35;}
@@ -1657,7 +1668,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.57.2';
+const GAME_VERSION = '1.59.1';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1806,6 +1817,18 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.59.1', date:'02/10/2026', title:'Cài thành ứng dụng', items:[
+    ['moi','Cài game ra màn hình chính Android (và iPhone): mở toàn màn hình như một ứng dụng, có biểu tượng Chưởng Thiên Bình. Vào Hệ Thống ▸ Cài ra màn hình chính.']
+  ]},
+  {v:'1.59.0', date:'02/10/2026', title:'Tu luyện và đột phá do máy chủ quyết định', items:[
+    ['moi','Khi đã đăng nhập, bế quan (một tháng hoặc nhiều năm) do máy chủ tính tu vi theo linh căn, đạo lộ, độ khó, số công pháp, và cho thời gian trôi — thọ nguyên tăng đúng theo đó.'],
+    ['moi','Đột phá do máy chủ kiểm tra tu vi đã viên mãn, tự tung tỷ lệ (đột phá đại cảnh giới theo độ khó, cộng thêm khi có đan phá cảnh đúng cảnh giới — máy chủ tự trừ đan), tự đổi cảnh giới; thất bại mất tu vi đúng theo độ khó. Thiên kiếp vẫn diễn ra như cũ nhưng phải được máy chủ cấp phép trước.'],
+    ['doi','Cảnh giới không thể tự tăng trên máy; tu vi tự cộng ngoài bế quan bị giới hạn theo thời gian.']
+  ]},
+  {v:'1.58.0', date:'02/10/2026', title:'Chiến đấu do máy chủ phân xử', items:[
+    ['moi','Khi đã đăng nhập, các trận chạm trán khi thám hiểm vùng đất ở Hành Tẩu chạy trên máy chủ: máy chủ giữ máu hai bên, tự tính sát thương, bạo kích, chạy trốn, tự trao tu vi, linh thạch, linh thảo, yêu huyết. Sửa số liệu trên máy không còn làm trận dễ hơn hay tự thêm chiến lợi phẩm.'],
+    ['moi','Trong trận vẫn dùng được pháp bảo, đan liệu thương, linh phù và bảo vật hiếm — máy chủ kiểm tra ngươi có thật và trừ đúng số lượng. Có nhãn "Máy chủ phân xử" ở góc đấu trường.']
+  ]},
   {v:'1.57.2', date:'02/10/2026', title:'Gọn màn chiến đấu', items:[
     ['doi','Bảo vật và thần thông trong trận gom vào ô "Bảo Vật" trên lưới chiêu thức, ghi số món còn dùng được; chạm để mở túi hai cột, món dùng được xếp trước, chọn xong tự đóng.']
   ]},
@@ -3011,6 +3034,7 @@ function exploreRegion(locId){
   if(Math.random()<0.12 && npcEncounterAt({region:ng().region})){ render(); return; }
   const roll = Math.random()*100;
   if(roll<45){
+    if(scEnabled()){ serverCombatStart(loc.id); return; }
     startCombat(genRegionEnemy(loc.power, loc.enemies));
     return;
   } else if(roll<60){
@@ -8721,6 +8745,7 @@ function deathRestart(){ state.dead = false; state.deathReason = null; closeModa
 /* Bế quan nhiều năm liền */
 function meditateYears(n){
   if(state.mortal) return;
+  if(scEnabled() && !state.combat && !state.expd){ serverCultivate(12*n); return; }
   state.medCount = (state.medCount||0)+1;
   if(state.combat || state.expd) return;
   let gain = 0, mishaps = 0, dmg = 0;
@@ -9024,6 +9049,26 @@ function debugMortalRestart(){ if(!Admin.ok()) return; state.mortal = true; stat
 function debugWins(n){ if(!Admin.ok()) return; state.winCount = (state.winCount||0) + n; dbgDone(`+${n} trận thắng (tổng ${state.winCount}).`); }
 function debugBgm(){ if(!Admin.ok()) return; settings.bgm = !settings.bgm; persistSettings(); bgmApply(); dbgDone(`Nhạc nền: ${settings.bgm?'bật':'tắt'}.`); }
 
+/* =====================================================================
+   CÀI THÀNH ỨNG DỤNG (PWA) — biểu tượng ngoài màn hình chính, mở toàn màn hình
+===================================================================== */
+let installEvt = null;
+const isStandalone = ()=> (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); installEvt = e; });
+window.addEventListener('appinstalled', ()=>{ installEvt = null; toast('Đã cài Phàm Nhân Vấn Đạo ra màn hình chính'); });
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  window.addEventListener('load', ()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+}
+async function installApp(){
+  if(isStandalone()){ toast('Ngươi đang mở game dưới dạng ứng dụng rồi'); return; }
+  if(installEvt){ installEvt.prompt(); try{ await installEvt.userChoice; }catch(e){} installEvt = null; return; }
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${ic('star','keep')} Cài Ra Màn Hình Chính</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    ${ios ? `<p class="flavor" style="margin-top:0;">Trên iPhone/iPad (Safari): chạm nút <b>Chia sẻ</b> ở thanh dưới, chọn <b>Thêm vào Màn hình chính</b>.</p>`
+          : `<p class="flavor" style="margin-top:0;">Trên Android (Chrome): chạm <b>⋮</b> ở góc trên bên phải, chọn <b>Cài đặt ứng dụng</b> hoặc <b>Thêm vào màn hình chính</b>.</p>`}
+    <p class="sec-note">Nếu không thấy mục cài đặt: game cần được mở từ trang web của ngươi (https), cùng thư mục với các tệp manifest.webmanifest, sw.js và biểu tượng.</p>`;
+  document.getElementById('overlay').classList.add('show');
+}
 /* Admin Panel: tài khoản bị máy chủ đánh dấu */
 let DBG_FLAGS = null, DBG_FLAGS_ERR = '';
 async function debugCheatLoad(){
@@ -9177,6 +9222,7 @@ function renderAlertsCard(){
 function renderContent(){
   const el = document.getElementById('content');
   if(!state.root || !state.path){ el.innerHTML = `<div class="card"><p class="flavor">Hãy tạo nhân vật để bắt đầu hành trình.</p></div>`; return; }
+  if(SC){ el.innerHTML = renderServerCombat(); return; }
   if(state.combat){ el.innerHTML = renderCombatPanel(); return; }
   if(state.tribulation){ el.innerHTML = renderTribulationPanel(); return; }
   const tab = state.activeTab, sub = curSub(tab);
@@ -12271,6 +12317,7 @@ function showSettings(tab){
       <div class="sys-sec">Tùy chỉnh</div>
       <div class="sys-list">
         ${sysRow('eye','Hiển thị', `Cỡ chữ ${scaleName} · phông ${fontName} · hiệu ứng ${settings.motion?'bật':'tắt'}`, "showSettings('hienthi')")}
+        ${isStandalone() ? '' : sysRow('star','Cài ra màn hình chính', 'Mở game như một ứng dụng, không có thanh trình duyệt', 'installApp()')}
         ${sysRow('chart','Thống kê', `${state && state.root ? (state.winCount||0)+' trận thắng · '+seenCount()+' cảnh truyện' : 'Chưa có nhân vật'}`, "showSettings('thongke')")}
         ${sysRow('bell','Âm nhạc', settings.bgm ? `Đang bật · ${bgmCurrent().name}` : 'Nhạc nền đang tắt', "showSettings('amnhac')", settings.bgm?'on':'')}
         ${sysRow('taiji','Lối chơi', `Nhật ký ${settings.logLen} dòng · ${settings.confirmDanger?'hỏi lại thao tác nguy hiểm':'không hỏi lại'}`, "showSettings('loichoi')")}
@@ -13117,6 +13164,166 @@ function openCombatBag(){
     <div class="cbag">${items.join('')}</div>`;
   document.getElementById('overlay').classList.add('show');
 }
+/* =====================================================================
+   CHIẾN ĐẤU DO MÁY CHỦ QUYẾT ĐỊNH (bước 1)
+   Khi đã đăng nhập, trận chạm trán ở Hành Tẩu chạy trên máy chủ: máy chủ giữ
+   máu hai bên, tự tính sát thương, tự tung tỷ lệ, tự trao chiến lợi phẩm.
+   Trình duyệt chỉ gửi hành động và hiển thị.
+===================================================================== */
+const SERVER_COMBAT = true;
+let SC = null, scBusy = false, scPrev = null;
+function scEnabled(){ return SERVER_COMBAT && tsbOnline(); }
+async function serverCombatStart(locId){
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('combat_start', {p_loc: locId}); if(error) throw error;
+    SC = data; SC.logAll = (data.log||[]).slice(); scPrev = null;
+    render();
+  }catch(e){ toast(cloudErrMsg(e)); }
+}
+async function serverCombatAct(act){
+  if(!SC || scBusy || SC.status!=='active') return;
+  scBusy = true; scPrev = {e:SC.enemy.hp, p:SC.p.hp};
+  document.querySelectorAll('.sc-act').forEach(b=>b.disabled = true);
+  const stage = document.querySelector('.cb-arena'); if(stage && (act==='atk'||act==='treasure'||act.startsWith('rare:'))) stage.classList.add('sc-swing');
+  if(act==='atk'||act==='treasure') sfx('tap');
+  try{
+    const {data, error} = await cloud.client.rpc('combat_act', {p_id: SC.id, p_act: act}); if(error) throw error;
+    const all = (SC.logAll||[]).concat(data.log||[]);
+    SC = data; SC.logAll = all;
+    if(SC.status!=='active') await serverCombatFinish();
+  }catch(e){ toast(cloudErrMsg(e)); }
+  scBusy = false;
+  render();
+}
+async function serverCombatFinish(){
+  try{
+    const remote = await cloudFetch();
+    if(remote){ writeLocalSave(remote); const keepTab = state.activeTab, keepSub = JSON.parse(JSON.stringify(state.subTabs||{})); restoreFromSave(remote); state.activeTab = keepTab; state.subTabs = keepSub; }
+  }catch(e){}
+  const r = SC.reward || {};
+  if(SC.status==='won'){
+    const parts = [`${r.tuVi||0} tu vi`]; if(r.stones) parts.push(`${r.stones} linh thạch`); if(r.herb) parts.push(HERB_NAMES[r.herb-1]); if(r.huyet) parts.push(matName('huyet', r.huyet));
+    addLog(`Đánh bại ${SC.enemy.name}! Nhận ${parts.join(', ')}.`); sfx('ok');
+  } else if(SC.status==='lost') addLog(`Bại dưới tay ${SC.enemy.name}, trọng thương rút lui${r.lostTuVi?`, mất ${r.lostTuVi} tu vi`:''}.`);
+  else addLog(`Ngươi thoát khỏi ${SC.enemy.name}.`);
+  SC.done = true;
+}
+function scClose(){ SC = null; render(); }
+function renderServerCombat(){
+  const c = SC, e = c.enemy, p = c.p;
+  const ePct = Math.max(0, e.hp/e.hpMax*100), pPct = Math.max(0, p.hp/p.hpMax*100);
+  const eHit = scPrev && e.hp < scPrev.e, pHit = scPrev && p.hp < scPrev.p;
+  const prevE = scPrev ? Math.max(0, scPrev.e/e.hpMax*100) : null, prevP = scPrev ? Math.max(0, scPrev.p/p.hpMax*100) : null;
+  scPrev = null;
+  const recent = (c.logAll||[]).slice(-2);
+  const crit = eHit && recent.some(l=>/bạo kích/i.test(l));
+  if(eHit) sfx(crit?'crit':'hit'); if(pHit){ sfx('hurt'); buzz(40); }
+  const kind = e.boss ? 'boss' : e.kind==='beast' ? 'beast' : e.kind==='undead' ? 'evil' : 'normal';
+  const icon = e.kind==='beast' ? 'claw' : e.kind==='undead' ? 'demoneye' : e.kind==='construct' ? 'puppet' : 'swords';
+  const done = c.status!=='active';
+  const tal = Object.entries(c.tal||{});
+  const skill = (icn, label, sub, dis, act, cls) => `<button class="cb-skill sc-act ${cls||''}" ${dis||done?'disabled':''} onclick="${act}"><span class="cb-sk-ic">${ic(icn,'keep')}</span><span class="cb-sk-t">${label}</span>${sub!==''&&sub!=null?`<span class="cb-sk-s">${sub}</span>`:''}</button>`;
+  return `<div class="cb-arena ${kind} ${eHit?'e-hit':''} ${pHit?'p-hit':''}">
+      <div class="cb-sky"></div>
+      <div class="cb-top"><span class="cb-turn">Hiệp ${c.turn+1}</span><span class="sc-srv">${ic('cloud','keep')} Máy chủ phân xử</span>${e.boss?`<span class="cb-boss">${ic('swords','keep')} Thủ lĩnh</span>`:''}</div>
+      <div class="cb-foe"><div class="cb-emblem"><div class="cb-ring"></div><div class="cb-ring r2"></div><div class="cb-core">${ic(icon,'keep')}</div>
+        ${eHit?`<div class="cb-slash"></div><div class="cb-dmg ${crit?'crit':''}">−${Math.round((prevE-ePct)/100*e.hpMax)}</div>`:''}</div>
+        <div class="cb-foe-name">${e.name}${e.boss?' · Thủ Lĩnh':''}</div>
+        ${hpBar('foe', ePct, prevE, '', '')}<div class="cb-foe-hp">${Math.max(0,e.hp)} / ${e.hpMax}</div>
+        ${c.frozen>0?`<div class="cb-chips"><span class="cb-chip bad">${ic('warn','keep')}Bị khống chế ${c.frozen}</span></div>`:''}</div>
+      ${crit?`<div class="cb-crit">Bạo Kích!</div>`:''}
+      <div class="cb-vs"><span></span><b>VS</b><span></span></div>
+      <div class="cb-self">${hpBar('self', pPct, prevP, state.name, `${Math.max(0,p.hp)} / ${p.hpMax}`)}
+        ${c.shield>0?`<div class="cb-chips"><span class="cb-chip">${ic('crystal','keep')}Khiên ${c.shield}</span></div>`:''}</div>
+      <div class="cb-last">${recent.map((l,i)=>`<div class="${i===recent.length-1?'now':'prev'}">${l}</div>`).join('')}</div>
+    </div>
+    ${done ? `<div class="card sc-end ${c.status}"><div class="sc-end-t">${c.status==='won'?'Thắng':c.status==='lost'?'Bại':'Thoát thân'}</div>
+        ${c.status==='won' && c.reward ? `<p class="sec-note" style="text-align:center;margin:4px 0 10px;">+${c.reward.tuVi||0} tu vi${c.reward.stones?` · +${c.reward.stones} linh thạch`:''}${c.reward.herb?` · ${HERB_NAMES[c.reward.herb-1]}`:''}${c.reward.huyet?` · ${matName('huyet',c.reward.huyet)}`:''}</p>`:''}
+        <button class="btn gold" onclick="scClose()">Trở Về</button></div>`
+    : `<div class="cb-actions">
+      <button class="cb-main sc-act" ${scBusy?'disabled':''} onclick="serverCombatAct('atk')">${ic('sword','keep')}<span>${(state.path&&state.path.atkLabel)||'Tấn Công'}</span></button>
+      <div class="cb-grid">
+        ${skill('bolt', c.treasure||'Pháp Bảo', c.cd_t>0?`hồi ${c.cd_t}`:'', !c.treasure||c.cd_t>0||scBusy, "serverCombatAct('treasure')", 'gold')}
+        ${skill('drop', 'Liệu Thương', c.heal, !c.heal||scBusy, "serverCombatAct('pill')", 'jade')}
+        ${skill('scroll', 'Phù Lục', tal.reduce((a,[,n])=>a+n,0), !tal.length||scBusy, 'scPhuMenu()')}
+        ${skill('crystal', 'Bảo Vật', `${(c.rare||[]).filter(id=>!(c.used||[]).includes(id)).length} dùng được`, !(c.rare||[]).length||scBusy, 'scBag()', 'gold')}
+      </div>
+      <details class="cb-log"><summary>Diễn biến trận đấu (${(c.logAll||[]).length})</summary>${(c.logAll||[]).slice().reverse().map(l=>`<div>${l}</div>`).join('')}</details>
+      <button class="cb-flee sc-act" ${scBusy?'disabled':''} onclick="serverCombatAct('flee')">Chạy trốn</button>
+    </div>`}`;
+}
+function scPhuMenu(){
+  const tal = Object.entries(SC.tal||{});
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${ic('scroll','keep')} Linh Phù</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <div class="cbag">${tal.map(([id,n])=>`<button class="btn" onclick="closeModal(); serverCombatAct('phu:${id}')">${(TALISMANS.find(t=>t.id===id)||{}).name||id} ×${n}</button>`).join('')}</div>`;
+  document.getElementById('overlay').classList.add('show');
+}
+function scBag(){
+  const L = (SC.rare||[]).slice().sort((a,b)=>((SC.used||[]).includes(a)?1:0)-((SC.used||[]).includes(b)?1:0));
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${ic('crystal','keep')} Bảo Vật</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <p class="sec-note" style="margin:0 0 10px;">Mỗi món dùng được một lần mỗi trận.</p>
+    <div class="cbag">${L.map(id=>`<button class="btn" ${(SC.used||[]).includes(id)?'disabled':''} onclick="closeModal(); serverCombatAct('rare:${id}')">${(rareDef(id)||{}).name||id}</button>`).join('')}</div>`;
+  document.getElementById('overlay').classList.add('show');
+}
+
+/* =====================================================================
+   BƯỚC 2: TU LUYỆN & ĐỘT PHÁ DO MÁY CHỦ QUYẾT ĐỊNH
+   Bế quan: máy chủ tính tu vi theo linh căn, đạo lộ, độ khó, công pháp và cho thời gian trôi.
+   Đột phá: máy chủ kiểm tra tu vi, tung tỷ lệ, dùng đan phá cảnh, đổi cảnh giới.
+   Cảnh giới chỉ tăng qua máy chủ (riêng thiên kiếp: máy chủ cấp phép trước).
+===================================================================== */
+let cultBusy = false;
+async function serverCultivate(months){
+  if(cultBusy) return; cultBusy = true;
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('cultivate', {p_months: months}); if(error) throw error;
+    state.medCount = (state.medCount||0)+1;
+    bmGain(months);
+    state.linhLuc = (state.linhLuc||0) + (3+state.realmIdx)*months;
+    advanceTime(months);
+    state.tuVi = Number(data.tuVi); state.age = data.age; state.month = data.month; state._srv = data.rev;
+    addLog(months>=12 ? `Bế quan tròn ${Math.round(months/12)} năm: tu vi +${data.gain}.` : `Ngươi vận công tu luyện, tu vi +${data.gain}.`);
+    fx('float', {sel:'#tuviFill', text:`+${data.gain}`, cls:'tuvi'});
+    checkPhysiqueDiscovery(); checkBreakthroughAvailable(); computeStats();
+    saveGame(true);
+  }catch(e){ toast(cloudErrMsg(e)); }
+  cultBusy = false;
+  render();
+}
+async function serverBreakthrough(){
+  if(cultBusy) return; cultBusy = true;
+  const atLast = (state.subStage||0) >= MAJOR_REALMS[state.realmIdx].substageCount-1;
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('breakthrough_try'); if(error) throw error;
+    state._srv = data.rev; state.buffStack = 0; state.breakthroughBoost = 0;
+    if(data.pill && state.breakPills) state.breakPills[data.pill] = Math.max(0, (state.breakPills[data.pill]||0)-1);
+    if(data.result==='tribulation'){ cultBusy = false; saveGame(true); startTribulation(); return; }
+    if(data.result==='ok'){
+      stat().brkOk++;
+      state.realmIdx = data.realmIdx; state.subStage = data.subStage; state.tuVi = Number(data.tuVi); state.age = data.age;
+      computeStats(); state.hp = state.stats.hpMax;
+      const newName = fullRealmName(state.realmIdx, state.subStage);
+      addLog(`${ic('bolt')} Đột phá thành công (tỷ lệ ${data.chance}%${data.pill?', có đan phá cảnh':''})! Ngươi chính thức bước vào ${newName}.${atLast?' '+MAJOR_REALMS[state.realmIdx].note:''}`);
+      if(atLast && !state.physiqueKnown && state.physique && state.physique.hidden && state.physique.id!=='tien_linh'){ state.physiqueKnown = true; addLog(`Bước vào ${newName}, thể chất tiềm ẩn bộc phát — ngươi mang 【${state.physique.name}】!`); }
+      if(atLast && state.realmIdx===3){ state.tamMaOk = false; addLog('Thiên địa dị tượng: linh khí trăm dặm cuộn xoáy về động phủ, mây ngũ sắc gom tụ trên đỉnh núi — một tu sĩ Nguyên Anh vừa ra đời.'); }
+      fx('flash',{color:'rgba(240,207,140,.45)',dur:700}); fx('banner',{text: atLast ? MAJOR_REALMS[state.realmIdx].name : 'Đột Phá Thành Công'});
+      checkBreakthroughAvailable(); saveGame(true); cultBusy = false; render(); showModal('breakthrough'); return;
+    }
+    stat().brkFail++;
+    state.tuVi = Number(data.tuVi);
+    const dmg = Math.round(state.stats.hpMax*(data.major && state.diff==='nguyentac' ? 0.45 : 0.2));
+    state.hp = Math.max(1, state.hp-dmg);
+    fx('flash',{color:'rgba(193,93,74,.4)'}); fx('shake'); fx('banner',{text:'Đột Phá Thất Bại', cls:'blood'});
+    addLog(`Đột phá thất bại (tỷ lệ ${data.chance}%), chân khí phản phệ! Mất ${data.lost} tu vi và ${dmg} khí huyết.`);
+    checkBreakthroughAvailable(); saveGame(true);
+  }catch(e){ toast(cloudErrMsg(e)); }
+  cultBusy = false;
+  render();
+}
+
 function renderCombatPanel(){
   const c = state.combat, e = c.enemy;
   const ePct = Math.max(0, Math.min(100,(e.hp/e.hpMax)*100));
@@ -14197,7 +14404,7 @@ function renderClock(){
   renderSky();
 }
 function timePaused(){
-  if(!state || !state.root || state.dead || state.combat || state.tribulation) return true;
+  if(!state || !state.root || state.dead || state.combat || SC || state.tribulation) return true;
   if(settings.realTime===false) return true;
   if(document.visibilityState==='hidden') return true;
   const ls = document.getElementById('loadingScreen'), cr = document.getElementById('creation');
@@ -15058,6 +15265,7 @@ function clampHerbTierAvailable(){
 ===================================================================== */
 function meditate(densityMult, zoneName){
   if(state.mortal) return;
+  if(scEnabled() && !densityMult && !zoneName){ serverCultivate(1); return; }
   densityMult = densityMult || 1;
   const base = Math.round(6 + state.realmIdx*4);
   const mods = rootMods(state.root, state.realmIdx);
@@ -15160,6 +15368,7 @@ function attemptBreakthrough(){
   if(atLastSubstage && state.realmIdx===2 && !state.tamMaOk){ startTamMa(); return; }
   if(atLastSubstage && state.realmIdx===10 && !(state.tg && tamThiDone())){ addLog('Thái Ất đỉnh phong — muốn bước vào Đại La phải Trảm Tam Thi trước (Nhân Vật ▸ Pháp Tắc).'); render(); return; }
   if(atLastSubstage && state.realmIdx===11 && !(state.tg && canChungDao())){ addLog('Chưa đủ điều kiện chứng đạo: chủ tu pháp tắc phải viên mãn và phải đánh bại Đạo Tổ đang chiếm giữ đại đạo đó (Nhân Vật ▸ Pháp Tắc).'); render(); return; }
+  if(scEnabled()){ serverBreakthrough(); return; }
   if(atLastSubstage && TRIBULATION_REALMS.includes(state.realmIdx)){ startTribulation(); return; }
   const mods = rootMods(state.root, state.realmIdx);
   const easeFactor = state.realmIdx<=2 ? 1 : 0.5; // tư chất tốt giúp ích rõ nhất ở các bình cảnh đầu
