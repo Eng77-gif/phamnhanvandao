@@ -1327,14 +1327,21 @@
   .cr-tile .cr-pips{display:flex;gap:2px;width:80%;} .cr-tile .cr-pips i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.08);} .cr-tile .cr-pips i.on{background:var(--jade);}
   .cr-tile .cr-exp{width:80%;height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;} .cr-tile .cr-exp span{display:block;height:100%;background:var(--gold);}
   .tl-art{width:56px !important;height:80px !important;}
-  .tl-sway{transform-origin:30px 4px;animation:tlSway 4s ease-in-out infinite;} @keyframes tlSway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+  .tl-sway{transform-origin:30px 4px;animation:tlSway 3.5s ease-in-out infinite;} @keyframes tlSway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
   .tl-glow{animation:wsGlow 2.4s ease-in-out infinite;}
   .tl-border{animation:tlBorder 3s linear infinite;} @keyframes tlBorder{to{stroke-dashoffset:-18}}
-  .tl-ink path{stroke-dasharray:80;stroke-dashoffset:80;animation:tlInk 5s ease-in-out infinite;}
-  .tl-ink path:nth-child(2){animation-delay:.4s} .tl-ink path:nth-child(3){animation-delay:.8s} .tl-ink path:nth-child(4){animation-delay:1.2s} .tl-ink path:nth-child(5){animation-delay:1.6s} .tl-ink path:nth-child(6){animation-delay:2s}
-  @keyframes tlInk{0%{stroke-dashoffset:80}35%,85%{stroke-dashoffset:0;filter:drop-shadow(0 0 2px #ff5a3a)}100%{stroke-dashoffset:0}}
+  .tl-ink path{stroke-dasharray:80;stroke-dashoffset:80;animation:tlInk 7s ease-in-out infinite;}
+  .tl-ink path:nth-child(2){animation-name:tlInk2} .tl-ink path:nth-child(3){animation-name:tlInk3} .tl-ink path:nth-child(4){animation-name:tlInk4} .tl-ink path:nth-child(5){animation-name:tlInk5} .tl-ink path:nth-child(6){animation-name:tlInk6}
+  @keyframes tlInk2{0%,5%{stroke-dashoffset:80}33%,100%{stroke-dashoffset:0}} @keyframes tlInk3{0%,10%{stroke-dashoffset:80}36%,100%{stroke-dashoffset:0}} @keyframes tlInk4{0%,15%{stroke-dashoffset:80}39%,100%{stroke-dashoffset:0}} @keyframes tlInk5{0%,20%{stroke-dashoffset:80}42%,100%{stroke-dashoffset:0}} @keyframes tlInk6{0%,25%{stroke-dashoffset:80}45%,100%{stroke-dashoffset:0}}
+  .tl-paper{animation:tlPaper 7s linear infinite;} @keyframes tlPaper{0%,70%{filter:none;opacity:1}86%{filter:brightness(.45) sepia(.6);opacity:1}93%{opacity:0}97%{opacity:0}100%{opacity:1;filter:none}}
+  .tl-cliprect{animation:tlBurn 7s linear infinite;} @keyframes tlBurn{0%,72%{transform:translateY(0)}92%{transform:translateY(-112px)}93%,100%{transform:translateY(0)}}
+  .tl-flame{opacity:0;animation:tlFlame 7s linear infinite;} @keyframes tlFlame{0%,71%{opacity:0;transform:translateY(100px)}72%{opacity:1;transform:translateY(100px)}92%{opacity:1;transform:translateY(-6px)}93%,100%{opacity:0;transform:translateY(100px)}}
+  .tl-embers circle{opacity:0;animation:tlEmber 7s ease-out infinite;} .tl-embers circle:nth-child(2){animation-delay:.25s} .tl-embers circle:nth-child(3){animation-delay:.5s} .tl-embers circle:nth-child(4){animation-delay:.75s} .tl-embers circle:nth-child(5){animation-delay:1s} .tl-embers circle:nth-child(6){animation-delay:1.2s}
+  @keyframes tlEmber{0%,72%{opacity:0;transform:translate(0,0)}76%{opacity:1}90%{opacity:0;transform:translate(4px,-26px)}100%{opacity:0}}
+  .tl-glow{animation:tlGlowC 7s ease-in-out infinite !important;} @keyframes tlGlowC{0%,30%{opacity:.5}45%,65%{opacity:1}75%,90%{opacity:1;filter:hue-rotate(-140deg) saturate(2)}95%{opacity:0}100%{opacity:.5}}
+  @keyframes tlInk{0%{stroke-dashoffset:80}30%{stroke-dashoffset:0}40%,62%{stroke-dashoffset:0;filter:drop-shadow(0 0 2.5px #ff5a3a)}70%,100%{stroke-dashoffset:0}}
   .tl-spark circle{animation:plSpark 2.6s ease-in-out infinite;} .tl-spark circle:nth-child(2){animation-delay:.9s} .tl-spark circle:nth-child(3){animation-delay:1.7s}
-  .no-motion .tl-ink path{stroke-dashoffset:0;}
+  .no-motion .tl-ink path{stroke-dashoffset:0;} .no-motion .tl-paper,.no-motion .tl-cliprect,.no-motion .tl-flame,.no-motion .tl-embers circle{animation:none !important;}
   .tsb-mine b{display:block;font-family:var(--fh);font-size:18px;color:var(--gold-bright);} .tsb-mine small{font-size:12px;color:var(--text-dim);}
   .tsb-row{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--border-soft);}
   .tsb-row.me{background:rgba(212,175,106,.07);border-radius:10px;padding:9px 8px;}
@@ -1355,6 +1362,29 @@
   .pa-act{flex:none;display:flex;flex-direction:column;gap:5px;align-items:flex-end;} .pa-act .btn{padding:6px 10px;min-height:0;font-size:12px;} .pa-act em{font-style:normal;font-size:11px;color:var(--gold);}
   .pa-mail{border-color:var(--gold-dim);background:radial-gradient(ellipse at 0% 0%, rgba(212,175,106,.14), transparent 60%), var(--panel);}
   .pa-ml{display:flex;flex-direction:column;padding:7px 0;border-bottom:1px solid var(--border-soft);} .pa-ml b{font-size:13.5px;} .pa-ml small{font-size:11.5px;color:var(--text-faint);}
+  .pa-feat{position:relative;overflow:hidden;text-align:center;border-color:var(--gold-dim);background:radial-gradient(ellipse at 50% 0%, rgba(240,207,140,.22), transparent 60%), var(--panel);}
+  .pa-feat::before{content:'';position:absolute;inset:-40%;background:conic-gradient(from 0deg, transparent 0 70%, rgba(240,207,140,.18) 80%, transparent 90%);animation:wsSpin 8s linear infinite;pointer-events:none;}
+  .pa-feat > *{position:relative;}
+  .pf-kick{display:inline-flex;align-items:center;gap:5px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);} .pf-kick .ic{width:13px;height:13px;margin:0;}
+  .pf-name{font-family:var(--fh);font-size:22px;color:#e3c6ff;text-shadow:0 0 14px rgba(170,120,255,.5);margin:6px 0 8px;}
+  .pf-price small{display:block;font-size:11px;color:var(--text-faint);} .pf-price b{display:block;font-family:var(--fh);font-size:30px;color:var(--gold-bright);line-height:1.1;} .pf-price span{font-size:12px;color:var(--text-dim);}
+  .pf-call{margin:10px 0 6px;font-family:var(--fh);font-size:17px;color:var(--text);}
+  .ph-once .pf-call{color:#ffd27a;} .ph-twice .pf-call{color:#ff8a6a;animation:vnPulse .7s infinite;} .ph-sold .pf-call{color:var(--gold-bright);font-size:26px;}
+  .pf-bar{height:5px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:10px;} .pf-bar span{display:block;height:100%;background:linear-gradient(90deg,#ffd27a,#ff6a4a);transition:width 1s linear;}
+  .ph-open .pf-bar span{background:var(--jade);}
+  .pf-lead{font-size:13px;color:var(--jade-bright);font-weight:700;}
+  .pa-hall .ph-row{display:flex;gap:8px;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border-soft);font-size:12.5px;animation:vnIn .35s ease-out;}
+  .pa-hall .ph-row b{color:var(--text);} .pa-hall .ph-row.npc b{color:#d8b8ff;} .pa-hall .ph-row.close b{color:var(--gold-bright);} .pa-hall em{font-style:normal;color:var(--gold-bright);font-weight:700;}
+  .pa-hall q,.pa-hr q{display:block;font-style:italic;color:var(--text-dim);font-size:12px;margin-top:2px;} .pa-hall q::before,.pa-hr q::before{content:'“';} .pa-hall q::after,.pa-hr q::after{content:'”';}
+  .pa-hall small{flex:none;font-size:10.5px;color:var(--text-faint);}
+  .pa-tag.mys{background:rgba(160,120,230,.2);color:#d8b8ff;} .pa-tag.hot{display:inline-flex;align-items:center;gap:2px;background:rgba(255,110,60,.2);color:#ffb39a;} .pa-tag.hot .ic{width:10px;height:10px;margin:0;}
+  .pa-dots .step-dot{cursor:pointer;} .pa-dots .step-dot.feat{background:var(--gold-dim);} .pa-dots .step-dot.mine{box-shadow:0 0 0 2px var(--jade);}
+  .pa-feat-ev{border-color:var(--gold-dim);background:radial-gradient(ellipse at 50% 0%, rgba(240,207,140,.16), transparent 60%), var(--panel);}
+  .pa-lead{box-shadow:inset 3px 0 0 var(--jade);}
+  .pa-rare-t{color:#e3c6ff !important;text-shadow:0 0 12px rgba(170,120,255,.45);}
+  .pf-call-line{font-family:var(--fh);font-size:17px;text-align:center;margin:8px 0 6px;}
+  .pf-call-line.ph-once{color:#ffd27a;} .pf-call-line.ph-twice{color:#ff8a6a;animation:vnPulse .7s infinite;} .pf-call-line.ph-sold{color:var(--gold-bright);font-size:22px;}
+  .pa-log-close{color:var(--gold-bright);} .pa-log-close .ic{width:12px;height:12px;margin:0 3px -1px 0;}
   .pa-row{position:relative;}
   .pa-row.flash{animation:paFlash 1.6s ease-out;} @keyframes paFlash{0%{background:rgba(255,200,90,.28)}100%{background:transparent}}
   .pa-row.lead{box-shadow:inset 3px 0 0 var(--jade);} .pa-row.out{box-shadow:inset 3px 0 0 var(--blood-bright);}
@@ -1380,6 +1410,36 @@
   .tl-last{margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(0,0,0,.3);border-left:3px solid var(--blood-bright);font-size:13px;animation:vnIn .35s ease-out;}
   .tl-log{font-size:12.5px;color:var(--text-dim);padding:6px 0;border-bottom:1px solid var(--border-soft);}
   .tl-sects{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;} .tl-sects span{font-size:11.5px;padding:4px 9px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text-dim);} .tl-sects b{color:var(--gold-bright);}
+  .acc-msg{display:flex;align-items:flex-start;gap:7px;margin-top:10px;padding:9px 11px;border-radius:10px;font-size:12.5px;line-height:1.5;}
+  .acc-msg .ic{width:14px;height:14px;margin:2px 0 0;flex:none;}
+  .acc-msg.bad{background:rgba(193,93,74,.12);border:1px solid rgba(193,93,74,.45);color:#ffb3a3;}
+  .acc-msg.ok{background:rgba(80,200,140,.1);border:1px solid rgba(80,200,140,.4);color:var(--jade-bright);}
+  .acc-result{width:58px;height:58px;margin:0 auto 6px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .acc-result .ic{width:28px;height:28px;margin:0;}
+  .acc-result.ok{background:rgba(80,200,140,.16);border:1px solid var(--jade);color:var(--jade-bright);}
+  .acc-result.bad{background:rgba(193,93,74,.16);border:1px solid var(--blood);color:#ffb3a3;}
+  .kl-art{width:70px !important;height:78px !important;}
+  .kl-strings{animation:klStr 3.2s ease-in-out infinite;transform-origin:50px 0;} @keyframes klStr{0%,100%{transform:skewX(-2deg)}50%{transform:skewX(2deg)}}
+  .kl-body{animation:klBob 3.2s ease-in-out infinite;} @keyframes klBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+  .kl-armL{transform-origin:31px 37px;animation:klArmL 3.2s ease-in-out infinite;} @keyframes klArmL{0%,100%{transform:rotate(4deg)}50%{transform:rotate(-6deg)}}
+  .kl-armR{transform-origin:69px 37px;animation:klPunch 4.8s ease-in-out infinite;} @keyframes klPunch{0%,55%,100%{transform:rotate(-4deg)}62%{transform:rotate(18deg)}70%{transform:rotate(-58deg) translateY(-2px)}76%{transform:rotate(-58deg)}86%{transform:rotate(-4deg)}}
+  .kl-burst{opacity:0;transform-origin:69px 80px;animation:klBurst 4.8s ease-out infinite;} @keyframes klBurst{0%,68%{opacity:0;transform:scale(.4)}71%{opacity:1;transform:scale(1)}80%{opacity:0;transform:scale(1.8)}100%{opacity:0}}
+  .kl-core{transform-box:fill-box;transform-origin:center;animation:hpOrb 1.6s ease-in-out infinite;}
+  .kl-eyes{animation:klEye 4.8s ease-in-out infinite;} @keyframes klEye{0%,60%,90%,100%{opacity:.75}66%,80%{opacity:1;filter:drop-shadow(0 0 3px #7ff0ff)}}
+  .kl-runes path{stroke-dasharray:14;animation:tlBorder 2.4s linear infinite;}
+  .kl-motes circle{animation:plSpark 2.8s ease-in-out infinite;} .kl-motes circle:nth-child(2){animation-delay:.9s} .kl-motes circle:nth-child(3){animation-delay:1.8s}
+  .tg-art2{width:80px !important;height:80px !important;overflow:visible;}
+  .tg-orb{animation-duration:var(--t);animation-delay:var(--d);animation-timing-function:linear;animation-iteration-count:infinite;}
+  @keyframes tgCw{from{transform:rotate(0) scaleY(.62)}to{transform:rotate(360deg) scaleY(.62)}}
+  @keyframes tgCcw{from{transform:rotate(360deg) scaleY(.75)}to{transform:rotate(0) scaleY(.75)}}
+  .tg-wing{transform-box:fill-box;transform-origin:center;animation:tgWing .12s linear infinite alternate;}
+  @keyframes tgWing{from{transform:scaleY(1)}to{transform:scaleY(.25)}}
+  .tg-glow{animation:breathe 3s ease-in-out infinite;transform-origin:50px 52px;}
+  .tg-ore{animation:tgOre 2.4s ease-in-out infinite;transform-origin:51px 52px;} @keyframes tgOre{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg) scale(.97)}}
+  .tg-flecks circle{animation:tgFleck 1.6s ease-out infinite;} .tg-flecks circle:nth-child(2){animation-delay:.4s} .tg-flecks circle:nth-child(3){animation-delay:.8s} .tg-flecks circle:nth-child(4){animation-delay:1.2s}
+  @keyframes tgFleck{0%{opacity:0;transform:translate(0,0)}25%{opacity:1}100%{opacity:0;transform:translate(var(--fx,4px),-8px)}}
+  .tg-flecks circle:nth-child(2n){--fx:-5px;}
+  .no-motion .tg-art2 *{animation:none !important;}
   .shop-tabs{display:grid !important;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:8px;}
   .shop-tabs button{font-size:10.5px;padding:7px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;}
   .shop-tabs .ic{width:14px;height:14px;margin:0;}
@@ -1668,7 +1728,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.60.0';
+const GAME_VERSION = '1.61.4';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1817,6 +1877,26 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.61.4', date:'02/10/2026', title:'Lá phù tự cháy', items:[
+    ['doi','Phù Lục Sư: chu sa viết xong, lá phù rực sáng rồi bùng cháy từ dưới lên — ngọn lửa leo dần, giấy sém đen, tàn lửa bay lên — cháy hết thì một lá phù mới lại được vẽ từ đầu.']
+  ]},
+  {v:'1.61.3', date:'02/10/2026', title:'Linh Trùng Viên mới', items:[
+    ['doi','Linh Trùng Viên vẽ lại: đàn Phệ Kim Trùng có thân, đầu, râu và đôi cánh vỗ liên hồi, bay vòng quanh khối khoáng kim đang bị gặm dần, mạt kim loại lấp lánh bắn ra; đàn đông thêm theo số lượng, lên đời tam sắc thì có cả trùng vàng, bạc và đen.']
+  ]},
+  {v:'1.61.2', date:'02/10/2026', title:'Khôi lỗi mới', items:[
+    ['doi','Khôi Lỗi Sư có hình khôi lỗi gỗ mới: khớp đồng, phù văn linh quang chạy trên thân, linh hạch giữa ngực phập phồng, sợi linh ti điều khiển từ trên cao khẽ lay; khôi lỗi bồng bềnh, mắt lóe sáng rồi tung một quyền tóe linh quang.']
+  ]},
+  {v:'1.61.1', date:'02/10/2026', title:'Sảnh đấu giá và đăng nhập', items:[
+    ['doi','Đấu Giá Tu Sĩ trình bày như sảnh Đấu Giá Hội: từng món một với giá hiện tại, người giữ giá, nút Hô / Hô Thêm 10% / Hô Thêm 30%, Món Trước — Món Kế Tiếp, chấm tiến độ các món và Diễn Biến của sảnh.'],
+    ['moi','Đăng nhập báo rõ thành công hay sai mật khẩu; thêm Quên mật khẩu — gửi liên kết qua email và đặt mật khẩu mới ngay trong game.'],
+    ['doi','Bỏ mục đổi máy chủ ở phần tài khoản.']
+  ]},
+  {v:'1.61.0', date:'02/10/2026', title:'Đấu giá kịch tính', items:[
+    ['moi','Phiên Đại Đấu Giá: luôn có một bảo vật quý giữa sảnh; sau thời gian tranh giá, Hội chủ hô "Còn ai trả cao hơn?… Lần thứ nhất!… Lần thứ hai!… Chốt!" — có người trả giá là hô lại từ đầu.'],
+    ['moi','Hàng bí ẩn: chỉ biết loại món (bảo vật, đan dược, linh phù...), thắng mới biết là gì.'],
+    ['moi','Khách NPC có tính cách: kẻ hào phóng trả vọt giá, kẻ chờ phút chót, kẻ dè dặt nhích từng chút, kẻ kình địch hễ thấy tu sĩ dẫn đầu là trả đè — kèm lời thoại.'],
+    ['moi','Hội Trường: dòng trả giá trực tiếp của mọi phiên; món nhiều người tranh có nhãn đang nóng.']
+  ]},
   {v:'1.60.0', date:'02/10/2026', title:'Luyện đan, chế phù do máy chủ quyết định', items:[
     ['moi','Khi đã đăng nhập: bái sư học Luyện Đan Sư, Phù Lục Sư; luyện đan tu vi, đan liệu thương; vẽ linh phù — máy chủ kiểm tra tay nghề, trừ nguyên liệu, tung tỷ lệ, trao thành phẩm và cộng thành thạo. Tay nghề hai nghề này không thể tự tăng trên máy.'],
     ['moi','Có bản ứng dụng Android (APK) cài thẳng, mở trang phamnhan.click toàn màn hình.']
@@ -9285,7 +9365,10 @@ function cloudErrMsg(e){
   if(/at least 6|Password should/i.test(m)) return 'Mật khẩu tối thiểu 6 ký tự.';
   if(/Email not confirmed/i.test(m)) return 'Email chưa xác nhận — mở hộp thư và bấm liên kết xác nhận trước.';
   if(/valid email|invalid format|Unable to validate email/i.test(m)) return 'Email không hợp lệ.';
-  if(/Failed to fetch|NetworkError|Load failed|network/i.test(m)) return 'Không kết nối được máy chủ — kiểm tra mạng hoặc cấu hình.';
+  if(/Failed to fetch|NetworkError|Load failed|network/i.test(m)) return 'Không kết nối được máy chủ — kiểm tra mạng.';
+  if(/User not found|user_not_found/i.test(m)) return 'Không tìm thấy tài khoản với email này.';
+  if(/same as|different from the old/i.test(m)) return 'Mật khẩu mới phải khác mật khẩu cũ.';
+  if(/expired|invalid.*(token|link)|otp/i.test(m)) return 'Liên kết đã hết hạn hoặc không hợp lệ — gửi lại liên kết khác.';
   if(/relation .*saves.* does not exist|Could not find the table/i.test(m)) return 'Chưa tạo bảng lưu — chạy đoạn SQL ở bước 3 trong Supabase.';
   if(/rate limit/i.test(m)) return 'Thử quá nhiều lần, đợi một lát rồi thử lại.';
   if(/LockManager|Locks API|SecurityError|localStorage|sandbox/i.test(m)) return 'Trình xem này không hỗ trợ tài khoản đám mây — mở game bằng trình duyệt để đăng nhập.';
@@ -9312,7 +9395,8 @@ async function cloudInit(){
     const {data} = await cloud.client.auth.getSession();
     cloud.user = data && data.session ? data.session.user : null;
     cloud.status = cloud.user ? 'in' : 'out';
-    cloud.client.auth.onAuthStateChange((ev, session)=>{ cloud.user = session ? session.user : null; cloud.status = cloud.user ? 'in' : 'out'; refreshCloudUI(); });
+    cloud.client.auth.onAuthStateChange((ev, session)=>{ cloud.user = session ? session.user : null; cloud.status = cloud.user ? 'in' : 'out'; refreshCloudUI(); if(ev==='PASSWORD_RECOVERY') setTimeout(showNewPw, 300); });
+    if(/type=recovery/.test(location.hash||'')) setTimeout(()=>{ if(cloud.user) showNewPw(); }, 1500);
     if(cloud.user) await cloudPullIfNewer(true);
   }catch(e){ cloud.status = 'error'; cloud.error = cloudErrMsg(e); }
   refreshCloudUI();
@@ -9348,9 +9432,9 @@ async function cloudSignUp(){
   try{
     const {data, error} = await cloud.client.auth.signUp({email, password:pw});
     if(error) throw error;
-    if(!data.session){ toast('Đã gửi email xác nhận — mở hộp thư, bấm liên kết rồi quay lại đăng nhập'); }
-    else { cloud.user = data.session.user; cloud.status = 'in'; cloud.formPw = ''; toast('Tạo tài khoản thành công'); await cloudAfterLogin(); }
-  }catch(e){ toast(cloudErrMsg(e)); }
+    if(!data.session){ accMsg('ok','Đã gửi email xác nhận — mở hộp thư, bấm liên kết rồi quay lại đăng nhập.'); }
+    else { cloud.user = data.session.user; cloud.status = 'in'; cloud.formPw = ''; cloud.formMsg = null; await cloudAfterLogin(); showLoginResult(true, 'Tạo tài khoản thành công — đạo đồ bắt đầu từ đây.'); }
+  }catch(e){ accMsg('bad', cloudErrMsg(e)); }
   cloud.busy = false; refreshCloudUI();
 }
 async function cloudSignIn(){
@@ -9361,11 +9445,19 @@ async function cloudSignIn(){
     const {data, error} = await cloud.client.auth.signInWithPassword({email, password:pw});
     if(error) throw error;
     cloud.user = data.user || (data.session && data.session.user); cloud.status = 'in';
-    cloud.formPw = '';
-    toast('Đăng nhập thành công');
+    cloud.formPw = ''; cloud.formMsg = null;
     await cloudAfterLogin();
-  }catch(e){ toast(cloudErrMsg(e)); }
-  cloud.busy = false; refreshCloudUI();
+    cloud.busy = false; refreshCloudUI();
+    showLoginResult(true, `Chào mừng trở lại, ${escHtml(cloud.user.email)}. Tiến trình đã được tải từ máy chủ.`);
+    return;
+  }catch(e){
+    const msg = cloudErrMsg(e);
+    cloud.busy = false; refreshCloudUI();
+    accMsg('bad', msg);
+    if(/Sai email hoặc mật khẩu/.test(msg)) showLoginResult(false, 'Sai email hoặc mật khẩu. Kiểm tra lại, hoặc đặt lại mật khẩu nếu đã quên.');
+    else toast(msg);
+    return;
+  }
 }
 async function cloudSignOut(){
   if(!cloud.client) return;
@@ -9485,6 +9577,61 @@ function titleAccountLine(){
   if(cloud.status==='error') return `${ic('cloud','keep')} <span>Chơi ngoại tuyến — tài khoản đám mây chưa kết nối.</span> <button class="ls-link" onclick="cloudInit()">Thử lại</button>`;
   return `${ic('cloud','keep')} <button class="ls-link" onclick="showSettings('taikhoan')">Thiết lập tài khoản đám mây</button>`;
 }
+/* ---------- Đăng nhập: thông báo rõ ràng, quên mật khẩu, đặt lại mật khẩu ---------- */
+function accMsg(kind, text){
+  cloud.formMsg = {kind, text};
+  const el = document.getElementById('accMsg'); if(el){ el.className = 'acc-msg '+kind; el.innerHTML = `${ic(kind==='ok'?'check':'warn','keep')} ${text}`; el.style.display = 'flex'; }
+}
+function showLoginResult(ok, text){
+  document.getElementById('modalBody').innerHTML = `<div class="story-pop"><div class="sp-glow"></div>
+    <div class="acc-result ${ok?'ok':'bad'}">${ic(ok?'check':'warn','keep')}</div>
+    <h2 class="sp-title">${ok?'Đăng Nhập Thành Công':'Đăng Nhập Thất Bại'}</h2>
+    <p class="sp-blurb">${text}</p>
+    <button class="btn ${ok?'gold':'ghost'}" style="margin-top:12px;" onclick="${ok?'closeModal()':"showSettings('taikhoan')"}">${ok?'Vào Đạo Đồ':'Thử Lại'}</button>
+    ${ok?'':`<button class="ls-link" style="margin-top:10px;" onclick="showForgotPw()">Quên mật khẩu?</button>`}</div>`;
+  document.getElementById('overlay').classList.add('show');
+}
+function showForgotPw(){
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="display:flex;align-items:center;gap:8px;">${ic('key','keep')} Quên Mật Khẩu</h2><button class="icon-btn" aria-label="Đóng" onclick="showSettings('taikhoan')">${ic('close','keep')}</button></div>
+    <p class="sec-note" style="margin:0 0 10px;">Nhập email đã đăng ký. Máy chủ sẽ gửi một liên kết đặt lại mật khẩu — mở liên kết đó trên máy này hoặc trong ứng dụng là đặt được mật khẩu mới.</p>
+    <label class="cr-label" for="fpEmail">Email</label>
+    <input id="fpEmail" type="email" class="acc-input" autocomplete="email" placeholder="ban@email.com" value="${(cloud.formEmail||'').replace(/"/g,'&quot;')}" onkeydown="if(event.key==='Enter') sendResetPw()">
+    <div id="fpMsg" class="acc-msg" style="display:none;"></div>
+    <button class="btn gold" style="margin-top:12px;" onclick="sendResetPw()">Gửi Liên Kết Đặt Lại</button>
+    <button class="ls-link" style="margin-top:10px;" onclick="showSettings('taikhoan')">Quay lại đăng nhập</button>`;
+  document.getElementById('overlay').classList.add('show');
+}
+async function sendResetPw(){
+  const email = (document.getElementById('fpEmail').value||'').trim(), m = document.getElementById('fpMsg');
+  const say = (k,t)=>{ m.className = 'acc-msg '+k; m.innerHTML = `${ic(k==='ok'?'check':'warn','keep')} ${t}`; m.style.display = 'flex'; };
+  if(!/^\S+@\S+\.\S+$/.test(email)){ say('bad','Email không hợp lệ.'); return; }
+  if(!cloud.client){ say('bad','Chưa kết nối được máy chủ.'); return; }
+  try{
+    const redirect = /^https?:/.test(location.protocol) ? location.origin + location.pathname : 'https://phamnhan.click/';
+    const {error} = await cloud.client.auth.resetPasswordForEmail(email, {redirectTo: redirect});
+    if(error) throw error;
+    cloud.formEmail = email;
+    say('ok', 'Đã gửi. Mở hộp thư (cả mục Thư rác), bấm liên kết đặt lại mật khẩu.');
+  }catch(e){ say('bad', cloudErrMsg(e)); }
+}
+function showNewPw(){
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="display:flex;align-items:center;gap:8px;">${ic('key','keep')} Đặt Mật Khẩu Mới</h2></div>
+    <p class="sec-note" style="margin:0 0 10px;">Liên kết hợp lệ. Hãy đặt mật khẩu mới cho tài khoản.</p>
+    <label class="cr-label" for="npw1">Mật khẩu mới</label><input id="npw1" type="password" class="acc-input" autocomplete="new-password" placeholder="Tối thiểu 6 ký tự">
+    <label class="cr-label" for="npw2" style="margin-top:10px;">Nhập lại</label><input id="npw2" type="password" class="acc-input" autocomplete="new-password" onkeydown="if(event.key==='Enter') saveNewPw()">
+    <div id="npwMsg" class="acc-msg" style="display:none;"></div>
+    <button class="btn gold" style="margin-top:12px;" onclick="saveNewPw()">Lưu Mật Khẩu</button>`;
+  document.getElementById('overlay').classList.add('show');
+}
+async function saveNewPw(){
+  const a = document.getElementById('npw1').value, b = document.getElementById('npw2').value, m = document.getElementById('npwMsg');
+  const say = (k,t)=>{ m.className = 'acc-msg '+k; m.innerHTML = `${ic(k==='ok'?'check':'warn','keep')} ${t}`; m.style.display = 'flex'; };
+  if(a.length<6){ say('bad','Mật khẩu tối thiểu 6 ký tự.'); return; }
+  if(a!==b){ say('bad','Hai lần nhập không khớp.'); return; }
+  try{ const {error} = await cloud.client.auth.updateUser({password:a}); if(error) throw error; say('ok','Đã đổi mật khẩu. Từ nay đăng nhập bằng mật khẩu mới.'); setTimeout(()=>{ closeModal(); try{ history.replaceState(null,'',location.pathname); }catch(e){} }, 1400); }
+  catch(e){ say('bad', cloudErrMsg(e)); }
+}
+
 function renderAccountTab(){
   const cfg = cloudCfg();
   if(!cfg || cloud.status==='unconfigured'){
@@ -9509,7 +9656,7 @@ function renderAccountTab(){
   }
   if(cloud.status==='connecting') return `<div id="accPanel"><p class="flavor">Đang kết nối máy chủ…</p></div>`;
   if(cloud.status==='error') return `<div id="accPanel"><p class="bad-mark">${ic('warn')} ${cloud.error}</p>
-      <div class="btn-row"><button class="btn gold" onclick="cloudInit()">Thử Lại</button><button class="btn ghost" onclick="clearCloudConfig()">Đổi Cấu Hình</button></div></div>`;
+      <div class="btn-row"><button class="btn gold" onclick="cloudInit()">Thử Lại</button></div></div>`;
   if(cloud.status==='out') return `<div id="accPanel">
       <p class="sec-note" style="margin:0 0 10px;">Đăng nhập để bản lưu tự đồng bộ lên đám mây — mở game ở máy khác, đăng nhập là chơi tiếp.</p>
       <label class="cr-label" for="accEmail">Email</label>
@@ -9520,7 +9667,8 @@ function renderAccountTab(){
         <button class="btn gold" ${cloud.busy?'disabled':''} onclick="cloudSignIn()">${cloud.busy?'Đang xử lý…':'Đăng Nhập'}</button>
         <button class="btn ghost" ${cloud.busy?'disabled':''} onclick="cloudSignUp()">Tạo Tài Khoản</button>
       </div>
-      <button class="btn ghost" style="margin-top:14px;" onclick="clearCloudConfig()">Đổi Máy Chủ</button>
+      <div id="accMsg" class="acc-msg ${cloud.formMsg?cloud.formMsg.kind:''}" style="display:${cloud.formMsg?'flex':'none'};">${cloud.formMsg?`${ic(cloud.formMsg.kind==='ok'?'check':'warn','keep')} ${cloud.formMsg.text}`:''}</div>
+      <button class="ls-link" style="margin-top:14px;" onclick="showForgotPw()">Quên mật khẩu?</button>
     </div>`;
   const local = readSave();
   return `<div id="accPanel">
@@ -13575,8 +13723,10 @@ const PROF_ART = {
   phuLuc:`<svg viewBox="0 0 60 100" class="ws-art tl-art"><defs>
       <linearGradient id="tlP" x1="0" x2="1"><stop offset="0" stop-color="#0f5a56"/><stop offset=".45" stop-color="#2aa294"/><stop offset=".6" stop-color="#36b8a6"/><stop offset="1" stop-color="#0d4e4a"/></linearGradient>
       <radialGradient id="tlG"><stop offset="0" stop-color="rgba(120,255,230,.55)"/><stop offset="1" stop-color="rgba(120,255,230,0)"/></radialGradient></defs>
+    <clipPath id="tlClip"><rect class="tl-cliprect" x="-10" y="-6" width="80" height="112"/></clipPath>
+      <linearGradient id="tlFire" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff3b0" stop-opacity="0"/><stop offset=".35" stop-color="#ffd060"/><stop offset=".7" stop-color="#ff7a20"/><stop offset="1" stop-color="#b8300a" stop-opacity="0"/></linearGradient>
     <ellipse class="tl-glow" cx="30" cy="50" rx="30" ry="50" fill="url(#tlG)"/>
-    <g class="tl-sway">
+    <g class="tl-sway"><g clip-path="url(#tlClip)"><g class="tl-paper">
       <path d="M10 4 C20 2 40 6 50 4 L52 96 C42 98 20 94 8 96Z" fill="url(#tlP)" stroke="#bff8ec" stroke-opacity=".7" stroke-width=".8"/>
       <path class="tl-border" d="M13 8 C22 6.5 38 9.5 47 8 L48.5 92 C40 93.5 22 90.5 11.5 92Z" fill="none" stroke="#a6f5e6" stroke-width=".9" stroke-dasharray="3 1.5"/>
       <rect x="21" y="40" width="18" height="16" fill="none" stroke="#073c38" stroke-opacity=".7" stroke-width="1.2"/>
@@ -13590,13 +13740,42 @@ const PROF_ART = {
         <path d="M30 70 V80 M24 78 C27 76 33 76 36 78 M26 84 C28 88 32 88 34 84"/>
       </g>
       <path d="M30 86 L28 90 H32Z" fill="#e0302a"/>
+    </g></g>
+      <g class="tl-flame"><rect x="6" y="-3" width="48" height="6" fill="url(#tlFire)"/>
+        <path d="M8 0 C10 -6 12 -3 13 -8 C15 -3 17 -6 19 -2 C21 -8 24 -4 26 -9 C28 -3 31 -7 33 -2 C35 -8 38 -4 40 -9 C42 -3 45 -6 47 -2 C49 -7 51 -4 52 0 Z" fill="#ff9a30" opacity=".9"/>
+        <path d="M12 0 C13 -4 15 -2 16 -5 C18 -2 20 -4 22 -1 C24 -5 26 -3 28 -6 C30 -2 33 -5 35 -1 C37 -5 40 -3 42 -6 C44 -2 46 -4 48 0 Z" fill="#ffe08a"/></g>
     </g>
+    <g class="tl-embers"><circle cx="18" cy="70" r="1" fill="#ffb24a"/><circle cx="30" cy="60" r=".8" fill="#ffd27a"/><circle cx="42" cy="68" r="1.1" fill="#ff8a3a"/><circle cx="25" cy="50" r=".7" fill="#ffd27a"/><circle cx="37" cy="40" r=".9" fill="#ffb24a"/><circle cx="22" cy="30" r=".8" fill="#ff8a3a"/></g>
     <g class="tl-spark"><circle cx="12" cy="20" r="1" fill="#c8fff2"/><circle cx="50" cy="40" r=".8" fill="#c8fff2"/><circle cx="14" cy="70" r=".9" fill="#c8fff2"/></g></svg>`,
   tranPhap:`<svg viewBox="0 0 100 100" class="ws-art"><g class="ws-spin"><circle cx="50" cy="50" r="40" fill="none" stroke="#d4af6a" stroke-opacity=".55" stroke-width="1.2"/><circle cx="50" cy="50" r="31" fill="none" stroke="#d4af6a" stroke-opacity=".35" stroke-dasharray="3 3"/>
     ${[0,45,90,135,180,225,270,315].map((r,i)=>`<g transform="rotate(${r} 50 50)"><path d="M43 14 H57 M43 18 H${i%2?'49 M51 18 H57':'57'} M43 22 H${i%3?'57':'49 M51 22 H57'}" stroke="#f0cf8c" stroke-width="2"/></g>`).join('')}</g>
     <circle cx="50" cy="50" r="13" fill="#0d1414" stroke="#f0cf8c" stroke-opacity=".6"/><path d="M50 37 A13 13 0 0 1 50 63 A6.5 6.5 0 0 1 50 50 A6.5 6.5 0 0 0 50 37Z" fill="#f0cf8c"/><circle cx="50" cy="43.5" r="2" fill="#0d1414"/><circle cx="50" cy="56.5" r="2" fill="#f0cf8c"/></svg>`,
-  khoiLoi:`<svg viewBox="0 0 100 100" class="ws-art"><g class="ws-bob" fill="#8a6a44" stroke="#c8a46a" stroke-opacity=".6"><circle cx="50" cy="22" r="10"/><rect x="38" y="34" width="24" height="28" rx="4"/><rect x="26" y="36" width="10" height="22" rx="4"/><rect x="64" y="36" width="10" height="22" rx="4"/><rect x="40" y="62" width="8" height="24" rx="3"/><rect x="52" y="62" width="8" height="24" rx="3"/></g>
-    <g class="ws-eyes"><circle cx="46" cy="21" r="1.8" fill="#7fe8ff"/><circle cx="54" cy="21" r="1.8" fill="#7fe8ff"/></g><circle cx="50" cy="46" r="4" fill="none" stroke="#7fe8ff" stroke-opacity=".8" class="ws-core"/></svg>`
+  khoiLoi:`<svg viewBox="0 0 100 110" class="ws-art kl-art"><defs>
+      <linearGradient id="klWood" x1="0" x2="1"><stop offset="0" stop-color="#3a2414"/><stop offset=".45" stop-color="#7a4f2c"/><stop offset=".6" stop-color="#8f6136"/><stop offset="1" stop-color="#2e1c10"/></linearGradient>
+      <linearGradient id="klWoodD" x1="0" x2="1"><stop offset="0" stop-color="#2a190d"/><stop offset=".5" stop-color="#5e3c20"/><stop offset="1" stop-color="#22140a"/></linearGradient>
+      <radialGradient id="klCore"><stop offset="0" stop-color="#e8ffff"/><stop offset=".4" stop-color="#6ff0ff"/><stop offset="1" stop-color="#0a8aa0" stop-opacity="0"/></radialGradient>
+      <linearGradient id="klGold" x1="0" x2="1"><stop offset="0" stop-color="#8a6a2c"/><stop offset=".5" stop-color="#f0d08a"/><stop offset="1" stop-color="#7a5a24"/></linearGradient></defs>
+    <g class="kl-strings" stroke="rgba(160,240,255,.55)" stroke-width=".6"><path d="M38 0 L38 26"/><path d="M62 0 L62 26"/><path d="M22 0 L22 46"/><path d="M78 0 L78 46"/><path d="M50 0 L50 14"/></g>
+    <ellipse cx="50" cy="104" rx="22" ry="3" fill="rgba(0,0,0,.45)"/>
+    <g class="kl-body">
+      <rect x="40" y="70" width="8" height="24" rx="3" fill="url(#klWoodD)"/><rect x="52" y="70" width="8" height="24" rx="3" fill="url(#klWoodD)"/>
+      <circle cx="44" cy="82" r="2.6" fill="url(#klGold)"/><circle cx="56" cy="82" r="2.6" fill="url(#klGold)"/>
+      <path d="M37 94 h13 v6 h-15 Z M50 94 h13 l2 6 h-15 Z" fill="#24150a"/>
+      <path d="M34 36 C34 30 40 27 50 27 C60 27 66 30 66 36 L63 66 C60 71 40 71 37 66 Z" fill="url(#klWood)" stroke="#c8a46a" stroke-opacity=".45"/>
+      <path d="M38 42 H62 M39 54 H61" stroke="url(#klGold)" stroke-width="1.2" opacity=".8"/>
+      <g class="kl-runes" fill="none" stroke="#7ff0ff" stroke-width=".9" stroke-linecap="round"><path d="M42 46 l3 3 l-3 3 M58 46 l-3 3 l3 3 M45 60 h10"/></g>
+      <circle class="kl-core" cx="50" cy="49" r="7" fill="url(#klCore)"/><circle cx="50" cy="49" r="2.6" fill="#effeff"/>
+      <rect x="44" y="66" width="12" height="5" rx="2" fill="url(#klGold)"/>
+      <g class="kl-armL"><circle cx="31" cy="37" r="5" fill="url(#klWoodD)" stroke="#c8a46a" stroke-opacity=".4"/><rect x="27" y="40" width="8" height="15" rx="3" fill="url(#klWood)"/><circle cx="31" cy="56" r="2.4" fill="url(#klGold)"/><rect x="27.5" y="57" width="7" height="12" rx="3" fill="url(#klWoodD)"/><rect x="26.5" y="68" width="9" height="7" rx="2.5" fill="#3a2414" stroke="#c8a46a" stroke-opacity=".4"/></g>
+      <g class="kl-armR"><circle cx="69" cy="37" r="5" fill="url(#klWoodD)" stroke="#c8a46a" stroke-opacity=".4"/><rect x="65" y="40" width="8" height="15" rx="3" fill="url(#klWood)"/><circle cx="69" cy="56" r="2.4" fill="url(#klGold)"/><rect x="65.5" y="57" width="7" height="12" rx="3" fill="url(#klWoodD)"/><rect x="64.5" y="68" width="9" height="7" rx="2.5" fill="#3a2414" stroke="#c8a46a" stroke-opacity=".4"/>
+        <g class="kl-burst"><circle cx="69" cy="80" r="6" fill="none" stroke="#9ff6ff" stroke-width="1.2"/><circle cx="69" cy="80" r="2" fill="#e8ffff"/></g></g>
+      <rect x="45" y="22" width="10" height="6" rx="2" fill="url(#klWoodD)"/>
+      <path d="M40 14 C40 8 44 5 50 5 C56 5 60 8 60 14 L59 22 C57 25 43 25 41 22 Z" fill="url(#klWood)" stroke="#c8a46a" stroke-opacity=".45"/>
+      <path d="M41 12 H59" stroke="url(#klGold)" stroke-width="1.4"/>
+      <path d="M50 5 V12" stroke="#7ff0ff" stroke-width=".8" opacity=".8"/>
+      <g class="kl-eyes"><rect x="43.5" y="15" width="4.5" height="2.2" rx="1" fill="#7ff0ff"/><rect x="52" y="15" width="4.5" height="2.2" rx="1" fill="#7ff0ff"/></g>
+    </g>
+    <g class="kl-motes"><circle cx="24" cy="70" r=".9" fill="#9ff6ff"/><circle cx="78" cy="60" r="1.1" fill="#9ff6ff"/><circle cx="30" cy="90" r=".8" fill="#9ff6ff"/></g></svg>`
 };
 const PROF_LINE = {
   danSu:'Hàn Lập dùng lục dịch thúc linh thảo, luyện đan không tiếc — nhờ vậy tu vi vượt xa người cùng lứa.',
@@ -13626,9 +13805,20 @@ function profHeader(id, extraRows){
   </div>`;
 }
 function trungBanner(){
-  const T = trung(), n = Math.min(26, 6 + Math.floor(T.n/40));
-  const dots = Array.from({length:n},(_,i)=>`<circle class="tg-d" r="${1.4+(i%3)*.5}" fill="${['#f0cf8c','#d8dde4','#2a2a2a'][T.gen>=1 ? i%3 : i%2]}" style="--a:${(i*137)%360}deg;--r:${16+(i*7)%22}px;--t:${3+(i%5)*.7}s"/>`).join('');
-  return `<svg viewBox="0 0 100 100" class="ws-art tg-art"><g transform="translate(50 50)">${dots}</g><circle cx="50" cy="50" r="6" fill="rgba(240,207,140,.25)"/></svg>`;
+  const T = trung(), n = Math.min(18, 5 + Math.floor((T.n||0)/60));
+  const cols = T.gen>=1 ? [['#f6d27a','#a8782a'],['#e6ecf0','#8a959c'],['#3a3a40','#141418']] : [['#f6d27a','#a8782a'],['#e6ecf0','#8a959c']];
+  const bugs = Array.from({length:n},(_,i)=>{ const [c1,c2] = cols[i%cols.length]; const r = 14 + (i*7)%20, t = 3.2 + (i%5)*0.8, d = -(i*0.37).toFixed(2), sz = 0.8 + (i%3)*0.15, dir = i%2 ? 'tgCw' : 'tgCcw';
+    return `<g class="tg-orb" style="--t:${t}s;--d:${d}s;animation-name:${dir}"><g transform="translate(${r} 0) rotate(${i%2?90:-90}) scale(${sz})"><use href="#tgBug" style="--c1:${c1};--c2:${c2}"/></g></g>`; }).join('');
+  return `<svg viewBox="0 0 100 100" class="ws-art tg-art2"><defs>
+      <g id="tgBug"><ellipse class="tg-wing" cx="-2.6" cy="0" rx="3.2" ry="1.4" fill="rgba(220,240,255,.55)"/><ellipse class="tg-wing w2" cx="2.6" cy="0" rx="3.2" ry="1.4" fill="rgba(220,240,255,.55)"/>
+        <ellipse cx="0" cy="0.6" rx="1.9" ry="2.8" fill="var(--c1)" stroke="var(--c2)" stroke-width=".5"/><path d="M0 -2 V3.2" stroke="var(--c2)" stroke-width=".4"/><circle cx="0" cy="-2.6" r="1.1" fill="var(--c2)"/><path d="M-.6 -3.4 l-.8 -1.2 M.6 -3.4 l.8 -1.2" stroke="var(--c2)" stroke-width=".35"/></g>
+      <radialGradient id="tgGlow"><stop offset="0" stop-color="rgba(255,220,140,.5)"/><stop offset="1" stop-color="rgba(255,220,140,0)"/></radialGradient>
+      <linearGradient id="tgOre" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff2c0"/><stop offset=".45" stop-color="#d8a94a"/><stop offset="1" stop-color="#6a4a1a"/></linearGradient></defs>
+    <circle cx="50" cy="52" r="26" fill="url(#tgGlow)" class="tg-glow"/>
+    <g class="tg-ore"><path d="M42 58 L44 46 L52 41 L60 46 L59 56 L51 62 Z" fill="url(#tgOre)" stroke="#fff2c0" stroke-opacity=".5" stroke-width=".6"/><path d="M44 46 L52 50 L60 46 M52 50 L51 62" stroke="#6a4a1a" stroke-opacity=".6" stroke-width=".6" fill="none"/>
+      <path class="tg-bite" d="M57 44 a3 3 0 0 0 3 4" stroke="#1a1208" stroke-width="1.6" fill="none"/></g>
+    <g class="tg-flecks"><circle cx="58" cy="44" r=".8" fill="#ffe8a0"/><circle cx="44" cy="50" r=".7" fill="#ffe8a0"/><circle cx="52" cy="60" r=".6" fill="#e6ecf0"/><circle cx="48" cy="43" r=".7" fill="#e6ecf0"/></g>
+    <g transform="translate(50 52)">${bugs}</g></svg>`;
 }
 function renderCraftCard(){
   const tiles = PROFESSIONS.map(p=>{
@@ -14867,6 +15057,7 @@ async function paLoad(force){
     PA.mine = m.data||[];
     const mb = await cloud.client.from('mailbox').select('*').eq('user_id', cloud.user.id).eq('claimed', false).order('id', {ascending:true}); if(mb.error) throw mb.error;
     PA.mail = mb.data||[];
+    try{ const f = await cloud.client.from('auction_bids').select('*').order('id', {ascending:false}).limit(30); if(!f.error) PA.feed = f.data||[]; }catch(e){}
     PA.ts = Date.now();
   }catch(e){ PA.err = cloudErrMsg(e); }
   PA.loading = false;
@@ -14940,10 +15131,11 @@ PA.prev = {}; PA.flash = {}; PA.myTop = {};
 let paPoll = null, paTick = null;
 function paWatch(){
   const on = state && state.activeTab==='tuido' && state.subTabs && state.subTabs.tuido==='dgts' && tsbOnline() && document.visibilityState!=='hidden';
-  if(on && !paPoll){ paPoll = setInterval(()=>{ PA.ts = 0; paLoad(true); }, 5000); paTick = setInterval(paTickDom, 1000); }
+  if(on && !paPoll){ paPoll = setInterval(()=>{ PA.ts = 0; paLoad(true); }, 4000); paTick = setInterval(paTickDom, 1000); }
   if(!on && paPoll){ clearInterval(paPoll); clearInterval(paTick); paPoll = paTick = null; }
 }
 function paTickDom(){
+  try{ paFeatTick(); }catch(e){}
   document.querySelectorAll('[data-end]').forEach(el=>{
     const ms = new Date(el.dataset.end).getTime() - Date.now();
     el.textContent = ms<=0 ? 'Đang chốt…' : ms<3600000 ? `${Math.floor(ms/60000)}:${String(Math.floor(ms%60000/1000)).padStart(2,'0')}` : paLeft(el.dataset.end).replace('còn ','');
@@ -14971,7 +15163,7 @@ async function paBidModal(id){
   const a = PA.list.find(x=>x.id===id); if(!a) return;
   const min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
   const steps = [min, Math.ceil(min*1.1), Math.ceil(min*1.25)].filter((v,i,arr)=>arr.indexOf(v)===i && (!a.buyout || v<a.buyout));
-  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${paItemName(a.item)} ×${a.qty}</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${paLotName(a)}</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
     <div class="pa-mhead"><div><small>${a.top_bid?'Giá hiện tại':'Khởi điểm'}</small><b>${a.top_bid||a.start_price}</b></div><div><small>Kết thúc sau</small><b data-end="${a.ends_at}">…</b></div><div><small>Ngươi có</small><b>${state.spiritStones}</b></div></div>
     <p class="sec-note" style="margin:6px 0 10px;">${escHtml(a.seller_name)}${a.system?' · hàng của hội':''}. Trả giá trong hai phút cuối sẽ gia hạn thêm hai phút.</p>
     <div class="pa-quick">${steps.map(v=>`<button class="btn sm gold" ${state.spiritStones<v?'disabled':''} onclick="paPlace(${a.id},${v})">${v}</button>`).join('')}
@@ -14981,9 +15173,9 @@ async function paBidModal(id){
   document.getElementById('overlay').classList.add('show');
   paTickDom();
   try{
-    const {data} = await cloud.client.from('auction_bids').select('bidder_name,amount,created_at').eq('auction_id', id).order('id', {ascending:false}).limit(8);
+    const {data} = await cloud.client.from('auction_bids').select('*').eq('auction_id', id).order('id', {ascending:false}).limit(8);
     const h = document.getElementById('paHist');
-    if(h) h.innerHTML = data && data.length ? `<div class="pa-hh">Lịch sử trả giá</div>` + data.map((b,i)=>`<div class="pa-hr ${i===0?'top':''}"><span>${escHtml(b.bidder_name)}</span><b>${b.amount}</b><small>${new Date(b.created_at).toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}</small></div>`).join('') : '<p class="flavor" style="margin:0;">Chưa ai trả giá — hãy là người đầu tiên.</p>';
+    if(h) h.innerHTML = data && data.length ? `<div class="pa-hh">Lịch sử trả giá</div>` + data.map((b,i)=>`<div class="pa-hr ${i===0?'top':''}"><span>${escHtml(b.bidder_name)}${b.note?`<q>${escHtml(b.note)}</q>`:''}</span><b>${b.amount}</b><small>${new Date(b.created_at).toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}</small></div>`).join('') : '<p class="flavor" style="margin:0;">Chưa ai trả giá — hãy là người đầu tiên.</p>';
   }catch(e){}
 }
 async function paPlace(id, amt){
@@ -15001,29 +15193,116 @@ async function paPlace(id, amt){
   PA.ts = 0; paLoad(true);
 }
 
+/* ---------- Đấu giá kịch tính: phiên đại đấu giá, hàng bí ẩn, hội trường trực tiếp ---------- */
+PA.feed = [];
+const KIND_LABEL = {rare:'Bảo vật', pill:'Đan dược', heal:'Đan dược', phu:'Linh phù', mat:'Nguyên liệu', herb:'Linh dược', seed:'Linh chủng', spec:'Linh dược'};
+function paLotName(a){ return a.mystery && a.status==='open' ? `Hàng bí ẩn · ${KIND_LABEL[a.item.k]||'Vật phẩm'}` : `${paItemName(a.item)} ×${a.qty}`; }
+function paHeat(id){ const t = Date.now()-300000; return PA.feed.filter(b=>b.auction_id===id && new Date(b.created_at).getTime()>t && b.bidder_name!=='Hội chủ').length; }
+function paPhase(a){
+  const now = Date.now(), minEnd = a.min_end ? new Date(a.min_end).getTime() : 0;
+  if(now < minEnd) return {k:'open', txt:'Đang tranh giá', left: minEnd-now, p: 0};
+  const since = now - new Date(a.last_bid_at || a.created_at).getTime();
+  if(since < 20000) return {k:'call', txt:'Còn vị đạo hữu nào trả cao hơn?', p: since/60000};
+  if(since < 40000) return {k:'once', txt:'Lần thứ nhất!', p: since/60000};
+  if(since < 60000) return {k:'twice', txt:'Lần thứ hai!', p: since/60000};
+  return {k:'sold', txt:'Chốt!', p: 1};
+}
+function renderFeatured(a){
+  if(!a) return '';
+  const ph = paPhase(a), me = cloud.user && a.top_bidder===cloud.user.id, min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
+  return `<div class="card pa-feat ph-${ph.k}" data-feat="${a.id}" data-minend="${a.min_end||''}" data-last="${a.last_bid_at||a.created_at}">
+    <div class="pf-kick">${ic('star','keep')} Đại Đấu Giá Hội</div>
+    <div class="pf-name">${paLotName(a)}</div>
+    <div class="pf-price"><small>${a.top_bid?'Giá hiện tại':'Khởi điểm'}</small><b>${(a.top_bid||a.start_price).toLocaleString('vi-VN')}</b><span>${a.top_bid?(me?'Ngươi đang dẫn':`${escHtml(a.top_name||'')}`):'Chưa ai ra giá'}</span></div>
+    <div class="pf-call" id="pfCall">${ph.txt}${ph.k==='open'?` · còn <span data-end="${a.min_end}"></span>`:''}</div>
+    <div class="pf-bar"><span id="pfBar" style="width:${Math.round(ph.p*100)}%"></span></div>
+    ${me?'<div class="pf-lead">Ngươi đang dẫn đầu — giữ vững!</div>':`<button class="btn gold" ${state.spiritStones<min?'disabled':''} onclick="paBidModal(${a.id})">Trả Giá (từ ${min.toLocaleString('vi-VN')})</button>`}
+  </div>`;
+}
+function renderAucHall(){
+  if(!PA.feed.length) return '';
+  const name = id=>{ const a = PA.list.find(x=>x.id===id); return a ? paLotName(a) : 'món đã chốt'; };
+  return `<div class="card pa-hall"><div class="sec-title">${ic('bell')} Hội Trường<span>trực tiếp</span></div>
+    ${PA.feed.slice(0,12).map(b=>`<div class="ph-row ${b.bidder_name==='Hội chủ'?'close':b.is_npc?'npc':'pc'}"><div><b>${escHtml(b.bidder_name)}</b> ${b.bidder_name==='Hội chủ'?'':`trả <em>${Number(b.amount).toLocaleString('vi-VN')}</em> cho ${name(b.auction_id)}`}${b.note?`<q>${escHtml(b.note)}</q>`:''}</div><small>${new Date(b.created_at).toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}</small></div>`).join('')}</div>`;
+}
+function paFeatTick(){
+  const el = document.querySelector('[data-feat]'); if(!el) return;
+  const a = PA.list.find(x=>x.id===+el.dataset.feat); if(!a) return;
+  const ph = paPhase(a);
+  el.className = el.classList.contains('pf-call-line') ? `ev-text pf-call-line ph-${ph.k}` : `card pa-feat ph-${ph.k}`;
+  const c = document.getElementById('pfCall'); if(c && !c.querySelector('[data-end]')) c.textContent = ph.txt;
+  if(c && ph.k!=='open' && c.querySelector('[data-end]')) c.textContent = ph.txt;
+  const bar = document.getElementById('pfBar'); if(bar) bar.style.width = Math.round(ph.p*100)+'%';
+  if(ph.k==='sold' && !PA._closing){ PA._closing = true; setTimeout(()=>{ PA._closing = false; PA.ts = 0; paLoad(true); }, 1500); }
+}
+
+/* Đấu Giá Tu Sĩ theo phong cách sảnh Đấu Giá Hội */
+PA.idx = 0;
+function paLots(){ const f = PA.list.filter(a=>a.featured), o = PA.list.filter(a=>!a.featured); return f.concat(o); }
+function paGo(d){ const n = paLots().length; if(!n) return; PA.idx = (PA.idx + d + n) % n; render(); }
+function paPick(i){ PA.idx = i; render(); }
+function paHo(id, pct){
+  const a = PA.list.find(x=>x.id===id); if(!a) return;
+  const min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
+  const amt = pct===0 ? min : Math.max(min, Math.ceil((a.top_bid||a.start_price)*(1+pct)));
+  paPlace(id, a.buyout ? Math.min(amt, a.buyout) : amt);
+}
 function renderPlayerAuction(){
-  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ</div><p class="sec-note" style="margin:0 0 10px;">Đấu giá giữa các tu sĩ cần tài khoản đám mây — máy chủ giữ đồ và linh thạch để không ai gian lận được.</p><button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập</button></div>`;
+  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ</div><p class="sec-note" style="margin:0 0 10px;">Đấu giá giữa các tu sĩ cần tài khoản — máy chủ giữ đồ và linh thạch để không ai gian lận được.</p><button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập</button></div>`;
   if(!PA.ts && !PA.loading) paLoad();
-  const meId = cloud.user.id;
+  setTimeout(()=>{ paWatch(); paTickDom(); }, 0);
+  const meId = cloud.user.id, lots = paLots();
+  if(PA.idx >= lots.length) PA.idx = 0;
+  const l = lots[PA.idx];
+  const dots = lots.map((x,i)=>`<span class="step-dot ${i===PA.idx?'cur':''} ${x.featured?'feat':''} ${x.top_bidder===meId?'mine':''}" onclick="paPick(${i})"></span>`).join('');
+  let lotCard;
+  if(!l){
+    lotCard = `<div class="card"><p class="flavor">${PA.loading?'Đang mở sảnh đấu giá…':'Sảnh đang trống — chờ các hội đem hàng ra.'}</p></div>`;
+  } else {
+    const mine = l.seller===meId, lead = l.top_bidder===meId, min = l.top_bid ? Math.ceil(l.top_bid*1.05) : l.start_price;
+    const ph = l.featured ? paPhase(l) : null, heat = paHeat(l.id);
+    const note = l.featured
+      ? `<p class="ev-text pf-call-line ph-${ph.k}" data-feat="${l.id}"><span id="pfCall">${ph.txt}</span></p><div class="pf-bar"><span id="pfBar" style="width:${Math.round(ph.p*100)}%"></span></div>`
+      : (l.mystery ? `<p class="ev-text">Món hàng phủ khăn đỏ, chỉ biết là ${(KIND_LABEL[l.item.k]||'vật phẩm').toLowerCase()}. Thắng rồi mới được mở ra.</p>` : '');
+    lotCard = `<div class="card event-card ${l.featured?'pa-feat-ev':''} ${lead?'pa-lead':''}">
+      <div class="ev-head"><span class="ev-sigil">${ic(l.featured?'star':l.mystery?'key':'hall','keep')}</span><div><div class="ev-title serif ${l.item.k==='rare'&&!l.mystery?'pa-rare-t':''}">${paLotName(l)}</div><div class="ev-sub">${l.featured?'Bảo vật áp trục':'Món hàng'} · linh thạch · ${escHtml(l.seller_name)}${heat>=3?` · <span class="pa-tag hot">${ic('bolt','keep')}${heat}</span>`:''}</div></div></div>
+      ${note}
+      <div class="row"><span class="k">Giá hiện tại</span><span class="v" style="color:var(--gold-bright);font-size:16px;">${(l.top_bid||l.start_price).toLocaleString('vi-VN')}${l.top_bid?'':' <small>(khởi điểm)</small>'}</span></div>
+      <div class="row"><span class="k">Người đang giữ giá</span><span class="v">${lead?'<span class="ok-mark">Ngươi</span>':l.top_bid?escHtml(l.top_name||'?'):'Chưa ai ra giá'}</span></div>
+      <div class="row"><span class="k">Trong túi</span><span class="v">${state.spiritStones.toLocaleString('vi-VN')}</span></div>
+      ${l.featured?'':`<div class="row"><span class="k">Kết thúc sau</span><span class="v"><span class="pa-cd" data-end="${l.ends_at}">${paLeft(l.ends_at)}</span></span></div>`}
+      ${l.buyout?`<div class="row"><span class="k">Giá mua đứt</span><span class="v">${l.buyout.toLocaleString('vi-VN')}</span></div>`:''}
+      <div class="btn-row" style="margin-top:10px;">
+        ${mine ? '<p class="sec-note" style="margin:0;">Món của ngươi — chờ người khác trả giá.</p>'
+          : lead ? '<p class="sec-note" style="margin:0;color:var(--jade-bright);">Ngươi đang giữ giá — chờ xem có ai hô đè không.</p>'
+          : `<button class="btn gold" ${state.spiritStones<min?'disabled':''} onclick="paHo(${l.id},0)">Hô ${min.toLocaleString('vi-VN')}</button>
+             <button class="btn gold" ${state.spiritStones<Math.ceil((l.top_bid||l.start_price)*1.1)?'disabled':''} onclick="paHo(${l.id},0.1)">Hô Thêm 10%</button>
+             <button class="btn gold" ${state.spiritStones<Math.ceil((l.top_bid||l.start_price)*1.3)?'disabled':''} onclick="paHo(${l.id},0.3)">Hô Thêm 30%</button>`}
+      </div>
+      ${!mine && !lead && l.buyout ? `<button class="btn blood" style="margin-top:8px;" ${state.spiritStones<l.buyout?'disabled':''} onclick="paPlace(${l.id},${l.buyout})">Mua Đứt ${l.buyout.toLocaleString('vi-VN')}</button>`:''}
+      <div class="btn-row" style="margin-top:8px;"><button class="btn ghost" onclick="paGo(-1)">Món Trước</button><button class="btn ghost" onclick="paGo(1)">Món Kế Tiếp</button></div>
+    </div>`;
+  }
+  const nameOf = id=>{ const a = PA.list.find(x=>x.id===id); return a ? paLotName(a) : 'món đã chốt'; };
+  const log = PA.feed.slice(0,14).map(b=> b.bidder_name==='Hội chủ'
+      ? `<div class="log-entry pa-log-close">${ic('hall','keep')} Hội chủ: ${escHtml(b.note||'Chốt!')}</div>`
+      : `<div class="log-entry">${escHtml(b.bidder_name)} hô <b>${Number(b.amount).toLocaleString('vi-VN')}</b> cho ${nameOf(b.auction_id)}${b.note?` — <i>“${escHtml(b.note)}”</i>`:''}</div>`).join('');
   const mail = PA.mail.length ? `<div class="card pa-mail"><div class="sec-title">${ic('bell')} Hộp Thư<span>${PA.mail.length}</span></div>
       ${PA.mail.map(m=>`<div class="pa-ml"><b>${m.stones>0?`${m.stones} linh thạch`:`${paItemName(m.item)} ×${m.qty}`}</b><small>${escHtml(m.note||'')}</small></div>`).join('')}
       <button class="btn gold" style="margin-top:8px;" onclick="paClaim()">Nhận Tất Cả</button></div>` : '';
-  const rows = PA.list.map(a=>{ const mine = a.seller===meId, top = a.top_bidder===meId, min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
-    const fl = PA.flash[a.id] && Date.now()-PA.flash[a.id] < 2000, ext = PA.flash[a.id+'x'] && Date.now()-PA.flash[a.id+'x'] < 6000;
-    const wasMine = PA.myTop[a.id] && !top;
-    return `<div class="pa-row ${mine?'mine':''} ${fl?'flash':''} ${top?'lead':wasMine?'out':''} ${a.item.k==='rare'?'rare':''}"><div class="pa-b"><b>${paItemName(a.item)} ×${a.qty}${a.system?'<span class="pa-tag sys">Hội</span>':''}${ext?'<span class="pa-tag ext">Gia hạn!</span>':''}</b>
-      <small>${escHtml(a.seller_name)} · <span class="pa-cd" data-end="${a.ends_at}">${paLeft(a.ends_at)}</span></small>
-      <small>${a.top_bid?`Giá hiện tại <b class="pa-p">${a.top_bid}</b> — ${top?'ngươi đang dẫn':escHtml(a.top_name||'')}`:`Khởi điểm <b class="pa-p">${a.start_price}</b>`}${a.buyout?` · mua đứt ${a.buyout}`:''}</small></div>
-      <div class="pa-act">${mine?'<em>Của ngươi</em>':`${top?'<em>Đang dẫn</em>':`<button class="btn sm gold" ${state.spiritStones<min?'disabled':''} onclick="paBidModal(${a.id})">Trả giá</button>`}`}</div></div>`; }).join('');
   const mineRows = PA.mine.map(a=>`<div class="pa-ml"><b>${paItemName(a.item)} ×${a.qty}</b><small>${({open:paLeft(a.ends_at)+(a.top_bid?` · đang ${a.top_bid}`:''),sold:`Đã bán ${a.top_bid}`,expired:'Không ai mua',cancelled:'Đã hủy'})[a.status]||a.status}</small>${a.status==='open'&&!a.top_bid?`<button class="ls-link" onclick="paCancel(${a.id})">Hủy</button>`:''}</div>`).join('');
-  setTimeout(()=>{ paWatch(); paTickDom(); }, 0);
-  return mail + `<div class="card"><div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ<span>${PA.list.length} phiên · cập nhật trực tiếp</span></div>
-    <p class="sec-note" style="margin:0 0 8px;">Tu sĩ khắp nơi và các đấu giá hội đem đồ ra đấu giá. Trả giá cao hơn ít nhất 5%; trả trong hai phút cuối thì phiên gia hạn thêm hai phút. Bị vượt giá thì linh thạch hoàn về Hộp Thư.</p>
-    <button class="btn gold" onclick="paSellForm()">${ic('hall')}Đăng Bán Vật Phẩm</button>
-    ${PA.err?`<p class="sec-note" style="color:var(--blood-bright);margin-top:8px;">${escHtml(PA.err)}</p>`:''}
-    <div style="margin-top:10px;">${PA.loading && !PA.list.length ? '<p class="flavor">Đang tải…</p>' : rows || '<p class="flavor">Chưa có phiên đấu giá nào.</p>'}</div>
-    <button class="ls-link" style="margin-top:8px;" onclick="PA.ts=0; paLoad(true)">Làm mới</button></div>
-    ${mineRows?`<div class="card"><div class="sec-title">${ic('key')} Món Ngươi Đăng</div>${mineRows}</div>`:''}`;
+  return `${mail}
+    <div class="card expd-card">
+      <div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ<span>Sảnh chung · ${lots.length} món</span></div>
+      <div class="step-dots pa-dots">${dots}</div>
+      <p class="sec-note" style="margin:8px 0 0;">Tu sĩ và các đấu giá hội khắp nơi đem hàng ra. Hô giá phải cao hơn ít nhất 5%; hô trong hai phút cuối thì phiên kéo dài thêm. Bị hô đè thì linh thạch hoàn về Hộp Thư.${PA.err?` <span class="bad-mark">${escHtml(PA.err)}</span>`:''}</p>
+    </div>
+    ${lotCard}
+    <div class="card"><div class="sec-title">${ic('scroll')} Diễn Biến</div>${log||'<p class="flavor" style="margin:0;">Sảnh còn yên ắng.</p>'}</div>
+    <div class="card"><div class="sec-title">${ic('key')} Ký Gửi Đấu Giá</div>
+      <p class="sec-note" style="margin:0 0 8px;">Đem đồ trong túi ra đấu giá. Bán được nhận linh thạch trừ 5% phí hội; không ai mua thì đồ trả về Hộp Thư.</p>
+      <button class="btn gold" onclick="paSellForm()">Đăng Bán Vật Phẩm</button>
+      ${mineRows?`<div style="margin-top:10px;">${mineRows}</div>`:''}</div>`;
 }
 
 /* =====================================================================
