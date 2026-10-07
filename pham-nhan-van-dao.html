@@ -1684,6 +1684,10 @@
   .ls-status{min-height:20px;font-size:13px;color:var(--text-faint);font-style:italic;text-align:center;transition:opacity .3s;}
   .ls-actions{display:flex;flex-direction:column;gap:9px;width:min(100%,320px);margin-top:18px;opacity:0;transform:translateY(8px);transition:opacity .5s, transform .5s;}
   .ls-actions.show{opacity:1;transform:none;}
+  .apk-btn{display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;}
+  .apk-btn .ic{width:16px;height:16px;margin:0;}
+  .apk-steps{margin:6px 0 10px;padding-left:20px;display:flex;flex-direction:column;gap:7px;font-size:13.5px;line-height:1.5;color:var(--text-dim);}
+  .apk-steps b{color:var(--text);}
   .ls-actions .btn small{display:block;font-size:11px;font-weight:500;opacity:.75;margin-top:2px;}
   .ls-note{font-size:11px;color:var(--text-faint);text-align:center;margin-top:2px;}
 
@@ -1696,7 +1700,7 @@
 </style>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-stone" viewBox="0 0 24 24"><path d="M7 3h10l4 6-9 12L3 9z"/><path d="M3 9h18"/><path d="M10 3 7.5 9 12 21l4.5-12L14 3"/></symbol><symbol id="i-qi" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7a5 5 0 1 0 5 5"/><circle cx="12" cy="12" r="1.2"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12"/><path d="M7.5 3v2.5c0 2.5 4.5 4 4.5 6.5s-4.5 4-4.5 6.5V21M16.5 3v2.5c0 2.5-4.5 4-4.5 6.5s4.5 4 4.5 6.5V21"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6z"/></symbol><symbol id="i-sword" viewBox="0 0 24 24"><path d="M21 3l-2.5 6L10 17.5 6.5 14 15 5.5z"/><path d="M5 12.5l6.5 6.5M8 16l-4.5 4.5"/></symbol><symbol id="i-swords" viewBox="0 0 24 24"><path d="M4 4l10 10M20 4 10 14M12 16l4-4M8 12l4 4M14 14l4.5 4.5M10 14l-4.5 4.5"/></symbol><symbol id="i-pagoda" viewBox="0 0 24 24"><path d="M12 2.5 8 5.5h8zM5 8.5h14l-2.5-3h-9zM6.5 8.5v4M17.5 8.5v4M4 15.5h16l-2.5-3h-11zM6.5 15.5V21M17.5 15.5V21M3 21h18M10.5 21v-3.5h3V21"/></symbol><symbol id="i-taiji" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a4.5 4.5 0 0 1 0 9 4.5 4.5 0 0 0 0 9"/><circle cx="12" cy="7.5" r="1" fill="currentColor"/><circle cx="12" cy="16.5" r="1"/></symbol><symbol id="i-scroll" viewBox="0 0 24 24"><path d="M8 4h11a2 2 0 0 1 0 4h-1v10a2 2 0 0 1-2 2H5a2 2 0 0 1 0-4h1V6a2 2 0 0 1 2-2z"/><path d="M5 16h11M10 9h5M10 12.5h5"/></symbol><symbol id="i-hall" viewBox="0 0 24 24"><path d="M3 9 12 4l9 5zM4 21h16M5 18h14M6.5 10v8M10 10v8M14 10v8M17.5 10v8"/></symbol><symbol id="i-hammer" viewBox="0 0 24 24"><path d="M14.5 3.5l6 6-2 2-6-6zM12.5 5.5 4 14a2.1 2.1 0 0 0 3 3l8.5-8.5"/></symbol><symbol id="i-root" viewBox="0 0 24 24"><path d="M12 11v10M12 11c0-4 3-7 7-7 0 4-3 7-7 7zM12 14c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5zM12 21l-3 1M12 21l3 1"/></symbol><symbol id="i-bug" viewBox="0 0 24 24"><ellipse cx="12" cy="13.5" rx="5" ry="6.5"/><path d="M12 7v13M9.5 7.5 8 4.5M14.5 7.5 16 4.5M7 11H3.5M17 11h3.5M7 15H4M17 15h3M8 18.5l-2 2M16 18.5l2 2"/></symbol><symbol id="i-herb" viewBox="0 0 24 24"><path d="M5 19C5 10 11 4 20 4c0 9-6 15-15 15z"/><path d="M5 19 14 10"/></symbol><symbol id="i-mountain" viewBox="0 0 24 24"><path d="M2.5 20 9 8l4 7 2.5-3.5L21.5 20z"/><path d="M7.3 11.2l1.7 1.3 1.6-1"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6l6-2.5 6 2.5 6-2.5v14.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 3.5V18M15 6v14.5"/></symbol><symbol id="i-puppet" viewBox="0 0 24 24"><path d="M6 2.5v4M12 2.5v3M18 2.5v4"/><circle cx="12" cy="8" r="2.5"/><path d="M12 10.5V16M6 6.5l3.5 5.5h5L18 6.5M9 21l3-5 3 5"/></symbol><symbol id="i-ding" viewBox="0 0 24 24"><path d="M4 9h16v3a8 8 0 0 1-16 0z"/><path d="M7 9V6.5M17 9V6.5M6 6.5h2M16 6.5h2M7 18l-1.5 3.5M17 18l1.5 3.5"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 3h4M10.5 3v4.5L5 17a2.5 2.5 0 0 0 2.2 3.8h9.6A2.5 2.5 0 0 0 19 17l-5.5-9.5V3"/><path d="M7.5 14h9"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M7 17v-5M12 17V7M17 17v-8"/></symbol><symbol id="i-pill" viewBox="0 0 24 24"><rect x="3" y="8.5" width="18" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="M10 9.1 14 14.9"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v13.5C7 18 10 18.5 12 20c2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5V20"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2.5 2.5M14.5 8.5l2 2"/></symbol><symbol id="i-storm" viewBox="0 0 24 24"><path d="M7 16H6a4 4 0 0 1-.5-8A5.5 5.5 0 0 1 16 6.5 4 4 0 0 1 18 16h-1"/><path d="M13 12l-3 5h4l-3 5"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></symbol><symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.3v.2"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></symbol><symbol id="i-crystal" viewBox="0 0 24 24"><path d="M12 2.5 19 12l-7 9.5L5 12z"/><path d="M5 12h14M12 2.5v19"/></symbol><symbol id="i-bamboo" viewBox="0 0 24 24"><path d="M9 3v18M15 5v16M7.5 9h3M7.5 15h3M13.5 11h3M13.5 17h3M15 8c2-2 4-2 5.5-1.5"/></symbol><symbol id="i-wave" viewBox="0 0 24 24"><path d="M2.5 8c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1M2.5 13c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1M2.5 18c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol><symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12.5H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M10.3 3h3.4l.5 2.5 1.8.8 2.1-1.5 2.4 2.4-1.5 2.1.8 1.8 2.5.5v3.4l-2.5.5-.8 1.8 1.5 2.1-2.4 2.4-2.1-1.5-1.8.8-.5 2.5h-3.4l-.5-2.5-1.8-.8-2.1 1.5-2.4-2.4 1.5-2.1-.8-1.8L3 13.7v-3.4l2.5-.5.8-1.8-1.5-2.1 2.4-2.4 2.1 1.5 1.8-.8z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol><symbol id="i-seal" viewBox="0 0 24 24"><path d="M12 3 20 17H4zM12 21 4 7h16z"/></symbol><symbol id="i-gate" viewBox="0 0 24 24"><path d="M3 5.5h18M5 9h14M7 5.5V21M17 5.5V21M12 9v4"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-demoneye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><path d="M12 8c-1.2 1.2-1.2 6.8 0 8 1.2-1.2 1.2-6.8 0-8z"/></symbol><symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.5 7 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10 12 3 12 3z"/></symbol><symbol id="i-lotus" viewBox="0 0 24 24"><path d="M12 20c-4 0-8-2-9-6 3 0 5.5 1 7 3M12 20c4 0 8-2 9-6-3 0-5.5 1-7 3M12 20c-2.5-2-3.5-5-3.5-8S10 6 12 4c2 2 3.5 5 3.5 8s-1 6-3.5 8z"/></symbol><symbol id="i-claw" viewBox="0 0 24 24"><path d="M6 3c1 6 0 12-2.5 18M11.5 3c1 6 .5 12-1.5 18M17 3c1 6 1 12-.5 18"/></symbol><symbol id="i-maple" viewBox="0 0 24 24"><path d="M12 21v-6M12 15l-7 2 2-3.5-3.5-3.5 4 .5-.5-5 3 2.5L12 3l2 5 3-2.5-.5 5 4-.5-3.5 3.5 2 3.5z"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.5A8 8 0 1 1 9.5 4.5a6.5 6.5 0 0 0 10 10z"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5h10a4 4 0 0 0 .5-8A5.5 5.5 0 0 0 7 9a4.75 4.75 0 0 0 0 9.5z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2 7.5 7.5 2-7.5 2-2 7.5-2-7.5-7.5-2 7.5-2z"/></symbol><symbol id="i-comet" viewBox="0 0 24 24"><circle cx="16" cy="8" r="3.5"/><path d="M13.5 10.5 3 21M12.5 8 5 15.5M16 11.5 8.5 19"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 21v-7h8v7"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 4v5h5"/><path d="M4.5 9A8 8 0 1 1 4 13"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 6.5h16M9 6.5V4h6v2.5M6 6.5l1 14h10l1-14M10 10.5v6M14 10.5v6"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-stone" viewBox="0 0 24 24"><path d="M7 3h10l4 6-9 12L3 9z"/><path d="M3 9h18"/><path d="M10 3 7.5 9 12 21l4.5-12L14 3"/></symbol><symbol id="i-qi" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7a5 5 0 1 0 5 5"/><circle cx="12" cy="12" r="1.2"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12"/><path d="M7.5 3v2.5c0 2.5 4.5 4 4.5 6.5s-4.5 4-4.5 6.5V21M16.5 3v2.5c0 2.5-4.5 4-4.5 6.5s4.5 4 4.5 6.5V21"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6z"/></symbol><symbol id="i-sword" viewBox="0 0 24 24"><path d="M21 3l-2.5 6L10 17.5 6.5 14 15 5.5z"/><path d="M5 12.5l6.5 6.5M8 16l-4.5 4.5"/></symbol><symbol id="i-swords" viewBox="0 0 24 24"><path d="M4 4l10 10M20 4 10 14M12 16l4-4M8 12l4 4M14 14l4.5 4.5M10 14l-4.5 4.5"/></symbol><symbol id="i-pagoda" viewBox="0 0 24 24"><path d="M12 2.5 8 5.5h8zM5 8.5h14l-2.5-3h-9zM6.5 8.5v4M17.5 8.5v4M4 15.5h16l-2.5-3h-11zM6.5 15.5V21M17.5 15.5V21M3 21h18M10.5 21v-3.5h3V21"/></symbol><symbol id="i-taiji" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a4.5 4.5 0 0 1 0 9 4.5 4.5 0 0 0 0 9"/><circle cx="12" cy="7.5" r="1" fill="currentColor"/><circle cx="12" cy="16.5" r="1"/></symbol><symbol id="i-scroll" viewBox="0 0 24 24"><path d="M8 4h11a2 2 0 0 1 0 4h-1v10a2 2 0 0 1-2 2H5a2 2 0 0 1 0-4h1V6a2 2 0 0 1 2-2z"/><path d="M5 16h11M10 9h5M10 12.5h5"/></symbol><symbol id="i-hall" viewBox="0 0 24 24"><path d="M3 9 12 4l9 5zM4 21h16M5 18h14M6.5 10v8M10 10v8M14 10v8M17.5 10v8"/></symbol><symbol id="i-hammer" viewBox="0 0 24 24"><path d="M14.5 3.5l6 6-2 2-6-6zM12.5 5.5 4 14a2.1 2.1 0 0 0 3 3l8.5-8.5"/></symbol><symbol id="i-root" viewBox="0 0 24 24"><path d="M12 11v10M12 11c0-4 3-7 7-7 0 4-3 7-7 7zM12 14c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5zM12 21l-3 1M12 21l3 1"/></symbol><symbol id="i-bug" viewBox="0 0 24 24"><ellipse cx="12" cy="13.5" rx="5" ry="6.5"/><path d="M12 7v13M9.5 7.5 8 4.5M14.5 7.5 16 4.5M7 11H3.5M17 11h3.5M7 15H4M17 15h3M8 18.5l-2 2M16 18.5l2 2"/></symbol><symbol id="i-herb" viewBox="0 0 24 24"><path d="M5 19C5 10 11 4 20 4c0 9-6 15-15 15z"/><path d="M5 19 14 10"/></symbol><symbol id="i-mountain" viewBox="0 0 24 24"><path d="M2.5 20 9 8l4 7 2.5-3.5L21.5 20z"/><path d="M7.3 11.2l1.7 1.3 1.6-1"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6l6-2.5 6 2.5 6-2.5v14.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 3.5V18M15 6v14.5"/></symbol><symbol id="i-puppet" viewBox="0 0 24 24"><path d="M6 2.5v4M12 2.5v3M18 2.5v4"/><circle cx="12" cy="8" r="2.5"/><path d="M12 10.5V16M6 6.5l3.5 5.5h5L18 6.5M9 21l3-5 3 5"/></symbol><symbol id="i-ding" viewBox="0 0 24 24"><path d="M4 9h16v3a8 8 0 0 1-16 0z"/><path d="M7 9V6.5M17 9V6.5M6 6.5h2M16 6.5h2M7 18l-1.5 3.5M17 18l1.5 3.5"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 3h4M10.5 3v4.5L5 17a2.5 2.5 0 0 0 2.2 3.8h9.6A2.5 2.5 0 0 0 19 17l-5.5-9.5V3"/><path d="M7.5 14h9"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M7 17v-5M12 17V7M17 17v-8"/></symbol><symbol id="i-pill" viewBox="0 0 24 24"><rect x="3" y="8.5" width="18" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="M10 9.1 14 14.9"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v13.5C7 18 10 18.5 12 20c2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5V20"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2.5 2.5M14.5 8.5l2 2"/></symbol><symbol id="i-storm" viewBox="0 0 24 24"><path d="M7 16H6a4 4 0 0 1-.5-8A5.5 5.5 0 0 1 16 6.5 4 4 0 0 1 18 16h-1"/><path d="M13 12l-3 5h4l-3 5"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></symbol><symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.3v.2"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11.5M7 10.5l5 5 5-5"/><path d="M4.5 16.5v3h15v-3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></symbol><symbol id="i-crystal" viewBox="0 0 24 24"><path d="M12 2.5 19 12l-7 9.5L5 12z"/><path d="M5 12h14M12 2.5v19"/></symbol><symbol id="i-bamboo" viewBox="0 0 24 24"><path d="M9 3v18M15 5v16M7.5 9h3M7.5 15h3M13.5 11h3M13.5 17h3M15 8c2-2 4-2 5.5-1.5"/></symbol><symbol id="i-wave" viewBox="0 0 24 24"><path d="M2.5 8c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1M2.5 13c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1M2.5 18c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol><symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12.5H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M10.3 3h3.4l.5 2.5 1.8.8 2.1-1.5 2.4 2.4-1.5 2.1.8 1.8 2.5.5v3.4l-2.5.5-.8 1.8 1.5 2.1-2.4 2.4-2.1-1.5-1.8.8-.5 2.5h-3.4l-.5-2.5-1.8-.8-2.1 1.5-2.4-2.4 1.5-2.1-.8-1.8L3 13.7v-3.4l2.5-.5.8-1.8-1.5-2.1 2.4-2.4 2.1 1.5 1.8-.8z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol><symbol id="i-seal" viewBox="0 0 24 24"><path d="M12 3 20 17H4zM12 21 4 7h16z"/></symbol><symbol id="i-gate" viewBox="0 0 24 24"><path d="M3 5.5h18M5 9h14M7 5.5V21M17 5.5V21M12 9v4"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-demoneye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><path d="M12 8c-1.2 1.2-1.2 6.8 0 8 1.2-1.2 1.2-6.8 0-8z"/></symbol><symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.5 7 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10 12 3 12 3z"/></symbol><symbol id="i-lotus" viewBox="0 0 24 24"><path d="M12 20c-4 0-8-2-9-6 3 0 5.5 1 7 3M12 20c4 0 8-2 9-6-3 0-5.5 1-7 3M12 20c-2.5-2-3.5-5-3.5-8S10 6 12 4c2 2 3.5 5 3.5 8s-1 6-3.5 8z"/></symbol><symbol id="i-claw" viewBox="0 0 24 24"><path d="M6 3c1 6 0 12-2.5 18M11.5 3c1 6 .5 12-1.5 18M17 3c1 6 1 12-.5 18"/></symbol><symbol id="i-maple" viewBox="0 0 24 24"><path d="M12 21v-6M12 15l-7 2 2-3.5-3.5-3.5 4 .5-.5-5 3 2.5L12 3l2 5 3-2.5-.5 5 4-.5-3.5 3.5 2 3.5z"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.5A8 8 0 1 1 9.5 4.5a6.5 6.5 0 0 0 10 10z"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5h10a4 4 0 0 0 .5-8A5.5 5.5 0 0 0 7 9a4.75 4.75 0 0 0 0 9.5z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2 7.5 7.5 2-7.5 2-2 7.5-2-7.5-7.5-2 7.5-2z"/></symbol><symbol id="i-comet" viewBox="0 0 24 24"><circle cx="16" cy="8" r="3.5"/><path d="M13.5 10.5 3 21M12.5 8 5 15.5M16 11.5 8.5 19"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 21v-7h8v7"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 4v5h5"/><path d="M4.5 9A8 8 0 1 1 4 13"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 6.5h16M9 6.5V4h6v2.5M6 6.5l1 14h10l1-14M10 10.5v6M14 10.5v6"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol></svg>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="creation" aria-label="Tạo nhân vật"></div>
 <div id="loadingScreen" role="dialog" aria-label="Phàm Nhân Vấn Đạo">
@@ -1787,7 +1791,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.62.1';
+const GAME_VERSION = '1.62.4';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1864,12 +1868,13 @@ function toast(msg){
 /* Bản lưu không còn nằm trên máy: chỉ giữ trong bộ nhớ khi đang chơi và đẩy thẳng lên máy chủ */
 const CLOUD_ONLY = true;
 let MEMSAVE = null;
-(function(){ try{ const raw = localStorage.getItem(SAVE_KEY); if(raw){ const d = JSON.parse(raw); if(d && d.state && d.state.root && d.state.path){ MEMSAVE = d; window.__legacyLocal = true; } } }catch(e){} })();
+(function(){ try{ localStorage.removeItem(SAVE_KEY); }catch(e){} })();   // không còn nhận bản lưu nằm trên máy
 let warnedNoCloud = false;
 function saveGame(silent){
   if(!state || !state.root || !state.path) return false;
+  if(!(cloud.user && cloud.status==='in')){ lockToLogin('Phiên đăng nhập đã hết — hãy đăng nhập lại.'); return false; }
   try{
-    MEMSAVE = JSON.parse(JSON.stringify({v:GAME_VERSION, t:Date.now(), state}));
+    MEMSAVE = JSON.parse(JSON.stringify({v:GAME_VERSION, t:Date.now(), uid:cloud.user.id, state}));
     if(CLOUD_ONLY && !(cloud.user && cloud.status==='in') && !warnedNoCloud){ warnedNoCloud = true; toast('Chưa đăng nhập — tiến trình chưa được lưu lên máy chủ'); }
     lastSaveAt = Date.now();
     if(typeof scheduleCloudPush==='function') scheduleCloudPush();
@@ -1888,6 +1893,7 @@ function scheduleSave(){
 function readSave(){
   const d = MEMSAVE;
   if(!d || !d.state || !d.state.root || !d.state.path) return null;
+  if(!(cloud.user && cloud.status==='in') || (d.uid && d.uid!==cloud.user.id)) return null;
   return d;
 }
 function deleteSave(){
@@ -1897,6 +1903,7 @@ function deleteSave(){
   toast('Đã xóa bản lưu');
 }
 function restoreFromSave(d){
+  if(!tsbOnline() || (d && d.uid && cloud.user && d.uid!==cloud.user.id)){ lockToLogin(); return; }
   state = d.state;
   if(!state.subTabs) state.subTabs = {nhanvat:'tuchat', tuluyen:'tuluyen', nghephu:'nghe', nhangioi:'diavuc'};
   if(!state.ng) state.ng = ngFresh();
@@ -1936,6 +1943,9 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.62.4', date:'07/10/2026', title:'Vá ba lỗ đăng nhập', items:[['sua','Dọn sạch phần còn sót: không còn đoạn mã nào đọc bản lưu hay cấu hình máy chủ từ bộ nhớ trình duyệt; địa chỉ máy chủ chính thức bị khóa cứng.']]},
+  {v:'1.62.3', date:'07/10/2026', title:'Chặn đăng nhập ẩn danh', items:[['sua','Không còn cách nào vào game khi chưa đăng nhập tài khoản đã xác nhận email: bỏ bản lưu nằm trên máy, bỏ đổi máy chủ, mất phiên đăng nhập giữa chừng thì khóa game và quay về màn đăng nhập; bản lưu gắn với đúng tài khoản, không chép được sang tài khoản khác.'],['sua','Máy chủ từ chối mọi tài khoản ẩn danh, chưa xác nhận email, email tạm thời hoặc email trùng biến thể (a.b+1@gmail.com).']]},
+  {v:'1.62.2', date:'07/10/2026', title:'Tải ứng dụng Android', items:[['moi','Tải thẳng ứng dụng Android (APK) ngay trên web: nút ở màn hình đăng nhập (khi mở bằng điện thoại Android), trong Cài Đặt và trong mục Cài ra màn hình chính, kèm hướng dẫn cài từng bước. Trong ứng dụng thì nút tự ẩn.']]},
   {v:'1.62.1', date:'07/10/2026', title:'Khách quen Đại Hội', items:[['doi','Khách tranh giá ở Đại Hội Đấu Giá Tu Sĩ giờ là chính các nhân vật trong cốt truyện — Lệnh Hồ Lão Tổ, Tử Linh Tiên Tử, Nam Lũng Hầu, Mộ Phái Linh, Ôn Thiên Nhân, Kiền lão ma, Cực Âm Tổ Sư, Vương Thiền... mỗi người một tính cách và câu nói riêng. Bảo vật áp trục chỉ các lão quái từ Kết Đan trở lên mới tranh; hàng thường là người cùng tầm.']]},
   {v:'1.62.0', date:'07/10/2026', title:'Đại Hội Đấu Giá Tu Sĩ', items:[
     ['moi','Đấu Giá Tu Sĩ thành Đại Hội: các đại đấu giá hội liên thủ, theo lịch thiên hạ cứ 5–10 năm mới mở một kỳ (1 năm thiên hạ ≈ 1 giờ thực), hoặc do quản trị viên triệu tập. Đếm ngược khai mạc, danh mục công bố trước.'],
@@ -9221,13 +9231,34 @@ window.addEventListener('appinstalled', ()=>{ installEvt = null; toast('Đã cà
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   window.addEventListener('load', ()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); });
 }
+/* Tải thẳng ứng dụng Android (APK) từ trang web */
+const APK_URL = 'pham-nhan-van-dao.apk';
+const isAndroid = ()=> /android/i.test(navigator.userAgent);
+const inApk = ()=> /; wv\)/.test(navigator.userAgent) || /VanDaoApp/i.test(navigator.userAgent);
+const canOfferApk = ()=> !inApk();
+function apkBtn(cls){ return `<a class="btn ${cls||'ghost'} apk-btn" href="${APK_URL}" download="pham-nhan-van-dao.apk" onclick="apkClicked()">${ic('download','keep')}Tải Ứng Dụng Android (APK)</a>`; }
+function apkGo(){ const a = document.createElement('a'); a.href = APK_URL; a.download = 'pham-nhan-van-dao.apk'; document.body.appendChild(a); a.click(); a.remove(); apkClicked(); }
+function apkClicked(){
+  setTimeout(()=>{
+    document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${ic('download','keep')} Cài Ứng Dụng Android</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+      <p class="flavor" style="margin-top:0;">Tệp <b>pham-nhan-van-dao.apk</b> đang được tải về.</p>
+      <ol class="apk-steps">
+        <li>Mở thông báo tải xong (hoặc vào <b>Tệp ▸ Tải xuống</b>) rồi chạm vào tệp.</li>
+        <li>Nếu điện thoại báo chặn: chọn <b>Cài đặt</b> ▸ bật <b>Cho phép từ nguồn này</b> cho trình duyệt, rồi quay lại.</li>
+        <li>Chạm <b>Cài đặt</b>. Nếu Play Protect hỏi, chọn <b>Vẫn cài đặt</b> — ứng dụng chưa đưa lên Google Play nên máy chưa nhận ra.</li>
+        <li>Mở <b>Phàm Nhân Vấn Đạo</b> ngoài màn hình chính và đăng nhập tài khoản như trên web — tiến trình lưu trên máy chủ nên giữ nguyên.</li>
+      </ol>
+      <p class="sec-note">Ứng dụng luôn mở bản game mới nhất trên phamnhan.click, không cần tải lại khi game cập nhật.</p>`;
+    document.getElementById('overlay').classList.add('show');
+  }, 300);
+}
 async function installApp(){
   if(isStandalone()){ toast('Ngươi đang mở game dưới dạng ứng dụng rồi'); return; }
   if(installEvt){ installEvt.prompt(); try{ await installEvt.userChoice; }catch(e){} installEvt = null; return; }
   const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
   document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${ic('star','keep')} Cài Ra Màn Hình Chính</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
     ${ios ? `<p class="flavor" style="margin-top:0;">Trên iPhone/iPad (Safari): chạm nút <b>Chia sẻ</b> ở thanh dưới, chọn <b>Thêm vào Màn hình chính</b>.</p>`
-          : `<p class="flavor" style="margin-top:0;">Trên Android (Chrome): chạm <b>⋮</b> ở góc trên bên phải, chọn <b>Cài đặt ứng dụng</b> hoặc <b>Thêm vào màn hình chính</b>.</p>`}
+          : `${isAndroid() && canOfferApk() ? `<p class="flavor" style="margin-top:0;">Cách nhanh nhất: tải ứng dụng Android rồi cài thẳng.</p>${apkBtn('gold')}<p class="sec-note" style="margin:10px 0 4px;">Hoặc dùng bản web cài từ trình duyệt:</p>` : ''}<p class="flavor" style="margin-top:0;">Trên Android (Chrome): chạm <b>⋮</b> ở góc trên bên phải, chọn <b>Cài đặt ứng dụng</b> hoặc <b>Thêm vào màn hình chính</b>.</p>`}
     <p class="sec-note">Nếu không thấy mục cài đặt: game cần được mở từ trang web của ngươi (https), cùng thư mục với các tệp manifest.webmanifest, sw.js và biểu tượng.</p>`;
   document.getElementById('overlay').classList.add('show');
 }
@@ -9429,12 +9460,14 @@ create policy "insert own save" on public.saves for insert with check (auth.uid(
 create policy "update own save" on public.saves for update using (auth.uid() = user_id);`;
 let cloud = {client:null, user:null, status:'off', error:'', lastSync:null, busy:false, loading:null, pushTimer:null, remoteT:null};
 
+Object.freeze(CLOUD_DEFAULT);
 function cloudCfg(){
-  try{ const c = JSON.parse(localStorage.getItem(CLOUD_CFG_KEY)||'null'); if(c && c.url && c.key) return c; }catch(e){}
+  try{ localStorage.removeItem(CLOUD_CFG_KEY); }catch(e){}   // chỉ dùng máy chủ chính thức, không cho trỏ sang máy chủ khác
   return (CLOUD_DEFAULT.url && CLOUD_DEFAULT.key) ? CLOUD_DEFAULT : null;
 }
 function cloudErrMsg(e){
   const m = (e && (e.message||e.error_description||e.msg)) || String(e||'');
+  if(/ẩn danh hoặc chưa xác nhận email/.test(m) && cloud.client){ try{ cloud.client.auth.signOut(); }catch(x){} setTimeout(()=>lockToLogin('Tài khoản không hợp lệ (ẩn danh hoặc chưa xác nhận email).'), 50); }
   if(/Invalid login credentials/i.test(m)) return 'Sai email hoặc mật khẩu.';
   if(/already registered|already been registered/i.test(m)) return 'Email này đã được đăng ký — hãy đăng nhập.';
   if(/at least 6|Password should/i.test(m)) return 'Mật khẩu tối thiểu 6 ký tự.';
@@ -9469,28 +9502,16 @@ async function cloudInit(){
     cloud.client = window.supabase.createClient(cfg.url, cfg.key, {auth:{persistSession:true, autoRefreshToken:true, storageKey:'pnvd-auth', lock: async (name, timeout, fn)=>await fn()}});
     const {data} = await cloud.client.auth.getSession();
     cloud.user = data && data.session ? data.session.user : null;
+    if(cloud.user && !userVerified(cloud.user)){ await cloud.client.auth.signOut(); cloud.user = null; }
     cloud.status = cloud.user ? 'in' : 'out';
-    cloud.client.auth.onAuthStateChange((ev, session)=>{ cloud.user = session ? session.user : null; cloud.status = cloud.user ? 'in' : 'out'; refreshCloudUI(); if(ev==='PASSWORD_RECOVERY') setTimeout(showNewPw, 300); });
+    cloud.client.auth.onAuthStateChange((ev, session)=>{ const prev = cloud.user && cloud.user.id; cloud.user = session ? session.user : null; cloud.status = cloud.user ? 'in' : 'out'; if(prev && (!cloud.user || cloud.user.id!==prev)) lockToLogin(cloud.user ? 'Tài khoản vừa thay đổi — tải lại game.' : 'Đã đăng xuất hoặc phiên đăng nhập hết hạn.'); else if(cloud.user && !userVerified(cloud.user)) { cloud.client.auth.signOut(); lockToLogin('Tài khoản chưa xác nhận email.'); } refreshCloudUI(); if(ev==='PASSWORD_RECOVERY') setTimeout(showNewPw, 300); });
     if(/type=recovery/.test(location.hash||'')) setTimeout(()=>{ if(cloud.user) showNewPw(); }, 1500);
     if(cloud.user) await cloudPullIfNewer(true);
   }catch(e){ cloud.status = 'error'; cloud.error = cloudErrMsg(e); }
   refreshCloudUI();
 }
-function saveCloudConfig(){
-  const url = (document.getElementById('cfgUrl').value||'').trim().replace(/\/+$/,'');
-  const key = (document.getElementById('cfgKey').value||'').trim();
-  if(!/^https:\/\/.+\.supabase\.co$/.test(url)){ toast('Project URL phải có dạng https://xxxx.supabase.co'); return; }
-  if(key.length<40){ toast('Anon key có vẻ chưa đúng — hãy sao chép cả chuỗi dài'); return; }
-  localStorage.setItem(CLOUD_CFG_KEY, JSON.stringify({url, key}));
-  cloud.client = null; cloud.user = null;
-  toast('Đã lưu cấu hình máy chủ');
-  cloudInit();
-}
-function clearCloudConfig(){
-  localStorage.removeItem(CLOUD_CFG_KEY);
-  cloud = {client:null, user:null, status:'unconfigured', error:'', lastSync:null, busy:false, loading:cloud.loading, pushTimer:null, remoteT:null};
-  refreshCloudUI();
-}
+function saveCloudConfig(){ toast('Game chỉ dùng máy chủ chính thức'); }
+function clearCloudConfig(){ try{ localStorage.removeItem(CLOUD_CFG_KEY); }catch(e){} }
 function copyCloudSql(){
   const done = ()=>toast('Đã sao chép đoạn SQL');
   if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(CLOUD_SQL).then(done, ()=>fallbackCopy());
@@ -9508,6 +9529,7 @@ async function cloudSignUp(){
     const {data, error} = await cloud.client.auth.signUp({email, password:pw});
     if(error) throw error;
     if(!data.session){ accMsg('ok','Đã gửi email xác nhận — mở hộp thư, bấm liên kết rồi quay lại đăng nhập.'); }
+    else if(!userVerified(data.session.user)){ await cloud.client.auth.signOut(); accMsg('ok','Đã gửi email xác nhận — mở hộp thư, bấm liên kết rồi quay lại đăng nhập.'); }
     else { cloud.user = data.session.user; cloud.status = 'in'; cloud.formPw = ''; cloud.formMsg = null; await cloudAfterLogin(); showLoginResult(true, 'Tạo tài khoản thành công — đạo đồ bắt đầu từ đây.'); }
   }catch(e){ accMsg('bad', cloudErrMsg(e)); }
   cloud.busy = false; refreshCloudUI();
@@ -9519,7 +9541,9 @@ async function cloudSignIn(){
   try{
     const {data, error} = await cloud.client.auth.signInWithPassword({email, password:pw});
     if(error) throw error;
-    cloud.user = data.user || (data.session && data.session.user); cloud.status = 'in';
+    cloud.user = data.user || (data.session && data.session.user);
+    if(!userVerified(cloud.user)){ await cloud.client.auth.signOut(); cloud.user = null; cloud.status = 'out'; throw new Error('Tài khoản chưa xác nhận email — mở hộp thư và bấm liên kết xác nhận trước.'); }
+    cloud.status = 'in';
     cloud.formPw = ''; cloud.formMsg = null;
     await cloudAfterLogin();
     cloud.busy = false; refreshCloudUI();
@@ -9555,11 +9579,11 @@ async function cloudPush(silent){
   if(!cloud.client || !cloud.user) return false;
   const local = readSave();
   if(!local) return false;
+  if(local.uid !== cloud.user.id) return false;
   try{
     const {error} = await cloud.client.from('saves').upsert({user_id:cloud.user.id, data:local, version:GAME_VERSION, updated_at:new Date().toISOString()});
     if(error) throw error;
     cloud.lastSync = Date.now(); cloud.remoteT = local.t; cloud.error = '';
-    if(window.__legacyLocal){ try{ localStorage.removeItem(SAVE_KEY); }catch(e){} window.__legacyLocal = false; }
     setTimeout(checkSaveStatus, 300);
     if(!silent) toast('Đã đồng bộ lên đám mây');
     refreshCloudUI();
@@ -9571,7 +9595,7 @@ function scheduleCloudPush(){
   if(cloud.pushTimer) return;
   cloud.pushTimer = setTimeout(()=>{ cloud.pushTimer = null; cloudPush(true); }, 4000);
 }
-function writeLocalSave(d){ MEMSAVE = d; }
+function writeLocalSave(d){ if(d && cloud.user) d.uid = cloud.user.id; MEMSAVE = d; }
 /* Lúc mở game: bản đám mây mới hơn thì âm thầm thay bản trên máy */
 async function cloudPullIfNewer(atStart){
   const remote = await cloudFetch();
@@ -9649,7 +9673,7 @@ function titleAccountLine(){
   if(cloud.status==='in') return `${ic('cloud','keep')} <span>${cloud.user.email}</span> <button class="ls-link" onclick="showSettings('taikhoan')">Tài khoản</button>`;
   if(cloud.status==='connecting') return `${ic('cloud','keep')} <span>Đang kết nối máy chủ…</span>`;
   if(cloud.status==='out') return `${ic('cloud','keep')} <button class="ls-link" onclick="showSettings('taikhoan')">Đăng nhập để lưu trên đám mây</button>`;
-  if(cloud.status==='error') return `${ic('cloud','keep')} <span>Chơi ngoại tuyến — tài khoản đám mây chưa kết nối.</span> <button class="ls-link" onclick="cloudInit()">Thử lại</button>`;
+  if(cloud.status==='error') return `${ic('cloud','keep')} <span>Chưa kết nối được máy chủ — cần mạng để vào game.</span> <button class="ls-link" onclick="cloudInit()">Thử lại</button>`;
   return `${ic('cloud','keep')} <button class="ls-link" onclick="showSettings('taikhoan')">Thiết lập tài khoản đám mây</button>`;
 }
 /* ---------- Đăng nhập: thông báo rõ ràng, quên mật khẩu, đặt lại mật khẩu ---------- */
@@ -12548,6 +12572,7 @@ function showSettings(tab){
       <div class="sys-list">
         ${sysRow('eye','Hiển thị', `Cỡ chữ ${scaleName} · phông ${fontName} · hiệu ứng ${settings.motion?'bật':'tắt'}`, "showSettings('hienthi')")}
         ${isStandalone() ? '' : sysRow('star','Cài ra màn hình chính', 'Mở game như một ứng dụng, không có thanh trình duyệt', 'installApp()')}
+        ${canOfferApk() && !/iphone|ipad|ipod/i.test(navigator.userAgent) ? sysRow('download','Tải ứng dụng Android', 'Tải tệp APK về máy rồi cài thẳng', "apkGo()") : ''}
         ${sysRow('chart','Thống kê', `${state && state.root ? (state.winCount||0)+' trận thắng · '+seenCount()+' cảnh truyện' : 'Chưa có nhân vật'}`, "showSettings('thongke')")}
         ${sysRow('bell','Âm nhạc', settings.bgm ? `Đang bật · ${bgmCurrent().name}` : 'Nhạc nền đang tắt', "showSettings('amnhac')", settings.bgm?'on':'')}
         ${sysRow('taiji','Lối chơi', `Nhật ký ${settings.logLen} dòng · ${settings.confirmDanger?'hỏi lại thao tác nguy hiểm':'không hỏi lại'}`, "showSettings('loichoi')")}
@@ -16536,7 +16561,8 @@ function showTitleActions(){
     box.innerHTML = st==='connecting' || st==='unknown' || !st ? `<div class="ls-note">Đang kết nối máy chủ…</div>`
       : `<div class="ls-note" style="margin-bottom:8px;">Tiến trình tu luyện nay chỉ được lưu trên máy chủ. Đăng nhập để bước vào đạo đồ.</div>
          <button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập / Đăng Ký</button>
-         ${st==='error'?`<button class="btn ghost" onclick="cloudInit().then(showTitleActions)">Thử Kết Nối Lại</button>`:''}`;
+         ${st==='error'?`<button class="btn ghost" onclick="cloudInit().then(showTitleActions)">Thử Kết Nối Lại</button>`:''}
+         ${st!=='connecting' && st!=='unknown' && st && isAndroid() && canOfferApk() ? apkBtn('ghost') : ''}`;
     requestAnimationFrame(()=>box.classList.add('show'));
     const acc = document.getElementById('lsAccount'); if(acc) acc.innerHTML = titleAccountLine();
     return;
@@ -16550,18 +16576,38 @@ function showTitleActions(){
   } else {
     box.innerHTML = `<button class="btn gold" onclick="titleNew()">Bước Vào Tu Tiên Giới</button>`;
   }
+  if(isAndroid() && canOfferApk()) box.insertAdjacentHTML('beforeend', apkBtn('ghost'));
   requestAnimationFrame(()=>box.classList.add('show'));
   const acc = document.getElementById('lsAccount'); if(acc) acc.innerHTML = titleAccountLine();
   const first = box.querySelector('button'); if(first) first.focus({preventScroll:true});
 }
-function hideTitle(){ const ls = document.getElementById('loadingScreen'); if(ls) ls.classList.add('hide'); }
+function userVerified(u){ return !!(u && !u.is_anonymous && u.email && (u.email_confirmed_at || u.confirmed_at)); }
+/* Khóa game, quay về màn hình đăng nhập — không có chế độ chơi khi chưa đăng nhập */
+function lockToLogin(msg){
+  if(lockToLogin._busy) return; 
+  const ls = document.getElementById('loadingScreen');
+  const inGame = ls && ls.classList.contains('hide');
+  MEMSAVE = null;
+  if(!inGame){ if(msg) toast(msg); const box = document.getElementById('lsActions'); if(box && box.classList.contains('show') && typeof showTitleActions==='function') showTitleActions(); return; }
+  lockToLogin._busy = true;
+  try{ document.getElementById('overlay').classList.remove('show'); }catch(e){}
+  ls.classList.remove('hide');
+  const box = document.getElementById('lsActions'); if(box) box.innerHTML = `<div class="ls-note">${escHtml(msg||'Cần đăng nhập để tiếp tục.')}</div>`;
+  setTimeout(()=>location.reload(), 1200);
+}
+setInterval(()=>{
+  const ls = document.getElementById('loadingScreen');
+  if(ls && ls.classList.contains('hide') && state && state.root && !tsbOnline() && cloud.status!=='connecting') lockToLogin('Mất phiên đăng nhập — hãy đăng nhập lại.');
+}, 5000);
+function hideTitle(){ if(!tsbOnline()){ lockToLogin(); return; } const ls = document.getElementById('loadingScreen'); if(ls) ls.classList.add('hide'); }
 function titleContinue(){
+  if(!tsbOnline()){ lockToLogin(); return; }
   const sv = readSave();
   hideTitle();
   if(sv){ restoreFromSave(sv); toast(`Tiếp tục đạo đồ của ${state.name}`); }
   else showModal('start');
 }
-function titleNew(){ hideTitle(); showModal('start'); }
+function titleNew(){ if(!tsbOnline()){ lockToLogin(); return; } hideTitle(); showModal('start'); }
 
 
 function selectPath(id){
@@ -16572,6 +16618,7 @@ function selectPath(id){
 }
 
 function startGame(){
+  if(!tsbOnline()){ lockToLogin(); return; }
   const name = (pendingName||'').trim() || 'Vô Danh';
   if(!pendingRoot) pendingRoot = rollSpiritRoot();
   if(!pendingPath) return;
