@@ -1386,7 +1386,49 @@
   .pf-call-line{font-family:var(--fh);font-size:17px;text-align:center;margin:8px 0 6px;}
   .pf-call-line.ph-once{color:#ffd27a;} .pf-call-line.ph-twice{color:#ff8a6a;animation:vnPulse .7s infinite;} .pf-call-line.ph-sold{color:var(--gold-bright);font-size:22px;}
   .pa-log-close{color:var(--gold-bright);} .pa-log-close .ic{width:12px;height:12px;margin:0 3px -1px 0;}
-  .pa-row{position:relative;}
+  .dg-head{position:relative;overflow:hidden;text-align:center;border-color:var(--gold-dim);background:radial-gradient(ellipse at 50% 0%, rgba(240,207,140,.2), transparent 62%), var(--panel);}
+.dg-head::before{content:'';position:absolute;inset:-40%;background:conic-gradient(from 0deg, transparent 0 70%, rgba(240,207,140,.14) 80%, transparent 90%);animation:wsSpin 10s linear infinite;pointer-events:none;}
+.dg-head > *{position:relative;}
+.dg-head .row{text-align:left;}
+.dg-count{margin:6px 0 4px;}
+.dg-count small{display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);}
+.dg-count b{display:block;font-family:var(--fh);font-size:28px;color:var(--gold-bright);line-height:1.15;text-shadow:0 0 16px rgba(240,207,140,.35);}
+.dg-count > span{font-size:12px;color:var(--text-dim);}
+.dg-roles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.dg-role{display:flex;flex-direction:column;gap:6px;padding:10px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.025);}
+.dg-role b{display:flex;align-items:center;gap:6px;font-size:13.5px;color:var(--gold-bright);}
+.dg-role b .ic{width:14px;height:14px;margin:0;}
+.dg-role small{flex:1;font-size:11.5px;color:var(--text-dim);line-height:1.45;}
+.dg-role .btn{padding:8px 6px;font-size:12.5px;}
+.dg-cat{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"g n p" "g s p";column-gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border-soft);}
+.dg-cat .dg-g{grid-area:g;min-width:84px;text-align:center;box-sizing:border-box;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.06);color:var(--text-faint);white-space:nowrap;}
+.dg-cat.feat .dg-g{background:rgba(240,207,140,.18);color:var(--gold-bright);}
+.dg-cat.mine{box-shadow:inset 3px 0 0 var(--jade);padding-left:6px;}
+.dg-cat b{grid-area:n;font-size:13px;min-width:0;}
+.dg-cat small{grid-area:s;font-size:11px;color:var(--text-faint);}
+.dg-cat em{grid-area:p;font-style:normal;font-size:12px;color:var(--gold);text-align:right;}
+.dg-price{text-align:center;margin:6px 0 2px;}
+.dg-price small{display:block;font-size:11px;color:var(--text-faint);}
+.dg-price b{display:block;font-family:var(--fh);font-size:32px;color:var(--gold-bright);line-height:1.1;}
+.dg-price span{font-size:12.5px;color:var(--text-dim);}
+.dg-timer{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.dg-timer .pf-bar{flex:1;margin:0;}
+.dg-timer .pf-bar span{transition:width .5s linear;background:linear-gradient(90deg,var(--jade),#ffd27a);}
+.dg-timer b{font-family:var(--fh);font-size:16px;color:var(--text);min-width:44px;text-align:right;font-variant-numeric:tabular-nums;}
+.dg-lot.dg-hot{animation:dgHot 1s ease-in-out infinite;}
+.dg-lot.dg-hot .dg-timer b{color:#ff8a6a;}
+.dg-lot.dg-hot .pf-bar span{background:linear-gradient(90deg,#ffd27a,#ff6a4a);}
+@keyframes dgHot{0%,100%{box-shadow:0 0 0 0 rgba(255,120,80,0)}50%{box-shadow:0 0 0 2px rgba(255,120,80,.45),0 0 18px rgba(255,120,80,.25)}}
+.pf-call-line.ph-call{color:var(--text);}
+.pf-call-line.ph-wait{color:var(--text-faint);font-size:14px;}
+.log-entry.dg-pc b{color:var(--jade-bright);}
+.dg-act{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
+.dg-act > .sec-note{grid-column:1/-1;}
+.dg-act .btn{padding:10px 4px;}
+.dg-admin{border-color:rgba(255,120,80,.35);}
+.dg-agrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.dg-agrid label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--text-dim);}
+.pa-row{position:relative;}
   .pa-row.flash{animation:paFlash 1.6s ease-out;} @keyframes paFlash{0%{background:rgba(255,200,90,.28)}100%{background:transparent}}
   .pa-row.lead{box-shadow:inset 3px 0 0 var(--jade);} .pa-row.out{box-shadow:inset 3px 0 0 var(--blood-bright);}
   .pa-row.rare .pa-b > b{color:#d8b8ff;text-shadow:0 0 8px rgba(170,120,255,.45);}
@@ -1446,7 +1488,7 @@
   .dl-sparks circle{opacity:0;animation:dlSpark 4s ease-out infinite;} .dl-sparks circle:nth-child(2){animation-delay:.1s} .dl-sparks circle:nth-child(3){animation-delay:.2s} .dl-sparks circle:nth-child(4){animation-delay:.3s}
   @keyframes dlSpark{0%,72%{opacity:0;transform:translate(0,0)}76%{opacity:1}92%{opacity:0;transform:translate(var(--sx,3px),-9px)}100%{opacity:0}}
   .dl-sparks circle:nth-child(odd){--sx:-4px;}
-  .lk-hammer{transform-origin:73px 15px;animation:lkHam 1.4s ease-in infinite;} @keyframes lkHam{0%{transform:translate(4px,-6px) rotate(-30deg)}55%{transform:translate(4px,-6px) rotate(-30deg)}72%{transform:translate(-12px,4px) rotate(8deg)}78%{transform:translate(-11px,2px) rotate(4deg)}100%{transform:translate(4px,-6px) rotate(-30deg)}}
+  
   .lk-ring{opacity:0;transform-box:fill-box;transform-origin:center;animation:lkRing 1.4s ease-out infinite;} @keyframes lkRing{0%,70%{opacity:0;transform:scale(.3)}73%{opacity:1;transform:scale(.6)}90%{opacity:0;transform:scale(2.4)}100%{opacity:0}}
   .ws-khiSu .ws-sparks circle{animation-duration:1.4s !important;animation-delay:1s !important;}
   .lk-steam circle{opacity:0;animation:lkSteam 5.6s ease-out infinite;} .lk-steam circle:nth-child(2){animation-delay:.3s} .lk-steam circle:nth-child(3){animation-delay:.6s}
@@ -1745,7 +1787,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.61.5';
+const GAME_VERSION = '1.62.1';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1894,6 +1936,16 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.62.1', date:'07/10/2026', title:'Khách quen Đại Hội', items:[['doi','Khách tranh giá ở Đại Hội Đấu Giá Tu Sĩ giờ là chính các nhân vật trong cốt truyện — Lệnh Hồ Lão Tổ, Tử Linh Tiên Tử, Nam Lũng Hầu, Mộ Phái Linh, Ôn Thiên Nhân, Kiền lão ma, Cực Âm Tổ Sư, Vương Thiền... mỗi người một tính cách và câu nói riêng. Bảo vật áp trục chỉ các lão quái từ Kết Đan trở lên mới tranh; hàng thường là người cùng tầm.']]},
+  {v:'1.62.0', date:'07/10/2026', title:'Đại Hội Đấu Giá Tu Sĩ', items:[
+    ['moi','Đấu Giá Tu Sĩ thành Đại Hội: các đại đấu giá hội liên thủ, theo lịch thiên hạ cứ 5–10 năm mới mở một kỳ (1 năm thiên hạ ≈ 1 giờ thực), hoặc do quản trị viên triệu tập. Đếm ngược khai mạc, danh mục công bố trước.'],
+    ['moi','Điều kiện vào hội như Đấu Giá Hội: từ Trúc Cơ Kỳ, chứng minh tài lực, phí lệnh bài, số lệnh bài có hạn. Bậc Nguyên Anh trở lên nhận thiệp mời — miễn phí, ngồi phòng chữ Thiên, danh tính được che.'],
+    ['moi','Báo danh chọn vai: Người Mua (được hô giá mọi món) hoặc Người Ký Gửi (đưa tối đa ba món lên sàn, phí giám định 3%, hội thu 8% khi bán; chủ hàng không được hô giá).'],
+    ['moi','Mỗi kỳ mười tám món của hội cộng hàng ký gửi, lên sàn lần lượt, mỗi món ba phút: hàng thường mở màn, trân phẩm ở giữa, ba bảo vật áp trục để cuối. Mười hơi thở cuối hội chủ hô "Lần thứ nhất… lần thứ hai… Chốt!", hô phút chót thì sàn kéo dài thêm.'],
+    ['moi','Khách NPC có tính cách và tu sĩ khắp nơi tranh giá liên tục từ hàng thường tới bảo vật — có món bị đẩy giá cao ngất, có món nguội để nhặt được hời. Bị hô đè thì linh thạch tự hoàn về.'],
+    ['moi','Quản trị viên: khai mạc ngay, khai mạc sau 5 phút, hủy kỳ (trả hết đồ và linh thạch), chỉnh lịch thiên hạ.'],
+    ['doi','Bỏ đăng bán tự do bất cứ lúc nào và dòng hàng của hội sinh liên tục — mọi giao dịch đấu giá giữa tu sĩ đều diễn ra trong kỳ Đại Hội.']]},
+  {v:'1.61.6', date:'07/10/2026', title:'Búa rèn', items:[['doi','Luyện Khí Sư: thay búa linh quang bằng búa rèn thật — cán gỗ quấn dây, đầu thép khắc phù văn. Búa xoay quanh chỗ cầm ở cuối cán, giáng mặt búa xuống thỏi thép nung đỏ rồi nảy lên, tia lửa và vòng chấn động trùng nhịp va chạm.']]},
   {v:'1.61.5', date:'02/10/2026', title:'Hoạt ảnh các nghề', items:[
     ['moi','Luyện Đan Sư: nắp đan lư rung lên từng hồi rồi một viên đan sáng rực bay vọt ra khỏi chóp lư, tóe kim quang.'],
     ['moi','Luyện Khí Sư: linh chùy trong suốt nện xuống thỏi thép nung đỏ theo nhịp — vòng chấn động lan ra, tia lửa bắn tung, thỉnh thoảng hơi nước bốc lên như lúc tôi thép.'],
@@ -13731,7 +13783,7 @@ const PROF_ART = {
       <linearGradient id="avHorn" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d9dfe1"/><stop offset=".35" stop-color="#9aa3a6"/><stop offset=".75" stop-color="#5b6366"/><stop offset="1" stop-color="#3a4144"/></linearGradient>
       <linearGradient id="avWaist" x1="0" x2="1"><stop offset="0" stop-color="#2b3134"/><stop offset=".35" stop-color="#5f686c"/><stop offset=".55" stop-color="#717a7e"/><stop offset=".8" stop-color="#454c4f"/><stop offset="1" stop-color="#262b2d"/></linearGradient>
       <linearGradient id="avBase" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6a7377"/><stop offset="1" stop-color="#33393b"/></linearGradient>
-      <linearGradient id="avHot" x1="0" x2="1"><stop offset="0" stop-color="#ff5a10"/><stop offset=".5" stop-color="#fff2a8"/><stop offset="1" stop-color="#ff5a10"/></linearGradient></defs>
+      <linearGradient id="avHot" x1="0" x2="1"><stop offset="0" stop-color="#ff5a10"/><stop offset=".5" stop-color="#fff2a8"/><stop offset="1" stop-color="#ff5a10"/></linearGradient><linearGradient id="lkWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a0683a"/><stop offset=".5" stop-color="#6e4224"/><stop offset="1" stop-color="#3e2312"/></linearGradient><linearGradient id="lkHead" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a6470"/><stop offset=".45" stop-color="#c9d3dc"/><stop offset="1" stop-color="#46505a"/></linearGradient></defs>
     <ellipse cx="54" cy="70" rx="40" ry="3.5" fill="rgba(0,0,0,.5)"/>
     <path d="M32 26 C20 26 10 27.5 3 30.5 C10 33 21 35 32 36Z" fill="url(#avHorn)" stroke="#eef2f3" stroke-opacity=".35" stroke-width=".6"/>
     <path d="M6 30 C14 29 23 28.5 31 28.5" stroke="#fff" stroke-opacity=".55" stroke-width=".8" fill="none"/>
@@ -13745,7 +13797,7 @@ const PROF_ART = {
     <g fill="#000" opacity=".18"><circle cx="60" cy="31" r=".7"/><circle cx="72" cy="33" r=".5"/><circle cx="66" cy="47" r=".8"/><circle cx="58" cy="50" r=".5"/><circle cx="78" cy="64" r=".7"/><circle cx="50" cy="63" r=".5"/></g>
     <ellipse class="ws-glow" cx="60" cy="21" rx="15" ry="4" fill="rgba(255,150,60,.4)"/>
     <rect class="ws-hotbar" x="50" y="18.6" width="22" height="3.6" rx="1.8" fill="url(#avHot)"/>
-    <g class="lk-hammer"><rect x="66" y="-4" width="14" height="7" rx="1.5" fill="rgba(120,230,255,.35)" stroke="#9ff6ff" stroke-width=".8"/><rect x="71.8" y="3" width="2.4" height="12" rx="1" fill="rgba(120,230,255,.3)" stroke="#9ff6ff" stroke-width=".6"/><path d="M69 -0.5 h8" stroke="#e8ffff" stroke-width=".6" opacity=".8"/></g>
+    <g class="lk-hammer"><g><rect x="62" y="9.5" width="28" height="3" rx="1.3" fill="url(#lkWood)" stroke="#2a170a" stroke-width=".4"/><path d="M82.5 9.5v3M84.5 9.5v3M86.5 9.5v3M88.5 9.5v3" stroke="#c9a46a" stroke-width=".7"/><rect x="65.5" y="8.6" width="2" height="4.8" rx=".5" fill="#8a6a3a" stroke="#3a2a14" stroke-width=".3"/><rect x="56.5" y="3.4" width="9.6" height="14.4" rx="1.2" fill="url(#lkHead)" stroke="#20262c" stroke-width=".5"/><rect x="55.8" y="15.6" width="11" height="2.3" rx=".6" fill="#7d8790" stroke="#20262c" stroke-width=".4"/><rect x="55.8" y="3" width="11" height="1.8" rx=".6" fill="#7d8790" stroke="#20262c" stroke-width=".4"/><path d="M59 7.5l2.3 2.2-2.3 2.2M63.5 7.5l-2.2 2.2 2.2 2.2" stroke="#7ff0ff" stroke-width=".5" fill="none" opacity=".85"/><animateTransform attributeName="transform" type="rotate" dur="1.4s" repeatCount="indefinite" values="44 88 11;44 88 11;-1 88 11;6 88 11;44 88 11" keyTimes="0;0.42;0.7;0.8;1" calcMode="spline" keySplines="0 0 1 1;.55 0 1 .6;0 0 .4 1;.4 0 .3 1"/></g></g>
     <circle class="lk-ring" cx="61" cy="19" r="4" fill="none" stroke="#fff0b0" stroke-width="1"/>
     <g class="lk-steam"><circle cx="55" cy="14" r="2.5" fill="rgba(230,240,240,.25)"/><circle cx="62" cy="11" r="3" fill="rgba(230,240,240,.2)"/><circle cx="68" cy="13" r="2.2" fill="rgba(230,240,240,.22)"/></g>
     <g class="ws-sparks"><circle cx="58" cy="17" r="1.3" fill="#ffe08a" style="--sx:-12px"/><circle cx="63" cy="16" r="1.1" fill="#ffb84a" style="--sx:9px"/><circle cx="61" cy="15.5" r="1.5" fill="#fff4c0" style="--sx:-3px"/><circle cx="66" cy="17" r=".9" fill="#ff9a3a" style="--sx:14px"/></g></svg>`,
@@ -15074,267 +15126,327 @@ async function paReady(){
   if(!ok) throw new Error(cloud.error || 'Không đồng bộ được bản lưu lên đám mây');
 }
 function paApply(rev){ if(rev!=null){ state._srv = rev; } computeStats(); saveGame(true); cloudPush(true); }
-async function paLoad(force){
-  if(!tsbOnline() || PA.loading) return;
-  if(!force && Date.now()-PA.ts < 30000) return;
-  PA.loading = true; PA.err = '';
-  try{
-    await cloud.client.rpc('auction_settle');
-    const now = new Date().toISOString();
-    const a = await cloud.client.from('auctions').select('*').eq('status','open').gt('ends_at', now).order('ends_at', {ascending:true}).limit(60); if(a.error) throw a.error;
-    paDiff(a.data||[]);
-    PA.list = a.data||[];
-    const m = await cloud.client.from('auctions').select('*').eq('seller', cloud.user.id).order('created_at', {ascending:false}).limit(15); if(m.error) throw m.error;
-    PA.mine = m.data||[];
-    const mb = await cloud.client.from('mailbox').select('*').eq('user_id', cloud.user.id).eq('claimed', false).order('id', {ascending:true}); if(mb.error) throw mb.error;
-    PA.mail = mb.data||[];
-    try{ const f = await cloud.client.from('auction_bids').select('*').order('id', {ascending:false}).limit(30); if(!f.error) PA.feed = f.data||[]; }catch(e){}
-    PA.ts = Date.now();
-  }catch(e){ PA.err = cloudErrMsg(e); }
-  PA.loading = false;
-  if(state.activeTab==='tuido' && state.subTabs.tuido==='dgts') render();
-}
-async function paClaim(){
+async function paClaim(quiet){
   try{
     await paReady();
     const {data, error} = await cloud.client.rpc('mail_claim'); if(error) throw error;
     (data.items||[]).forEach(x=>{ if(x.stones>0) state.spiritStones += x.stones; if(x.item && x.qty>0) paLocalAdd(x.item, x.qty); });
     paApply(data.rev);
     addLog(`Hộp thư Đấu Giá Tu Sĩ: ${(data.items||[]).map(x=>x.stones>0?`${x.stones} linh thạch`:`${paItemName(x.item)} ×${x.qty}`).join(', ')||'trống'}.`);
-    toast('Đã nhận hộp thư');
-  }catch(e){ toast(cloudErrMsg(e)); }
-  PA.ts = 0; paLoad(true);
+    if(!quiet) toast('Đã nhận hộp thư');
+  }catch(e){ if(!quiet) toast(cloudErrMsg(e)); }
+  dgLoad(true);
 }
-async function paBid(id, buyout){
-  const a = PA.list.find(x=>x.id===id); if(!a) return;
-  const min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
-  let amt = buyout ? a.buyout : parseInt(prompt(`Trả giá cho ${paItemName(a.item)} ×${a.qty}\nÍt nhất ${min} linh thạch (ngươi có ${state.spiritStones}):`, min), 10);
-  if(!amt || isNaN(amt)) return;
+const KIND_LABEL = {rare:'Bảo vật', pill:'Đan dược', heal:'Đan dược', phu:'Linh phù', mat:'Nguyên liệu', herb:'Linh dược', seed:'Linh chủng', spec:'Linh dược'};
+/* =====================================================================
+   ĐẠI HỘI ĐẤU GIÁ TU SĨ — mở theo lịch thiên hạ (5–10 năm một kỳ) hoặc do quản trị viên triệu tập.
+   Báo danh có điều kiện, chọn vai Người Mua / Người Ký Gửi; từng món lên sàn ba phút,
+   khách NPC và tu sĩ khắp nơi tranh giá liên tục. Máy chủ giữ đồ và linh thạch.
+===================================================================== */
+const DG = {s:null, loading:false, err:'', ts:0, off:0, prev:{}, cur:null, claiming:false, poll:null, tick:null, seen:{}};
+const dgNow = ()=> Date.now() + DG.off;
+const dgFmt = n => Number(n||0).toLocaleString('vi-VN');
+function dgOnPage(){ return state && state.activeTab==='tuido' && state.subTabs && state.subTabs.tuido==='dgts'; }
+function dgName(l){ return l.mystery && (l.status==='queued'||l.status==='open') ? `Hàng bí ẩn · ${KIND_LABEL[l.item.k]||'Vật phẩm'}` : `${paItemName(l.item)} ×${l.qty}`; }
+function dgGrade(l){ return l.feat ? 'Bảo vật áp trục' : (l.tier||0)>=2 ? 'Trân phẩm' : 'Hàng thường'; }
+function dgCurLot(){ const s = DG.s; return s && s.event.cur ? s.lots.find(l=>l.id===s.event.cur) : null; }
+function dgYearsLeft(ms){
+  const hpy = DG.s ? Number(DG.s.cfg.hpy)||1 : 1, y = ms/3600000/hpy;
+  if(y>=1){ const yy = Math.floor(y), mm = Math.floor((y-yy)*12); return `${yy} năm${mm?` ${mm} tháng`:''}`; }
+  const m = Math.max(1, Math.ceil(y*12)); return `${m} tháng`;
+}
+function dgClock(ms){
+  ms = Math.max(0, ms); const s = Math.floor(ms/1000), h = Math.floor(s/3600), m = Math.floor(s%3600/60), x = s%60;
+  return h ? `${h}:${String(m).padStart(2,'0')}:${String(x).padStart(2,'0')}` : `${m}:${String(x).padStart(2,'0')}`;
+}
+function dgPhase(l){
+  const left = new Date(l.ends).getTime() - dgNow();
+  if(new Date(l.from).getTime() > dgNow()) return {k:'wait', txt:'Món hàng đang được đưa lên sàn…'};
+  if(left<=0) return {k:'sold', txt:'Chốt!'};
+  if(left<=6000) return {k:'twice', txt:'Lần thứ hai!'};
+  if(left<=12000) return {k:'once', txt:'Lần thứ nhất!'};
+  if(left<=20000) return {k:'call', txt:'Còn vị đạo hữu nào trả cao hơn?'};
+  return {k:'open', txt: l.top ? 'Đang tranh giá' : 'Mời chư vị ra giá'};
+}
+
+async function dgLoad(force){
+  if(!tsbOnline() || DG.loading) return;
+  if(!force && Date.now()-DG.ts < 2000) return;
+  DG.loading = true; DG.err = '';
+  try{
+    const {data, error} = await cloud.client.rpc('dgts_state'); if(error) throw error;
+    DG.off = new Date(data.now).getTime() - Date.now();
+    dgDiff(data);
+    DG.s = data; PA.mail = data.mail||[];
+    DG.ts = Date.now();
+    dgAutoClaim();
+  }catch(e){ DG.err = cloudErrMsg(e); }
+  DG.loading = false;
+  if(dgOnPage()) render();
+}
+function dgDiff(n){
+  const me = n.me, P = DG.prev;
+  (n.lots||[]).forEach(l=>{
+    const p = P[l.id];
+    if(p && p.lead && !l.lead && l.status==='open'){ toast(`Bị hô đè: ${dgName(l)} — giờ ${dgFmt(l.top)}`); sfx('hurt'); buzz([40,40,40]); }
+    if(p && p.status==='open' && l.status==='sold' && l.lead){ fx('banner',{text:'Chốt Giá!'}); sfx('ok'); addLog(`Đại Hội Đấu Giá: ngươi thắng ${paItemName(l.item)} ×${l.qty} với ${dgFmt(l.top)} linh thạch — nhận ở Hộp Thư.`); }
+    if(p && p.status==='open' && l.status==='sold' && l.mine){ addLog(`Đại Hội Đấu Giá: ${paItemName(l.item)} ×${l.qty} của ngươi về tay ${l.topName} với ${dgFmt(l.top)} linh thạch.`); }
+  });
+  if(n.event.cur && n.event.cur!==DG.cur && DG.cur!=null && dgOnPage()){ const l = n.lots.find(x=>x.id===n.event.cur); if(l){ sfx('tap'); toast(`Lên sàn: ${dgName(l)}`); } }
+  if(n.event.status==='open' && DG.s && DG.s.event.id===n.event.id && DG.s.event.status==='announce'){ fx('banner',{text:'Đại Hội Khai Mạc'}); sfx('ok'); }
+  DG.cur = n.event.cur || null;
+  DG.prev = {}; (n.lots||[]).forEach(l=>DG.prev[l.id] = {lead:l.lead, status:l.status});
+}
+async function dgAutoClaim(){
+  const s = DG.s; if(!s || DG.claiming || !PA.mail.length) return;
+  if(!(s.event.status==='open' && s.me && s.me.role==='mua')) return;
+  if(!PA.mail.some(m=>m.stones>0)) return;
+  DG.claiming = true;
+  try{ await paClaim(true); }catch(e){}
+  DG.claiming = false;
+}
+function dgWatch(){
+  const on = dgOnPage() && tsbOnline() && document.visibilityState!=='hidden';
+  if(on && !DG.poll){
+    const loop = ()=>{ if(!DG.poll) return; dgLoad(true); const open = DG.s && DG.s.event.status==='open'; DG.poll = setTimeout(loop, open ? 2500 : 12000); };
+    DG.poll = setTimeout(loop, 50); DG.tick = setInterval(dgTickDom, 500);
+  }
+  if(!on && DG.poll){ clearTimeout(DG.poll); clearInterval(DG.tick); DG.poll = DG.tick = null; }
+}
+function paWatch(){ dgWatch(); }
+function dgTickDom(){
+  const now = dgNow();
+  document.querySelectorAll('[data-dgend]').forEach(el=>{ el.textContent = dgClock(new Date(el.dataset.dgend).getTime() - now); });
+  document.querySelectorAll('[data-dgyears]').forEach(el=>{ el.textContent = dgYearsLeft(new Date(el.dataset.dgyears).getTime() - now); });
+  const l = dgCurLot(); if(!l) return;
+  const ph = dgPhase(l), from = new Date(l.from).getTime(), to = new Date(l.ends).getTime();
+  const bar = document.getElementById('dgBar'); if(bar) bar.style.width = Math.max(0, Math.min(100, (to-now)/Math.max(1,to-from)*100)).toFixed(1)+'%';
+  const call = document.getElementById('dgCall'); if(call){ call.textContent = ph.txt; call.className = `pf-call-line ph-${ph.k}`; }
+  const card = document.getElementById('dgLot'); if(card) card.classList.toggle('dg-hot', ph.k==='once' || ph.k==='twice');
+  if((ph.k==='sold' || (ph.k==='wait' && from<=now)) && !DG._closing){ DG._closing = true; setTimeout(()=>{ DG._closing = false; dgLoad(true); }, 900); }
+}
+
+/* ---------- hành động ---------- */
+async function dgJoin(role){
+  const s = DG.s; if(!s) return;
+  const vip = state.realmIdx >= s.cfg.vipRealm, fee = vip ? 0 : role==='mua' ? s.cfg.buyerFee : s.cfg.sellerFee;
+  if(!confirm(`Báo danh ${role==='mua'?'Người Mua':'Người Ký Gửi'} Đại Hội kỳ ${s.event.no}?\n${vip?'Ngươi nhận thiệp mời — miễn phí lệnh bài, ngồi phòng riêng.':`Phí lệnh bài ${fee} linh thạch (không hoàn lại).`}\n${role==='mua'?'Người mua được hô giá mọi món nhưng không được ký gửi.':'Người ký gửi được đưa hàng lên sàn nhưng không được hô giá kỳ này.'}`)) return;
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc('dgts_join', {p_role:role}); if(error) throw error;
+    if(data.fee>0) state.spiritStones -= data.fee;
+    paApply(data.rev);
+    addLog(data.vip ? `Ngươi cầm thiệp mời vào Đại Hội Đấu Giá kỳ ${s.event.no} — được xếp phòng chữ Thiên số ${data.room}.` : `Ngươi nộp ${data.fee} linh thạch, nhận lệnh bài ${role==='mua'?'Người Mua':'Người Ký Gửi'} Đại Hội Đấu Giá kỳ ${s.event.no}.`);
+    toast('Đã báo danh'); sfx('ok');
+  }catch(e){ toast(cloudErrMsg(e)); }
+  dgLoad(true);
+}
+async function dgBid(id, amt){
+  const l = DG.s && DG.s.lots.find(x=>x.id===id); if(!l || !amt) return;
   if(amt > state.spiritStones){ toast('Không đủ linh thạch'); return; }
   try{
     await paReady();
-    const {data, error} = await cloud.client.rpc('auction_bid', {p_id:id, p_amount:amt}); if(error) throw error;
+    const {data, error} = await cloud.client.rpc('dgts_bid', {p_id:id, p_amount:amt}); if(error) throw error;
     state.spiritStones -= data.paid; paApply(data.rev);
-    addLog(data.bought ? `Ngươi mua đứt ${paItemName(a.item)} ×${a.qty} với ${data.paid} linh thạch — nhận ở Hộp Thư.` : `Ngươi trả ${data.paid} linh thạch cho ${paItemName(a.item)} ×${a.qty}.`);
-    toast(data.bought ? 'Đã mua — nhận ở Hộp Thư' : 'Đã trả giá');
-  }catch(e){ toast(cloudErrMsg(e)); }
-  PA.ts = 0; paLoad(true);
+    addLog(`Đại Hội Đấu Giá: ngươi hô ${dgFmt(data.paid)} linh thạch cho ${dgName(l)}.`);
+    toast(data.extended ? 'Hô giá phút chót — sàn kéo dài thêm mười hơi thở!' : 'Đã hô giá — ngươi đang giữ giá'); sfx('crit');
+  }catch(e){ const m = cloudErrMsg(e); toast(/ít nhất/.test(m) ? 'Chậm một nhịp — vừa có người hô cao hơn, hãy hô lại!' : m); }
+  dgLoad(true);
 }
-async function paCancel(id){
-  try{ const {error} = await cloud.client.rpc('auction_cancel', {p_id:id}); if(error) throw error; toast('Đã hủy — đồ trả về Hộp Thư'); }catch(e){ toast(cloudErrMsg(e)); }
-  PA.ts = 0; paLoad(true);
+function dgHo(id, pct){
+  const l = DG.s && DG.s.lots.find(x=>x.id===id); if(!l) return;
+  const min = l.top ? Math.ceil(l.top*1.05) : l.start;
+  dgBid(id, pct===0 ? min : Math.max(min, Math.ceil((l.top||l.start)*(1+pct))));
 }
-function paSellForm(){
-  const own = paOwned();
-  if(!own.length){ toast('Túi trữ vật không có gì để bán'); return; }
-  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="display:flex;align-items:center;gap:8px;">${ic('hall','keep')} Đăng Bán</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+function dgConsignForm(){
+  const s = DG.s; if(!s) return;
+  const own = paOwned().filter(x=>x.k!=='stones');
+  if(!own.length){ toast('Túi trữ vật không có gì để ký gửi'); return; }
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="display:flex;align-items:center;gap:8px;">${ic('key','keep')} Ký Gửi Đại Hội</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
     <label class="cr-label">Vật phẩm</label>
-    <select id="paItem" class="acc-input">${own.map((x,i)=>`<option value="${i}">${paItemName(x)} (có ${x.n})</option>`).join('')}</select>
-    <label class="cr-label" style="margin-top:8px;">Số lượng</label><input id="paQty" class="acc-input" type="number" min="1" value="1">
-    <label class="cr-label" style="margin-top:8px;">Giá khởi điểm (linh thạch)</label><input id="paStart" class="acc-input" type="number" min="1" value="100">
-    <label class="cr-label" style="margin-top:8px;">Giá mua đứt (bỏ trống nếu không)</label><input id="paBuy" class="acc-input" type="number" min="2" placeholder="Không bắt buộc">
-    <label class="cr-label" style="margin-top:8px;">Thời gian</label>
-    <select id="paHours" class="acc-input"><option value="1">1 giờ</option><option value="6" selected>6 giờ</option><option value="24">24 giờ</option></select>
-    <p class="sec-note" style="margin:8px 0 0;">Vật phẩm rời túi ngay khi đăng. Bán được thì nhận linh thạch trừ 5% phí hội; không ai mua thì đồ trả về Hộp Thư.</p>
-    <button class="btn gold" style="margin-top:12px;" onclick="paSubmit()">Đăng Bán</button>`;
+    <select id="dgItem" class="acc-input">${own.map((x,i)=>`<option value="${i}">${paItemName(x)} (có ${x.n})</option>`).join('')}</select>
+    <label class="cr-label" style="margin-top:8px;">Số lượng</label><input id="dgQty" class="acc-input" type="number" min="1" value="1">
+    <label class="cr-label" style="margin-top:8px;">Giá khởi điểm (linh thạch)</label><input id="dgStart" class="acc-input" type="number" min="1" value="100" oninput="dgFeePreview()">
+    <p class="sec-note" id="dgFee" style="margin:8px 0 0;"></p>
+    <p class="sec-note" style="margin:6px 0 0;">Hội giám định xếp món của ngươi vào danh mục theo phẩm cấp, luôn trước phần bảo vật áp trục. Bán được nhận linh thạch trừ ${Math.round(s.cfg.feePct*100)}% phí hội; không ai mua thì đồ trả về Hộp Thư. Món chưa lên sàn có thể rút lại (không hoàn phí giám định).</p>
+    <button class="btn gold" style="margin-top:12px;" onclick="dgConsign()">Đưa Vào Danh Mục</button>`;
   PA.form = own;
   document.getElementById('overlay').classList.add('show');
+  dgFeePreview();
 }
-async function paSubmit(){
-  const it = PA.form[+document.getElementById('paItem').value];
-  const qty = parseInt(document.getElementById('paQty').value,10), start = parseInt(document.getElementById('paStart').value,10);
-  const bv = document.getElementById('paBuy').value.trim(), buy = bv ? parseInt(bv,10) : null, hours = +document.getElementById('paHours').value;
-  if(!qty || qty<1 || qty>it.n){ toast('Số lượng không hợp lệ'); return; }
+function dgFeePreview(){ const el = document.getElementById('dgFee'); if(!el) return; const v = parseInt(document.getElementById('dgStart').value,10)||0; el.textContent = `Phí giám định: ${Math.max(20, Math.ceil(v*0.03))} linh thạch (3% giá khởi điểm, ít nhất 20).`; }
+async function dgConsign(){
+  const it = PA.form[+document.getElementById('dgItem').value];
+  const qty = parseInt(document.getElementById('dgQty').value,10), start = parseInt(document.getElementById('dgStart').value,10);
+  if(!qty || qty<1 || qty>it.n || qty>99){ toast('Số lượng không hợp lệ'); return; }
   if(!start || start<1){ toast('Giá khởi điểm không hợp lệ'); return; }
-  if(buy!=null && (!buy || buy<=start)){ toast('Giá mua đứt phải cao hơn giá khởi điểm'); return; }
+  const fee = Math.max(20, Math.ceil(start*0.03));
+  if(state.spiritStones < fee){ toast('Không đủ linh thạch trả phí giám định'); return; }
   const item = {k:it.k, a:it.a||null, b:it.b||null};
   try{
     await paReady();
-    const {data, error} = await cloud.client.rpc('auction_list', {p_item:item, p_qty:qty, p_start:start, p_buyout:buy, p_hours:hours}); if(error) throw error;
-    paLocalAdd(item, -qty); paApply(data.rev);
-    addLog(`Ngươi đăng bán ${paItemName(item)} ×${qty} ở Đấu Giá Tu Sĩ, khởi điểm ${start} linh thạch.`);
-    closeModal(); toast('Đã đăng bán');
+    const {data, error} = await cloud.client.rpc('dgts_consign', {p_item:item, p_qty:qty, p_start:start}); if(error) throw error;
+    state.spiritStones -= data.fee; paLocalAdd(item, -qty); paApply(data.rev);
+    addLog(`Ngươi ký gửi ${paItemName(item)} ×${qty} ở Đại Hội Đấu Giá, khởi điểm ${dgFmt(start)} linh thạch (phí giám định ${data.fee}).`);
+    closeModal(); toast('Đã đưa vào danh mục'); sfx('ok');
   }catch(e){ toast(cloudErrMsg(e)); }
-  PA.ts = 0; paLoad(true);
+  dgLoad(true);
 }
-/* ---------- Đấu giá kịch tính: cập nhật trực tiếp, đếm ngược, gia hạn, lịch sử trả giá ---------- */
-PA.prev = {}; PA.flash = {}; PA.myTop = {};
-let paPoll = null, paTick = null;
-function paWatch(){
-  const on = state && state.activeTab==='tuido' && state.subTabs && state.subTabs.tuido==='dgts' && tsbOnline() && document.visibilityState!=='hidden';
-  if(on && !paPoll){ paPoll = setInterval(()=>{ PA.ts = 0; paLoad(true); }, 4000); paTick = setInterval(paTickDom, 1000); }
-  if(!on && paPoll){ clearInterval(paPoll); clearInterval(paTick); paPoll = paTick = null; }
+async function dgWithdraw(id){
+  try{ const {error} = await cloud.client.rpc('dgts_withdraw', {p_id:id}); if(error) throw error; toast('Đã rút — đồ trả về Hộp Thư'); }catch(e){ toast(cloudErrMsg(e)); }
+  dgLoad(true);
 }
-function paTickDom(){
-  try{ paFeatTick(); }catch(e){}
-  document.querySelectorAll('[data-end]').forEach(el=>{
-    const ms = new Date(el.dataset.end).getTime() - Date.now();
-    el.textContent = ms<=0 ? 'Đang chốt…' : ms<3600000 ? `${Math.floor(ms/60000)}:${String(Math.floor(ms%60000/1000)).padStart(2,'0')}` : paLeft(el.dataset.end).replace('còn ','');
-    el.classList.toggle('hot', ms>0 && ms<120000);
-  });
-}
-function paDiff(newList){
-  const me = cloud.user && cloud.user.id, seen = {};
-  newList.forEach(a=>{
-    seen[a.id] = 1;
-    const p = PA.prev[a.id];
-    if(p && (a.top_bid||0) > (p.top_bid||0)){
-      PA.flash[a.id] = Date.now();
-      if(p.top_bidder===me && a.top_bidder!==me){ toast(`Bị vượt giá: ${paItemName(a.item)} — giờ ${a.top_bid}`); sfx('hurt'); buzz([40,40,40]); }
-      else if(a.top_bidder!==me) sfx('tap');
-    }
-    if(p && new Date(a.ends_at) > new Date(p.ends_at) && a.top_bid) PA.flash[a.id+'x'] = Date.now();
-  });
-  Object.values(PA.prev).forEach(p=>{
-    if(!seen[p.id] && p.top_bidder===me){ toast(`Chốt! Ngươi thắng ${paItemName(p.item)} — nhận ở Hộp Thư`); sfx('ok'); fx('banner',{text:'Chốt Giá!'}); }
-  });
-  PA.prev = {}; newList.forEach(a=>PA.prev[a.id] = {id:a.id, top_bid:a.top_bid, top_bidder:a.top_bidder, ends_at:a.ends_at, item:a.item});
-}
-async function paBidModal(id){
-  const a = PA.list.find(x=>x.id===id); if(!a) return;
-  const min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
-  const steps = [min, Math.ceil(min*1.1), Math.ceil(min*1.25)].filter((v,i,arr)=>arr.indexOf(v)===i && (!a.buyout || v<a.buyout));
-  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${paLotName(a)}</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
-    <div class="pa-mhead"><div><small>${a.top_bid?'Giá hiện tại':'Khởi điểm'}</small><b>${a.top_bid||a.start_price}</b></div><div><small>Kết thúc sau</small><b data-end="${a.ends_at}">…</b></div><div><small>Ngươi có</small><b>${state.spiritStones}</b></div></div>
-    <p class="sec-note" style="margin:6px 0 10px;">${escHtml(a.seller_name)}${a.system?' · hàng của hội':''}. Trả giá trong hai phút cuối sẽ gia hạn thêm hai phút.</p>
-    <div class="pa-quick">${steps.map(v=>`<button class="btn sm gold" ${state.spiritStones<v?'disabled':''} onclick="paPlace(${a.id},${v})">${v}</button>`).join('')}
-      ${a.buyout?`<button class="btn sm blood" ${state.spiritStones<a.buyout?'disabled':''} onclick="paPlace(${a.id},${a.buyout})">Mua đứt ${a.buyout}</button>`:''}</div>
-    <div class="pa-custom"><input id="paAmt" class="acc-input" type="number" min="${min}" value="${min}"><button class="btn sm ghost" onclick="paPlace(${a.id}, parseInt(document.getElementById('paAmt').value,10))">Trả giá</button></div>
-    <div class="pa-hist" id="paHist"><p class="flavor">Đang tải lịch sử trả giá…</p></div>`;
-  document.getElementById('overlay').classList.add('show');
-  paTickDom();
+async function dgAdmin(action, arg){
+  if(!Admin.ok()) return;
+  if(action==='cancel' && !confirm('Hủy kỳ đại hội hiện tại? Hàng ký gửi và linh thạch đang giữ giá sẽ trả về Hộp Thư.')) return;
+  if(action==='config'){
+    const h = parseFloat(document.getElementById('dgaH').value), a = parseInt(document.getElementById('dgaA').value,10), b = parseInt(document.getElementById('dgaB').value,10), n = parseInt(document.getElementById('dgaN').value,10);
+    arg = {hours_per_year:h, min_years:a, max_years:b, sys_lots:n};
+  }
   try{
-    const {data} = await cloud.client.from('auction_bids').select('*').eq('auction_id', id).order('id', {ascending:false}).limit(8);
-    const h = document.getElementById('paHist');
-    if(h) h.innerHTML = data && data.length ? `<div class="pa-hh">Lịch sử trả giá</div>` + data.map((b,i)=>`<div class="pa-hr ${i===0?'top':''}"><span>${escHtml(b.bidder_name)}${b.note?`<q>${escHtml(b.note)}</q>`:''}</span><b>${b.amount}</b><small>${new Date(b.created_at).toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}</small></div>`).join('') : '<p class="flavor" style="margin:0;">Chưa ai trả giá — hãy là người đầu tiên.</p>';
-  }catch(e){}
-}
-async function paPlace(id, amt){
-  const a = PA.list.find(x=>x.id===id); if(!a || !amt || isNaN(amt)) return;
-  if(amt > state.spiritStones){ toast('Không đủ linh thạch'); return; }
-  try{
-    await paReady();
-    const {data, error} = await cloud.client.rpc('auction_bid', {p_id:id, p_amount:amt}); if(error) throw error;
-    state.spiritStones -= data.paid; paApply(data.rev);
-    PA.myTop[id] = true;
-    addLog(data.bought ? `Ngươi mua đứt ${paItemName(a.item)} ×${a.qty} với ${data.paid} linh thạch — nhận ở Hộp Thư.` : `Ngươi trả ${data.paid} linh thạch cho ${paItemName(a.item)} ×${a.qty}.`);
-    closeModal();
-    if(data.bought){ fx('banner',{text:'Mua Đứt!'}); sfx('ok'); } else { toast(data.extended ? 'Đã trả giá — phiên được gia hạn hai phút!' : 'Đã trả giá — ngươi đang dẫn đầu'); sfx('crit'); }
+    const {data, error} = await cloud.client.rpc('dgts_admin', {p_action:action, p_arg:arg||{}}); if(error) throw error;
+    DG.off = new Date(data.now).getTime() - Date.now(); DG.s = data; PA.mail = data.mail||[];
+    toast({open_now:'Đại hội khai mạc', open_in:'Đã định giờ khai mạc', cancel:'Đã hủy kỳ đại hội', config:'Đã lưu lịch'}[action]||'Xong');
   }catch(e){ toast(cloudErrMsg(e)); }
-  PA.ts = 0; paLoad(true);
+  render();
 }
 
-/* ---------- Đấu giá kịch tính: phiên đại đấu giá, hàng bí ẩn, hội trường trực tiếp ---------- */
-PA.feed = [];
-const KIND_LABEL = {rare:'Bảo vật', pill:'Đan dược', heal:'Đan dược', phu:'Linh phù', mat:'Nguyên liệu', herb:'Linh dược', seed:'Linh chủng', spec:'Linh dược'};
-function paLotName(a){ return a.mystery && a.status==='open' ? `Hàng bí ẩn · ${KIND_LABEL[a.item.k]||'Vật phẩm'}` : `${paItemName(a.item)} ×${a.qty}`; }
-function paHeat(id){ const t = Date.now()-300000; return PA.feed.filter(b=>b.auction_id===id && new Date(b.created_at).getTime()>t && b.bidder_name!=='Hội chủ').length; }
-function paPhase(a){
-  const now = Date.now(), minEnd = a.min_end ? new Date(a.min_end).getTime() : 0;
-  if(now < minEnd) return {k:'open', txt:'Đang tranh giá', left: minEnd-now, p: 0};
-  const since = now - new Date(a.last_bid_at || a.created_at).getTime();
-  if(since < 20000) return {k:'call', txt:'Còn vị đạo hữu nào trả cao hơn?', p: since/60000};
-  if(since < 40000) return {k:'once', txt:'Lần thứ nhất!', p: since/60000};
-  if(since < 60000) return {k:'twice', txt:'Lần thứ hai!', p: since/60000};
-  return {k:'sold', txt:'Chốt!', p: 1};
+/* ---------- giao diện ---------- */
+function dgMailCard(){
+  if(!PA.mail.length) return '';
+  return `<div class="card pa-mail"><div class="sec-title">${ic('bell')} Hộp Thư<span>${PA.mail.length}</span></div>
+    ${PA.mail.map(m=>`<div class="pa-ml"><b>${m.stones>0?`${dgFmt(m.stones)} linh thạch`:`${paItemName(m.item)} ×${m.qty}`}</b><small>${escHtml(m.note||'')}</small></div>`).join('')}
+    <button class="btn gold" style="margin-top:8px;" onclick="paClaim()">Nhận Tất Cả</button></div>`;
 }
-function renderFeatured(a){
-  if(!a) return '';
-  const ph = paPhase(a), me = cloud.user && a.top_bidder===cloud.user.id, min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
-  return `<div class="card pa-feat ph-${ph.k}" data-feat="${a.id}" data-minend="${a.min_end||''}" data-last="${a.last_bid_at||a.created_at}">
-    <div class="pf-kick">${ic('star','keep')} Đại Đấu Giá Hội</div>
-    <div class="pf-name">${paLotName(a)}</div>
-    <div class="pf-price"><small>${a.top_bid?'Giá hiện tại':'Khởi điểm'}</small><b>${(a.top_bid||a.start_price).toLocaleString('vi-VN')}</b><span>${a.top_bid?(me?'Ngươi đang dẫn':`${escHtml(a.top_name||'')}`):'Chưa ai ra giá'}</span></div>
-    <div class="pf-call" id="pfCall">${ph.txt}${ph.k==='open'?` · còn <span data-end="${a.min_end}"></span>`:''}</div>
-    <div class="pf-bar"><span id="pfBar" style="width:${Math.round(ph.p*100)}%"></span></div>
-    ${me?'<div class="pf-lead">Ngươi đang dẫn đầu — giữ vững!</div>':`<button class="btn gold" ${state.spiritStones<min?'disabled':''} onclick="paBidModal(${a.id})">Trả Giá (từ ${min.toLocaleString('vi-VN')})</button>`}
+function dgAdminCard(){
+  if(!(typeof Admin!=='undefined' && Admin.ok() && DG.s && DG.s.admin)) return '';
+  const s = DG.s, open = s.event.status==='open';
+  return `<div class="card dg-admin"><div class="sec-title">${ic('warn')} Quản Trị Đại Hội<span>chỉ quản trị viên</span></div>
+    <div class="btn-row">${open?'':`<button class="btn gold" onclick="dgAdmin('open_now')">Khai Mạc Ngay</button><button class="btn ghost" onclick="dgAdmin('open_in',{minutes:5})">Khai Mạc Sau 5 Phút</button>`}
+      <button class="btn blood" onclick="dgAdmin('cancel')">Hủy Kỳ Này</button></div>
+    <div class="dg-agrid">
+      <label>Giờ thực / năm<input id="dgaH" class="acc-input" type="number" step="0.1" min="0.05" value="${s.cfg.hpy}"></label>
+      <label>Ít nhất (năm)<input id="dgaA" class="acc-input" type="number" min="1" value="${s.cfg.minY}"></label>
+      <label>Nhiều nhất (năm)<input id="dgaB" class="acc-input" type="number" min="1" value="${s.cfg.maxY}"></label>
+      <label>Món của hội<input id="dgaN" class="acc-input" type="number" min="6" max="40" value="${s.cfg.sysLots||18}"></label>
+    </div>
+    <button class="btn ghost" style="margin-top:8px;" onclick="dgAdmin('config')">Lưu Lịch</button>
+    <p class="sec-note" style="margin:6px 0 0;">Lịch mới áp dụng từ kỳ sau. Số món của hội áp dụng khi danh mục kỳ sau được lập.</p></div>`;
+}
+function dgSellerCard(){
+  const s = DG.s; if(!s.me || s.me.role!=='ban') return '';
+  const mine = s.lots.filter(l=>l.mine), closed = s.event.status==='open' && (dgCurLot()||{}).feat;
+  return `<div class="card"><div class="sec-title">${ic('key')} Hàng Ký Gửi Của Ngươi<span>${mine.filter(l=>l.status!=='cancelled').length}/${s.cfg.maxConsign}</span></div>
+    ${mine.map(l=>`<div class="pa-ml"><b>${paItemName(l.item)} ×${l.qty}</b><small>Khởi điểm ${dgFmt(l.start)} · ${({queued:'chờ lên sàn',open:`đang trên sàn${l.top?` · ${dgFmt(l.top)}`:''}`,sold:`đã bán ${dgFmt(l.top)} cho ${escHtml(l.topName||'')}`,expired:'không ai mua',cancelled:'đã rút'})[l.status]||l.status}</small>${l.status==='queued'?`<button class="ls-link" onclick="dgWithdraw(${l.id})">Rút lại</button>`:''}</div>`).join('') || '<p class="flavor" style="margin:0 0 6px;">Chưa ký gửi món nào.</p>'}
+    ${closed?'<p class="sec-note" style="margin:8px 0 0;">Đã sang phần áp trục — ngừng nhận ký gửi.</p>':`<button class="btn gold" style="margin-top:8px;" ${mine.filter(l=>l.status!=='cancelled').length>=s.cfg.maxConsign?'disabled':''} onclick="dgConsignForm()">Ký Gửi Vật Phẩm</button>`}</div>`;
+}
+function dgEntryCard(){
+  const s = DG.s, c = s.cfg, vip = state.realmIdx >= c.vipRealm, realmOk = !state.mortal && state.realmIdx >= c.minRealm;
+  const left = Math.max(0, c.seats - s.event.seatsUsed);
+  if(s.me){
+    const r = s.me.role==='mua' ? 'Người Mua' : 'Người Ký Gửi';
+    return `<div class="card dg-entry"><div class="sec-title">${ic('check')} Đã Báo Danh<span>${r}</span></div>
+      <p class="flavor" style="margin:0;">${s.me.vip?`Thiệp mời đã gửi tới — ngươi ngồi <b>phòng chữ Thiên số ${s.me.room}</b>, cấm chế che giấu danh tính, người ngoài chỉ thấy số phòng.`:`Lệnh bài ${r} đã đeo bên hông.`} ${s.me.role==='mua'?'Được hô giá mọi món khi lên sàn; linh thạch hô giá được hội tạm giữ, bị hô đè sẽ hoàn về ngay.':'Đưa tối đa ' + c.maxConsign + ' món vào danh mục; chủ hàng không được hô giá trong kỳ.'}</p></div>`;
+  }
+  const chk = (ok, txt)=>`<div class="row"><span class="k">${txt}</span><span class="v">${ok?`<span class="ok-mark">${ic('check')}</span>`:`<span class="bad-mark">${ic('warn')}</span>`}</span></div>`;
+  const buyOk = realmOk && (vip || left>0) && state.spiritStones >= c.proof + (vip?0:c.buyerFee);
+  const sellOk = realmOk && (vip || left>0) && state.spiritStones >= (vip?0:c.sellerFee);
+  return `<div class="card dg-entry"><div class="sec-title">${ic('key')} Điều Kiện Vào Hội</div>
+    ${chk(realmOk, `Cảnh giới từ ${MAJOR_REALMS[c.minRealm].name}`)}
+    ${chk(state.spiritStones >= c.proof + (vip?0:c.buyerFee), `Chứng minh tài lực (Người Mua): ${dgFmt(c.proof)} linh thạch trong túi`)}
+    ${chk(vip || left>0, vip ? `Thiệp mời gửi bậc ${MAJOR_REALMS[c.vipRealm].name} trở lên — miễn phí, phòng riêng` : `Lệnh bài còn ${left}/${c.seats} tấm`)}
+    <div class="row"><span class="k">Phí lệnh bài</span><span class="v">${vip?'Miễn':`${c.buyerFee} (mua) · ${c.sellerFee} (ký gửi)`}</span></div>
+    <div class="dg-roles">
+      <div class="dg-role"><b>${ic('stone','keep')} Người Mua</b><small>Hô giá mọi món trên sàn. Bị hô đè thì linh thạch hoàn về ngay.</small>
+        <button class="btn gold" ${buyOk?'':'disabled'} onclick="dgJoin('mua')">Báo Danh Mua</button></div>
+      <div class="dg-role"><b>${ic('key','keep')} Người Ký Gửi</b><small>Đưa tối đa ${c.maxConsign} món ra đấu giá. Không được hô giá kỳ này.</small>
+        <button class="btn ghost" ${sellOk?'':'disabled'} onclick="dgJoin('ban')">Báo Danh Ký Gửi</button></div>
+    </div></div>`;
+}
+function dgCatalog(title, lots, note){
+  if(!lots.length) return '';
+  return `<div class="card"><div class="sec-title">${ic('scroll')} ${title}<span>${lots.length} món</span></div>${note?`<p class="sec-note" style="margin:0 0 6px;">${note}</p>`:''}
+    ${lots.map(l=>`<div class="dg-cat ${l.feat?'feat':''} ${l.mine?'mine':''}"><span class="dg-g">${dgGrade(l)}</span><b class="${l.item.k==='rare'&&!l.mystery?'pa-rare-t':''}">${dgName(l)}</b><small>${escHtml(l.seller||'')}${l.mine?' · của ngươi':''}</small><em>${l.status==='sold'?`${dgFmt(l.top)} · ${escHtml(l.topName||'')}`:l.status==='expired'?'Không ai mua':`từ ${dgFmt(l.start)}`}</em></div>`).join('')}</div>`;
+}
+function dgLotCard(l){
+  const s = DG.s, me = s.me, ph = dgPhase(l), min = l.top ? Math.ceil(l.top*1.05) : l.start;
+  const idx = s.lots.filter(x=>x.status!=='cancelled').findIndex(x=>x.id===l.id) + 1, total = s.lots.filter(x=>x.status!=='cancelled').length;
+  let act;
+  if(l.mine) act = `<p class="sec-note" style="margin:0;">Món của ngươi đang trên sàn — chủ hàng chỉ được ngồi xem.</p>`;
+  else if(l.lead) act = `<p class="sec-note" style="margin:0;color:var(--jade-bright);">Ngươi đang giữ giá — chờ xem có ai hô đè không.</p>`;
+  else if(!me) act = `<p class="sec-note" style="margin:0;">Chưa báo danh — chỉ được đứng xem. Báo danh Người Mua để hô giá.</p>`;
+  else if(me.role!=='mua') act = `<p class="sec-note" style="margin:0;">Người ký gửi không được hô giá kỳ này.</p>`;
+  else if(ph.k==='wait') act = `<p class="sec-note" style="margin:0;">Đợi hội chủ mở giá…</p>`;
+  else {
+    const p10 = Math.max(min, Math.ceil((l.top||l.start)*1.1)), p30 = Math.max(min, Math.ceil((l.top||l.start)*1.3));
+    act = `<button class="btn gold" ${state.spiritStones<min?'disabled':''} onclick="dgHo(${l.id},0)">Hô ${dgFmt(min)}</button>
+      <button class="btn gold" ${state.spiritStones<p10?'disabled':''} onclick="dgHo(${l.id},0.1)">+10%</button>
+      <button class="btn gold" ${state.spiritStones<p30?'disabled':''} onclick="dgHo(${l.id},0.3)">+30%</button>`;
+  }
+  return `<div class="card event-card dg-lot ${l.feat?'pa-feat-ev':''} ${l.lead?'pa-lead':''}" id="dgLot">
+    <div class="ev-head"><span class="ev-sigil">${ic(l.feat?'star':l.mystery?'key':'hall','keep')}</span><div><div class="ev-title serif ${l.item.k==='rare'&&!l.mystery?'pa-rare-t':''}">${dgName(l)}</div><div class="ev-sub">Món ${idx}/${total} · ${dgGrade(l)} · ${escHtml(l.seller||'')}</div></div></div>
+    ${l.mystery?`<p class="ev-text">Món hàng phủ khăn đỏ, chỉ biết là ${(KIND_LABEL[l.item.k]||'vật phẩm').toLowerCase()}. Thắng rồi mới được mở ra.</p>`:''}
+    <div class="dg-price"><small>${l.top?'Giá hiện tại':'Khởi điểm'}</small><b>${dgFmt(l.top||l.start)}</b><span>${l.lead?'Ngươi đang giữ giá':l.top?escHtml(l.topName||''):'Chưa ai ra giá'}</span></div>
+    <p class="pf-call-line ph-${ph.k}" id="dgCall">${ph.txt}</p>
+    <div class="dg-timer"><div class="pf-bar"><span id="dgBar"></span></div><b data-dgend="${l.ends}">${dgClock(new Date(l.ends).getTime()-dgNow())}</b></div>
+    <div class="row"><span class="k">Trong túi</span><span class="v">${dgFmt(state.spiritStones)}</span></div>
+    <div class="dg-act">${act}</div>
   </div>`;
 }
-function renderAucHall(){
-  if(!PA.feed.length) return '';
-  const name = id=>{ const a = PA.list.find(x=>x.id===id); return a ? paLotName(a) : 'món đã chốt'; };
-  return `<div class="card pa-hall"><div class="sec-title">${ic('bell')} Hội Trường<span>trực tiếp</span></div>
-    ${PA.feed.slice(0,12).map(b=>`<div class="ph-row ${b.bidder_name==='Hội chủ'?'close':b.is_npc?'npc':'pc'}"><div><b>${escHtml(b.bidder_name)}</b> ${b.bidder_name==='Hội chủ'?'':`trả <em>${Number(b.amount).toLocaleString('vi-VN')}</em> cho ${name(b.auction_id)}`}${b.note?`<q>${escHtml(b.note)}</q>`:''}</div><small>${new Date(b.created_at).toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}</small></div>`).join('')}</div>`;
-}
-function paFeatTick(){
-  const el = document.querySelector('[data-feat]'); if(!el) return;
-  const a = PA.list.find(x=>x.id===+el.dataset.feat); if(!a) return;
-  const ph = paPhase(a);
-  el.className = el.classList.contains('pf-call-line') ? `ev-text pf-call-line ph-${ph.k}` : `card pa-feat ph-${ph.k}`;
-  const c = document.getElementById('pfCall'); if(c && !c.querySelector('[data-end]')) c.textContent = ph.txt;
-  if(c && ph.k!=='open' && c.querySelector('[data-end]')) c.textContent = ph.txt;
-  const bar = document.getElementById('pfBar'); if(bar) bar.style.width = Math.round(ph.p*100)+'%';
-  if(ph.k==='sold' && !PA._closing){ PA._closing = true; setTimeout(()=>{ PA._closing = false; PA.ts = 0; paLoad(true); }, 1500); }
+function renderPlayerAuction(){
+  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ</div><p class="sec-note" style="margin:0 0 10px;">Đại Hội Đấu Giá Tu Sĩ cần tài khoản — máy chủ giữ đồ và linh thạch để không ai gian lận được.</p><button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập</button></div>`;
+  setTimeout(()=>{ dgWatch(); dgTickDom(); }, 0);
+  const s = DG.s;
+  if(!s) return `<div class="card"><div class="sec-title">${ic('hall')} Đại Hội Đấu Giá Tu Sĩ</div><p class="flavor" style="margin:0;">${DG.err?`<span class="bad-mark">${escHtml(DG.err)}</span>`:'Đang liên lạc với hội…'}</p></div>`;
+  const e = s.event, c = s.cfg, live = s.lots.filter(l=>l.status!=='cancelled');
+  const err = DG.err ? `<p class="sec-note" style="margin:6px 0 0;"><span class="bad-mark">${escHtml(DG.err)}</span></p>` : '';
+  const prev = s.prev && s.prev.best ? `<div class="row"><span class="k">Kỳ trước (thứ ${s.prev.no})</span><span class="v"><small>${s.prev.sold} món · ${dgFmt(s.prev.total)} linh thạch · đắt nhất ${paItemName(s.prev.best.item)} ${dgFmt(s.prev.best.price)} (${escHtml(s.prev.best.who||'')})</small></span></div>` : '';
+  if(e.status==='announce'){
+    const head = `<div class="card dg-head">
+      <div class="pf-kick">${ic('hall','keep')} Kỳ thứ ${e.no}${e.by==='admin'?' · do quản trị viên triệu tập':''}</div>
+      <div class="pf-name">Đại Hội Đấu Giá Tu Sĩ</div>
+      <p class="flavor" style="margin:0 0 8px;">Các đại đấu giá hội liên thủ, cứ ${c.minY}–${c.maxY} năm mới mở một lần. Kỳ này cách kỳ trước ${e.years||'?'} năm.</p>
+      <div class="dg-count"><small>Khai mạc sau</small><b data-dgyears="${e.startsAt}">${dgYearsLeft(new Date(e.startsAt).getTime()-dgNow())}</b><span>≈ <span data-dgend="${e.startsAt}"></span> thời gian thực (1 năm ≈ ${c.hpy} giờ)</span></div>
+      ${prev}${err}</div>`;
+    const cat = dgCatalog('Danh Mục Công Bố Trước', live, 'Từng món lên sàn lần lượt, mỗi món ba phút. Hàng thường mở màn, trân phẩm ở giữa, bảo vật áp trục để cuối.');
+    return `${dgMailCard()}${head}${dgEntryCard()}${dgSellerCard()}${cat}${dgAdminCard()}`;
+  }
+  const l = dgCurLot();
+  const dots = live.map(x=>`<span class="step-dot ${['sold','expired'].includes(x.status)?'done':''} ${x.id===e.cur?'cur':''} ${x.feat?'feat':''} ${x.mine?'mine':''}"></span>`).join('');
+  const head = `<div class="card expd-card"><div class="sec-title">${ic('hall')} Đại Hội Đấu Giá Tu Sĩ<span>Kỳ ${e.no}</span></div>
+    <div class="step-dots pa-dots">${dots}</div>
+    <p class="sec-note" style="margin:8px 0 0;">Mỗi món ba phút; hô trong mười hơi thở cuối thì sàn kéo dài thêm chút ít. Hô giá phải cao hơn ít nhất 5%.${e.seatsUsed?` ${e.seatsUsed} tu sĩ đã báo danh.`:''}</p>${err}</div>`;
+  const next = live.filter(x=>x.status==='queued').slice(0,5);
+  const done = live.filter(x=>x.status==='sold'||x.status==='expired').reverse();
+  const nameOf = id=>{ const x = s.lots.find(y=>y.id===id); return x ? dgName(x) : 'món đã chốt'; };
+  const log = (s.bids||[]).slice(0,16).map(b=> b.name==='Hội chủ'
+      ? `<div class="log-entry pa-log-close">${ic('hall','keep')} Hội chủ: ${escHtml(b.note||'Chốt!')}</div>`
+      : `<div class="log-entry ${b.npc?'':'dg-pc'}">${escHtml(b.name)} hô <b>${dgFmt(b.amt)}</b> cho ${nameOf(b.lot)}${b.note?` — <i>“${escHtml(b.note)}”</i>`:''}</div>`).join('');
+  return `${dgMailCard()}${head}
+    ${l ? dgLotCard(l) : `<div class="card"><p class="flavor" style="margin:0;">Hội chủ đang chuẩn bị món kế tiếp…</p></div>`}
+    ${s.me?'':dgEntryCard()}
+    <div class="card"><div class="sec-title">${ic('scroll')} Diễn Biến</div>${log||'<p class="flavor" style="margin:0;">Sảnh còn yên ắng.</p>'}</div>
+    ${dgCatalog('Sắp Lên Sàn', next)}
+    ${dgSellerCard()}
+    ${dgCatalog('Đã Chốt', done)}
+    ${dgAdminCard()}`;
 }
 
-/* Đấu Giá Tu Sĩ theo phong cách sảnh Đấu Giá Hội */
-PA.idx = 0;
-function paLots(){ const f = PA.list.filter(a=>a.featured), o = PA.list.filter(a=>!a.featured); return f.concat(o); }
-function paGo(d){ const n = paLots().length; if(!n) return; PA.idx = (PA.idx + d + n) % n; render(); }
-function paPick(i){ PA.idx = i; render(); }
-function paHo(id, pct){
-  const a = PA.list.find(x=>x.id===id); if(!a) return;
-  const min = a.top_bid ? Math.ceil(a.top_bid*1.05) : a.start_price;
-  const amt = pct===0 ? min : Math.max(min, Math.ceil((a.top_bid||a.start_price)*(1+pct)));
-  paPlace(id, a.buyout ? Math.min(amt, a.buyout) : amt);
-}
-function renderPlayerAuction(){
-  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ</div><p class="sec-note" style="margin:0 0 10px;">Đấu giá giữa các tu sĩ cần tài khoản — máy chủ giữ đồ và linh thạch để không ai gian lận được.</p><button class="btn gold" onclick="showSettings('taikhoan')">Đăng Nhập</button></div>`;
-  if(!PA.ts && !PA.loading) paLoad();
-  setTimeout(()=>{ paWatch(); paTickDom(); }, 0);
-  const meId = cloud.user.id, lots = paLots();
-  if(PA.idx >= lots.length) PA.idx = 0;
-  const l = lots[PA.idx];
-  const dots = lots.map((x,i)=>`<span class="step-dot ${i===PA.idx?'cur':''} ${x.featured?'feat':''} ${x.top_bidder===meId?'mine':''}" onclick="paPick(${i})"></span>`).join('');
-  let lotCard;
-  if(!l){
-    lotCard = `<div class="card"><p class="flavor">${PA.loading?'Đang mở sảnh đấu giá…':'Sảnh đang trống — chờ các hội đem hàng ra.'}</p></div>`;
-  } else {
-    const mine = l.seller===meId, lead = l.top_bidder===meId, min = l.top_bid ? Math.ceil(l.top_bid*1.05) : l.start_price;
-    const ph = l.featured ? paPhase(l) : null, heat = paHeat(l.id);
-    const note = l.featured
-      ? `<p class="ev-text pf-call-line ph-${ph.k}" data-feat="${l.id}"><span id="pfCall">${ph.txt}</span></p><div class="pf-bar"><span id="pfBar" style="width:${Math.round(ph.p*100)}%"></span></div>`
-      : (l.mystery ? `<p class="ev-text">Món hàng phủ khăn đỏ, chỉ biết là ${(KIND_LABEL[l.item.k]||'vật phẩm').toLowerCase()}. Thắng rồi mới được mở ra.</p>` : '');
-    lotCard = `<div class="card event-card ${l.featured?'pa-feat-ev':''} ${lead?'pa-lead':''}">
-      <div class="ev-head"><span class="ev-sigil">${ic(l.featured?'star':l.mystery?'key':'hall','keep')}</span><div><div class="ev-title serif ${l.item.k==='rare'&&!l.mystery?'pa-rare-t':''}">${paLotName(l)}</div><div class="ev-sub">${l.featured?'Bảo vật áp trục':'Món hàng'} · linh thạch · ${escHtml(l.seller_name)}${heat>=3?` · <span class="pa-tag hot">${ic('bolt','keep')}${heat}</span>`:''}</div></div></div>
-      ${note}
-      <div class="row"><span class="k">Giá hiện tại</span><span class="v" style="color:var(--gold-bright);font-size:16px;">${(l.top_bid||l.start_price).toLocaleString('vi-VN')}${l.top_bid?'':' <small>(khởi điểm)</small>'}</span></div>
-      <div class="row"><span class="k">Người đang giữ giá</span><span class="v">${lead?'<span class="ok-mark">Ngươi</span>':l.top_bid?escHtml(l.top_name||'?'):'Chưa ai ra giá'}</span></div>
-      <div class="row"><span class="k">Trong túi</span><span class="v">${state.spiritStones.toLocaleString('vi-VN')}</span></div>
-      ${l.featured?'':`<div class="row"><span class="k">Kết thúc sau</span><span class="v"><span class="pa-cd" data-end="${l.ends_at}">${paLeft(l.ends_at)}</span></span></div>`}
-      ${l.buyout?`<div class="row"><span class="k">Giá mua đứt</span><span class="v">${l.buyout.toLocaleString('vi-VN')}</span></div>`:''}
-      <div class="btn-row" style="margin-top:10px;">
-        ${mine ? '<p class="sec-note" style="margin:0;">Món của ngươi — chờ người khác trả giá.</p>'
-          : lead ? '<p class="sec-note" style="margin:0;color:var(--jade-bright);">Ngươi đang giữ giá — chờ xem có ai hô đè không.</p>'
-          : `<button class="btn gold" ${state.spiritStones<min?'disabled':''} onclick="paHo(${l.id},0)">Hô ${min.toLocaleString('vi-VN')}</button>
-             <button class="btn gold" ${state.spiritStones<Math.ceil((l.top_bid||l.start_price)*1.1)?'disabled':''} onclick="paHo(${l.id},0.1)">Hô Thêm 10%</button>
-             <button class="btn gold" ${state.spiritStones<Math.ceil((l.top_bid||l.start_price)*1.3)?'disabled':''} onclick="paHo(${l.id},0.3)">Hô Thêm 30%</button>`}
-      </div>
-      ${!mine && !lead && l.buyout ? `<button class="btn blood" style="margin-top:8px;" ${state.spiritStones<l.buyout?'disabled':''} onclick="paPlace(${l.id},${l.buyout})">Mua Đứt ${l.buyout.toLocaleString('vi-VN')}</button>`:''}
-      <div class="btn-row" style="margin-top:8px;"><button class="btn ghost" onclick="paGo(-1)">Món Trước</button><button class="btn ghost" onclick="paGo(1)">Món Kế Tiếp</button></div>
-    </div>`;
-  }
-  const nameOf = id=>{ const a = PA.list.find(x=>x.id===id); return a ? paLotName(a) : 'món đã chốt'; };
-  const log = PA.feed.slice(0,14).map(b=> b.bidder_name==='Hội chủ'
-      ? `<div class="log-entry pa-log-close">${ic('hall','keep')} Hội chủ: ${escHtml(b.note||'Chốt!')}</div>`
-      : `<div class="log-entry">${escHtml(b.bidder_name)} hô <b>${Number(b.amount).toLocaleString('vi-VN')}</b> cho ${nameOf(b.auction_id)}${b.note?` — <i>“${escHtml(b.note)}”</i>`:''}</div>`).join('');
-  const mail = PA.mail.length ? `<div class="card pa-mail"><div class="sec-title">${ic('bell')} Hộp Thư<span>${PA.mail.length}</span></div>
-      ${PA.mail.map(m=>`<div class="pa-ml"><b>${m.stones>0?`${m.stones} linh thạch`:`${paItemName(m.item)} ×${m.qty}`}</b><small>${escHtml(m.note||'')}</small></div>`).join('')}
-      <button class="btn gold" style="margin-top:8px;" onclick="paClaim()">Nhận Tất Cả</button></div>` : '';
-  const mineRows = PA.mine.map(a=>`<div class="pa-ml"><b>${paItemName(a.item)} ×${a.qty}</b><small>${({open:paLeft(a.ends_at)+(a.top_bid?` · đang ${a.top_bid}`:''),sold:`Đã bán ${a.top_bid}`,expired:'Không ai mua',cancelled:'Đã hủy'})[a.status]||a.status}</small>${a.status==='open'&&!a.top_bid?`<button class="ls-link" onclick="paCancel(${a.id})">Hủy</button>`:''}</div>`).join('');
-  return `${mail}
-    <div class="card expd-card">
-      <div class="sec-title">${ic('hall')} Đấu Giá Tu Sĩ<span>Sảnh chung · ${lots.length} món</span></div>
-      <div class="step-dots pa-dots">${dots}</div>
-      <p class="sec-note" style="margin:8px 0 0;">Tu sĩ và các đấu giá hội khắp nơi đem hàng ra. Hô giá phải cao hơn ít nhất 5%; hô trong hai phút cuối thì phiên kéo dài thêm. Bị hô đè thì linh thạch hoàn về Hộp Thư.${PA.err?` <span class="bad-mark">${escHtml(PA.err)}</span>`:''}</p>
-    </div>
-    ${lotCard}
-    <div class="card"><div class="sec-title">${ic('scroll')} Diễn Biến</div>${log||'<p class="flavor" style="margin:0;">Sảnh còn yên ắng.</p>'}</div>
-    <div class="card"><div class="sec-title">${ic('key')} Ký Gửi Đấu Giá</div>
-      <p class="sec-note" style="margin:0 0 8px;">Đem đồ trong túi ra đấu giá. Bán được nhận linh thạch trừ 5% phí hội; không ai mua thì đồ trả về Hộp Thư.</p>
-      <button class="btn gold" onclick="paSellForm()">Đăng Bán Vật Phẩm</button>
-      ${mineRows?`<div style="margin-top:10px;">${mineRows}</div>`:''}</div>`;
-}
+/* nhắc khai mạc khi đang chơi ở mục khác */
+setInterval(async ()=>{
+  try{
+    if(!tsbOnline() || dgOnPage() || document.visibilityState==='hidden') return;
+    const {data} = await cloud.client.from('dgts_events').select('id,no,status,starts_at').in('status',['announce','open']).order('id',{ascending:false}).limit(1);
+    const e = data && data[0]; if(!e) return;
+    const soon = e.status==='announce' && new Date(e.starts_at).getTime() - Date.now() < 10*60000;
+    const key = e.id + (e.status==='open'?'o':soon?'s':'');
+    if((e.status==='open' || soon) && !DG.seen[key]){
+      DG.seen[key] = 1;
+      const msg = e.status==='open' ? `Đại Hội Đấu Giá Tu Sĩ kỳ ${e.no} đã khai mạc — vào Túi Đồ ▸ Đấu Giá Tu Sĩ.` : `Đại Hội Đấu Giá Tu Sĩ kỳ ${e.no} sắp khai mạc.`;
+      toast(msg); addLog(msg);
+    }
+  }catch(e){}
+}, 180000);
 
 /* =====================================================================
    CHỐNG GIAN LẬN (phía game) — máy chủ so sánh mỗi lần đồng bộ;
