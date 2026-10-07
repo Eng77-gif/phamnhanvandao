@@ -1791,7 +1791,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.62.4';
+const GAME_VERSION = '1.63.0';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1943,6 +1943,12 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.63.0', date:'07/10/2026', title:'Bí Cảnh & Hành Tẩu chạy trên máy chủ', items:[
+    ['moi','Toàn bộ mười hai bí cảnh do máy chủ điều hành: lịch mở cửa, từng bước đi, hiểm cảnh (độc chướng, áp lực không gian, lôi đình, tàn hồn, hư vô), sự kiện, lựa chọn (huyễn cảnh, vùng nứt không gian), trận đấu, trùm tầng cuối và chiến lợi phẩm. Trình duyệt chỉ gửi lựa chọn và hiển thị.'],
+    ['moi','Hành Tẩu ▸ Bản Đồ: thám hiểm địa vực (mạch linh thạch, Kim Lôi Trúc, Canh Tinh, Hư Thiên Tàn Đồ, Thanh Nguyên Kiếm Quyết, Đại Diễn Quyết, Đại Na Di Lệnh...) và truyền tống giữa Thiên Nam, Loạn Tinh Hải, Đại Tấn đều do máy chủ quyết định.'],
+    ['doi','Chiến lợi phẩm trong bí cảnh chỉ thuộc về ngươi khi rời đi; thua trận bị đẩy ra và mất một nửa (Man Hoang mất sạch). Thoát game giữa chừng thì lần sau vào lại vẫn ở đúng bước cũ.'],
+    ['sua','Chỉ nhận đăng ký bằng email của nhà cung cấp lớn (Gmail, Outlook/Hotmail, Yahoo, iCloud...) — chặn email 10 phút.']]},
+  {v:'1.62.5', date:'07/10/2026', title:'Vá lỗ hổng toàn diện', items:[['sua','Máy chủ giữ ngân sách theo thời gian thực cho linh thạch, tu vi, đan dược, linh phù, linh dược, nguyên liệu, linh chủng — sửa bản lưu để tăng vật phẩm sẽ bị trả về số cũ; bế quan, chiến đấu, luyện đan, đột phá, hô giá đều có giới hạn tốc độ.'],['sua','Không còn tự sửa được số lần vi phạm, thời gian tu luyện, chủ bản lưu; không đọc trực tiếp được bảng nội bộ (hộp thư, đấu giá...) của người khác. Phần thưởng chiến đấu tính theo sức mạnh nơi đánh.'],['doi','Khi máy chủ điều chỉnh tài nguyên, game tự cập nhật lại cho khớp.']]},
   {v:'1.62.4', date:'07/10/2026', title:'Vá ba lỗ đăng nhập', items:[['sua','Dọn sạch phần còn sót: không còn đoạn mã nào đọc bản lưu hay cấu hình máy chủ từ bộ nhớ trình duyệt; địa chỉ máy chủ chính thức bị khóa cứng.']]},
   {v:'1.62.3', date:'07/10/2026', title:'Chặn đăng nhập ẩn danh', items:[['sua','Không còn cách nào vào game khi chưa đăng nhập tài khoản đã xác nhận email: bỏ bản lưu nằm trên máy, bỏ đổi máy chủ, mất phiên đăng nhập giữa chừng thì khóa game và quay về màn đăng nhập; bản lưu gắn với đúng tài khoản, không chép được sang tài khoản khác.'],['sua','Máy chủ từ chối mọi tài khoản ẩn danh, chưa xác nhận email, email tạm thời hoặc email trùng biến thể (a.b+1@gmail.com).']]},
   {v:'1.62.2', date:'07/10/2026', title:'Tải ứng dụng Android', items:[['moi','Tải thẳng ứng dụng Android (APK) ngay trên web: nút ở màn hình đăng nhập (khi mở bằng điện thoại Android), trong Cài Đặt và trong mục Cài ra màn hình chính, kèm hướng dẫn cài từng bước. Trong ứng dụng thì nút tự ẩn.']]},
@@ -3135,6 +3141,7 @@ function daiDienMadnessBonus(){ return ng().daiDien.have ? ng().daiDien.layer*8 
 
 /* ---------------- Di chuyển giữa các địa vực ---------------- */
 function travelTo(id){
+  if(srvWorld()){ if(!SC && !state.expd) srvTravel(id); return; }
   if(!ngActive()) return;
   const to = NG_REGIONS.find(r=>r.id===id);
   const from = ngRegion();
@@ -3185,6 +3192,7 @@ function ngHostileSectsHere(){
 }
 
 function exploreRegion(locId){
+  if(srvWorld()){ if(!SC && !state.expd) srvExplore(locId); return; }
   if(!ngActive()) return;
   const region = ngRegion();
   const loc = region.locations.find(l=>l.id===locId);
@@ -5462,6 +5470,7 @@ function checkRealmOpenings(){
 /* ---------------- Chuyến thám hiểm ---------------- */
 function emptyLoot(){ return {stones:0, herbs:{}, mats:{}, thao:0, thaoSet:{}, huyettinh:0}; }
 function enterRealm(z){
+  if(srvWorld()){ if(!state.expd && !SC) srvExpdEnter(z); return; }
   if(state.expd || state.combat) return;
   const info = realmOpenInfo(z);
   if(!info.open){ addLog(`${ZONES[z].name}: ${info.label}.`); render(); return; }
@@ -5501,6 +5510,7 @@ function expFightRandom(){
 }
 
 function expAdvance(){
+  if(state.expd && state.expd.srv){ if(!state.pendingEvent && !SC && !state.expd.done) srvExpd('advance'); return; }
   const E = state.expd, R = REALMS[E.z];
   if(!E || state.pendingEvent || state.combat || E.done) return;
   E.step++;
@@ -5718,6 +5728,7 @@ function finalReward(z){
 }
 
 function expRest(){
+  if(state.expd && state.expd.srv){ if(!state.pendingEvent && !SC && !state.expd.done) srvExpd('rest'); return; }
   const E = state.expd, R = REALMS[E.z];
   if(!E || state.pendingEvent || state.combat || E.done) return;
   E.step++;
@@ -5751,6 +5762,7 @@ function expBank(){
   return parts;
 }
 function expLeave(){
+  if(state.expd && state.expd.srv){ if(!state.pendingEvent && !SC) srvExpd('leave'); return; }
   const E = state.expd;
   if(!E || state.combat || state.pendingEvent) return;
   let betray = '';
@@ -5898,6 +5910,7 @@ function renderExpeditionPanel(){
   if(L.stones) chips.push(`${ic('stone')}${L.stones} linh thạch`);
   if(L.thao) Object.keys(L.thaoSet||{}).forEach(k=>{ if(L.thaoSet[k]) chips.push(`${SPEC_NAMES[k]} ${L.thaoSet[k]}`); });
   if(L.huyettinh) chips.push(`Huyết Tinh ${L.huyettinh}`);
+  Object.keys(L.rare||{}).forEach(id=>{ if(L.rare[id]) chips.push(`${(rareDef(id)||{}).name||'Bảo vật'} ${L.rare[id]}`); });
   Object.keys(L.herbs).forEach(t=>{ if(L.herbs[t]) chips.push(`${HERB_NAMES[t-1]} ${L.herbs[t]}`); });
   Object.keys(L.mats).forEach(k=>Object.keys(L.mats[k]).forEach(t=>{ if(L.mats[k][t]) chips.push(`${matName(k,+t)} ${L.mats[k][t]}`); }));
   const status = [];
@@ -9521,9 +9534,11 @@ function copyCloudSql(){
 
 /* ---------- Đăng ký, đăng nhập ---------- */
 function cloudForm(){ return {email:(document.getElementById('accEmail').value||'').trim(), pw:document.getElementById('accPw').value||''}; }
+const EMAIL_OK = ['gmail.com','googlemail.com','yahoo.com','yahoo.com.vn','ymail.com','rocketmail.com','outlook.com','outlook.com.vn','hotmail.com','hotmail.com.vn','live.com','msn.com','icloud.com','me.com','mac.com','proton.me','protonmail.com','aol.com','yandex.com','yandex.ru','mail.ru','gmx.com','gmx.net','zoho.com','naver.com','qq.com','163.com'];
 async function cloudSignUp(){
   const {email, pw} = cloudForm();
   if(!cloud.client || cloud.busy) return;
+  if(!EMAIL_OK.includes((email.split('@')[1]||'').toLowerCase())){ accMsg('bad','Chỉ nhận email Gmail, Outlook/Hotmail, Yahoo, iCloud và các nhà cung cấp lớn — không nhận email tạm thời.'); return; }
   cloud.busy = true; refreshCloudUI();
   try{
     const {data, error} = await cloud.client.auth.signUp({email, password:pw});
@@ -9575,14 +9590,39 @@ async function cloudFetch(){
   if(error) throw error;
   return data ? data.data : null;
 }
+/* Máy chủ có thể điều chỉnh tài nguyên vượt ngân sách — áp phần chênh lệch về bản đang chơi */
+function cloudReconcile(pushed, srv){
+  if(!state || !state.root || !pushed || !srv) return;
+  let changed = false;
+  const num = v => typeof v==='number' && isFinite(v) ? v : 0;
+  const delta = (cur, p, s)=>{
+    if(typeof s==='number' || typeof p==='number'){ const d = num(s) - num(p); if(d){ changed = true; return Math.max(0, num(cur) + d); } return cur; }
+    if(s && typeof s==='object'){ const out = (cur && typeof cur==='object') ? cur : {}; const keys = new Set([...Object.keys(s), ...Object.keys(p||{})]); keys.forEach(k=>{ out[k] = delta(out[k], p?p[k]:undefined, s[k]); }); return out; }
+    if(p && typeof p==='object' && !s){ changed = true; return {}; }
+    return cur;
+  };
+  ['spiritStones','tuVi','seeds'].forEach(k=>{ state[k] = delta(state[k], pushed[k], srv[k]); });
+  ['pills','healPills','talismans','herbs','mats','breakPills','specHerbs'].forEach(k=>{ if(srv[k]!==undefined || pushed[k]!==undefined) state[k] = delta(state[k], pushed[k], srv[k]); });
+  ['realmIdx','subStage'].forEach(k=>{ if(srv[k]!==undefined && srv[k]!==pushed[k]){ state[k] = srv[k]; changed = true; } });
+  ['professions','profExp'].forEach(k=>{ if(JSON.stringify(srv[k]||{})!==JSON.stringify(pushed[k]||{})){ state[k] = JSON.parse(JSON.stringify(srv[k]||{})); changed = true; } });
+  if(JSON.stringify(srv.tribPending||null)!==JSON.stringify(pushed.tribPending||null)){ if(srv.tribPending) state.tribPending = srv.tribPending; else delete state.tribPending; changed = true; }
+  if(typeof srv._srv==='number') state._srv = srv._srv;
+  if(changed){
+    try{ computeStats(); }catch(e){}
+    MEMSAVE = JSON.parse(JSON.stringify({v:GAME_VERSION, t:Date.now(), uid:cloud.user.id, state}));
+    toast('Máy chủ đã điều chỉnh tài nguyên tăng bất thường');
+    try{ render(); }catch(e){}
+  }
+}
 async function cloudPush(silent){
   if(!cloud.client || !cloud.user) return false;
   const local = readSave();
   if(!local) return false;
   if(local.uid !== cloud.user.id) return false;
   try{
-    const {error} = await cloud.client.from('saves').upsert({user_id:cloud.user.id, data:local, version:GAME_VERSION, updated_at:new Date().toISOString()});
+    const {data:row, error} = await cloud.client.from('saves').upsert({user_id:cloud.user.id, data:local, version:GAME_VERSION, updated_at:new Date().toISOString()}).select('data').maybeSingle();
     if(error) throw error;
+    if(row && row.data && row.data.state) cloudReconcile(local.state, row.data.state);
     cloud.lastSync = Date.now(); cloud.remoteT = local.t; cloud.error = '';
     setTimeout(checkSaveStatus, 300);
     if(!silent) toast('Đã đồng bộ lên đám mây');
@@ -13463,6 +13503,9 @@ async function serverCombatFinish(){
   } else if(SC.status==='lost') addLog(`Bại dưới tay ${SC.enemy.name}, trọng thương rút lui${r.lostTuVi?`, mất ${r.lostTuVi} tu vi`:''}.`);
   else addLog(`Ngươi thoát khỏi ${SC.enemy.name}.`);
   SC.done = true;
+  if(SC.expd){
+    try{ const {data} = await cloud.client.rpc('expd_state'); const keep = SC; xpApply(data); SC = keep; if(data && data.log && data.log[0] && /Chiến lợi phẩm tầng cuối/.test(data.log[0])) addLog(data.log[0]); }catch(e){}
+  }
 }
 function scClose(){ SC = null; render(); }
 function renderServerCombat(){
@@ -13520,6 +13563,85 @@ function scBag(){
     <p class="sec-note" style="margin:0 0 10px;">Mỗi món dùng được một lần mỗi trận.</p>
     <div class="cbag">${L.map(id=>`<button class="btn" ${(SC.used||[]).includes(id)?'disabled':''} onclick="closeModal(); serverCombatAct('rare:${id}')">${(rareDef(id)||{}).name||id}</button>`).join('')}</div>`;
   document.getElementById('overlay').classList.add('show');
+}
+
+/* =====================================================================
+   ĐỢT 1 CHUYỂN LÊN MÁY CHỦ: BÍ CẢNH & HÀNH TẨU
+   Máy chủ giữ phiên thám hiểm (bước, hiểm cảnh, sự kiện, chiến lợi phẩm),
+   tự mở trận đấu, tự trao thưởng tầng cuối; trình duyệt chỉ gửi lựa chọn và hiển thị.
+===================================================================== */
+let XP = undefined;
+function srvWorld(){ return scEnabled(); }
+async function srvSync(){
+  try{
+    const remote = await cloudFetch();
+    if(remote){ writeLocalSave(remote); const keepTab = state.activeTab, keepSub = JSON.parse(JSON.stringify(state.subTabs||{})); restoreFromSave(remote); state.activeTab = keepTab; state.subTabs = keepSub; }
+  }catch(e){}
+}
+function xpApply(v){
+  XP = v || null;
+  if(!v || v.status!=='open'){
+    if(v && /bust/.test(v.status||'') && v.log && v.log[0]) addLog(v.log[0]);
+    state.expd = null; state.pendingEvent = null; return;
+  }
+  const L = v.loot||{}, M = v.mods||{};
+  state.expd = {z:v.z, step:v.step, srv:true,
+    loot:{stones:L.stones||0, herbs:L.herbs||{}, mats:L.mats||{}, thao:Object.values(L.thao||{}).reduce((a,b)=>a+b,0), thaoSet:L.thao||{}, huyettinh:L.huyettinh||0, rare:L.rare||{}},
+    mods:{pressure:M.pressure||0, streak:M.streak||0, rule:null, lootMult:1, nextEnemyMult:1}, flags:{}, log:v.log||[], done:!!v.done};
+  state.currentZone = v.z;
+  state.pendingEvent = v.pending ? {title:v.pending.title, icon:v.pending.icon, text:v.pending.text,
+    options:(v.pending.options||[]).map(o=>({label:o.label, note:o.note, act:'srvExpd', args:[o.id]}))} : null;
+  if(v.combat){ SC = v.combat; SC.logAll = (v.combat.log||[]).slice(); SC.expd = true; scPrev = null; }
+}
+async function xpCall(fn, args){
+  if(xpCall.busy) return undefined;
+  xpCall.busy = true;
+  try{
+    await paReady();
+    const {data, error} = await cloud.client.rpc(fn, args||{}); if(error) throw error;
+    await srvSync();
+    return data;
+  }catch(e){ toast(cloudErrMsg(e)); return undefined; }
+  finally{ xpCall.busy = false; }
+}
+async function srvExpdResume(){
+  if(!srvWorld()) return;
+  try{ const {data, error} = await cloud.client.rpc('expd_state'); if(error) throw error; xpApply(data); }catch(e){}
+  render();
+}
+async function srvExpdEnter(z){
+  const v = await xpCall('expd_enter', {p_z:z}); if(v===undefined){ render(); return; }
+  xpApply(v); state.activeTab = 'hanhtau'; state.subTabs.hanhtau = 'bicanh';
+  (v.log||[]).slice(0,1).forEach(l=>addLog(l));
+  render(); window.scrollTo(0,0);
+}
+async function srvExpd(kind){
+  const fn = {advance:'expd_advance', rest:'expd_rest', leave:'expd_leave'}[kind];
+  const before = (XP && XP.log && XP.log.length) || 0;
+  const v = await xpCall(fn); if(v===undefined){ render(); return; }
+  if(kind==='leave'){ addLog(v.msg || 'Rời bí cảnh.'); xpApply(null); computeStats(); checkBreakthroughAvailable(); render(); return; }
+  const fresh = (v.log||[]).slice(0, Math.max(1, (v.log||[]).length - before)).reverse();
+  fresh.forEach(l=>{ if(!/^— /.test(l)) addLog(l); });
+  xpApply(v); computeStats(); checkBreakthroughAvailable(); render();
+}
+EVENT_ACTS.srvExpd = async function(opt){
+  const v = await xpCall('expd_choose', {p_opt:opt}); if(v===undefined){ srvExpdResume(); return; }
+  if(v.log && v.log[0]) addLog(v.log[0]);
+  xpApply(v); computeStats(); render();
+};
+async function srvExplore(locId){
+  const d = await xpCall('explore_region', {p_loc:locId}); if(d===undefined){ render(); return; }
+  if(d.kind==='fight'){ SC = d.combat; SC.logAll = (d.combat.log||[]).slice(); scPrev = null; }
+  else if(d.msg) addLog(d.msg);
+  computeStats(); checkBreakthroughAvailable(); render();
+}
+async function srvTravel(id){
+  const d = await xpCall('travel_to', {p_region:id}); if(d===undefined){ render(); return; }
+  const flavor = {thiennam:'Cổ truyền tống trận rung chuyển, cảnh vật trước mắt hóa thành những ngọn núi quen thuộc của Thiên Nam.',
+    loantinh:'Ánh sáng truyền tống trận lóe lên rồi tắt, gió biển mặn chát ập vào mặt — ngươi đã đặt chân tới Loạn Tinh Hải.',
+    daitan:'Xuyên qua trận truyền tống cổ xưa nối liền hai miền, linh khí nồng đậm của Đại Tấn khiến ngươi thoáng choáng váng.'};
+  addLog(`${flavor[d.region]||('Tới '+d.name+'.')}${d.cost?` (tốn ${d.cost} linh thạch)`:''}${d.dmg?` Không gian vặn xoắn, chịu ${d.dmg} sát thương.`:''}`);
+  computeStats(); render();
 }
 
 /* =====================================================================
@@ -16604,7 +16726,7 @@ function titleContinue(){
   if(!tsbOnline()){ lockToLogin(); return; }
   const sv = readSave();
   hideTitle();
-  if(sv){ restoreFromSave(sv); toast(`Tiếp tục đạo đồ của ${state.name}`); }
+  if(sv){ restoreFromSave(sv); toast(`Tiếp tục đạo đồ của ${state.name}`); setTimeout(srvExpdResume, 300); }
   else showModal('start');
 }
 function titleNew(){ if(!tsbOnline()){ lockToLogin(); return; } hideTitle(); showModal('start'); }
