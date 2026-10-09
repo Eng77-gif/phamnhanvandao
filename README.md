@@ -23,12 +23,15 @@ Xử lý toàn bộ logic game: Vòng lặp thời gian, tính toán chỉ số,
 Sử dụng localStorage để tự động lưu/tải tiến trình chơi một cách liền mạch.
 
 🫧 Game mới: Chuyển Sinh Thành Slime
-Thư mục `slime/` chứa một tựa game hành động độc lập (một tệp HTML, không cần máy chủ), mở tại `/slime/` (ví dụ: https://phamnhan.click/slime/).
-- Hấp thụ & Phân tích: Nuốt Chửng quái vật suy yếu (HP < 35%) hoặc nguyên liệu rơi trên đất vào "Dạ Dày". Học kỹ năng đặc trưng (Phun độc, Tàng Hình, Phân Thân Thuật, Băng Tiễn…) và tích lũy kháng tính (Nhiệt, Băng, Độc, Vật lý). Đại Hiền Giả phân tích điểm yếu Boss, đề xuất công thức chế tạo/dung hợp và tính tỉ lệ né.
-- Tiến hóa phân nhánh: Tuyến Nguyên Tố (Slime Nước → Slime Băng/Lửa → Slime Nguyên Tố Cổ Đại) hoặc Tuyến Ma Vương (Ma Slime → Slime Hắc Ám → Slime Ma Vương, cần tích lũy Ma lực từ các trận chiến lớn).
-- Biến hình: Dạng Khối (nhanh, nảy né đòn vật lý, bơi nhanh, chui qua lùm gai để lấy rương bí mật) và Dạng Nhân Hình (trang bị vũ khí, ma thuật mạnh hơn, dùng Kỹ năng Tối thượng, giao tiếp với loài người).
-- Ban tên & Thu phục: tiêu tốn MP để đặt tên cho Goblin, Sói, Ogre, Thằn Lằn Nhân — chúng tiến hóa thành Hobgoblin, Lang Tinh, Quỷ Nhân, Long Nhân. Thiếu MP sẽ rơi vào Ngủ Đông.
-- Lĩnh địa: phát triển Làng Goblin → Thị Trấn → Thành Phố → Quốc Gia Liên Minh Ma Vật; xây Nhà Ở, Nông Trại, Lò Rèn, Trạm Gác, Chợ, Tường Thành, Đại Sứ Quán; phân công thuộc hạ; buôn bán và ký hiệp ước với Vương Quốc Lam Thạch; phòng thủ trước Giáo Hội Thánh Quang.
-- Dung hợp kỹ năng: ví dụ Tự Phục Hồi + Kháng Độc + Kháng Băng → Cơ Thể Bất Hoại; cuối game mở Kỹ năng Tối thượng: Thao Túng Không Gian, Ngưng Đọng Thời Gian, Pháp Tắc Cải Biến, Bạo Thực Chi Vương.
-- Trùm cuối: Quỷ Vương Heo ở phương Bắc. Nuốt chửng nó để thức tỉnh.
-- Điều khiển: WASD + chuột trên máy tính; joystick ảo + nút cảm ứng trên điện thoại. Tự động lưu bằng localStorage.
+Thư mục `slime/` chứa một tựa game độc lập (mỗi bản là một tệp HTML, không cần máy chủ), dựa trên light novel *Tensei Shitara Slime Datta Ken*.
+
+**Bản chính — Text RPG + Xây dựng Quốc gia** (`/slime/`, ví dụ https://phamnhan.click/slime/)
+- Cốt truyện 10 chương theo nguyên tác: Hang Phong Ấn & Veldora → Làng Goblin & Hắc Lang → Vương Quốc Dwargon (Kaijin) → Shizu & Ifrit → Quỷ Nhân (Benimaru, Shuna, Shion, Souei, Hakurou, Kurobe) → Orc Disaster Geld → Ma Vương Milim & Charybdis → Kiếm Vương Gazel & Blumund → Hinata & Lễ Hội Thu Hoạch → Walpurgis & Clayman.
+- Kẻ Săn Mồi & Đại Hiền Giả: Nuốt Chửng ma vật để phân tích từng phần trăm và học kỹ năng (Thủy Nhẫn, Tơ Thép, Độc Tức, Hắc Lôi, Hắc Viêm…), tích lũy kháng tính (Kháng Nhiệt Biến, Kháng Tấn Công Vật Lý, Kháng Đau, Kháng Độc…) tới Vô Hiệu Hóa. Đại Hiền Giả dự đoán đòn của địch, tính tỉ lệ né, phân tích điểm yếu Boss, đề xuất chế tạo & dung hợp.
+- Mô Phỏng: Dạng Slime, Nhân Hình (từ Shizu), Hắc Lang, Dơi Khổng Lồ, Thằn Lằn Giáp — mỗi dạng có ưu nhược điểm riêng.
+- Ban tên: Rigurd, Gobta, Ranga, các Quỷ Nhân, Geld, Gabiru… thuộc hạ tiến hóa; tiêu tốn Ma tố và có thể khiến ngài rơi vào Ngủ Đông. Hành Lang Linh Hồn chia sẻ kỹ năng của thuộc hạ.
+- Lĩnh địa: từ Làng Goblin tới Liên Bang Jura Tempest; phân công hàng nghìn Hobgoblin, High Orc, Long Nhân vào 8 ngành nghề; 11 công trình; thông thương & hiệp ước với Dwargon, Blumund; sự kiện văn bản hằng ngày.
+- Dung hợp kỹ năng & Kỹ năng Tối thượng: Trí Tuệ Chi Vương Raphael, Bạo Thực Chi Vương Beelzebuth, Thệ Ước Chi Vương Uriel, Bạo Phong Chi Vương Veldora, Thần Chi Nộ: Megiddo…
+- Hai con đường thức tỉnh: Ma Vương Thực Thụ (Lễ Hội Thu Hoạch, như nguyên tác) hoặc Tinh Linh Hóa (khế ước Ifrit, Sylphide, Undine, Gnome).
+
+**Bản hành động** (`/slime/hanh-dong/`): game hành động thời gian thực điều khiển bằng bàn phím/cảm ứng.
