@@ -21,3 +21,11 @@ Hiệu ứng chuyển động (Animations) mượt mà cho các thông báo, tha
 JavaScript (Vanilla):
 Xử lý toàn bộ logic game: Vòng lặp thời gian, tính toán chỉ số, chiến đấu, RNG (random number generation) cho rớt đồ và đột phá.
 Sử dụng localStorage để tự động lưu/tải tiến trình chơi một cách liền mạch.
+
+🫧 Game mới: Chuyển Sinh Thành Slime
+Thư mục `slime/` chứa một tựa game hành động độc lập (một tệp HTML, không cần máy chủ), mở tại `/slime/` (ví dụ: https://phamnhan.click/slime/).
+- Bạn chuyển sinh thành một con slime trong Hang Phong Ấn, kết bạn với Long Vương Bão Tố bị phong ấn.
+- Dùng Thủy Đạn để làm quái suy yếu (HP < 35%), rồi Nuốt Chửng để học kỹ năng của chúng: Lao Tới, Tơ Dính, Siêu Âm, Sương Độc, Pháo Đá, Hỏa Cầu, Giáp Vảy, Cuồng Bạo… Nuốt cùng loại nhiều lần để lên cấp kỹ năng (tối đa Lv5).
+- 4 vùng đất: Hang Phong Ấn → Rừng Sương Mù → Đầm Lầy Độc → Núi Lửa Diệm Ngục; tiến hóa Slime → Slime Cao Cấp → Ma Slime → Slime Thần Ma → Ma Vương Slime.
+- Trùm cuối: Quỷ Vương Heo ở phương Bắc. Nuốt chửng nó để thức tỉnh Ma Vương.
+- Điều khiển: WASD + chuột trên máy tính; joystick ảo + nút cảm ứng trên điện thoại. Tự động lưu bằng localStorage.
