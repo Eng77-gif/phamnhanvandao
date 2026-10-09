@@ -24,8 +24,11 @@ Sử dụng localStorage để tự động lưu/tải tiến trình chơi một
 
 🫧 Game mới: Chuyển Sinh Thành Slime
 Thư mục `slime/` chứa một tựa game hành động độc lập (một tệp HTML, không cần máy chủ), mở tại `/slime/` (ví dụ: https://phamnhan.click/slime/).
-- Bạn chuyển sinh thành một con slime trong Hang Phong Ấn, kết bạn với Long Vương Bão Tố bị phong ấn.
-- Dùng Thủy Đạn để làm quái suy yếu (HP < 35%), rồi Nuốt Chửng để học kỹ năng của chúng: Lao Tới, Tơ Dính, Siêu Âm, Sương Độc, Pháo Đá, Hỏa Cầu, Giáp Vảy, Cuồng Bạo… Nuốt cùng loại nhiều lần để lên cấp kỹ năng (tối đa Lv5).
-- 4 vùng đất: Hang Phong Ấn → Rừng Sương Mù → Đầm Lầy Độc → Núi Lửa Diệm Ngục; tiến hóa Slime → Slime Cao Cấp → Ma Slime → Slime Thần Ma → Ma Vương Slime.
-- Trùm cuối: Quỷ Vương Heo ở phương Bắc. Nuốt chửng nó để thức tỉnh Ma Vương.
+- Hấp thụ & Phân tích: Nuốt Chửng quái vật suy yếu (HP < 35%) hoặc nguyên liệu rơi trên đất vào "Dạ Dày". Học kỹ năng đặc trưng (Phun độc, Tàng Hình, Phân Thân Thuật, Băng Tiễn…) và tích lũy kháng tính (Nhiệt, Băng, Độc, Vật lý). Đại Hiền Giả phân tích điểm yếu Boss, đề xuất công thức chế tạo/dung hợp và tính tỉ lệ né.
+- Tiến hóa phân nhánh: Tuyến Nguyên Tố (Slime Nước → Slime Băng/Lửa → Slime Nguyên Tố Cổ Đại) hoặc Tuyến Ma Vương (Ma Slime → Slime Hắc Ám → Slime Ma Vương, cần tích lũy Ma lực từ các trận chiến lớn).
+- Biến hình: Dạng Khối (nhanh, nảy né đòn vật lý, bơi nhanh, chui qua lùm gai để lấy rương bí mật) và Dạng Nhân Hình (trang bị vũ khí, ma thuật mạnh hơn, dùng Kỹ năng Tối thượng, giao tiếp với loài người).
+- Ban tên & Thu phục: tiêu tốn MP để đặt tên cho Goblin, Sói, Ogre, Thằn Lằn Nhân — chúng tiến hóa thành Hobgoblin, Lang Tinh, Quỷ Nhân, Long Nhân. Thiếu MP sẽ rơi vào Ngủ Đông.
+- Lĩnh địa: phát triển Làng Goblin → Thị Trấn → Thành Phố → Quốc Gia Liên Minh Ma Vật; xây Nhà Ở, Nông Trại, Lò Rèn, Trạm Gác, Chợ, Tường Thành, Đại Sứ Quán; phân công thuộc hạ; buôn bán và ký hiệp ước với Vương Quốc Lam Thạch; phòng thủ trước Giáo Hội Thánh Quang.
+- Dung hợp kỹ năng: ví dụ Tự Phục Hồi + Kháng Độc + Kháng Băng → Cơ Thể Bất Hoại; cuối game mở Kỹ năng Tối thượng: Thao Túng Không Gian, Ngưng Đọng Thời Gian, Pháp Tắc Cải Biến, Bạo Thực Chi Vương.
+- Trùm cuối: Quỷ Vương Heo ở phương Bắc. Nuốt chửng nó để thức tỉnh.
 - Điều khiển: WASD + chuột trên máy tính; joystick ảo + nút cảm ứng trên điện thoại. Tự động lưu bằng localStorage.
