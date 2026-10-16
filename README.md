@@ -21,3 +21,13 @@ Hiệu ứng chuyển động (Animations) mượt mà cho các thông báo, tha
 JavaScript (Vanilla):
 Xử lý toàn bộ logic game: Vòng lặp thời gian, tính toán chỉ số, chiến đấu, RNG (random number generation) cho rớt đồ và đột phá.
 Sử dụng localStorage để tự động lưu/tải tiến trình chơi một cách liền mạch.
+
+⚽ FC Online Trợ Lý (thư mục `fc-online/`)
+Web app cài được (PWA) dành cho người chơi FC Online, chạy offline, dữ liệu lưu ngay trên thiết bị:
+- Trận đấu: ghi kết quả, tỉ lệ thắng, phong độ, biểu đồ tỉ lệ thắng tích lũy, thống kê theo đội hình và chiến thuật.
+- Đội hình: kho cầu thủ, xếp đội hình trên sân, team color, so sánh cầu thủ, gợi ý đội hình theo ngân sách.
+- Nhắc lịch: đếm ngược mùa xếp hạng, tiến độ lên hạng, mục tiêu, lời nhắc lặp lại có thông báo.
+- Chiến thuật: lưu thiết lập, tự tính tỉ lệ thắng của từng chiến thuật và theo sơ đồ đối thủ.
+- Sao lưu và khôi phục bằng tệp JSON.
+Mở tại `/fc-online/` (ví dụ https://phamnhan.click/fc-online/), rồi bấm "Cài app" hoặc "Thêm vào màn hình chính".
+App chỉ ghi chép và phân tích, không can thiệp vào game.
