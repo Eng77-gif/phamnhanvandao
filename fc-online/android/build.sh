@@ -48,6 +48,6 @@ if [ ! -f "$KS" ]; then
     -storepass "$PASS" -keypass "$PASS" -dname "CN=FC Online Tro Ly, O=phamnhan.click, C=VN" >/dev/null 2>&1
   echo "Đã tạo khóa ký mới: $KS"
 fi
-"$BT/apksigner" sign --ks "$KS" --ks-key-alias fco --ks-pass "pass:$PASS" --key-pass "pass:$PASS" --out "$OUT" "$B/aligned.apk"
+"$BT/apksigner" sign --v4-signing-enabled false --ks "$KS" --ks-key-alias fco --ks-pass "pass:$PASS" --key-pass "pass:$PASS" --out "$OUT" "$B/aligned.apk"
 "$BT/apksigner" verify "$OUT"
 echo "APK: $OUT ($(du -h "$OUT" | cut -f1))"
