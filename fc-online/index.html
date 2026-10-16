@@ -264,7 +264,7 @@ dialog h3{margin-bottom:12px}
   </div>
   <div class="card">
     <div class="row spread" style="margin-bottom:10px"><h3 style="margin:0">Lời nhắc</h3><div class="row"><button class="btn small" id="notifBtn">Bật thông báo</button><button class="btn primary" id="addRemBtn">+ Lời nhắc</button></div></div>
-    <p class="small muted" style="margin-top:0">Thông báo chỉ hiện khi app đang mở (hoặc chạy nền trên máy tính). Danh sách bên dưới luôn hiển thị lời nhắc đến hạn.</p>
+    <p class="small muted" style="margin-top:0" id="remHint">Trên web, thông báo chỉ hiện khi app đang mở. Bản APK Android có thông báo cả khi app đã đóng.</p>
     <div class="list" id="remList"></div>
   </div>
 </section>
@@ -285,6 +285,11 @@ dialog h3{margin-bottom:12px}
       <button class="btn primary" id="exportBtn">Xuất tệp JSON</button>
       <label class="btn" style="flex-direction:row;color:var(--text)">Nhập tệp JSON<input type="file" id="importFile" accept="application/json,.json" hidden></label>
     </div>
+  </div>
+  <div class="card" id="apkCard">
+    <h3>App Android</h3>
+    <p class="small muted" style="margin-top:0">Cài bản APK để dùng như app thật, có thông báo nhắc lịch cả khi app đã đóng. Dữ liệu trên web và trong APK là riêng, hãy dùng tệp sao lưu để chuyển qua lại.</p>
+    <a class="btn primary" href="fc-online-tro-ly.apk" download style="display:inline-block;text-decoration:none">Tải APK</a>
   </div>
   <div class="card">
     <h3>Dữ liệu mẫu</h3>
@@ -406,7 +411,10 @@ const KEY = 'fco-tro-ly-v1';
 const blank = () => ({matches:[],players:[],squad:{formation:'4-2-3-1',budget:100,slots:{}},reminders:[],goals:[],tactics:[],season:{end:'',rank:'',goal:'',pts:''}});
 let S = blank();
 function load(){ try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(blank(), JSON.parse(raw)); }catch(e){} }
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ toast('Không lưu được dữ liệu trên thiết bị này'); } }
+const ANDROID = window.FCOAndroid || null;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ toast('Không lưu được dữ liệu trên thiết bị này'); } syncNative(); }
+// Trong APK: gửi lời nhắc sang Android để hiện thông báo cả khi app đã đóng.
+function syncNative(){ if(!ANDROID) return; try{ ANDROID.syncReminders(JSON.stringify(S.reminders.map(r=>({id:r.id,title:r.title,at:new Date(r.at).getTime(),repeat:r.repeat||''})).filter(r=>!isNaN(r.at)))); }catch(e){} }
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
 
 /* ===================== Tiện ích ===================== */
@@ -779,7 +787,8 @@ function checkReminders(){
   let changed=false;
   for(const r of S.reminders){ if(!r.notified && new Date(r.at) <= Date.now()){
     r.notified = true; changed = true;
-    try{ if('Notification' in window && Notification.permission==='granted'){
+    try{ if(ANDROID) toast('Nhắc: '+r.title);
+    else if('Notification' in window && Notification.permission==='granted'){
       navigator.serviceWorker?.ready.then(reg=>reg.showNotification('FC Online Trợ Lý',{body:r.title,icon:'icon-192.png',tag:r.id})).catch(()=>new Notification('FC Online Trợ Lý',{body:r.title}));
     } else toast('Nhắc: '+r.title); }catch(e){ toast('Nhắc: '+r.title); }
   }}
@@ -791,9 +800,10 @@ for(const id of ['seasonEnd','rankNow','rankGoal','rankPts']) $('#'+id).onchange
 $('#goalForm').onsubmit = e=>{ e.preventDefault(); const t=$('#goalText').value.trim(); if(!t) return; S.goals.push({id:uid(),text:t,done:false}); $('#goalText').value=''; save(); renderPlan(); };
 $('#addRemBtn').onclick = ()=>editReminder(null);
 $('#notifBtn').onclick = async ()=>{
+  if(ANDROID){ ANDROID.requestNotif(); return; }
   if(!('Notification' in window)) return toast('Trình duyệt không hỗ trợ thông báo');
   const p = await Notification.requestPermission(); toast(p==='granted'?'Đã bật thông báo':'Thông báo chưa được cho phép'); updateNotifBtn(); };
-function updateNotifBtn(){ const b=$('#notifBtn'); if(!('Notification' in window)){ b.hidden=true; return; } b.hidden = Notification.permission==='granted'; }
+function updateNotifBtn(){ const b=$('#notifBtn'); if(ANDROID){ b.hidden = ANDROID.notifEnabled(); return; } if(!('Notification' in window)){ b.hidden=true; return; } b.hidden = Notification.permission==='granted'; }
 
 /* ===================== CHIẾN THUẬT ===================== */
 function tacticRecord(t){ const ms = S.matches.filter(m=>m.tactic===t.id); const w=ms.filter(m=>resultOf(m)==='W').length, d=ms.filter(m=>resultOf(m)==='D').length; return {n:ms.length,w,d,l:ms.length-w-d}; }
@@ -832,9 +842,11 @@ $('#addTacticBtn').onclick = ()=>editTactic(null);
 
 /* ===================== DỮ LIỆU ===================== */
 $('#exportBtn').onclick = ()=>{
+  const name = `fco-tro-ly-${new Date().toISOString().slice(0,10)}.json`;
+  if(ANDROID){ ANDROID.saveFile(name, JSON.stringify(S,null,1)); return; }
   const blob = new Blob([JSON.stringify(S,null,1)],{type:'application/json'});
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = `fco-tro-ly-${new Date().toISOString().slice(0,10)}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  a.download = name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 };
 $('#importFile').onchange = async e=>{
   const file = e.target.files[0]; if(!file) return;
@@ -880,6 +892,12 @@ let deferredInstall = null;
 addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); deferredInstall = e; $('#installBtn').hidden = false; });
 $('#installBtn').onclick = async ()=>{ if(!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall=null; $('#installBtn').hidden=true; };
 
+// Nút Back của Android: đóng hộp thoại đang mở, hoặc quay về tab Trận đấu trước khi thoát.
+window.fcoBack = ()=>{
+  const d = $$('dialog').find(x=>x.open); if(d){ d.close('cancel'); return true; }
+  if(!$('#view-matches').classList.contains('active')){ showView('matches'); return true; }
+  return false;
+};
 function render(){
   const v = $('nav.tabs button[aria-selected="true"]').dataset.view;
   if(v==='matches') renderMatches(); else if(v==='squad') renderSquadAll(); else if(v==='plan') renderPlan(); else if(v==='tactics') renderTactics();
@@ -897,7 +915,9 @@ function init(){
   let tab='matches'; try{ tab = localStorage.getItem(KEY+'-tab') || 'matches'; }catch(e){}
   showView($('nav.tabs button[data-view="'+tab+'"]') ? tab : 'matches');
   checkReminders(); setInterval(checkReminders, 30000);
-  if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  syncNative();
+  if(ANDROID) $('#apkCard').hidden = true;
+  if(!ANDROID && 'serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 init();
 </script>

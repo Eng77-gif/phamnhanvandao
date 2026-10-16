@@ -6,6 +6,7 @@ self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Pr
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  if (/\.apk$/i.test(new URL(req.url).pathname)) return;   // tệp cài Android: tải thẳng
   e.respondWith(fetch(req).then(res => {
     const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
     return res;

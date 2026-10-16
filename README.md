@@ -30,4 +30,6 @@ Web app cài được (PWA) dành cho người chơi FC Online, chạy offline, 
 - Chiến thuật: lưu thiết lập, tự tính tỉ lệ thắng của từng chiến thuật và theo sơ đồ đối thủ.
 - Sao lưu và khôi phục bằng tệp JSON.
 Mở tại `/fc-online/` (ví dụ https://phamnhan.click/fc-online/), rồi bấm "Cài app" hoặc "Thêm vào màn hình chính".
+APK Android: `fc-online/fc-online-tro-ly.apk` (Android 7.0 trở lên), có thông báo nhắc lịch cả khi app đã đóng và lưu tệp sao lưu vào thư mục Download.
+Build lại APK: `fc-online/android/build.sh` (cần JDK, Android SDK build-tools 35 + platform 34). Khóa ký `fc-online/android/fco-release.jks` không được đưa lên git, cần giữ lại để cài đè các bản sau.
 App chỉ ghi chép và phân tích, không can thiệp vào game.
