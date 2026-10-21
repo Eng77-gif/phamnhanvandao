@@ -1,6 +1,6 @@
 /* Service worker tối giản cho Phàm Nhân Vấn Đạo — cho phép cài thành ứng dụng.
    Game cần mạng để lưu lên máy chủ, nên chỉ lưu tạm trang chính để mở nhanh hơn. */
-const CACHE = 'van-dao-v3';
+const CACHE = 'van-dao-v4';
 self.addEventListener('install', e => { self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', e => {

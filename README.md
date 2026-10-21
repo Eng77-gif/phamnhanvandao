@@ -29,3 +29,8 @@ Bang Hội: người chơi tự khai lập, góp quỹ nâng cấp, phong trư�
 Kênh chat thế giới, lời nói hiện thành bong bóng trên bản đồ.
 
 Cài phần máy chủ: mở Supabase ▸ SQL Editor và chạy tệp supabase/world_online.sql (chỉ thêm bảng/hàm mới). Khi chưa chạy, bản đồ 2D và chat vẫn hoạt động qua Realtime (chat không lưu lịch sử); Lôi Đài và Bang Hội cần tệp SQL này.
+
+🎨 Đồ họa pixel-art (v1.74)
+Bản đồ Thế Giới dùng sprite sheet trong assets/sprites/ (nhân vật 4 hướng × đứng/đi 4 khung/ra chiêu, yêu thú, ô nền, cây, nhà, truyền tống trận, hiệu ứng chém).
+Sinh lại: node tools/sprites/build.js (cần Playwright). Xem trước toàn bộ: tools/sprites/preview.png.
+Thay bằng tranh PixelLab: xuất cùng kích thước khung và thứ tự hàng/cột như mô tả đầu tệp tools/sprites/pixel-gen.js rồi ghi đè tệp PNG tương ứng — không cần sửa code.

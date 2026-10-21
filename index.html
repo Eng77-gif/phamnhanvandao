@@ -1857,7 +1857,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.73.0';
+const GAME_VERSION = '1.74.0';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -2010,6 +2010,12 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.74.0', date:'21/10/2026', title:'Thế Giới pixel-art', items:[
+    ['moi','Bản đồ Thế Giới vẽ lại bằng sprite sheet pixel-art: ô nền, cây cối, cờ phướn, nhà ngói, lôi đài gỗ, truyền tống trận phát sáng.'],
+    ['moi','Nhân vật bốn hướng có hoạt ảnh đi và ra chiêu, màu đạo bào theo đạo lộ; yêu thú (lang, xà, linh thể, tán tu) có hoạt ảnh riêng.'],
+    ['moi','Chạm yêu thú: nhân vật vung kiếm, hiệu ứng chém rồi mới vào trận.'],
+    ['doi','Nước gợn sóng, công trình chắn đường, bóng đổ dưới chân.']
+  ]},
   {v:'1.73.0', date:'21/10/2026', title:'Thế Giới Trực Tuyến — bản đồ 2D, Lôi Đài, Bang Hội', items:[
     ['moi','Tab mới Thế Giới: bản đồ 2D đi lại tự do theo từng địa vực, thấy đạo hữu khác di chuyển theo thời gian thực.'],
     ['moi','Yêu thú lang thang trong các vùng săn — chạm để giao chiến. Truyền Tống Trận, Lôi Đài, Bang Hội Đường, Phường Thị ngay giữa thành.'],
@@ -17399,9 +17405,25 @@ const WO = {
   canvas:null, ctx:null, raf:0, lastT:0, lastSend:0, lastTrack:0, cam:{x:0, y:0}, leaveTimer:null,
   chat:{world:[], guild:[]}, chatCh:'world', chatSub:null, noDb:false,
   guild:null, role:null, cap:0, members:[], glist:[], gTs:0, gLoading:false, gErr:'',
-  arena:{rank:[], my:null, ts:0, loading:false, err:'', incoming:[], sub:null}
+  arena:{rank:[], my:null, ts:0, loading:false, err:'', incoming:[], sub:null},
+  px:false, fx:[], solids:[], bgB:null
 };
-const W2D = {T:40, W:48, H:36};
+const W2D = {T:32, W:48, H:36};
+/* Sprite sheet pixel-art (assets/sprites, sinh bằng tools/sprites/build.js — thay được bằng bản xuất PixelLab cùng khung) */
+const WO_SPR = {}, WO_HERO_PATHS = ['phap','the','hon','kiem','ma','phat','yeuquy'];
+const WO_TILE_COLS = ['grass0','grass1','grass2','flower','dirt','plaza','water0','water1','sand','cliff','forest'];
+const WO_OBJ_COLS = ['tree','pine','rock','bush','banner','grassTall'];
+function woLoadSprites(){
+  if(WO.pxLoading) return; WO.pxLoading = true;
+  const names = [...WO_HERO_PATHS.map(p=>'hero-'+p), 'mob-bandit','mob-beast','mob-snake','mob-spirit','tiles','objects','buildings','portal','fx'];
+  let left = names.length, failed = false;
+  names.forEach(n=>{ const im = new Image();
+    im.onload = ()=>{ if(--left===0 && !failed){ WO.px = true; WO.bg = null; if(WO.canvas && document.body.contains(WO.canvas)) woStart(); } };
+    im.onerror = ()=>{ failed = true; };
+    im.src = 'assets/sprites/' + n + '.png'; WO_SPR[n] = im; });
+}
+function woMobKind(n){ return /Xà|Giao|Mãng/i.test(n) ? 'snake' : /Lang|Hổ|Thú|Kình|Quy|Báo|Viên|Ưng|Hồ Ly/i.test(n) ? 'beast' : /Yêu|Linh|Hồn|Ma|Khôi|Quỷ|Phách|Lỗi/i.test(n) ? 'spirit' : 'bandit'; }
+function woDir(vx, vy){ return Math.abs(vx) > Math.abs(vy) ? (vx < 0 ? 1 : 2) : (vy < 0 ? 3 : 0); }
 const WO_GUILD_LV = [0, 50000, 200000, 600000, 1500000];
 const WO_ROLE = {leader:'Bang Chủ', elder:'Trưởng Lão', member:'Bang Chúng'};
 function woMissing(e){ const m = (e && (e.message||e.msg||e.code)) || ''; return /Could not find the function|does not exist|PGRST202|42883|42P01|schema cache/i.test(m); }
@@ -17456,16 +17478,20 @@ function woBuild(){
   zones.forEach(z=>{ disc(z.x, z.y, 5, 'g'); });
   const road = (ax, ay, bx, by)=>{ const n = Math.max(Math.abs(bx-ax), Math.abs(by-ay)); for(let k=0;k<=n;k++){ const x = Math.round(ax+(bx-ax)*k/n), y = Math.round(ay+(by-ay)*k/n); paint(x, y, 'r'); paint(x+1, y, 'r'); } };
   zones.forEach(z=>road(cx, cy, z.x, z.y));
-  for(let y=-5;y<=5;y++) for(let x=-7;x<=7;x++) paint(cx+x, cy+y, (Math.abs(x)===7||Math.abs(y)===5) ? 'r' : 'p');
+  for(let y=-7;y<=7;y++) for(let x=-10;x<=10;x++) paint(cx+x, cy+y, (Math.abs(x)===10||Math.abs(y)===7) ? 'r' : 'p');
   const sites = [
-    {id:'arena',  name:'Lôi Đài',          x:cx-4, y:cy-2.5},
-    {id:'guild',  name:'Bang Hội Đường',   x:cx+4, y:cy-2.5},
+    {id:'arena',  name:'Lôi Đài',          x:cx-5, y:cy-1},
+    {id:'guild',  name:'Bang Hội Đường',   x:cx+5, y:cy-1},
     {id:'portal', name:'Truyền Tống Trận', x:cx,   y:cy+3},
-    {id:'market', name:'Phường Thị',       x:cx-4.5, y:cy+2.5},
-    {id:'retreat',name:'Bế Quan Thạch',    x:cx+4.5, y:cy+2.5}
+    {id:'market', name:'Phường Thị',       x:cx-6, y:cy+5.5},
+    {id:'retreat',name:'Bế Quan Thạch',    x:cx+6, y:cy+5.5}
   ].map(s=>({...s, x:s.x*T+T/2, y:s.y*T+T/2}));
-  // vẽ sẵn nền vào canvas phụ
-  const bg = document.createElement('canvas'); bg.width = W*T; bg.height = H*T;
+  const zpx = zones.map(z=>({x:z.x*T+T/2, y:z.y*T+T/2}));
+  let bg, bgB = null;
+  if(WO.px){ bg = woBgPx(grid, X, 'water0', zpx, cx, cy); bgB = woBgPx(grid, X, 'water1', zpx, cx, cy); }
+  else {
+  // vẽ sẵn nền vào canvas phụ (dự phòng khi chưa tải được sprite)
+  bg = document.createElement('canvas'); bg.width = W*T; bg.height = H*T;
   const g = bg.getContext('2d');
   for(let y=0;y<H;y++) for(let x=0;x<W;x++){
     const t = grid[y][x], px = x*T, py = y*T, v = rnd();
@@ -17479,14 +17505,86 @@ function woBuild(){
   }
   zones.forEach(z=>{ const px = z.x*T+T/2, py = z.y*T+T/2; g.save(); g.strokeStyle = 'rgba(224,130,104,.45)'; g.setLineDash([8,8]); g.lineWidth = 2; g.beginPath(); g.arc(px, py, 5*T, 0, 7); g.stroke(); g.restore(); });
   sites.forEach(s=>woDrawSite(g, s));
+  }
+  WO.solids = WO.px ? sites.filter(s=>s.id!=='portal').map(s=>s.id==='arena' ? [s.x-92, s.y-112, s.x+92, s.y-6] : [s.x-54, s.y-92, s.x+54, s.y-8]) : [];
+  WO.bgB = bgB;
   const mini = document.createElement('canvas'); mini.width = W*3; mini.height = H*3; mini.getContext('2d').drawImage(bg, 0, 0, mini.width, mini.height);
   WO.grid = grid; WO.bg = bg; WO.mini = mini; WO.sites = sites;
   WO.zones = zones.map(z=>({loc:z.loc, x:z.x*T+T/2, y:z.y*T+T/2}));
   WO.mobs = [];
-  WO.zones.forEach((z, zi)=>{ for(let k=0;k<3;k++){ const a = rnd()*7, d = 40+rnd()*110; WO.mobs.push({id:zi+'-'+k, zone:z, name:(z.loc.enemies||['Yêu Thú'])[k % (z.loc.enemies||[1]).length], x:z.x+Math.cos(a)*d, y:z.y+Math.sin(a)*d, tx:null, ty:null, hideUntil:0, ph:rnd()*6}); } });
-  const portal = sites.find(s=>s.id==='portal');
-  WO.me.x = portal.x + (Math.random()-0.5)*60; WO.me.y = portal.y - 50; WO.me.tx = WO.me.ty = null; WO.target = null;
+  WO.zones.forEach((z, zi)=>{ for(let k=0;k<3;k++){ const a = rnd()*7, d = 40+rnd()*110, nm = (z.loc.enemies||['Yêu Thú'])[k % (z.loc.enemies||[1]).length]; WO.mobs.push({id:zi+'-'+k, zone:z, name:nm, kind:woMobKind(nm), x:z.x+Math.cos(a)*d, y:z.y+Math.sin(a)*d, tx:null, ty:null, face:-1, hideUntil:0, hitUntil:0, ph:rnd()*6}); } });
+  if(key !== WO.mapKey){
+    const portal = sites.find(s=>s.id==='portal');
+    WO.me.x = portal.x + (Math.random()-0.5)*60; WO.me.y = portal.y - 70; WO.me.tx = WO.me.ty = null; WO.target = null;
+  }
   WO.mapKey = key;
+}
+function woBgPx(grid, X, water, zones, cx, cy){
+  const {T, W, H} = W2D, row = {ng:0, lg:1, tg:2}[X.w] || 0, ts = WO_SPR.tiles, ob = WO_SPR.objects, R = woRng(WO_TILE_COLS.join() + woMapKey());
+  const bg = document.createElement('canvas'); bg.width = W*T; bg.height = H*T;
+  const g = bg.getContext('2d'); g.imageSmoothingEnabled = false;
+  const deco = [];
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    const t = grid[y][x]; let n;
+    if(t==='g'){ const v = R(); n = v<.5 ? 'grass0' : v<.8 ? 'grass1' : v<.94 ? 'grass2' : 'flower'; if(R()<.06) deco.push([x, y, ['rock','bush','grassTall','grassTall'][Math.floor(R()*4)]]); }
+    else if(t==='f'){ n = 'forest'; if((x+y)%2===0 || R()<.25) deco.push([x, y, R() < (X.w==='lg' ? .6 : .3) ? 'pine' : 'tree']); }
+    else n = {w:water, s:'sand', r:'dirt', p:'plaza', m:'cliff'}[t];
+    g.drawImage(ts, WO_TILE_COLS.indexOf(n)*16, row*16, 16, 16, x*T, y*T, T, T);
+    if(t==='m' && y>0 && grid[y-1][x]!=='m'){ g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(x*T, y*T, T, 4); }
+    if(t!=='w' && y>0 && grid[y-1][x]==='w'){ g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(x*T, y*T, T, 2); }
+  }
+  [[-10,-7],[10,-7],[-10,7],[10,7],[-3,-7],[3,-7]].forEach(([dx,dy])=>deco.push([cx+dx, cy+dy, 'banner']));
+  zones.forEach(z=>{ g.save(); g.strokeStyle = 'rgba(224,110,90,.5)'; g.setLineDash([6,6]); g.lineWidth = 2; g.beginPath(); g.arc(z.x, z.y, 5*T, 0, 7); g.stroke(); g.restore(); });
+  deco.sort((a, b)=>a[1]-b[1]).forEach(([x, y, n])=>{ const j = n==='banner' ? 0 : Math.round((R()-.5)*10);
+    g.fillStyle = 'rgba(0,0,0,.22)'; g.beginPath(); g.ellipse(x*T+T/2+j, y*T+T-4, n==='tree'||n==='pine' ? 18 : 10, 5, 0, 0, 7); g.fill();
+    g.drawImage(ob, WO_OBJ_COLS.indexOf(n)*32, row*40, 32, 40, x*T+T/2-32+j, y*T+T-76, 64, 80); });
+  return bg;
+}
+function woLabel(c, text, x, y, color, font){
+  c.font = font || '600 12px "Be Vietnam Pro", sans-serif'; c.textAlign = 'center'; c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.8)';
+  c.strokeText(text, x, y); c.fillStyle = color; c.fillText(text, x, y);
+}
+function woShadow(c, x, y, r){ c.fillStyle = 'rgba(0,0,0,.32)'; c.beginPath(); c.ellipse(x, y, r, r*0.36, 0, 0, 7); c.fill(); }
+function woDrawSitePx(c, s, now){
+  const B = WO_SPR.buildings;
+  if(s.id==='portal'){ c.drawImage(WO_SPR.portal, (Math.floor(now/160)%4)*48, 0, 48, 48, s.x-48, s.y-62, 96, 96); }
+  else if(s.id==='arena') c.drawImage(B, 192, 0, 96, 72, s.x-96, s.y-126, 192, 144);
+  else c.drawImage(B, ({guild:0, market:1, retreat:2}[s.id]||0)*64, 0, 64, 72, s.x-64, s.y-134, 128, 144);
+  const w = (c.font = '600 13px "Be Vietnam Pro", sans-serif', c.measureText(s.name).width + 14);
+  c.fillStyle = 'rgba(8,12,14,.75)'; c.fillRect(s.x-w/2, s.y+(s.id==='portal'?28:10), w, 19);
+  c.fillStyle = '#eecb8f'; c.textAlign = 'center'; c.fillText(s.name, s.x, s.y+(s.id==='portal'?42:24));
+}
+function woDrawHeroPx(c, x, y, o, me, t){
+  const sheet = WO_SPR['hero-' + (WO_HERO_PATHS.includes(o.p) ? o.p : 'kiem')], r = o.r||0;
+  if(r>=2){ c.save(); c.globalAlpha = .3 + Math.sin(t/400)*.1; const gr = c.createRadialGradient(x, y-26, 2, x, y-26, 34); gr.addColorStop(0, ['#fff','#fff','#f3dfa6','#9fe0ff','#b9a2ff','#ffd27a','#ff9ad0','#ff7a7a','#ffe9a8','#fff4c2','#fff','#fff','#fff'][r]||'#fff'); gr.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = gr; c.beginPath(); c.arc(x, y-26, 34, 0, 7); c.fill(); c.restore(); }
+  woShadow(c, x, y-2, 13);
+  const f = o.atk ? 5 : o.moving ? 1 + Math.floor(t/110)%4 : 0;
+  c.drawImage(sheet, f*24, (o.dir||0)*32, 24, 32, Math.round(x-24), Math.round(y-62), 48, 64);
+  woLabel(c, (o.t?`[${o.t}] `:'') + (o.n||''), x, y-66, me ? '#eecb8f' : '#e6f4ec', `${me?'700':'600'} 12px "Be Vietnam Pro", sans-serif`);
+  woLabel(c, woRealmShort(r), x, y+12, '#9fd8bd', '10px "Be Vietnam Pro", sans-serif');
+  if(o.say && t < o.sayT) woBubble(c, x, y-82, o.say);
+}
+function woDrawMobPx(c, m, now, tnow){
+  const locked = state.realmIdx < (m.zone.loc.power||0) || state.mortal, f = Math.floor(now/(m.moving?130:260) + m.ph)%4, hit = m.hitUntil > tnow;
+  c.save();
+  if(hit && Math.floor(tnow/60)%2) c.globalAlpha = .45;
+  const hue = (m.zone.loc.power||0)*38; if(hue && 'filter' in c) c.filter = `hue-rotate(${hue}deg)${locked?' grayscale(.6) brightness(.7)':''}`; else if(locked && 'filter' in c) c.filter = 'grayscale(.6) brightness(.7)';
+  if(m.kind==='bandit'){
+    woShadow(c, m.x, m.y-2, 12);
+    c.drawImage(WO_SPR['mob-bandit'], (hit ? 5 : m.moving ? 1+f : 0)*24, (m.face>0 ? 2 : 1)*32, 24, 32, Math.round(m.x-24), Math.round(m.y-62), 48, 64);
+  } else {
+    woShadow(c, m.x, m.y-4, m.kind==='snake' ? 20 : 18);
+    c.translate(Math.round(m.x), 0); if(m.face>0) c.scale(-1, 1);
+    c.drawImage(WO_SPR['mob-'+m.kind], f*32, hit ? 32 : 0, 32, 32, -32, Math.round(m.y-58), 64, 64);
+  }
+  c.restore();
+  woLabel(c, (locked?'🔒 ':'') + m.name, m.x, m.y-(m.kind==='bandit'?66:48), locked ? '#b0a8a0' : '#ff9a84', '600 11px "Be Vietnam Pro", sans-serif');
+}
+function woDrawFx(c, tnow){
+  WO.fx = WO.fx.filter(e=>tnow - e.t0 < 320);
+  WO.fx.forEach(e=>{ const f = Math.min(3, Math.floor((tnow - e.t0)/80));
+    c.drawImage(WO_SPR.fx, f*32, 0, 32, 32, e.x-32, e.y-60, 64, 64);
+    c.drawImage(WO_SPR.fx, f*32+8, 32, 16, 16, e.x-16+8, e.y-44, 32, 32); });
 }
 function woDrawSite(g, s){
   const x = s.x, y = s.y;
@@ -17515,7 +17613,7 @@ function woDrawSite(g, s){
   g.fillStyle = '#eecb8f'; g.fillText(s.name, x, y+51);
   g.restore();
 }
-function woBlocked(x, y){ const {T, W, H} = W2D; const i = Math.floor(x/T), j = Math.floor(y/T); if(i<0||j<0||i>=W||j>=H) return true; const t = WO.grid[j][i]; return t==='w' || t==='m'; }
+function woBlocked(x, y){ const {T, W, H} = W2D; const i = Math.floor(x/T), j = Math.floor(y/T); if(i<0||j<0||i>=W||j>=H) return true; const t = WO.grid[j][i]; if(t==='w' || t==='m') return true; for(const r of WO.solids) if(x>r[0] && x<r[2] && y>r[1] && y<r[3]) return true; return false; }
 
 /* ---------------- Vẽ nhân vật & yêu thú ---------------- */
 function woDrawHero(c, x, y, o, me, t){
@@ -17563,7 +17661,8 @@ function woStart(){
   const host = document.getElementById('w2dHost'); if(!host) return;
   if(WO.canvas.parentNode !== host) host.appendChild(WO.canvas);
   woResize();
-  if(WO.mapKey !== woMapKey() || !WO.bg){ woBuild(); woMapLeave(); }
+  if(!WO.px) woLoadSprites();
+  if(WO.mapKey !== woMapKey() || !WO.bg){ const k = WO.mapKey; woBuild(); if(k !== WO.mapKey) woMapLeave(); }
   woMapJoin();
   if(WO.leaveTimer){ clearTimeout(WO.leaveTimer); WO.leaveTimer = null; }
   if(!WO.raf){ WO.lastT = performance.now(); WO.raf = requestAnimationFrame(woFrame); }
@@ -17591,7 +17690,7 @@ function woUpdate(dt, now){
   const len = Math.hypot(vx, vy);
   me.moving = len > 0;
   if(len){
-    vx /= len; vy /= len; if(vx) me.face = vx > 0 ? 1 : -1;
+    vx /= len; vy /= len; if(vx) me.face = vx > 0 ? 1 : -1; me.dir = woDir(vx, vy);
     const nx = me.x + vx*sp*dt, ny = me.y + vy*sp*dt;
     if(!woBlocked(nx, ny)){ me.x = nx; me.y = ny; }
     else if(!woBlocked(nx, me.y)){ me.x = nx; }
@@ -17600,10 +17699,12 @@ function woUpdate(dt, now){
     if(now - WO.lastSend > 120 && WO.map && WO.mapReady){ WO.lastSend = now; WO.map.send({type:'broadcast', event:'mv', payload:{id:cloud.user.id, x:Math.round(me.x), y:Math.round(me.y)}}); WO.dirty = true; }
   }
   if(WO.dirty && WO.map && WO.mapReady && now - WO.lastTrack > 4000){ WO.lastTrack = now; WO.dirty = false; WO.map.track({...woProfile(), x:Math.round(me.x), y:Math.round(me.y)}); }
-  for(const id in WO.others){ const o = WO.others[id]; if(o.tx==null) continue; const dx = o.tx-o.x, dy = o.ty-o.y; o.moving = Math.abs(dx)+Math.abs(dy) > 2; o.x += dx*Math.min(1, dt*8); o.y += dy*Math.min(1, dt*8); }
+  for(const id in WO.others){ const o = WO.others[id]; if(o.tx==null) continue; const dx = o.tx-o.x, dy = o.ty-o.y; o.moving = Math.abs(dx)+Math.abs(dy) > 2; if(o.moving) o.dir = woDir(dx, dy); o.x += dx*Math.min(1, dt*8); o.y += dy*Math.min(1, dt*8); }
   WO.mobs.forEach(m=>{
+    m.moving = false;
+    if(m.hitUntil > Date.now()) return;
     if(m.tx==null || Math.hypot(m.tx-m.x, m.ty-m.y) < 3){ if(Math.random() < dt*0.4){ const a = Math.random()*7, d = Math.random()*150; m.tx = m.zone.x + Math.cos(a)*d; m.ty = m.zone.y + Math.sin(a)*d; } return; }
-    const dx = m.tx-m.x, dy = m.ty-m.y, d = Math.hypot(dx, dy); m.x += dx/d*40*dt; m.y += dy/d*40*dt;
+    const dx = m.tx-m.x, dy = m.ty-m.y, d = Math.hypot(dx, dy); m.moving = true; if(Math.abs(dx) > 1) m.face = dx > 0 ? 1 : -1; m.x += dx/d*40*dt; m.y += dy/d*40*dt;
   });
   // vật gần nhất có thể tương tác
   let best = null, bd = 70;
@@ -17618,20 +17719,24 @@ function woUpdate(dt, now){
 }
 function woDraw(now){
   const c = WO.ctx, dpr = WO.dpr, w = WO.vw, h = WO.vh, me = WO.me, {T, W, H} = W2D;
-  const cx = Math.max(0, Math.min(W*T - w, me.x - w/2)), cy = Math.max(0, Math.min(H*T - h, me.y - h/2));
+  const cx = Math.round(Math.max(0, Math.min(W*T - w, me.x - w/2))), cy = Math.round(Math.max(0, Math.min(H*T - h, me.y - h/2)));
   WO.cam.x = cx; WO.cam.y = cy;
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
-  c.drawImage(WO.bg, cx, cy, w, h, 0, 0, w, h);
+  c.imageSmoothingEnabled = false;
+  c.drawImage(WO.bgB && Math.floor(now/700)%2 ? WO.bgB : WO.bg, cx, cy, w, h, 0, 0, w, h);
   c.translate(-cx, -cy);
   WO.zones.forEach(z=>{ c.font = '700 14px "Noto Serif", serif'; c.textAlign = 'center'; c.lineWidth = 4; c.strokeStyle = 'rgba(0,0,0,.7)'; const lb = z.loc.name + ((z.loc.power||0) > state.realmIdx ? ` · cần ${woRealmShort(z.loc.power)}` : ''); c.strokeText(lb, z.x, z.y - 5*T + 18); c.fillStyle = '#f0c9b8'; c.fillText(lb, z.x, z.y - 5*T + 18); });
   if(me.tx!=null){ c.strokeStyle = 'rgba(238,203,143,.8)'; c.lineWidth = 2; c.beginPath(); c.arc(me.tx, me.ty, 8 + Math.sin(now/120)*2, 0, 7); c.stroke(); }
   const tnow = Date.now();
   const ents = [];
-  WO.mobs.forEach(m=>{ if(m.hideUntil <= tnow) ents.push({y:m.y, f:()=>woDrawMob(c, m, now)}); });
-  for(const id in WO.others){ const o = WO.others[id]; ents.push({y:o.y, f:()=>woDrawHero(c, o.x, o.y, {...o, sayT:o.sayT}, false, tnow)}); }
-  ents.push({y:me.y, f:()=>woDrawHero(c, me.x, me.y, {...woProfile(), moving:me.moving, say:me.say, sayT:me.sayT}, true, tnow)});
+  const P = WO.px, hero = P ? woDrawHeroPx : woDrawHero;
+  if(P) WO.sites.forEach(s=>ents.push({y:s.id==='portal' ? s.y-40 : s.y, f:()=>woDrawSitePx(c, s, now)}));
+  WO.mobs.forEach(m=>{ if(m.hideUntil <= tnow) ents.push({y:m.y, f:()=>P ? woDrawMobPx(c, m, now, tnow) : woDrawMob(c, m, now)}); });
+  for(const id in WO.others){ const o = WO.others[id]; ents.push({y:o.y, f:()=>hero(c, o.x, o.y, {...o, sayT:o.sayT}, false, tnow)}); }
+  ents.push({y:me.y, f:()=>hero(c, me.x, me.y, {...woProfile(), moving:me.moving, dir:me.dir, atk:me.atkUntil > tnow, say:me.say, sayT:me.sayT}, true, tnow)});
   ents.sort((a, b)=>a.y-b.y).forEach(e=>e.f());
-  if(WO.near){ const r = WO.near.ref; c.strokeStyle = 'rgba(238,203,143,.9)'; c.setLineDash([4,4]); c.lineWidth = 1.5; c.beginPath(); c.ellipse(r.x, r.y+4, 26, 10, 0, 0, 7); c.stroke(); c.setLineDash([]); }
+  if(P) woDrawFx(c, tnow);
+  if(WO.near && WO.near.kind!=='site'){ const r = WO.near.ref; c.strokeStyle = 'rgba(238,203,143,.9)'; c.setLineDash([4,4]); c.lineWidth = 1.5; c.beginPath(); c.ellipse(r.x, r.y+4, 26, 10, 0, 0, 7); c.stroke(); c.setLineDash([]); }
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
   // bản đồ nhỏ
   const mw = Math.min(132, w*0.3), mh = mw*H/W, mx = w - mw - 8, my = 8;
@@ -17648,10 +17753,10 @@ function woPointer(ev){
   const tnow = Date.now();
   WO.mobs.forEach(m=>{ if(m.hideUntil > tnow) return; const d = Math.hypot(m.x-x, m.y-y); if(d < bd){ bd = d; hit = {kind:'mob', ref:m, key:'m'+m.id}; } });
   for(const id in WO.others){ const o = WO.others[id]; const d = Math.hypot(o.x-x, o.y-15-y); if(d < bd){ bd = d; hit = {kind:'pl', ref:{...o, id}, key:'p'+id}; } }
-  if(!hit) WO.sites.forEach(s=>{ if(Math.abs(s.x-x) < 48 && y > s.y-44 && y < s.y+56){ hit = {kind:'site', ref:s, key:'s'+s.id}; } });
+  if(!hit) WO.sites.forEach(s=>{ if(WO.px ? (Math.abs(s.x-x) < (s.id==='arena' ? 96 : 60) && y > s.y-(s.id==='portal' ? 60 : 130) && y < s.y+40) : (Math.abs(s.x-x) < 48 && y > s.y-44 && y < s.y+56)){ hit = {kind:'site', ref:s, key:'s'+s.id}; } });
   if(hit && WO.near && WO.near.key === hit.key){ woInteract(hit); return; }
   WO.target = hit;
-  WO.me.tx = hit ? hit.ref.x : x; WO.me.ty = hit ? hit.ref.y + (hit.kind==='site' ? 40 : 0) : y;
+  WO.me.tx = hit ? hit.ref.x : x; WO.me.ty = hit ? hit.ref.y + (hit.kind==='site' ? (WO.px ? 26 : 40) : 0) : y;
 }
 function woRenderAct(){
   const el = document.getElementById('w2dAct'); if(!el) return;
@@ -17677,8 +17782,12 @@ function woInteract(n){
     if(state.mortal){ toast('Phàm nhân chưa thể săn yêu thú — hãy nhập đạo trước'); return; }
     if(state.realmIdx < (loc.power||0)){ toast(`Cần đạt ${MAJOR_REALMS[loc.power].name} mới vào được ${loc.name}`); return; }
     if(SC || state.combat || state.expd){ toast('Đang bận việc khác'); return; }
-    m.hideUntil = Date.now() + 25000;
-    woWorld().explore(loc.id);
+    if(m.hitUntil > Date.now()) return;
+    const now = Date.now(), me = WO.me;
+    me.atkUntil = now + 380; me.dir = woDir(m.x - me.x, m.y - me.y); m.hitUntil = now + 420; m.face = me.x > m.x ? 1 : -1;
+    WO.fx.push({x:m.x, y:m.y, t0:now});
+    try{ sfx('tap'); }catch(e){}
+    setTimeout(()=>{ m.hideUntil = Date.now() + 25000; woWorld().explore(loc.id); }, 420);
     return;
   }
   if(n.kind==='pl') return woPlayerCard(n.ref.id, n.ref);
