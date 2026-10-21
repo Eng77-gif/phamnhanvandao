@@ -21,3 +21,11 @@ Hiệu ứng chuyển động (Animations) mượt mà cho các thông báo, tha
 JavaScript (Vanilla):
 Xử lý toàn bộ logic game: Vòng lặp thời gian, tính toán chỉ số, chiến đấu, RNG (random number generation) cho rớt đồ và đột phá.
 Sử dụng localStorage để tự động lưu/tải tiến trình chơi một cách liền mạch.
+
+🌏 Thế Giới Trực Tuyến (v1.73)
+Bản đồ 2D: mỗi địa vực là một bản đồ riêng, đi lại bằng chạm/chuột hoặc WASD, thấy đạo hữu khác di chuyển theo thời gian thực (Supabase Realtime Presence). Yêu thú lang thang trong vùng săn, chạm để giao chiến; giữa thành có Lôi Đài, Bang Hội Đường, Truyền Tống Trận, Phường Thị.
+Lôi Đài: khiêu chiến người đang trực tuyến, máy chủ phân thắng bại theo thực lực, có điểm và bảng xếp hạng.
+Bang Hội: người chơi tự khai lập, góp quỹ nâng cấp, phong trưởng lão, kênh chat riêng.
+Kênh chat thế giới, lời nói hiện thành bong bóng trên bản đồ.
+
+Cài phần máy chủ: mở Supabase ▸ SQL Editor và chạy tệp supabase/world_online.sql (chỉ thêm bảng/hàm mới). Khi chưa chạy, bản đồ 2D và chat vẫn hoạt động qua Realtime (chat không lưu lịch sử); Lôi Đài và Bang Hội cần tệp SQL này.

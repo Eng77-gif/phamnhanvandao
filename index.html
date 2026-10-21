@@ -336,7 +336,7 @@
 
   /* ================= v1.3 — điều hướng & bố cục mới ================= */
   .bottom-nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:640px;z-index:20;
-    display:grid;grid-template-columns:repeat(6,1fr);background:rgba(14,19,22,.96);backdrop-filter:blur(8px);
+    display:grid;grid-template-columns:repeat(7,1fr);background:rgba(14,19,22,.96);backdrop-filter:blur(8px);
     border-top:1px solid var(--border);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));}
   .bottom-nav.locked{opacity:.35;pointer-events:none;}
   .nav-btn{background:none;border:none;color:var(--text-faint);display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px 6px;border-radius:10px;position:relative;}
@@ -1691,6 +1691,70 @@
   .ls-actions .btn small{display:block;font-size:11px;font-weight:500;opacity:.75;margin-top:2px;}
   .ls-note{font-size:11px;color:var(--text-faint);text-align:center;margin-top:2px;}
 
+  /* ================= v1.73 — Thế Giới Trực Tuyến ================= */
+  .nav-lb{font-size:10px;}
+  body.wo-wide #app, body.wo-wide .bottom-nav{max-width:1100px;}
+  .w2d-card{padding:10px;}
+  .w2d-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 2px 8px;font-size:12.5px;color:var(--text-dim);}
+  .w2d-top > b{font-family:var(--fh);font-size:15px;color:var(--gold-bright);display:flex;align-items:center;gap:6px;}
+  .w2d-top .ic{width:16px;height:16px;}
+  .w2d-top span b{color:var(--jade-bright);}
+  .w2d-host{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#0b1113;box-shadow:inset 0 0 40px rgba(0,0,0,.5);}
+  .w2d-canvas{display:block;width:100%;touch-action:none;cursor:pointer;outline:none;}
+  .w2d-act{min-height:40px;display:flex;align-items:center;justify-content:center;margin-top:8px;}
+  .w2d-go{width:auto;max-width:100%;display:inline-flex;align-items:center;gap:6px;animation:vnIn .25s ease-out;}
+  .w2d-go .ic{width:15px;height:15px;margin:0;}
+  .w2d-hint{font-size:11.5px;color:var(--text-faint);display:flex;align-items:center;gap:6px;text-align:center;}
+  .w2d-hint .ic{width:14px;height:14px;flex:none;}
+  .w2d-chat{margin-top:6px;display:flex;flex-direction:column;gap:3px;min-height:20px;}
+  .w2d-say{display:flex;gap:6px;margin-top:8px;}
+  .w2d-say input{flex:1;min-width:0;background:#0b1113;border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:14px;padding:9px 11px;outline:none;}
+  .w2d-say input:focus{border-color:var(--jade-dim);}
+  .wo-msg{font-size:12.5px;line-height:1.45;word-break:break-word;}
+  .wo-msg b{font-weight:700;color:var(--jade-bright);margin-right:6px;}
+  .wo-msg b small{font-weight:500;font-size:10px;color:var(--text-faint);margin-left:4px;}
+  .wo-msg.me b{color:var(--gold-bright);}
+  .wo-msg.sys span{color:var(--text-faint);font-style:italic;}
+  .wo-tag{font-style:normal;display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:#1a1206;background:linear-gradient(180deg,#f3d693,#c89a4a);border-radius:4px;padding:0 4px;margin-right:5px;vertical-align:1px;}
+  .wo-chat-list{height:min(56vh,460px);overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:10px;background:rgba(0,0,0,.28);}
+  .wo-row{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--border-soft);width:100%;background:none;border-left:0;border-right:0;border-top:0;color:inherit;text-align:left;font:inherit;}
+  .wo-row:last-child{border-bottom:none;}
+  .wo-rb{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .wo-rb b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .wo-rb small{font-size:11px;color:var(--text-faint);}
+  .wo-row em{font-style:normal;font-size:12px;color:var(--gold);}
+  .wo-notice{color:var(--text-dim)!important;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .wo-notice-box{font-size:13px;color:var(--text-dim);padding:9px 11px;border-radius:8px;background:rgba(0,0,0,.25);border-left:2px solid var(--gold-dim);}
+  .wo-link{background:none;border:none;color:var(--gold);font-size:12px;text-decoration:underline;padding:0 0 0 4px;}
+  .wo-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--text-faint);opacity:.5;}
+  .wo-dot.on{background:var(--jade-bright);opacity:1;box-shadow:0 0 6px var(--jade);}
+  .wo-mem{cursor:pointer;}
+  .wo-form{display:flex;gap:8px;}
+  .wo-form .acc-input{flex:1;min-width:0;}
+  .wo-form .wo-tag-in{flex:none;width:84px;text-transform:uppercase;text-align:center;}
+  .wo-col{display:flex;flex-direction:column;gap:8px;}
+  .wo-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+  .wo-stats > div{text-align:center;padding:9px 4px;border-radius:9px;background:rgba(0,0,0,.25);border:1px solid var(--border-soft);}
+  .wo-stats b{display:block;font-family:var(--fh);font-size:18px;color:var(--gold-bright);}
+  .wo-stats small{font-size:10.5px;color:var(--text-faint);}
+  .wo-pts{font-family:var(--fh);color:var(--gold-bright);}
+  .wo-hero-card{background:radial-gradient(ellipse at 100% 0%, rgba(193,93,74,.12), transparent 55%), linear-gradient(180deg, var(--panel), var(--panel2));}
+  /* màn hình mở đầu kiểu cổng game */
+  #loadingScreen::before, #loadingScreen::after{content:'';position:absolute;left:-5%;right:-5%;bottom:0;pointer-events:none;}
+  #loadingScreen::before{height:34%;background:linear-gradient(180deg,#14232a,#0b1316);clip-path:polygon(0 60%,9% 38%,17% 52%,28% 22%,38% 46%,47% 30%,58% 50%,68% 18%,79% 44%,88% 30%,100% 48%,100% 100%,0 100%);opacity:.9;}
+  #loadingScreen::after{height:20%;background:linear-gradient(180deg,#0f1b1f,#080c0e);clip-path:polygon(0 50%,12% 30%,24% 56%,36% 36%,50% 60%,63% 34%,76% 54%,88% 28%,100% 46%,100% 100%,0 100%);}
+  #loadingScreen > :not(.ls-sky){position:relative;z-index:1;}
+  .ls-portal{display:flex;flex-direction:column;align-items:center;gap:10px;margin:0 0 14px;width:min(100%,360px);}
+  .ls-server{display:flex;align-items:center;gap:8px;width:100%;padding:9px 14px;border-radius:12px;background:rgba(10,16,18,.7);border:1px solid var(--gold-dim);box-shadow:0 0 0 1px rgba(212,175,106,.08), 0 8px 24px rgba(0,0,0,.35);}
+  .ls-server b{font-size:13px;color:var(--gold-bright);font-weight:700;}
+  .ls-server small{margin-left:auto;font-size:11px;color:var(--jade-bright);}
+  .ls-led{flex:none;width:8px;height:8px;border-radius:50%;background:var(--jade-bright);box-shadow:0 0 8px var(--jade);animation:ls-pulse 2s ease-in-out infinite;}
+  .ls-feats{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;}
+  .ls-feats span{font-size:10.5px;letter-spacing:.4px;color:#cfe6da;padding:3px 9px;border-radius:20px;border:1px solid rgba(127,212,176,.25);background:rgba(87,187,150,.08);}
+  @media (min-width:900px){
+    body.wo-wide main{padding-left:22px;padding-right:22px;}
+  }
+
   @media (prefers-reduced-motion: reduce){
     .bar-fill{transition:none;}
     .btn{transition:none;}
@@ -1700,7 +1764,7 @@
 </style>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-stone" viewBox="0 0 24 24"><path d="M7 3h10l4 6-9 12L3 9z"/><path d="M3 9h18"/><path d="M10 3 7.5 9 12 21l4.5-12L14 3"/></symbol><symbol id="i-qi" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7a5 5 0 1 0 5 5"/><circle cx="12" cy="12" r="1.2"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12"/><path d="M7.5 3v2.5c0 2.5 4.5 4 4.5 6.5s-4.5 4-4.5 6.5V21M16.5 3v2.5c0 2.5-4.5 4-4.5 6.5s4.5 4 4.5 6.5V21"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6z"/></symbol><symbol id="i-sword" viewBox="0 0 24 24"><path d="M21 3l-2.5 6L10 17.5 6.5 14 15 5.5z"/><path d="M5 12.5l6.5 6.5M8 16l-4.5 4.5"/></symbol><symbol id="i-swords" viewBox="0 0 24 24"><path d="M4 4l10 10M20 4 10 14M12 16l4-4M8 12l4 4M14 14l4.5 4.5M10 14l-4.5 4.5"/></symbol><symbol id="i-pagoda" viewBox="0 0 24 24"><path d="M12 2.5 8 5.5h8zM5 8.5h14l-2.5-3h-9zM6.5 8.5v4M17.5 8.5v4M4 15.5h16l-2.5-3h-11zM6.5 15.5V21M17.5 15.5V21M3 21h18M10.5 21v-3.5h3V21"/></symbol><symbol id="i-taiji" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a4.5 4.5 0 0 1 0 9 4.5 4.5 0 0 0 0 9"/><circle cx="12" cy="7.5" r="1" fill="currentColor"/><circle cx="12" cy="16.5" r="1"/></symbol><symbol id="i-scroll" viewBox="0 0 24 24"><path d="M8 4h11a2 2 0 0 1 0 4h-1v10a2 2 0 0 1-2 2H5a2 2 0 0 1 0-4h1V6a2 2 0 0 1 2-2z"/><path d="M5 16h11M10 9h5M10 12.5h5"/></symbol><symbol id="i-hall" viewBox="0 0 24 24"><path d="M3 9 12 4l9 5zM4 21h16M5 18h14M6.5 10v8M10 10v8M14 10v8M17.5 10v8"/></symbol><symbol id="i-hammer" viewBox="0 0 24 24"><path d="M14.5 3.5l6 6-2 2-6-6zM12.5 5.5 4 14a2.1 2.1 0 0 0 3 3l8.5-8.5"/></symbol><symbol id="i-root" viewBox="0 0 24 24"><path d="M12 11v10M12 11c0-4 3-7 7-7 0 4-3 7-7 7zM12 14c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5zM12 21l-3 1M12 21l3 1"/></symbol><symbol id="i-bug" viewBox="0 0 24 24"><ellipse cx="12" cy="13.5" rx="5" ry="6.5"/><path d="M12 7v13M9.5 7.5 8 4.5M14.5 7.5 16 4.5M7 11H3.5M17 11h3.5M7 15H4M17 15h3M8 18.5l-2 2M16 18.5l2 2"/></symbol><symbol id="i-herb" viewBox="0 0 24 24"><path d="M5 19C5 10 11 4 20 4c0 9-6 15-15 15z"/><path d="M5 19 14 10"/></symbol><symbol id="i-mountain" viewBox="0 0 24 24"><path d="M2.5 20 9 8l4 7 2.5-3.5L21.5 20z"/><path d="M7.3 11.2l1.7 1.3 1.6-1"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6l6-2.5 6 2.5 6-2.5v14.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 3.5V18M15 6v14.5"/></symbol><symbol id="i-puppet" viewBox="0 0 24 24"><path d="M6 2.5v4M12 2.5v3M18 2.5v4"/><circle cx="12" cy="8" r="2.5"/><path d="M12 10.5V16M6 6.5l3.5 5.5h5L18 6.5M9 21l3-5 3 5"/></symbol><symbol id="i-ding" viewBox="0 0 24 24"><path d="M4 9h16v3a8 8 0 0 1-16 0z"/><path d="M7 9V6.5M17 9V6.5M6 6.5h2M16 6.5h2M7 18l-1.5 3.5M17 18l1.5 3.5"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 3h4M10.5 3v4.5L5 17a2.5 2.5 0 0 0 2.2 3.8h9.6A2.5 2.5 0 0 0 19 17l-5.5-9.5V3"/><path d="M7.5 14h9"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M7 17v-5M12 17V7M17 17v-8"/></symbol><symbol id="i-pill" viewBox="0 0 24 24"><rect x="3" y="8.5" width="18" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="M10 9.1 14 14.9"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v13.5C7 18 10 18.5 12 20c2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5V20"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2.5 2.5M14.5 8.5l2 2"/></symbol><symbol id="i-storm" viewBox="0 0 24 24"><path d="M7 16H6a4 4 0 0 1-.5-8A5.5 5.5 0 0 1 16 6.5 4 4 0 0 1 18 16h-1"/><path d="M13 12l-3 5h4l-3 5"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></symbol><symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.3v.2"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11.5M7 10.5l5 5 5-5"/><path d="M4.5 16.5v3h15v-3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></symbol><symbol id="i-crystal" viewBox="0 0 24 24"><path d="M12 2.5 19 12l-7 9.5L5 12z"/><path d="M5 12h14M12 2.5v19"/></symbol><symbol id="i-bamboo" viewBox="0 0 24 24"><path d="M9 3v18M15 5v16M7.5 9h3M7.5 15h3M13.5 11h3M13.5 17h3M15 8c2-2 4-2 5.5-1.5"/></symbol><symbol id="i-wave" viewBox="0 0 24 24"><path d="M2.5 8c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1M2.5 13c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1M2.5 18c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol><symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12.5H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M10.3 3h3.4l.5 2.5 1.8.8 2.1-1.5 2.4 2.4-1.5 2.1.8 1.8 2.5.5v3.4l-2.5.5-.8 1.8 1.5 2.1-2.4 2.4-2.1-1.5-1.8.8-.5 2.5h-3.4l-.5-2.5-1.8-.8-2.1 1.5-2.4-2.4 1.5-2.1-.8-1.8L3 13.7v-3.4l2.5-.5.8-1.8-1.5-2.1 2.4-2.4 2.1 1.5 1.8-.8z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol><symbol id="i-seal" viewBox="0 0 24 24"><path d="M12 3 20 17H4zM12 21 4 7h16z"/></symbol><symbol id="i-gate" viewBox="0 0 24 24"><path d="M3 5.5h18M5 9h14M7 5.5V21M17 5.5V21M12 9v4"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-demoneye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><path d="M12 8c-1.2 1.2-1.2 6.8 0 8 1.2-1.2 1.2-6.8 0-8z"/></symbol><symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.5 7 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10 12 3 12 3z"/></symbol><symbol id="i-lotus" viewBox="0 0 24 24"><path d="M12 20c-4 0-8-2-9-6 3 0 5.5 1 7 3M12 20c4 0 8-2 9-6-3 0-5.5 1-7 3M12 20c-2.5-2-3.5-5-3.5-8S10 6 12 4c2 2 3.5 5 3.5 8s-1 6-3.5 8z"/></symbol><symbol id="i-claw" viewBox="0 0 24 24"><path d="M6 3c1 6 0 12-2.5 18M11.5 3c1 6 .5 12-1.5 18M17 3c1 6 1 12-.5 18"/></symbol><symbol id="i-maple" viewBox="0 0 24 24"><path d="M12 21v-6M12 15l-7 2 2-3.5-3.5-3.5 4 .5-.5-5 3 2.5L12 3l2 5 3-2.5-.5 5 4-.5-3.5 3.5 2 3.5z"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.5A8 8 0 1 1 9.5 4.5a6.5 6.5 0 0 0 10 10z"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5h10a4 4 0 0 0 .5-8A5.5 5.5 0 0 0 7 9a4.75 4.75 0 0 0 0 9.5z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2 7.5 7.5 2-7.5 2-2 7.5-2-7.5-7.5-2 7.5-2z"/></symbol><symbol id="i-comet" viewBox="0 0 24 24"><circle cx="16" cy="8" r="3.5"/><path d="M13.5 10.5 3 21M12.5 8 5 15.5M16 11.5 8.5 19"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 21v-7h8v7"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 4v5h5"/><path d="M4.5 9A8 8 0 1 1 4 13"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 6.5h16M9 6.5V4h6v2.5M6 6.5l1 14h10l1-14M10 10.5v6M14 10.5v6"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></symbol><symbol id="i-stone" viewBox="0 0 24 24"><path d="M7 3h10l4 6-9 12L3 9z"/><path d="M3 9h18"/><path d="M10 3 7.5 9 12 21l4.5-12L14 3"/></symbol><symbol id="i-qi" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7a5 5 0 1 0 5 5"/><circle cx="12" cy="12" r="1.2"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12"/><path d="M7.5 3v2.5c0 2.5 4.5 4 4.5 6.5s-4.5 4-4.5 6.5V21M16.5 3v2.5c0 2.5-4.5 4-4.5 6.5s4.5 4 4.5 6.5V21"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6z"/></symbol><symbol id="i-sword" viewBox="0 0 24 24"><path d="M21 3l-2.5 6L10 17.5 6.5 14 15 5.5z"/><path d="M5 12.5l6.5 6.5M8 16l-4.5 4.5"/></symbol><symbol id="i-swords" viewBox="0 0 24 24"><path d="M4 4l10 10M20 4 10 14M12 16l4-4M8 12l4 4M14 14l4.5 4.5M10 14l-4.5 4.5"/></symbol><symbol id="i-pagoda" viewBox="0 0 24 24"><path d="M12 2.5 8 5.5h8zM5 8.5h14l-2.5-3h-9zM6.5 8.5v4M17.5 8.5v4M4 15.5h16l-2.5-3h-11zM6.5 15.5V21M17.5 15.5V21M3 21h18M10.5 21v-3.5h3V21"/></symbol><symbol id="i-taiji" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a4.5 4.5 0 0 1 0 9 4.5 4.5 0 0 0 0 9"/><circle cx="12" cy="7.5" r="1" fill="currentColor"/><circle cx="12" cy="16.5" r="1"/></symbol><symbol id="i-scroll" viewBox="0 0 24 24"><path d="M8 4h11a2 2 0 0 1 0 4h-1v10a2 2 0 0 1-2 2H5a2 2 0 0 1 0-4h1V6a2 2 0 0 1 2-2z"/><path d="M5 16h11M10 9h5M10 12.5h5"/></symbol><symbol id="i-hall" viewBox="0 0 24 24"><path d="M3 9 12 4l9 5zM4 21h16M5 18h14M6.5 10v8M10 10v8M14 10v8M17.5 10v8"/></symbol><symbol id="i-hammer" viewBox="0 0 24 24"><path d="M14.5 3.5l6 6-2 2-6-6zM12.5 5.5 4 14a2.1 2.1 0 0 0 3 3l8.5-8.5"/></symbol><symbol id="i-root" viewBox="0 0 24 24"><path d="M12 11v10M12 11c0-4 3-7 7-7 0 4-3 7-7 7zM12 14c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5zM12 21l-3 1M12 21l3 1"/></symbol><symbol id="i-bug" viewBox="0 0 24 24"><ellipse cx="12" cy="13.5" rx="5" ry="6.5"/><path d="M12 7v13M9.5 7.5 8 4.5M14.5 7.5 16 4.5M7 11H3.5M17 11h3.5M7 15H4M17 15h3M8 18.5l-2 2M16 18.5l2 2"/></symbol><symbol id="i-herb" viewBox="0 0 24 24"><path d="M5 19C5 10 11 4 20 4c0 9-6 15-15 15z"/><path d="M5 19 14 10"/></symbol><symbol id="i-mountain" viewBox="0 0 24 24"><path d="M2.5 20 9 8l4 7 2.5-3.5L21.5 20z"/><path d="M7.3 11.2l1.7 1.3 1.6-1"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6l6-2.5 6 2.5 6-2.5v14.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 3.5V18M15 6v14.5"/></symbol><symbol id="i-puppet" viewBox="0 0 24 24"><path d="M6 2.5v4M12 2.5v3M18 2.5v4"/><circle cx="12" cy="8" r="2.5"/><path d="M12 10.5V16M6 6.5l3.5 5.5h5L18 6.5M9 21l3-5 3 5"/></symbol><symbol id="i-ding" viewBox="0 0 24 24"><path d="M4 9h16v3a8 8 0 0 1-16 0z"/><path d="M7 9V6.5M17 9V6.5M6 6.5h2M16 6.5h2M7 18l-1.5 3.5M17 18l1.5 3.5"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 3h4M10.5 3v4.5L5 17a2.5 2.5 0 0 0 2.2 3.8h9.6A2.5 2.5 0 0 0 19 17l-5.5-9.5V3"/><path d="M7.5 14h9"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M7 17v-5M12 17V7M17 17v-8"/></symbol><symbol id="i-pill" viewBox="0 0 24 24"><rect x="3" y="8.5" width="18" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="M10 9.1 14 14.9"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v13.5C7 18 10 18.5 12 20c2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5V20"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2.5 2.5M14.5 8.5l2 2"/></symbol><symbol id="i-storm" viewBox="0 0 24 24"><path d="M7 16H6a4 4 0 0 1-.5-8A5.5 5.5 0 0 1 16 6.5 4 4 0 0 1 18 16h-1"/><path d="M13 12l-3 5h4l-3 5"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></symbol><symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.3v.2"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11.5M7 10.5l5 5 5-5"/><path d="M4.5 16.5v3h15v-3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></symbol><symbol id="i-crystal" viewBox="0 0 24 24"><path d="M12 2.5 19 12l-7 9.5L5 12z"/><path d="M5 12h14M12 2.5v19"/></symbol><symbol id="i-bamboo" viewBox="0 0 24 24"><path d="M9 3v18M15 5v16M7.5 9h3M7.5 15h3M13.5 11h3M13.5 17h3M15 8c2-2 4-2 5.5-1.5"/></symbol><symbol id="i-wave" viewBox="0 0 24 24"><path d="M2.5 8c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1M2.5 13c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1M2.5 18c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.5 5-1"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol><symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12.5H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M10.3 3h3.4l.5 2.5 1.8.8 2.1-1.5 2.4 2.4-1.5 2.1.8 1.8 2.5.5v3.4l-2.5.5-.8 1.8 1.5 2.1-2.4 2.4-2.1-1.5-1.8.8-.5 2.5h-3.4l-.5-2.5-1.8-.8-2.1 1.5-2.4-2.4 1.5-2.1-.8-1.8L3 13.7v-3.4l2.5-.5.8-1.8-1.5-2.1 2.4-2.4 2.1 1.5 1.8-.8z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol><symbol id="i-seal" viewBox="0 0 24 24"><path d="M12 3 20 17H4zM12 21 4 7h16z"/></symbol><symbol id="i-gate" viewBox="0 0 24 24"><path d="M3 5.5h18M5 9h14M7 5.5V21M17 5.5V21M12 9v4"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-demoneye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><path d="M12 8c-1.2 1.2-1.2 6.8 0 8 1.2-1.2 1.2-6.8 0-8z"/></symbol><symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.5 7 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10 12 3 12 3z"/></symbol><symbol id="i-lotus" viewBox="0 0 24 24"><path d="M12 20c-4 0-8-2-9-6 3 0 5.5 1 7 3M12 20c4 0 8-2 9-6-3 0-5.5 1-7 3M12 20c-2.5-2-3.5-5-3.5-8S10 6 12 4c2 2 3.5 5 3.5 8s-1 6-3.5 8z"/></symbol><symbol id="i-claw" viewBox="0 0 24 24"><path d="M6 3c1 6 0 12-2.5 18M11.5 3c1 6 .5 12-1.5 18M17 3c1 6 1 12-.5 18"/></symbol><symbol id="i-maple" viewBox="0 0 24 24"><path d="M12 21v-6M12 15l-7 2 2-3.5-3.5-3.5 4 .5-.5-5 3 2.5L12 3l2 5 3-2.5-.5 5 4-.5-3.5 3.5 2 3.5z"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.5A8 8 0 1 1 9.5 4.5a6.5 6.5 0 0 0 10 10z"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5h10a4 4 0 0 0 .5-8A5.5 5.5 0 0 0 7 9a4.75 4.75 0 0 0 0 9.5z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2 7.5 7.5 2-7.5 2-2 7.5-2-7.5-7.5-2 7.5-2z"/></symbol><symbol id="i-comet" viewBox="0 0 24 24"><circle cx="16" cy="8" r="3.5"/><path d="M13.5 10.5 3 21M12.5 8 5 15.5M16 11.5 8.5 19"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 21v-7h8v7"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 4v5h5"/><path d="M4.5 9A8 8 0 1 1 4 13"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 6.5h16M9 6.5V4h6v2.5M6 6.5l1 14h10l1-14M10 10.5v6M14 10.5v6"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol></svg>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="creation" aria-label="Tạo nhân vật"></div>
 <div id="loadingScreen" role="dialog" aria-label="Phàm Nhân Vấn Đạo">
@@ -1731,6 +1795,8 @@
   </svg>
   <h1 class="ls-title">Phàm Nhân Vấn Đạo</h1>
   <div class="ls-sub">Nhân Giới · Linh Giới · Tiên Giới</div>
+  <div class="ls-portal" aria-label="Máy chủ"><div class="ls-server"><span class="ls-led"></span><b>Máy chủ Tam Giới · S1</b><small id="lsOnline">Đang kết nối…</small></div>
+    <div class="ls-feats"><span>Bản đồ 2D</span><span>Lôi Đài</span><span>Bang Hội</span><span>Chat Thế Giới</span><span>Đấu Giá</span></div></div>
   <div class="ls-status" id="loadingText" aria-live="polite">Ánh trăng rót xuống miệng bình…</div>
   <div class="ls-actions" id="lsActions"></div>
   <div id="lsAccount"></div>
@@ -1791,7 +1857,7 @@ function ic(name, extra){
 /* =====================================================================
    CÀI ĐẶT · LƯU TRỮ · NHẬT KÝ CẬP NHẬT
 ===================================================================== */
-const GAME_VERSION = '1.72.0';
+const GAME_VERSION = '1.73.0';
 const SAVE_KEY = 'ntcm_save_v1';
 const SETTINGS_KEY = 'ntcm_settings_v1';
 const DEFAULT_SETTINGS = {offlineProgress:true, typeSpeed:22, theme:'ngoc', timeSpeed:10000, autoHeal:0, storyPopups:true, autoRead:false, autoReadMs:2600, vibrate:true, sfx:false, sfxVol:0.5, realTime:true, bgm:false, bgmVol:0.5, bgmTrack:'all', storyOriginalName:false, font:'default', textScale:'md', motion:true, showIcons:true, autosave:true, logLen:90, confirmDanger:true};
@@ -1944,6 +2010,14 @@ function publicChangelog(){
   return CHANGELOG.map(c=>Object.assign({}, c, {items:c.items.filter(x=>!hide(x))})).filter(c=>c.items.length && !/debug|admin/i.test(c.title));
 }
 const CHANGELOG = [
+  {v:'1.73.0', date:'21/10/2026', title:'Thế Giới Trực Tuyến — bản đồ 2D, Lôi Đài, Bang Hội', items:[
+    ['moi','Tab mới Thế Giới: bản đồ 2D đi lại tự do theo từng địa vực, thấy đạo hữu khác di chuyển theo thời gian thực.'],
+    ['moi','Yêu thú lang thang trong các vùng săn — chạm để giao chiến. Truyền Tống Trận, Lôi Đài, Bang Hội Đường, Phường Thị ngay giữa thành.'],
+    ['moi','Lôi Đài: gửi chiến thư cho người đang trực tuyến, máy chủ phân thắng bại; có điểm lôi đài, bảng xếp hạng và thưởng linh thạch.'],
+    ['moi','Bang Hội do người chơi khai lập: hiệu bang, cáo thị, góp quỹ nâng cấp, phong trưởng lão, kênh chat riêng.'],
+    ['moi','Kênh chat thế giới; lời nói hiện thành bong bóng trên đầu nhân vật trong bản đồ.'],
+    ['doi','Màn hình mở đầu hiển thị máy chủ và số đạo hữu đang trực tuyến.']
+  ]},
   {v:'1.72.0', date:'07/10/2026', title:'Hư Thiên Ngọc Giản — quyền lợi ứng dụng Android', items:[
     ['moi','Ứng dụng Android mới: người tu luyện qua ứng dụng được Hư Thiên Ngọc Giản nhận chủ.'],
     ['moi','Bế quan khi vắng mặt gấp đôi tốc độ và tối đa 48 tháng (bản web 24 tháng).'],
@@ -4493,6 +4567,7 @@ function tribulationHeal(){
 ===================================================================== */
 const NAV = [
   {id:'tuluyen', icon:'taiji',  label:'Tu Luyện', subs:[['tuluyen','Bế Quan','taiji'],['congphap','Công Pháp','book'],['bitruyen','Bí Truyền','key'],['phaptac','Pháp Tắc','taiji'],['phithang','Phi Thăng','cloud'],['thoigian','Thời Gian','hourglass']]},
+  {id:'thegioi', icon:'globe', label:'Thế Giới', subs:[['bando2d','Bản Đồ','map'],['loidai','Lôi Đài','swords'],['banghoi','Bang Hội','flag'],['kenhchat','Kênh Chat','chat']]},
   {id:'cottruyen', icon:'book', label:'Cốt Truyện', subs:null},
   {id:'nhanvat', icon:'person', label:'Nhân Vật', subs:[['tongquan','Tổng Quan','chart'],['tuchat','Tư Chất','root'],['daolu','Đạo Lữ','lotus'],['dode','Đồ Đệ','person'],['nhanmach','Nhân Mạch','person'],['linhsung','Linh Sủng','bug']]},
   {id:'hanhtau', icon:'map',    label:'Hành Tẩu', subs:[['bando','Bản Đồ','map'],['theluc','Thế Lực','pagoda'],['bicanh','Bí Cảnh','mountain'],['yeuthu','Yêu Thú','claw'],['tusibang','Tu Sĩ Bảng','star'],['thiluyen','Huyết Sắc Mùa','swords']]},
@@ -9553,6 +9628,7 @@ function renderContent(){
   if(state.mortal && tab==='tuluyen' && sub!=='thoigian') body = renderMortalPage();
   else if(state.mortal && ['hanhtau','dongphu','tuido'].includes(tab) && sub!=='yeuthu') body = mortalLocked();
   else if(tab==='cottruyen') body = renderStoryPage();
+  else if(tab==='thegioi') body = ({bando2d:renderWorld2D, loidai:renderArena, banghoi:renderGuild, kenhchat:renderChatPage}[sub] || renderWorld2D)();
   else if(tab==='tuluyen') body = ({tuluyen:()=>renderOmenChip()+renderGuideCard()+renderAlertsCard()+renderCultivatePage()+renderAppPerkCard()+renderBanMenhCard()+renderSatKhiCard(), congphap:()=>renderStoryTechCard()+renderTechniquesPage(), bitruyen:()=>`<div class="bt-wrap">${renderHeritageAll()}</div>`, phaptac:renderPhapTac, phithang:renderAscendPage, thoigian:renderTimePage}[sub])();
   else if(tab==='nhanvat') body = ({tongquan:renderOverview, daolu:renderDaoLuPage, dode:renderDodePage, danhhieu:renderTitlePage, tuchat:()=>characterCardsLegacy().cardTuChat, nhanmach:renderNpcPage, linhsung:renderWormTab}[sub])();
   else if(tab==='hanhtau') body = ({bando:renderWorldMap, theluc:renderWorldFactions, bicanh:renderExploreTab, yeuthu:renderBeastPage, tusibang:renderTuSiBang, thiluyen:renderTrialSeason}[sub])();
@@ -17308,6 +17384,668 @@ if(typeof __ENGINE__==='undefined'){
     window[n] = function(...a){ if(!ENG()) return orig.apply(this, a); engCall(n, a); };
   });
   setInterval(()=>{ if(ENG() && state && state.root && document.visibilityState!=='hidden' && engBusyN===0 && Date.now()-engLastSync > 60000) engSync(); }, 15000);
+}
+
+/* =====================================================================
+   v1.73 — THẾ GIỚI TRỰC TUYẾN
+   Bản đồ 2D đi lại tự do, thấy đạo hữu khác theo thời gian thực (Realtime
+   Presence), kênh chat thế giới/bang hội, Lôi Đài khiêu chiến trực tiếp và
+   Bang Hội do người chơi lập. Phần máy chủ: supabase/world_online.sql.
+===================================================================== */
+const WO = {
+  lobby:null, lobbyKey:'', tracked:'', online:{},
+  map:null, mapKey:'', others:{}, mobs:[], bg:null, mini:null, grid:null, sites:[], zones:[],
+  me:{x:0, y:0, tx:null, ty:null, face:1, moving:false, say:'', sayT:0}, keys:{}, target:null, near:null, nearKey:'',
+  canvas:null, ctx:null, raf:0, lastT:0, lastSend:0, lastTrack:0, cam:{x:0, y:0}, leaveTimer:null,
+  chat:{world:[], guild:[]}, chatCh:'world', chatSub:null, noDb:false,
+  guild:null, role:null, cap:0, members:[], glist:[], gTs:0, gLoading:false, gErr:'',
+  arena:{rank:[], my:null, ts:0, loading:false, err:'', incoming:[], sub:null}
+};
+const W2D = {T:40, W:48, H:36};
+const WO_GUILD_LV = [0, 50000, 200000, 600000, 1500000];
+const WO_ROLE = {leader:'Bang Chủ', elder:'Trưởng Lão', member:'Bang Chúng'};
+function woMissing(e){ const m = (e && (e.message||e.msg||e.code)) || ''; return /Could not find the function|does not exist|PGRST202|42883|42P01|schema cache/i.test(m); }
+function woErr(e){ return woMissing(e) ? 'Máy chủ chưa cài tính năng này — cần chạy supabase/world_online.sql trong Supabase.' : cloudErrMsg(e); }
+function woRealmShort(r){ const R = MAJOR_REALMS[r]; return R ? R.name.replace(/ Kỳ$/,'') : ''; }
+function woMyTag(){ return WO.guild ? WO.guild.tag : ''; }
+function woProfile(){ return {n:state && state.name || 'Vô Danh', r:state ? state.realmIdx||0 : 0, p:state && state.path ? state.path.id : '', t:woMyTag()}; }
+function woAfterStones(){ try{ if(ENG()){ engLastSync = 0; engSync(); } }catch(e){} }
+
+/* ---------------- Thế giới hiện tại & khu vực ---------------- */
+function woWorld(){
+  const w = curWorld();
+  if(w==='ng') return {w, list:NG_REGIONS, region:ngRegion(), explore:id=>exploreRegion(id), travel:id=>travelTo(id)};
+  if(w==='lg') return {w, list:LG_REGIONS, region:lgRegion(), explore:id=>lgExplore(id), travel:id=>lgTravel(id)};
+  return {w, list:TG_REGIONS.filter(tgRegionVisible), region:tgRegion(), explore:id=>tgExplore(id), travel:id=>tgTravel(id)};
+}
+function woMapKey(){ const x = woWorld(); return x.w+'-'+x.region.id; }
+const WO_PAL = {
+  ng:{grass:['#2d4a33','#33533a','#2a4530'], forest:'#1f3a28', tree:'#2f6b45', water:'#1d3f57', wave:'#3f7896', mount:'#4a4a45', snow:'#8d8f87', road:'#6b5b3e', plaza:'#5b574d', sand:'#7a6a48'},
+  lg:{grass:['#2f3550','#353b58','#2b314b'], forest:'#262a45', tree:'#4f4f8f', water:'#1b2f52', wave:'#4d6fb0', mount:'#4b4458', snow:'#a39cb8', road:'#5d5470', plaza:'#504c63', sand:'#6b6280'},
+  tg:{grass:['#4a4630','#524e36','#45412c'], forest:'#3c3a26', tree:'#8a7a3c', water:'#33405a', wave:'#8fa6d0', mount:'#6b6450', snow:'#e8e0c4', road:'#8c7b52', plaza:'#6e6650', sand:'#9a8a60'}
+};
+
+/* ---------------- Sinh bản đồ theo khu vực (cố định theo tên) ---------------- */
+function woRng(seed){ let s = 7; for(const c of seed) s = (s*31 + c.charCodeAt(0))|0; return ()=>{ s = (s*1103515245 + 12345)|0; return ((s>>>16)&0x7fff)/0x7fff; }; }
+function woNoise(rnd, gw, gh){
+  const g = []; for(let j=0;j<=gh;j++){ g.push([]); for(let i=0;i<=gw;i++) g[j].push(rnd()); }
+  return (u, v)=>{ const x = u*gw, y = v*gh, i = Math.min(gw-1, Math.floor(x)), j = Math.min(gh-1, Math.floor(y)), fx = x-i, fy = y-j;
+    const sx = fx*fx*(3-2*fx), sy = fy*fy*(3-2*fy);
+    const a = g[j][i] + (g[j][i+1]-g[j][i])*sx, b = g[j+1][i] + (g[j+1][i+1]-g[j+1][i])*sx; return a + (b-a)*sy; };
+}
+function woBuild(){
+  const X = woWorld(), key = woMapKey(), {T, W, H} = W2D, rnd = woRng(key), pal = WO_PAL[X.w];
+  const n1 = woNoise(rnd, 6, 5), n2 = woNoise(rnd, 12, 9);
+  const cx = W/2, cy = H/2;
+  const locs = (X.region.locations||[]).slice(0, 6);
+  const zones = locs.map((l, i)=>{ const a = -Math.PI*0.75 + i*(Math.PI*2/Math.max(3, locs.length)); return {loc:l, x:Math.round(cx + Math.cos(a)*15), y:Math.round(cy + Math.sin(a)*11.5)}; });
+  const sea = X.region.id==='loantinh' || /Hải|Biển/.test(X.region.name);
+  const grid = [];
+  for(let y=0;y<H;y++){ grid.push([]); for(let x=0;x<W;x++){
+    const h = n1(x/W, y/H)*0.7 + n2(x/W, y/H)*0.3;
+    const edge = Math.min(x, y, W-1-x, H-1-y);
+    let t = 'g';
+    if(h < (sea?0.42:0.3) || edge < 1) t = 'w';
+    else if(h < (sea?0.46:0.33)) t = 's';
+    else if(h > 0.8) t = 'm';
+    else if(h > 0.66) t = 'f';
+    grid[y].push(t);
+  }}
+  const paint = (x, y, t)=>{ if(x>=0 && y>=0 && x<W && y<H) grid[y][x] = t; };
+  const disc = (px, py, r, t)=>{ for(let y=-r;y<=r;y++) for(let x=-r;x<=r;x++) if(x*x+y*y<=r*r+1) paint(px+x, py+y, t); };
+  zones.forEach(z=>{ disc(z.x, z.y, 5, 'g'); });
+  const road = (ax, ay, bx, by)=>{ const n = Math.max(Math.abs(bx-ax), Math.abs(by-ay)); for(let k=0;k<=n;k++){ const x = Math.round(ax+(bx-ax)*k/n), y = Math.round(ay+(by-ay)*k/n); paint(x, y, 'r'); paint(x+1, y, 'r'); } };
+  zones.forEach(z=>road(cx, cy, z.x, z.y));
+  for(let y=-5;y<=5;y++) for(let x=-7;x<=7;x++) paint(cx+x, cy+y, (Math.abs(x)===7||Math.abs(y)===5) ? 'r' : 'p');
+  const sites = [
+    {id:'arena',  name:'Lôi Đài',          x:cx-4, y:cy-2.5},
+    {id:'guild',  name:'Bang Hội Đường',   x:cx+4, y:cy-2.5},
+    {id:'portal', name:'Truyền Tống Trận', x:cx,   y:cy+3},
+    {id:'market', name:'Phường Thị',       x:cx-4.5, y:cy+2.5},
+    {id:'retreat',name:'Bế Quan Thạch',    x:cx+4.5, y:cy+2.5}
+  ].map(s=>({...s, x:s.x*T+T/2, y:s.y*T+T/2}));
+  // vẽ sẵn nền vào canvas phụ
+  const bg = document.createElement('canvas'); bg.width = W*T; bg.height = H*T;
+  const g = bg.getContext('2d');
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    const t = grid[y][x], px = x*T, py = y*T, v = rnd();
+    g.fillStyle = t==='w' ? pal.water : t==='s' ? pal.sand : t==='r' ? pal.road : t==='p' ? pal.plaza : t==='f' ? pal.forest : t==='m' ? pal.mount : pal.grass[Math.floor(v*3)];
+    g.fillRect(px, py, T, T);
+    if(t==='p'){ g.strokeStyle = 'rgba(0,0,0,.18)'; g.strokeRect(px+.5, py+.5, T-1, T-1); }
+    if(t==='w' && v<0.5){ g.strokeStyle = pal.wave; g.globalAlpha = .35; g.beginPath(); g.moveTo(px+6, py+20); g.quadraticCurveTo(px+14, py+14, px+22, py+20); g.quadraticCurveTo(px+30, py+26, px+36, py+20); g.stroke(); g.globalAlpha = 1; }
+    if(t==='g' && v>0.8){ g.fillStyle = 'rgba(255,255,255,.07)'; for(let k=0;k<3;k++) g.fillRect(px+rnd()*T, py+rnd()*T, 2, 5); }
+    if(t==='f'){ for(let k=0;k<2;k++){ const ox = px+8+rnd()*24, oy = py+8+rnd()*22; g.fillStyle = 'rgba(0,0,0,.25)'; g.beginPath(); g.ellipse(ox, oy+10, 10, 4, 0, 0, 7); g.fill(); g.fillStyle = pal.tree; g.beginPath(); g.arc(ox, oy, 10, 0, 7); g.fill(); g.fillStyle = 'rgba(255,255,255,.08)'; g.beginPath(); g.arc(ox-3, oy-3, 5, 0, 7); g.fill(); } }
+    if(t==='m'){ g.fillStyle = 'rgba(0,0,0,.25)'; g.beginPath(); g.moveTo(px+2, py+T); g.lineTo(px+T/2, py+4); g.lineTo(px+T-2, py+T); g.fill(); g.fillStyle = pal.snow; g.beginPath(); g.moveTo(px+T/2-6, py+12); g.lineTo(px+T/2, py+4); g.lineTo(px+T/2+6, py+12); g.fill(); }
+  }
+  zones.forEach(z=>{ const px = z.x*T+T/2, py = z.y*T+T/2; g.save(); g.strokeStyle = 'rgba(224,130,104,.45)'; g.setLineDash([8,8]); g.lineWidth = 2; g.beginPath(); g.arc(px, py, 5*T, 0, 7); g.stroke(); g.restore(); });
+  sites.forEach(s=>woDrawSite(g, s));
+  const mini = document.createElement('canvas'); mini.width = W*3; mini.height = H*3; mini.getContext('2d').drawImage(bg, 0, 0, mini.width, mini.height);
+  WO.grid = grid; WO.bg = bg; WO.mini = mini; WO.sites = sites;
+  WO.zones = zones.map(z=>({loc:z.loc, x:z.x*T+T/2, y:z.y*T+T/2}));
+  WO.mobs = [];
+  WO.zones.forEach((z, zi)=>{ for(let k=0;k<3;k++){ const a = rnd()*7, d = 40+rnd()*110; WO.mobs.push({id:zi+'-'+k, zone:z, name:(z.loc.enemies||['Yêu Thú'])[k % (z.loc.enemies||[1]).length], x:z.x+Math.cos(a)*d, y:z.y+Math.sin(a)*d, tx:null, ty:null, hideUntil:0, ph:rnd()*6}); } });
+  const portal = sites.find(s=>s.id==='portal');
+  WO.me.x = portal.x + (Math.random()-0.5)*60; WO.me.y = portal.y - 50; WO.me.tx = WO.me.ty = null; WO.target = null;
+  WO.mapKey = key;
+}
+function woDrawSite(g, s){
+  const x = s.x, y = s.y;
+  g.save();
+  if(s.id==='portal'){
+    const gr = g.createRadialGradient(x, y, 4, x, y, 46); gr.addColorStop(0, 'rgba(160,240,200,.55)'); gr.addColorStop(1, 'rgba(160,240,200,0)');
+    g.fillStyle = gr; g.beginPath(); g.arc(x, y, 46, 0, 7); g.fill();
+    g.strokeStyle = '#8fe0b8'; g.lineWidth = 2; g.beginPath(); g.arc(x, y, 28, 0, 7); g.stroke(); g.beginPath(); g.arc(x, y, 18, 0, 7); g.stroke();
+    for(let k=0;k<8;k++){ const a = k*Math.PI/4; g.fillStyle = '#c9f7de'; g.fillRect(x+Math.cos(a)*23-2, y+Math.sin(a)*23-2, 4, 4); }
+  } else if(s.id==='arena'){
+    g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(x-46, y-30, 96, 66);
+    g.fillStyle = '#6b4a2e'; g.fillRect(x-48, y-34, 96, 64); g.fillStyle = '#8a6a44'; g.fillRect(x-42, y-28, 84, 52);
+    g.strokeStyle = '#d4af6a'; g.lineWidth = 2; g.strokeRect(x-42, y-28, 84, 52);
+    [[-48,-34],[42,-34],[-48,24],[42,24]].forEach(([dx,dy])=>{ g.fillStyle = '#3a2416'; g.fillRect(x+dx, y+dy, 6, 10); g.fillStyle = '#c15d4a'; g.beginPath(); g.moveTo(x+dx+5, y+dy-14); g.lineTo(x+dx+18, y+dy-10); g.lineTo(x+dx+5, y+dy-6); g.fill(); g.fillStyle = '#2a1a10'; g.fillRect(x+dx+3, y+dy-16, 2, 18); });
+  } else {
+    const col = {guild:['#5e2f28','#c15d4a'], market:['#3b4f42','#57bb96'], retreat:['#3a3a52','#9aa0d8']}[s.id] || ['#444','#999'];
+    g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(x-34, y-10, 72, 40);
+    g.fillStyle = '#d8ccb0'; g.fillRect(x-32, y-14, 64, 38);
+    g.fillStyle = '#3a2a1a'; g.fillRect(x-7, y+6, 14, 18);
+    g.fillStyle = col[0]; g.beginPath(); g.moveTo(x-44, y-12); g.lineTo(x, y-42); g.lineTo(x+44, y-12); g.closePath(); g.fill();
+    g.strokeStyle = col[1]; g.lineWidth = 2; g.stroke();
+  }
+  g.font = '600 13px "Be Vietnam Pro", sans-serif'; g.textAlign = 'center';
+  const w = g.measureText(s.name).width + 14;
+  g.fillStyle = 'rgba(8,12,14,.72)'; g.fillRect(x-w/2, y+36, w, 20);
+  g.fillStyle = '#eecb8f'; g.fillText(s.name, x, y+51);
+  g.restore();
+}
+function woBlocked(x, y){ const {T, W, H} = W2D; const i = Math.floor(x/T), j = Math.floor(y/T); if(i<0||j<0||i>=W||j>=H) return true; const t = WO.grid[j][i]; return t==='w' || t==='m'; }
+
+/* ---------------- Vẽ nhân vật & yêu thú ---------------- */
+function woDrawHero(c, x, y, o, me, t){
+  const robe = (PATH_ROBE[o.p]||[0,'#a8f0d0'])[1], r = o.r||0;
+  const bob = o.moving ? Math.sin(t/90)*1.5 : 0;
+  if(r>=2){ c.save(); c.globalAlpha = .35 + Math.sin(t/400)*.1; const gr = c.createRadialGradient(x, y-14, 2, x, y-14, 26); gr.addColorStop(0, ['#fff','#fff','#f3dfa6','#9fe0ff','#b9a2ff','#ffd27a','#ff9ad0','#ff7a7a','#ffe9a8','#fff4c2','#fff','#fff','#fff'][r]||'#fff'); gr.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = gr; c.beginPath(); c.arc(x, y-14, 26, 0, 7); c.fill(); c.restore(); }
+  c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.ellipse(x, y+2, 11, 4, 0, 0, 7); c.fill();
+  c.fillStyle = robe; c.beginPath(); c.moveTo(x-10, y+bob); c.lineTo(x-6, y-20+bob); c.lineTo(x+6, y-20+bob); c.lineTo(x+10, y+bob); c.closePath(); c.fill();
+  c.fillStyle = 'rgba(0,0,0,.25)'; c.fillRect(x-6, y-11+bob, 12, 2);
+  c.fillStyle = '#f1d7b8'; c.beginPath(); c.arc(x, y-26+bob, 7, 0, 7); c.fill();
+  c.fillStyle = '#1d1a18'; c.beginPath(); c.arc(x, y-29+bob, 7, Math.PI, 0); c.fill(); c.beginPath(); c.arc(x, y-35+bob, 3.2, 0, 7); c.fill();
+  c.font = `${me?'700':'600'} 12px "Be Vietnam Pro", sans-serif`; c.textAlign = 'center';
+  const label = (o.t?`[${o.t}] `:'') + (o.n||'');
+  c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.75)'; c.strokeText(label, x, y-46+bob);
+  c.fillStyle = me ? '#eecb8f' : '#e6f4ec'; c.fillText(label, x, y-46+bob);
+  c.font = '10px "Be Vietnam Pro", sans-serif'; c.strokeText(woRealmShort(r), x, y+15); c.fillStyle = '#9fd8bd'; c.fillText(woRealmShort(r), x, y+15);
+  if(o.say && t < o.sayT){ woBubble(c, x, y-60+bob, o.say); }
+}
+function woBubble(c, x, y, text){
+  c.font = '12px "Be Vietnam Pro", sans-serif';
+  const s = text.length > 46 ? text.slice(0, 45)+'…' : text, w = Math.min(240, c.measureText(s).width + 16);
+  c.fillStyle = 'rgba(245,240,226,.95)'; c.beginPath(); c.roundRect ? c.roundRect(x-w/2, y-22, w, 22, 8) : c.rect(x-w/2, y-22, w, 22); c.fill();
+  c.beginPath(); c.moveTo(x-5, y); c.lineTo(x+5, y); c.lineTo(x, y+6); c.fill();
+  c.fillStyle = '#1a1a14'; c.textAlign = 'center'; c.fillText(s, x, y-7, w-10);
+}
+function woDrawMob(c, m, t){
+  const locked = state.realmIdx < (m.zone.loc.power||0) || state.mortal;
+  const y = m.y + Math.sin(t/260 + m.ph)*2;
+  const hue = 10 + (m.zone.loc.power||0)*28;
+  c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.ellipse(m.x, m.y+12, 13, 4, 0, 0, 7); c.fill();
+  c.fillStyle = `hsl(${hue} 45% ${locked?28:38}%)`; c.beginPath(); c.ellipse(m.x, y, 15, 12, 0, 0, 7); c.fill();
+  c.fillStyle = `hsl(${hue} 45% 22%)`; c.beginPath(); c.moveTo(m.x-12, y-6); c.lineTo(m.x-8, y-18); c.lineTo(m.x-3, y-9); c.fill(); c.beginPath(); c.moveTo(m.x+12, y-6); c.lineTo(m.x+8, y-18); c.lineTo(m.x+3, y-9); c.fill();
+  c.fillStyle = locked ? '#888' : '#ffde6a'; c.beginPath(); c.arc(m.x-5, y-2, 2.4, 0, 7); c.arc(m.x+5, y-2, 2.4, 0, 7); c.fill();
+  c.font = '600 11px "Be Vietnam Pro", sans-serif'; c.textAlign = 'center'; c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.75)';
+  const lb = (locked?'🔒 ':'') + m.name; c.strokeText(lb, m.x, y-22); c.fillStyle = locked ? '#b0a8a0' : '#ff9a84'; c.fillText(lb, m.x, y-22);
+}
+
+/* ---------------- Vòng lặp bản đồ ---------------- */
+function woStart(){
+  if(!WO.canvas){
+    const cv = document.createElement('canvas'); cv.className = 'w2d-canvas'; cv.setAttribute('aria-label', 'Bản đồ thế giới'); cv.tabIndex = 0;
+    cv.addEventListener('pointerdown', woPointer);
+    WO.canvas = cv; WO.ctx = cv.getContext('2d');
+  }
+  const host = document.getElementById('w2dHost'); if(!host) return;
+  if(WO.canvas.parentNode !== host) host.appendChild(WO.canvas);
+  woResize();
+  if(WO.mapKey !== woMapKey() || !WO.bg){ woBuild(); woMapLeave(); }
+  woMapJoin();
+  if(WO.leaveTimer){ clearTimeout(WO.leaveTimer); WO.leaveTimer = null; }
+  if(!WO.raf){ WO.lastT = performance.now(); WO.raf = requestAnimationFrame(woFrame); }
+}
+function woResize(){
+  const host = document.getElementById('w2dHost'); if(!host || !WO.canvas) return;
+  const dpr = Math.min(2, window.devicePixelRatio||1), w = host.clientWidth || 320, h = Math.round(Math.max(300, Math.min(window.innerHeight*0.5, 540)));
+  if(WO.canvas.width !== Math.round(w*dpr) || WO.canvas.height !== Math.round(h*dpr)){ WO.canvas.width = Math.round(w*dpr); WO.canvas.height = Math.round(h*dpr); WO.canvas.style.height = h+'px'; }
+  WO.dpr = dpr; WO.vw = w; WO.vh = h;
+}
+function woFrame(now){
+  WO.raf = 0;
+  if(!WO.canvas || !document.body.contains(WO.canvas)){ WO.leaveTimer = setTimeout(woMapLeave, 20000); return; }
+  const dt = Math.min(0.05, (now - WO.lastT)/1000); WO.lastT = now;
+  woUpdate(dt, now); woDraw(now);
+  WO.raf = requestAnimationFrame(woFrame);
+}
+function woUpdate(dt, now){
+  const me = WO.me, sp = 150 + Math.min(12, state.realmIdx||0)*8;
+  let vx = 0, vy = 0;
+  const k = WO.keys;
+  if(k.ArrowLeft||k.a) vx -= 1; if(k.ArrowRight||k.d) vx += 1; if(k.ArrowUp||k.w) vy -= 1; if(k.ArrowDown||k.s) vy += 1;
+  if(vx||vy){ me.tx = me.ty = null; WO.target = null; }
+  else if(me.tx!=null){ const dx = me.tx-me.x, dy = me.ty-me.y, d = Math.hypot(dx, dy); if(d < 4){ me.tx = me.ty = null; } else { vx = dx/d; vy = dy/d; } }
+  const len = Math.hypot(vx, vy);
+  me.moving = len > 0;
+  if(len){
+    vx /= len; vy /= len; if(vx) me.face = vx > 0 ? 1 : -1;
+    const nx = me.x + vx*sp*dt, ny = me.y + vy*sp*dt;
+    if(!woBlocked(nx, ny)){ me.x = nx; me.y = ny; }
+    else if(!woBlocked(nx, me.y)){ me.x = nx; }
+    else if(!woBlocked(me.x, ny)){ me.y = ny; }
+    else { me.tx = me.ty = null; }
+    if(now - WO.lastSend > 120 && WO.map && WO.mapReady){ WO.lastSend = now; WO.map.send({type:'broadcast', event:'mv', payload:{id:cloud.user.id, x:Math.round(me.x), y:Math.round(me.y)}}); WO.dirty = true; }
+  }
+  if(WO.dirty && WO.map && WO.mapReady && now - WO.lastTrack > 4000){ WO.lastTrack = now; WO.dirty = false; WO.map.track({...woProfile(), x:Math.round(me.x), y:Math.round(me.y)}); }
+  for(const id in WO.others){ const o = WO.others[id]; if(o.tx==null) continue; const dx = o.tx-o.x, dy = o.ty-o.y; o.moving = Math.abs(dx)+Math.abs(dy) > 2; o.x += dx*Math.min(1, dt*8); o.y += dy*Math.min(1, dt*8); }
+  WO.mobs.forEach(m=>{
+    if(m.tx==null || Math.hypot(m.tx-m.x, m.ty-m.y) < 3){ if(Math.random() < dt*0.4){ const a = Math.random()*7, d = Math.random()*150; m.tx = m.zone.x + Math.cos(a)*d; m.ty = m.zone.y + Math.sin(a)*d; } return; }
+    const dx = m.tx-m.x, dy = m.ty-m.y, d = Math.hypot(dx, dy); m.x += dx/d*40*dt; m.y += dy/d*40*dt;
+  });
+  // vật gần nhất có thể tương tác
+  let best = null, bd = 70;
+  const tnow = Date.now();
+  WO.sites.forEach(s=>{ const d = Math.hypot(s.x-me.x, s.y-me.y); if(d < bd + 20){ bd = d - 20; best = {kind:'site', ref:s, key:'s'+s.id}; } });
+  WO.mobs.forEach(m=>{ if(m.hideUntil > tnow) return; const d = Math.hypot(m.x-me.x, m.y-me.y); if(d < bd){ bd = d; best = {kind:'mob', ref:m, key:'m'+m.id}; } });
+  for(const id in WO.others){ const o = WO.others[id]; const d = Math.hypot(o.x-me.x, o.y-me.y); if(d < bd){ bd = d; best = {kind:'pl', ref:{...o, id}, key:'p'+id}; } }
+  WO.near = best;
+  const nk = best ? best.key : '';
+  if(nk !== WO.nearKey){ WO.nearKey = nk; woRenderAct(); }
+  if(WO.target && best && best.key === WO.target.key){ const tg = WO.target; WO.target = null; me.tx = me.ty = null; woInteract(tg); }
+}
+function woDraw(now){
+  const c = WO.ctx, dpr = WO.dpr, w = WO.vw, h = WO.vh, me = WO.me, {T, W, H} = W2D;
+  const cx = Math.max(0, Math.min(W*T - w, me.x - w/2)), cy = Math.max(0, Math.min(H*T - h, me.y - h/2));
+  WO.cam.x = cx; WO.cam.y = cy;
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.drawImage(WO.bg, cx, cy, w, h, 0, 0, w, h);
+  c.translate(-cx, -cy);
+  WO.zones.forEach(z=>{ c.font = '700 14px "Noto Serif", serif'; c.textAlign = 'center'; c.lineWidth = 4; c.strokeStyle = 'rgba(0,0,0,.7)'; const lb = z.loc.name + ((z.loc.power||0) > state.realmIdx ? ` · cần ${woRealmShort(z.loc.power)}` : ''); c.strokeText(lb, z.x, z.y - 5*T + 18); c.fillStyle = '#f0c9b8'; c.fillText(lb, z.x, z.y - 5*T + 18); });
+  if(me.tx!=null){ c.strokeStyle = 'rgba(238,203,143,.8)'; c.lineWidth = 2; c.beginPath(); c.arc(me.tx, me.ty, 8 + Math.sin(now/120)*2, 0, 7); c.stroke(); }
+  const tnow = Date.now();
+  const ents = [];
+  WO.mobs.forEach(m=>{ if(m.hideUntil <= tnow) ents.push({y:m.y, f:()=>woDrawMob(c, m, now)}); });
+  for(const id in WO.others){ const o = WO.others[id]; ents.push({y:o.y, f:()=>woDrawHero(c, o.x, o.y, {...o, sayT:o.sayT}, false, tnow)}); }
+  ents.push({y:me.y, f:()=>woDrawHero(c, me.x, me.y, {...woProfile(), moving:me.moving, say:me.say, sayT:me.sayT}, true, tnow)});
+  ents.sort((a, b)=>a.y-b.y).forEach(e=>e.f());
+  if(WO.near){ const r = WO.near.ref; c.strokeStyle = 'rgba(238,203,143,.9)'; c.setLineDash([4,4]); c.lineWidth = 1.5; c.beginPath(); c.ellipse(r.x, r.y+4, 26, 10, 0, 0, 7); c.stroke(); c.setLineDash([]); }
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  // bản đồ nhỏ
+  const mw = Math.min(132, w*0.3), mh = mw*H/W, mx = w - mw - 8, my = 8;
+  c.globalAlpha = .85; c.fillStyle = 'rgba(0,0,0,.5)'; c.fillRect(mx-2, my-2, mw+4, mh+4); c.drawImage(WO.mini, mx, my, mw, mh); c.globalAlpha = 1;
+  const sx = mw/(W*T), sy = mh/(H*T);
+  c.strokeStyle = 'rgba(255,255,255,.6)'; c.lineWidth = 1; c.strokeRect(mx + cx*sx, my + cy*sy, w*sx, h*sy);
+  c.fillStyle = '#7fd4b0'; for(const id in WO.others){ const o = WO.others[id]; c.fillRect(mx + o.x*sx - 1.5, my + o.y*sy - 1.5, 3, 3); }
+  c.fillStyle = '#ffe08a'; c.beginPath(); c.arc(mx + me.x*sx, my + me.y*sy, 2.6, 0, 7); c.fill();
+}
+function woPointer(ev){
+  const r = WO.canvas.getBoundingClientRect();
+  const x = ev.clientX - r.left + WO.cam.x, y = ev.clientY - r.top + WO.cam.y;
+  let hit = null, bd = 30;
+  const tnow = Date.now();
+  WO.mobs.forEach(m=>{ if(m.hideUntil > tnow) return; const d = Math.hypot(m.x-x, m.y-y); if(d < bd){ bd = d; hit = {kind:'mob', ref:m, key:'m'+m.id}; } });
+  for(const id in WO.others){ const o = WO.others[id]; const d = Math.hypot(o.x-x, o.y-15-y); if(d < bd){ bd = d; hit = {kind:'pl', ref:{...o, id}, key:'p'+id}; } }
+  if(!hit) WO.sites.forEach(s=>{ if(Math.abs(s.x-x) < 48 && y > s.y-44 && y < s.y+56){ hit = {kind:'site', ref:s, key:'s'+s.id}; } });
+  if(hit && WO.near && WO.near.key === hit.key){ woInteract(hit); return; }
+  WO.target = hit;
+  WO.me.tx = hit ? hit.ref.x : x; WO.me.ty = hit ? hit.ref.y + (hit.kind==='site' ? 40 : 0) : y;
+}
+function woRenderAct(){
+  const el = document.getElementById('w2dAct'); if(!el) return;
+  const n = WO.near;
+  if(!n){ el.innerHTML = `<span class="w2d-hint">${ic('compass','keep')} Chạm bản đồ để đi · chạm yêu thú, công trình hay đạo hữu để tương tác</span>`; return; }
+  const lb = n.kind==='mob' ? `${ic('swords','keep')} Giao chiến ${escHtml(n.ref.name)}`
+    : n.kind==='pl' ? `${ic('person','keep')} ${escHtml(n.ref.n||'Đạo hữu')} · ${woRealmShort(n.ref.r)}`
+    : `${ic({arena:'swords', guild:'flag', portal:'gate', market:'hall', retreat:'taiji'}[n.ref.id]||'map','keep')} ${escHtml(n.ref.name)}`;
+  el.innerHTML = `<button class="btn sm gold w2d-go" onclick="woInteract(WO.near)">${lb}</button>`;
+}
+function woInteract(n){
+  if(!n) return;
+  if(n.kind==='site'){
+    const id = n.ref.id;
+    if(id==='arena') return goTo('thegioi','loidai');
+    if(id==='guild') return goTo('thegioi','banghoi');
+    if(id==='market') return goTo('tuido','phuongthi');
+    if(id==='retreat') return goTo('tuluyen','tuluyen');
+    if(id==='portal') return woPortal();
+  }
+  if(n.kind==='mob'){
+    const m = n.ref, loc = m.zone.loc;
+    if(state.mortal){ toast('Phàm nhân chưa thể săn yêu thú — hãy nhập đạo trước'); return; }
+    if(state.realmIdx < (loc.power||0)){ toast(`Cần đạt ${MAJOR_REALMS[loc.power].name} mới vào được ${loc.name}`); return; }
+    if(SC || state.combat || state.expd){ toast('Đang bận việc khác'); return; }
+    m.hideUntil = Date.now() + 25000;
+    woWorld().explore(loc.id);
+    return;
+  }
+  if(n.kind==='pl') return woPlayerCard(n.ref.id, n.ref);
+}
+function woPortal(){
+  const X = woWorld();
+  const rows = X.list.map(r=>{
+    const here = r.id===X.region.id, lock = state.realmIdx < (r.minRealm||0);
+    return `<div class="wo-row"><div class="wo-rb"><b>${escHtml(r.name)}</b><small>${here?'Đang ở đây':lock?`Cần ${MAJOR_REALMS[r.minRealm].name}`:(r.travelCost?`${r.travelCost} linh thạch`:'Miễn phí')}</small></div>
+      <button class="btn sm ${here||lock?'ghost':'gold'}" ${here||lock?'disabled':''} onclick="closeModal(); woWorld().travel('${r.id}')">Truyền tống</button></div>`;
+  }).join('');
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">Truyền Tống Trận</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <p class="sec-note" style="margin:0 0 10px;">Mỗi địa vực là một bản đồ riêng — đạo hữu ở cùng địa vực sẽ thấy nhau.</p>${rows}`;
+  document.getElementById('overlay').classList.add('show');
+}
+function woPlayerCard(uid, o){
+  const robe = (PATH_ROBE[o.p]||[0,'#a8f0d0'])[1];
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif" style="color:${robe}">${o.t?`<small class="wo-tag">${escHtml(o.t)}</small> `:''}${escHtml(o.n||'Đạo hữu')}</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <p class="sec-note" style="margin:0 0 12px;">${escHtml(MAJOR_REALMS[o.r||0]?.name||'')}</p>
+    <div class="btn-row"><button class="btn blood" onclick="closeModal(); woChallenge('${uid}')">${ic('swords','keep')} Khiêu Chiến Lôi Đài</button></div>`;
+  document.getElementById('overlay').classList.add('show');
+}
+
+/* ---------------- Realtime: sảnh chung & bản đồ ---------------- */
+function woLobbyJoin(){
+  if(!cloud.client) return;
+  const key = cloud.user ? cloud.user.id : 'obs-' + Math.random().toString(36).slice(2, 10);
+  if(WO.lobby){ if(cloud.user ? WO.lobbyKey === cloud.user.id : WO.lobbyKey.startsWith('obs-')) return; try{ cloud.client.removeChannel(WO.lobby); }catch(e){} WO.lobby = null; WO.tracked = ''; }
+  WO.lobbyKey = key;
+  const ch = cloud.client.channel('pnvd-lobby', {config:{presence:{key}, broadcast:{self:false}}});
+  ch.on('presence', {event:'sync'}, ()=>{ const st = ch.presenceState(); WO.online = {}; for(const k in st){ const m = st[k][st[k].length-1]; if(m && m.n) WO.online[k] = m; } woOnlineChanged(); });
+  ch.on('broadcast', {event:'chat'}, ({payload})=>woChatIn(payload));
+  ch.subscribe(s=>{ if(s==='SUBSCRIBED'){ WO.lobbyReady = true; WO.tracked = ''; woTrackLobby(); } });
+  WO.lobby = ch; WO.lobbyReady = false;
+}
+function woTrackLobby(){
+  if(!WO.lobby || !WO.lobbyReady || !cloud.user || !state || !state.root) return;
+  const p = woProfile(), sig = JSON.stringify(p);
+  if(sig === WO.tracked) return;
+  WO.tracked = sig; WO.lobby.track(p);
+}
+function woOnlineChanged(){
+  const n = Object.keys(WO.online).length;
+  const el = document.getElementById('lsOnline'); if(el) el.textContent = n ? `${n} đạo hữu đang trực tuyến` : 'Máy chủ đang mở';
+  document.querySelectorAll('.wo-online-n').forEach(e=>e.textContent = n);
+  if(state && state.activeTab==='thegioi' && state.subTabs.thegioi==='loidai'){ const l = document.getElementById('woOnlineList'); if(l) l.innerHTML = woOnlineRows(); }
+}
+function woMapJoin(){
+  if(!tsbOnline() || (WO.map && WO.mapChKey === WO.mapKey)) return;
+  woMapLeave();
+  const key = WO.mapKey, uid = cloud.user.id;
+  const ch = cloud.client.channel('pnvd-map-' + key, {config:{presence:{key:uid}, broadcast:{self:false}}});
+  ch.on('presence', {event:'sync'}, ()=>{
+    const st = ch.presenceState(), seen = {};
+    for(const k in st){ if(k===uid) continue; const m = st[k][st[k].length-1]; if(!m) continue; seen[k] = 1;
+      const o = WO.others[k]; if(o) Object.assign(o, {n:m.n, r:m.r, p:m.p, t:m.t}); else WO.others[k] = {n:m.n, r:m.r, p:m.p, t:m.t, x:m.x, y:m.y, tx:m.x, ty:m.y}; }
+    for(const k in WO.others) if(!seen[k]) delete WO.others[k];
+    document.querySelectorAll('.wo-here-n').forEach(e=>e.textContent = Object.keys(WO.others).length + 1);
+  });
+  ch.on('broadcast', {event:'mv'}, ({payload:p})=>{ const o = p && WO.others[p.id]; if(o){ o.tx = p.x; o.ty = p.y; } });
+  ch.subscribe(s=>{ if(s==='SUBSCRIBED'){ WO.mapReady = true; WO.lastTrack = performance.now(); ch.track({...woProfile(), x:Math.round(WO.me.x), y:Math.round(WO.me.y)}); } });
+  WO.map = ch; WO.mapChKey = key; WO.mapReady = false;
+}
+function woMapLeave(){
+  if(WO.leaveTimer){ clearTimeout(WO.leaveTimer); WO.leaveTimer = null; }
+  if(WO.map){ try{ cloud.client.removeChannel(WO.map); }catch(e){} }
+  WO.map = null; WO.mapChKey = ''; WO.mapReady = false; WO.others = {};
+}
+
+/* ---------------- Kênh chat ---------------- */
+function woChatName(){ return WO.chatCh==='guild' && WO.guild ? 'g' + WO.guild.id : 'world'; }
+async function woChatLoad(){
+  if(!tsbOnline() || WO.noDb) return;
+  const chn = woChatName(), box = chn==='world' ? 'world' : 'guild';
+  try{
+    const {data, error} = await cloud.client.from('world_chat').select('id,user_id,channel,name,realm_idx,tag,body,created_at').eq('channel', chn).order('id', {ascending:false}).limit(50);
+    if(error) throw error;
+    WO.chat[box] = (data||[]).reverse();
+  }catch(e){ if(woMissing(e)) WO.noDb = true; }
+  woChatPaint();
+}
+function woChatSubscribe(){
+  if(WO.chatSub || !tsbOnline() || WO.noDb) return;
+  WO.chatSub = cloud.client.channel('pnvd-chat-db').on('postgres_changes', {event:'INSERT', schema:'public', table:'world_chat'}, ({new:row})=>woChatIn(row)).subscribe();
+}
+function woChatIn(m){
+  if(!m || !m.body) return;
+  const box = m.channel==='world' ? 'world' : 'guild';
+  const L = WO.chat[box];
+  if(L.some(x=>x.id===m.id)) return;
+  L.push(m); if(L.length > 80) L.splice(0, L.length - 80);
+  const until = Date.now() + 6000;
+  if(cloud.user && m.user_id===cloud.user.id){ WO.me.say = m.body; WO.me.sayT = until; }
+  else if(WO.others[m.user_id]){ WO.others[m.user_id].say = m.body; WO.others[m.user_id].sayT = until; }
+  woChatPaint();
+}
+function woChatLine(m){
+  const mine = cloud.user && m.user_id===cloud.user.id;
+  return `<div class="wo-msg ${mine?'me':''}"><b>${m.tag?`<i class="wo-tag">${escHtml(m.tag)}</i>`:''}${escHtml(m.name)}<small>${woRealmShort(m.realm_idx)}</small></b><span>${escHtml(m.body)}</span></div>`;
+}
+function woChatPaint(){
+  const L = WO.chat[WO.chatCh==='guild' ? 'guild' : 'world'];
+  const full = document.getElementById('woChatList');
+  if(full){ const stick = full.scrollTop + full.clientHeight >= full.scrollHeight - 30; full.innerHTML = L.map(woChatLine).join('') || '<p class="sec-note" style="margin:8px 0;">Chưa có tin nhắn nào.</p>'; if(stick) full.scrollTop = full.scrollHeight; }
+  const mini = document.getElementById('w2dChat');
+  if(mini) mini.innerHTML = WO.chat.world.slice(-3).map(woChatLine).join('') || '<div class="wo-msg sys"><span>Kênh thế giới yên ắng…</span></div>';
+}
+async function woSay(ev, ch){
+  if(ev) ev.preventDefault();
+  const inp = document.getElementById(ch==='map' ? 'w2dSay' : 'woChatInput'); if(!inp) return;
+  const body = inp.value.trim(); if(!body) return;
+  if(!tsbOnline()){ toast('Cần đăng nhập để trò chuyện'); return; }
+  const chn = ch==='map' ? 'world' : (WO.chatCh==='guild' ? 'guild' : 'world');
+  inp.value = '';
+  if(!WO.noDb){
+    try{ const {data, error} = await cloud.client.rpc('chat_send', {p_channel:chn, p_body:body}); if(error) throw error; woChatIn(data); return; }
+    catch(e){ if(!woMissing(e)){ toast(cloudErrMsg(e)); inp.value = body; return; } WO.noDb = true; }
+  }
+  if(chn!=='world'){ toast('Kênh bang hội cần máy chủ có tính năng Bang Hội'); return; }
+  const now = Date.now(); if(now - (WO.lastSay||0) < 2500){ toast('Nói chậm thôi'); inp.value = body; return; } WO.lastSay = now;
+  const m = {id:'b'+now+Math.random().toString(36).slice(2,6), user_id:cloud.user.id, channel:'world', name:woProfile().n, realm_idx:woProfile().r, tag:woMyTag()||null, body:body.slice(0,200), created_at:new Date().toISOString()};
+  if(WO.lobby) WO.lobby.send({type:'broadcast', event:'chat', payload:m});
+  woChatIn(m);
+}
+function woChatTab(c){ WO.chatCh = c; render(); woChatLoad(); }
+
+/* ---------------- Lôi Đài ---------------- */
+function woArenaSubscribe(){
+  if(WO.arena.sub || !tsbOnline() || WO.noDb) return;
+  const uid = cloud.user.id;
+  WO.arena.sub = cloud.client.channel('pnvd-arena-' + uid)
+    .on('postgres_changes', {event:'INSERT', schema:'public', table:'arena_challenges', filter:`target=eq.${uid}`}, ({new:row})=>woIncoming(row))
+    .on('postgres_changes', {event:'UPDATE', schema:'public', table:'arena_challenges', filter:`challenger=eq.${uid}`}, ({new:row})=>{
+      if(row.status==='done' && row.result && !woIncoming.shown[row.id]){ woIncoming.shown[row.id] = 1; woShowFight(row.result, 'a'); }
+      else if(row.status==='declined') toast(`${row.t_name} từ chối lời khiêu chiến`);
+    }).subscribe();
+}
+async function woChallenge(uid){
+  if(!tsbOnline()){ toast('Cần đăng nhập'); return; }
+  try{ const {error} = await cloud.client.rpc('arena_challenge', {p_target:uid}); if(error) throw error;
+    const o = WO.online[uid] || WO.others[uid] || {}; toast(`Đã gửi chiến thư tới ${o.n||'đối thủ'} — chờ trả lời trong 90 giây`); }
+  catch(e){ toast(woErr(e)); }
+}
+function woIncoming(row){
+  if(!row || row.status!=='pending') return;
+  if(!WO.arena.incoming.some(x=>x.id===row.id)) WO.arena.incoming.push(row);
+  sfx && sfx('ok');
+  if(SC || state.combat || state.tribulation || document.getElementById('overlay').classList.contains('show')){ toast(`${row.c_name} gửi chiến thư Lôi Đài — vào Thế Giới ▸ Lôi Đài để nhận`); woArenaPaint(); return; }
+  document.getElementById('modalBody').innerHTML = `<div class="story-pop"><div class="sp-kicker">${ic('swords','keep')} Chiến Thư Lôi Đài</div><h2 class="sp-title">${escHtml(row.c_name)}</h2>
+    <p class="sp-blurb">hẹn ngươi lên lôi đài phân cao thấp. Chiến thư hết hạn sau 90 giây.</p>
+    <div class="btn-row"><button class="btn blood" onclick="woRespond(${row.id}, true)">Ứng Chiến</button><button class="btn ghost" onclick="woRespond(${row.id}, false)">Từ Chối</button></div></div>`;
+  document.getElementById('overlay').classList.add('show');
+  woArenaPaint();
+}
+woIncoming.shown = {};
+async function woRespond(id, accept){
+  const row = WO.arena.incoming.find(x=>x.id===id);
+  WO.arena.incoming = WO.arena.incoming.filter(x=>x.id!==id);
+  closeModal();
+  try{ const {data, error} = await cloud.client.rpc('arena_respond', {p_id:id, p_accept:!!accept}); if(error) throw error;
+    if(accept && data && !data.declined){ woIncoming.shown[id] = 1; woShowFight(data, 'd'); }
+  }catch(e){ toast(woErr(e)); }
+  woArenaPaint();
+}
+function woShowFight(r, side){
+  const mine = side==='a', won = mine ? r.won : !r.won;
+  const myName = mine ? r.aName : r.dName, foeName = mine ? r.dName : r.aName, myHp = mine ? r.aHp : r.dHp, foeHp = mine ? r.dHp : r.aHp;
+  document.getElementById('modalBody').innerHTML = `<div class="duel-box"><div class="sp-kicker" style="text-align:center;">${ic('swords','keep')} Lôi Đài</div>
+    <div class="duel-vs"><div><b>${escHtml(myName)}</b><span class="duel-hp"><i id="wHpA" style="width:100%"></i></span></div><em>VS</em><div><b>${escHtml(foeName)}</b><span class="duel-hp foe"><i id="wHpD" style="width:100%"></i></span></div></div>
+    <div class="duel-log" id="wDuelLog"></div><div id="wDuelEnd"></div></div>`;
+  document.getElementById('overlay').classList.add('show');
+  const log = r.log||[]; let i = 0;
+  const step = ()=>{
+    const box = document.getElementById('wDuelLog'); if(!box) return;
+    if(i >= log.length){
+      const gotStones = won && r.reward;
+      document.getElementById('wDuelEnd').innerHTML = `<div class="duel-res ${won?'win':'lose'}">${won?'Thắng':'Bại'}</div>
+        <p class="sec-note" style="text-align:center;margin:4px 0 10px;">Điểm lôi đài ${won?'+':'−'}${r.delta}${gotStones?` · ${r.reward} linh thạch`:''}</p>
+        <button class="btn gold" onclick="closeModal(); WO.arena.ts = 0; woArenaLoad(true)">Đóng</button>`;
+      if(won){ fx('banner', {text:'Lôi Đài Đắc Thắng'}); if(gotStones) woAfterStones(); }
+      return;
+    }
+    const e = log[i++], meHit = e.s===(mine?'a':'d');
+    const el = document.createElement('div'); el.className = 'duel-ln ' + (meHit?'a':'d');
+    el.textContent = `${meHit?myName:foeName} ra đòn — ${e.c?'bạo kích ':''}${e.d} sát thương.`;
+    box.appendChild(el); box.scrollTop = box.scrollHeight;
+    const bar = document.getElementById(meHit ? 'wHpD' : 'wHpA'); if(bar) bar.style.width = Math.max(0, e.h/(meHit?foeHp:myHp)*100) + '%';
+    setTimeout(step, 380);
+  };
+  setTimeout(step, 400);
+}
+async function woArenaLoad(force){
+  if(!tsbOnline() || WO.arena.loading || (!force && Date.now() - WO.arena.ts < 30000)) return;
+  WO.arena.loading = true; WO.arena.err = '';
+  try{
+    const uid = cloud.user.id;
+    const rk = await cloud.client.from('arena_stats').select('user_id,name,realm_idx,points,wins,losses').order('points', {ascending:false}).limit(30);
+    if(rk.error) throw rk.error;
+    WO.arena.rank = rk.data||[];
+    const my = await cloud.client.from('arena_stats').select('*').eq('user_id', uid).maybeSingle(); WO.arena.my = my.data||null;
+    const inc = await cloud.client.from('arena_challenges').select('*').eq('target', uid).eq('status', 'pending').gte('created_at', new Date(Date.now()-90000).toISOString());
+    WO.arena.incoming = inc.data||[];
+    WO.arena.ts = Date.now();
+  }catch(e){ WO.arena.err = woErr(e); if(woMissing(e)) WO.noDb = true; WO.arena.ts = Date.now(); }
+  WO.arena.loading = false;
+  if(state.activeTab==='thegioi' && state.subTabs.thegioi==='loidai') render();
+}
+function woOnlineRows(){
+  const uid = cloud.user && cloud.user.id;
+  const L = Object.entries(WO.online).filter(([k])=>k!==uid).sort((a, b)=>(b[1].r||0)-(a[1].r||0));
+  if(!L.length) return '<p class="sec-note" style="margin:6px 0 0;">Chưa có đạo hữu nào khác đang trực tuyến.</p>';
+  return L.slice(0, 40).map(([k, o])=>`<div class="wo-row"><div class="wo-rb"><b>${o.t?`<i class="wo-tag">${escHtml(o.t)}</i>`:''}${escHtml(o.n)}</b><small>${escHtml(MAJOR_REALMS[o.r||0]?.name||'')}</small></div><button class="btn sm blood" onclick="woChallenge('${k}')">Khiêu chiến</button></div>`).join('');
+}
+function woArenaPaint(){ if(state && state.activeTab==='thegioi' && state.subTabs.thegioi==='loidai') render(); }
+function renderArena(){
+  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('swords')} Lôi Đài</div><p class="sec-note" style="margin:0;">Đăng nhập để lên lôi đài cùng đạo hữu khắp Tam Giới.</p></div>`;
+  if(!WO.arena.ts && !WO.arena.loading) woArenaLoad();
+  const A = WO.arena, my = A.my, uid = cloud.user.id;
+  const live = A.incoming.filter(r=>Date.now() - Date.parse(r.created_at) < 90000);
+  return `<div class="card wo-hero-card"><div class="sec-title">${ic('swords')} Lôi Đài Tam Giới<span><b class="wo-online-n">${Object.keys(WO.online).length}</b> online</span></div>
+      <p class="sec-note" style="margin:0 0 10px;">Gửi chiến thư cho đạo hữu đang trực tuyến. Khi đối phương ứng chiến, máy chủ phân thắng bại theo thực lực thật của hai bên. Thắng được cộng điểm lôi đài và linh thạch (mỗi cặp đối thủ một lần mỗi giờ).</p>
+      <div class="wo-stats"><div><b>${my?my.points:1000}</b><small>Điểm</small></div><div><b>${my?my.wins:0}</b><small>Thắng</small></div><div><b>${my?my.losses:0}</b><small>Bại</small></div><div><b>${my ? (A.rank.findIndex(r=>r.user_id===uid)+1 || '30+') : '—'}</b><small>Hạng</small></div></div>
+      ${A.err?`<p class="sec-note" style="color:var(--blood-bright);margin:8px 0 0;">${escHtml(A.err)}</p>`:''}</div>
+    ${live.length?`<div class="card"><div class="sec-title">${ic('bell')} Chiến Thư Đang Chờ</div>${live.map(r=>`<div class="wo-row"><div class="wo-rb"><b>${escHtml(r.c_name)}</b><small>khiêu chiến ngươi</small></div><div class="btn-row" style="flex:none;"><button class="btn sm blood" onclick="woRespond(${r.id}, true)">Ứng chiến</button><button class="btn sm ghost" onclick="woRespond(${r.id}, false)">Từ chối</button></div></div>`).join('')}</div>`:''}
+    <div class="card"><div class="sec-title">${ic('person')} Đạo Hữu Trực Tuyến</div><div id="woOnlineList">${woOnlineRows()}</div></div>
+    <div class="card"><div class="sec-title">${ic('star')} Bảng Lôi Đài</div>
+      ${A.rank.length ? A.rank.map((r, i)=>`<div class="tsb-row ${r.user_id===uid?'me':''}"><span class="tsb-rank r${i+1}">${i+1}</span><div class="tsb-b"><b>${escHtml(r.name)}</b><small>${escHtml(MAJOR_REALMS[r.realm_idx]?.name||'')} · ${r.wins} thắng ${r.losses} bại</small></div><b class="wo-pts">${r.points}</b></div>`).join('') : `<p class="sec-note" style="margin:0;">${A.loading?'Đang tải…':'Chưa ai lên lôi đài — hãy là người đầu tiên.'}</p>`}
+      <button class="btn ghost sm" style="margin-top:10px;" onclick="WO.arena.ts=0; woArenaLoad(true)">Làm mới</button></div>`;
+}
+
+/* ---------------- Bang Hội ---------------- */
+async function woGuildLoad(force){
+  if(!tsbOnline() || WO.gLoading || (!force && Date.now() - WO.gTs < 45000)) return;
+  WO.gLoading = true; WO.gErr = '';
+  try{
+    const {data, error} = await cloud.client.rpc('guild_state'); if(error) throw error;
+    woGuildApply(data);
+    if(!WO.guild){ const l = await cloud.client.rpc('guild_list'); if(l.error) throw l.error; WO.glist = l.data||[]; }
+  }catch(e){ WO.gErr = woErr(e); if(woMissing(e)) WO.noDb = true; }
+  WO.gTs = Date.now(); WO.gLoading = false;
+  woTrackLobby();
+  if(state.activeTab==='thegioi' && state.subTabs.thegioi==='banghoi') render();
+}
+function woGuildApply(d){
+  const before = WO.guild && WO.guild.id;
+  WO.guild = d && d.guild || null; WO.role = d && d.role || null; WO.cap = d && d.cap || 0; WO.members = d && d.members || [];
+  if((WO.guild && WO.guild.id) !== before){ WO.chat.guild = []; if(WO.chatCh==='guild') woChatLoad(); }
+}
+async function woGuildCall(fn, args, msg){
+  try{ const {data, error} = await cloud.client.rpc(fn, args||{}); if(error) throw error;
+    if(data && data.rev!=null) woAfterStones();
+    if(msg) toast(msg);
+    if(data && 'guild' in data) woGuildApply(data);
+    WO.gTs = 0; await woGuildLoad(true); return data;
+  }catch(e){ toast(woErr(e)); }
+}
+function woGuildCreate(){
+  const nm = (document.getElementById('wgName')||{}).value||'', tg = (document.getElementById('wgTag')||{}).value||'';
+  if(nm.trim().length < 2 || !tg.trim()){ toast('Nhập tên bang và hiệu bang'); return; }
+  if(!confirm(`Khai lập bang hội "${nm.trim()}" [${tg.trim().toUpperCase()}] tốn 5.000 linh thạch?`)) return;
+  woGuildCall('guild_create', {p_name:nm, p_tag:tg}, 'Bang hội đã được khai lập');
+}
+function woGuildLeave(){ if(confirm(WO.role==='leader' ? 'Rời bang? Chức bang chủ sẽ truyền cho người kế vị (bang không còn ai sẽ giải tán).' : 'Rời khỏi bang hội?')) woGuildCall('guild_leave', {}, 'Đã rời bang'); }
+function woGuildNotice(){ const t = prompt('Cáo thị bang hội (tối đa 200 ký tự):', WO.guild && WO.guild.notice || ''); if(t!=null) woGuildCall('guild_notice', {p_text:t}, 'Đã cập nhật cáo thị'); }
+function woGuildMember(uid){
+  const m = WO.members.find(x=>x.user_id===uid); if(!m) return;
+  const me = WO.role, can = (me==='leader') || (me==='elder' && m.role==='member');
+  const b = [];
+  if(me==='leader'){ b.push(m.role==='elder' ? `<button class="btn ghost" onclick="closeModal(); woGuildCall('guild_set_role', {p_uid:'${uid}', p_role:'member'}, 'Đã giáng chức')">Giáng làm Bang Chúng</button>` : `<button class="btn gold" onclick="closeModal(); woGuildCall('guild_set_role', {p_uid:'${uid}', p_role:'elder'}, 'Đã phong Trưởng Lão')">Phong Trưởng Lão</button>`);
+    b.push(`<button class="btn ghost" onclick="if(confirm('Truyền chức bang chủ?')){ closeModal(); woGuildCall('guild_set_role', {p_uid:'${uid}', p_role:'leader'}, 'Đã truyền chức bang chủ'); }">Truyền chức Bang Chủ</button>`); }
+  if(can) b.push(`<button class="btn blood" onclick="if(confirm('Trục xuất thành viên này khỏi bang?')){ closeModal(); woGuildCall('guild_kick', {p_uid:'${uid}'}, 'Đã trục xuất'); }">Trục xuất</button>`);
+  if(WO.online[uid]) b.push(`<button class="btn blood" onclick="closeModal(); woChallenge('${uid}')">Tỷ thí Lôi Đài</button>`);
+  document.getElementById('modalBody').innerHTML = `<div class="modal-top"><h2 class="serif">${escHtml(m.name)}</h2><button class="icon-btn" aria-label="Đóng" onclick="closeModal()">${ic('close','keep')}</button></div>
+    <p class="sec-note" style="margin:0 0 12px;">${WO_ROLE[m.role]} · ${escHtml(MAJOR_REALMS[m.realm_idx]?.name||'')} · cống hiến ${Number(m.contribution).toLocaleString('vi-VN')}</p>
+    <div class="wo-col">${b.join('') || '<p class="sec-note">Không có thao tác nào.</p>'}</div>`;
+  document.getElementById('overlay').classList.add('show');
+}
+function renderGuild(){
+  if(!tsbOnline()) return `<div class="card"><div class="sec-title">${ic('flag')} Bang Hội</div><p class="sec-note" style="margin:0;">Đăng nhập để lập bang, kết giao đạo hữu.</p></div>`;
+  if(!WO.gTs && !WO.gLoading) woGuildLoad();
+  if(WO.gErr && !WO.guild) return `<div class="card"><div class="sec-title">${ic('flag')} Bang Hội</div><p class="sec-note" style="margin:0;color:var(--blood-bright);">${escHtml(WO.gErr)}</p><button class="btn ghost sm" style="margin-top:10px;" onclick="WO.gTs=0; woGuildLoad(true)">Thử lại</button></div>`;
+  if(!WO.gTs) return `<div class="card"><p class="sec-note" style="margin:0;">Đang tải bang hội…</p></div>`;
+  const G = WO.guild;
+  if(!G){
+    return `<div class="card wo-hero-card"><div class="sec-title">${ic('flag')} Khai Lập Bang Hội</div>
+        <p class="sec-note" style="margin:0 0 10px;">Cần đạt Trúc Cơ và 5.000 linh thạch. Hiệu bang (1–4 ký tự) hiện trước tên mọi thành viên trên bản đồ và kênh chat.</p>
+        <div class="wo-form"><input id="wgName" class="acc-input" maxlength="20" placeholder="Tên bang (2–20 ký tự)"><input id="wgTag" class="acc-input wo-tag-in" maxlength="4" placeholder="Hiệu"></div>
+        <button class="btn gold" style="margin-top:8px;" onclick="woGuildCreate()" ${state.spiritStones<5000||state.realmIdx<1?'disabled':''}>Khai Lập (5.000 linh thạch)</button></div>
+      <div class="card"><div class="sec-title">${ic('pagoda')} Các Bang Hội<span>${WO.glist.length}</span></div>
+        ${WO.glist.length ? WO.glist.map(g=>`<div class="wo-row"><div class="wo-rb"><b><i class="wo-tag">${escHtml(g.tag)}</i>${escHtml(g.name)}</b><small>Cấp ${g.level} · ${g.count}/${g.cap} người · Bang chủ ${escHtml(g.leader||'?')}</small>${g.notice?`<small class="wo-notice">${escHtml(g.notice)}</small>`:''}</div><button class="btn sm gold" ${g.count>=g.cap?'disabled':''} onclick="woGuildCall('guild_join', {p_id:${Number(g.id)}}, 'Đã gia nhập bang hội')">Gia nhập</button></div>`).join('') : '<p class="sec-note" style="margin:0;">Chưa có bang hội nào — hãy khai lập bang đầu tiên.</p>'}</div>`;
+  }
+  const nx = WO_GUILD_LV[G.level] || null, prev = WO_GUILD_LV[G.level-1] || 0;
+  return `<div class="card wo-hero-card"><div class="sec-title">${ic('flag')} <i class="wo-tag">${escHtml(G.tag)}</i>${escHtml(G.name)}<span>Cấp ${G.level}/5</span></div>
+      <div class="so-bar"><span style="width:${nx?Math.min(100,(G.fund-prev)/(nx-prev)*100):100}%"></span></div>
+      <p class="sec-note" style="margin:4px 0 8px;">Quỹ bang ${Number(G.fund).toLocaleString('vi-VN')} linh thạch${nx?` · lên cấp ở ${nx.toLocaleString('vi-VN')}`:' · viên mãn'} · ${WO.members.length}/${WO.cap} thành viên. Mỗi cấp bang mở thêm 5 chỗ.</p>
+      <div class="wo-notice-box">${G.notice?escHtml(G.notice):'<i>Chưa có cáo thị.</i>'}${WO.role!=='member'?` <button class="wo-link" onclick="woGuildNotice()">Sửa</button>`:''}</div>
+      <div class="btn-row" style="margin-top:10px;">${[1000,5000,20000].map(n=>`<button class="btn sm ${n===5000?'gold':'ghost'}" ${state.spiritStones<n?'disabled':''} onclick="woGuildCall('guild_donate', {p_amount:${n}}, 'Đã góp ${n.toLocaleString('vi-VN')} linh thạch vào quỹ bang')">Góp ${n.toLocaleString('vi-VN')}</button>`).join('')}</div>
+      <div class="btn-row" style="margin-top:8px;"><button class="btn sm ghost" onclick="WO.chatCh='guild'; goTo('thegioi','kenhchat'); woChatLoad()">${ic('chat','keep')} Kênh bang</button><button class="btn sm ghost" onclick="woGuildLeave()">Rời bang</button></div></div>
+    <div class="card"><div class="sec-title">${ic('person')} Thành Viên</div>
+      ${WO.members.map((m, i)=>`<button class="wo-row wo-mem" onclick="woGuildMember('${m.user_id}')"><span class="wo-dot ${WO.online[m.user_id]?'on':''}"></span><div class="wo-rb"><b>${escHtml(m.name)}</b><small>${WO_ROLE[m.role]} · ${escHtml(MAJOR_REALMS[m.realm_idx]?.name||'')}</small></div><em>${Number(m.contribution).toLocaleString('vi-VN')}</em></button>`).join('')}</div>`;
+}
+
+/* ---------------- Trang bản đồ & chat ---------------- */
+function renderWorld2D(){
+  const X = woWorld();
+  return `<div class="card w2d-card">
+      <div class="w2d-top"><b>${ic('map','keep')} ${escHtml(X.region.name)}</b><span><b class="wo-here-n">${Object.keys(WO.others).length+1}</b> ở đây · <b class="wo-online-n">${Object.keys(WO.online).length}</b> online</span></div>
+      <div id="w2dHost" class="w2d-host"></div>
+      <div class="w2d-act" id="w2dAct"></div>
+      <div class="w2d-chat" id="w2dChat"></div>
+      <form class="w2d-say" onsubmit="woSay(event,'map')"><input id="w2dSay" maxlength="200" autocomplete="off" placeholder="${tsbOnline()?'Nói với cả thế giới…':'Đăng nhập để trò chuyện'}" ${tsbOnline()?'':'disabled'}><button class="btn sm gold" ${tsbOnline()?'':'disabled'}>Gửi</button></form>
+    </div>
+    <p class="sec-note" style="margin:0 2px;">Chạm để di chuyển · bàn phím: WASD hoặc phím mũi tên. Chạm yêu thú để giao chiến, chạm công trình để vào, chạm đạo hữu để khiêu chiến. Đi qua Truyền Tống Trận để sang địa vực khác.</p>`;
+}
+function renderChatPage(){
+  const hasG = !!WO.guild;
+  if(WO.chatCh==='guild' && !hasG) WO.chatCh = 'world';
+  return `<div class="card wo-chat-card"><div class="subtab-row" style="margin-bottom:8px;"><button class="subtab-btn ${WO.chatCh==='world'?'active':''}" onclick="woChatTab('world')">${ic('globe')}Thế Giới</button>${hasG?`<button class="subtab-btn ${WO.chatCh==='guild'?'active':''}" onclick="woChatTab('guild')">${ic('flag')}Bang Hội</button>`:''}</div>
+    <div class="wo-chat-list" id="woChatList"></div>
+    <form class="w2d-say" onsubmit="woSay(event)"><input id="woChatInput" maxlength="200" autocomplete="off" placeholder="${tsbOnline()?'Nhập tin nhắn…':'Đăng nhập để trò chuyện'}" ${tsbOnline()?'':'disabled'}><button class="btn sm gold" ${tsbOnline()?'':'disabled'}>Gửi</button></form>
+    ${WO.noDb?'<p class="sec-note" style="margin:8px 0 0;">Máy chủ chưa có bảng chat — tin nhắn chỉ gửi tới người đang trực tuyến, không lưu lại.</p>':''}</div>`;
+}
+function woAfterRender(){
+  const onMap = state && state.root && state.activeTab==='thegioi' && curSub('thegioi')==='bando2d' && !SC && !state.combat && !state.tribulation;
+  document.body.classList.toggle('wo-wide', !!onMap);
+  if(onMap && document.getElementById('w2dHost')){ woStart(); woRenderAct(); woChatPaint(); }
+  if(document.getElementById('woChatList')){ woChatPaint(); const l = document.getElementById('woChatList'); l.scrollTop = l.scrollHeight; }
+}
+
+/* ---------------- Gắn vào game ---------------- */
+if(typeof __ENGINE__==='undefined'){
+  const _woRC = renderContent;
+  renderContent = function(){ _woRC.apply(this, arguments); try{ woAfterRender(); }catch(e){ console.error(e); } };
+  const _woAdopt = engAdopt;
+  engAdopt = function(out, fn){
+    try{
+      const keep = state && state.activeTab==='thegioi', sub = state && state.subTabs && state.subTabs.thegioi;
+      const s = out && out.data && out.data.state;
+      if(s){ s.subTabs = s.subTabs || {}; if(sub) s.subTabs.thegioi = sub; if(keep) s.activeTab = 'thegioi'; }
+    }catch(e){}
+    return _woAdopt.apply(this, arguments);
+  };
+  window.addEventListener('keydown', e=>{
+    const t = e.target; if(t && (t.tagName==='INPUT' || t.tagName==='TEXTAREA' || t.isContentEditable)) return;
+    if(!document.body.classList.contains('wo-wide')) return;
+    const k = e.key.length===1 ? e.key.toLowerCase() : e.key;
+    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','w','a','s','d'].includes(k)){ WO.keys[k] = true; e.preventDefault(); }
+    if(k==='e' || k==='Enter'){ if(WO.near) woInteract(WO.near); }
+  });
+  window.addEventListener('keyup', e=>{ const k = e.key.length===1 ? e.key.toLowerCase() : e.key; WO.keys[k] = false; });
+  window.addEventListener('blur', ()=>{ WO.keys = {}; });
+  window.addEventListener('resize', ()=>{ if(WO.canvas && document.body.contains(WO.canvas)) woResize(); });
+  setInterval(()=>{
+    try{
+      if(cloud.client) woLobbyJoin();
+      else if(cloud.status==='error'){ const el = document.getElementById('lsOnline'); if(el) el.textContent = 'Chưa kết nối'; }
+      woTrackLobby();
+      if(tsbOnline()){
+        if(!WO.chatSub && !WO.noDb){ woChatSubscribe(); woChatLoad(); }
+        woArenaSubscribe();
+        if(!WO.gTs) woGuildLoad();
+      } else if(WO.chatSub || WO.arena.sub){
+        try{ if(WO.chatSub) cloud.client.removeChannel(WO.chatSub); if(WO.arena.sub) cloud.client.removeChannel(WO.arena.sub); }catch(e){}
+        WO.chatSub = null; WO.arena.sub = null; WO.guild = null; WO.gTs = 0; woMapLeave();
+      }
+    }catch(e){}
+  }, 2000);
 }
 </script>
 </body>
